@@ -1,0 +1,362 @@
+-- Typed models for the Typebot SDK (LuaLS annotations).
+--
+-- GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
+-- params (op.<name>.points[].args.params[]). Field/param types come from the
+-- canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
+-- @voxgig/apidef VALID_CANON). Annotations only — no runtime effect. Do not
+-- edit by hand.
+
+---@class Analytics
+---@field total_completed number
+---@field total_start number
+---@field total_view number
+
+---@class AnalyticsLoadMatch
+---@field typebot_id string
+
+---@class Billing
+---@field amount number
+---@field currency string
+---@field date any
+---@field id string
+---@field resets_at string
+---@field total_chats_used number
+---@field url string
+
+---@class BillingLoadMatch
+---@field amount? number
+---@field currency? string
+---@field date? any
+---@field id string
+---@field resets_at? string
+---@field total_chats_used? number
+---@field url? string
+
+---@class BillingListMatch
+---@field amount? number
+---@field currency? string
+---@field date? any
+---@field id? string
+---@field resets_at? string
+---@field total_chats_used? number
+---@field url? string
+
+---@class Folder
+---@field created_at string
+---@field folder table
+---@field folder_name? string
+---@field id string
+---@field name string
+---@field parent_folder_id string
+---@field updated_at string
+---@field workspace_id string
+
+---@class FolderLoadMatch
+---@field id string
+
+---@class FolderListMatch
+---@field created_at? string
+---@field folder? table
+---@field folder_name? string
+---@field id? string
+---@field name? string
+---@field parent_folder_id? string
+---@field updated_at? string
+---@field workspace_id? string
+
+---@class FolderCreateData
+---@field created_at string
+---@field folder table
+---@field folder_name? string
+---@field id string
+---@field name string
+---@field parent_folder_id string
+---@field updated_at string
+---@field workspace_id string
+
+---@class FolderUpdateData
+---@field id string
+---@field created_at? string
+---@field folder? table
+---@field folder_name? string
+---@field name? string
+---@field parent_folder_id? string
+---@field updated_at? string
+---@field workspace_id? string
+
+---@class FolderRemoveMatch
+---@field id string
+
+---@class Result
+---@field answer table
+---@field context any
+---@field created_at string
+---@field description string
+---@field detail any
+---@field has_started boolean
+---@field id string
+---@field is_archived boolean
+---@field is_completed boolean
+---@field last_chat_session_id string
+---@field result_id string
+---@field status string
+---@field typebot_id string
+---@field variable table
+
+---@class ResultLoadMatch
+---@field id string
+---@field typebot_id string
+
+---@class ResultListMatch
+---@field typebot_id string
+
+---@class ResultRemoveMatch
+---@field typebot_id string
+
+---@class Typebot
+---@field access_right string
+---@field created_at string
+---@field current_user_mode string
+---@field custom_domain any
+---@field edge table
+---@field enable_safety_flag? boolean
+---@field event table
+---@field folder_id string
+---@field from_template? string
+---@field group table
+---@field icon any
+---@field id string
+---@field is_archived boolean
+---@field is_closed boolean
+---@field message any
+---@field name string
+---@field overwrite? boolean
+---@field public_id string
+---@field published_typebot any
+---@field published_typebot_id? string
+---@field results_table_preference any
+---@field risk_level any
+---@field selected_theme_template_id string
+---@field setting table
+---@field space_id string
+---@field theme table
+---@field typebot any
+---@field updated_at string
+---@field variable table
+---@field version? any
+---@field warning? table
+---@field whats_app_credentials_id string
+---@field workspace_id string
+
+---@class TypebotLoadMatch
+---@field id string
+
+---@class TypebotListMatch
+---@field access_right? string
+---@field created_at? string
+---@field current_user_mode? string
+---@field custom_domain? any
+---@field edge? table
+---@field enable_safety_flag? boolean
+---@field event? table
+---@field folder_id? string
+---@field from_template? string
+---@field group? table
+---@field icon? any
+---@field id? string
+---@field is_archived? boolean
+---@field is_closed? boolean
+---@field message? any
+---@field name? string
+---@field overwrite? boolean
+---@field public_id? string
+---@field published_typebot? any
+---@field published_typebot_id? string
+---@field results_table_preference? any
+---@field risk_level? any
+---@field selected_theme_template_id? string
+---@field setting? table
+---@field space_id? string
+---@field theme? table
+---@field typebot? any
+---@field updated_at? string
+---@field variable? table
+---@field version? any
+---@field warning? table
+---@field whats_app_credentials_id? string
+---@field workspace_id? string
+
+---@class TypebotCreateData
+---@field access_right string
+---@field created_at string
+---@field current_user_mode string
+---@field custom_domain any
+---@field edge table
+---@field enable_safety_flag? boolean
+---@field event table
+---@field folder_id string
+---@field from_template? string
+---@field group table
+---@field icon any
+---@field id string
+---@field is_archived boolean
+---@field is_closed boolean
+---@field message any
+---@field name string
+---@field overwrite? boolean
+---@field public_id string
+---@field published_typebot any
+---@field published_typebot_id? string
+---@field results_table_preference any
+---@field risk_level any
+---@field selected_theme_template_id string
+---@field setting table
+---@field space_id string
+---@field theme table
+---@field typebot any
+---@field updated_at string
+---@field variable table
+---@field version? any
+---@field warning? table
+---@field whats_app_credentials_id string
+---@field workspace_id string
+
+---@class TypebotUpdateData
+---@field id string
+---@field access_right? string
+---@field created_at? string
+---@field current_user_mode? string
+---@field custom_domain? any
+---@field edge? table
+---@field enable_safety_flag? boolean
+---@field event? table
+---@field folder_id? string
+---@field from_template? string
+---@field group? table
+---@field icon? any
+---@field is_archived? boolean
+---@field is_closed? boolean
+---@field message? any
+---@field name? string
+---@field overwrite? boolean
+---@field public_id? string
+---@field published_typebot? any
+---@field published_typebot_id? string
+---@field results_table_preference? any
+---@field risk_level? any
+---@field selected_theme_template_id? string
+---@field setting? table
+---@field space_id? string
+---@field theme? table
+---@field typebot? any
+---@field updated_at? string
+---@field variable? table
+---@field version? any
+---@field warning? table
+---@field whats_app_credentials_id? string
+---@field workspace_id? string
+
+---@class TypebotRemoveMatch
+---@field id string
+
+---@class Workspace
+---@field chats_hard_limit any
+---@field created_at string
+---@field current_user_mode string
+---@field icon any
+---@field id string
+---@field inactive_first_email_sent_at any
+---@field inactive_second_email_sent_at any
+---@field is_past_due boolean
+---@field is_suspended boolean
+---@field is_verified boolean
+---@field last_activity_at any
+---@field name string
+---@field plan string
+---@field role string
+---@field setting any
+---@field stripe_id string
+---@field updated_at string
+---@field user table
+---@field user_id string
+---@field workspace table
+---@field workspace_id string
+
+---@class WorkspaceLoadMatch
+---@field id string
+
+---@class WorkspaceListMatch
+---@field chats_hard_limit? any
+---@field created_at? string
+---@field current_user_mode? string
+---@field icon? any
+---@field id? string
+---@field inactive_first_email_sent_at? any
+---@field inactive_second_email_sent_at? any
+---@field is_past_due? boolean
+---@field is_suspended? boolean
+---@field is_verified? boolean
+---@field last_activity_at? any
+---@field name? string
+---@field plan? string
+---@field role? string
+---@field setting? any
+---@field stripe_id? string
+---@field updated_at? string
+---@field user? table
+---@field user_id? string
+---@field workspace? table
+---@field workspace_id? string
+
+---@class WorkspaceCreateData
+---@field chats_hard_limit any
+---@field created_at string
+---@field current_user_mode string
+---@field icon any
+---@field id string
+---@field inactive_first_email_sent_at any
+---@field inactive_second_email_sent_at any
+---@field is_past_due boolean
+---@field is_suspended boolean
+---@field is_verified boolean
+---@field last_activity_at any
+---@field name string
+---@field plan string
+---@field role string
+---@field setting any
+---@field stripe_id string
+---@field updated_at string
+---@field user table
+---@field user_id string
+---@field workspace table
+---@field workspace_id string
+
+---@class WorkspaceUpdateData
+---@field id string
+---@field chats_hard_limit? any
+---@field created_at? string
+---@field current_user_mode? string
+---@field icon? any
+---@field inactive_first_email_sent_at? any
+---@field inactive_second_email_sent_at? any
+---@field is_past_due? boolean
+---@field is_suspended? boolean
+---@field is_verified? boolean
+---@field last_activity_at? any
+---@field name? string
+---@field plan? string
+---@field role? string
+---@field setting? any
+---@field stripe_id? string
+---@field updated_at? string
+---@field user? table
+---@field user_id? string
+---@field workspace? table
+---@field workspace_id? string
+
+---@class WorkspaceRemoveMatch
+---@field id string
+
+local M = {}
+
+return M

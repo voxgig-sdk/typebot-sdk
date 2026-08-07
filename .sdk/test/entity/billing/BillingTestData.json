@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "billing": {
+      "BILLING00": {
+        "amount": 70,
+        "currency": "s47",
+        "date": "s48",
+        "id": "BILLING00",
+        "resets_at": "s4a",
+        "total_chats_used": 75,
+        "url": "s4c"
+      },
+      "BILLING01": {
+        "amount": 140,
+        "currency": "s8d",
+        "date": "s8e",
+        "id": "BILLING01",
+        "resets_at": "s90",
+        "total_chats_used": 145,
+        "url": "s92"
+      },
+      "BILLING02": {
+        "amount": 210,
+        "currency": "sd3",
+        "date": "sd4",
+        "id": "BILLING02",
+        "resets_at": "sd6",
+        "total_chats_used": 215,
+        "url": "sd8"
+      }
+    }
+  },
+  "new": {
+    "billing": {
+      "billing_ref01": {
+        "amount": 280,
+        "currency": "s119",
+        "date": "s11a",
+        "resets_at": "s11c",
+        "total_chats_used": 285,
+        "url": "s11e"
+      }
+    }
+  }
+}

@@ -1,0 +1,523 @@
+# Entity: typebot
+
+main: kit: entity: typebot: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "access_right"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "created_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "current_user_mode"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "custom_domain"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "edge"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "enable_safety_flag"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "event"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "folder_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "from_template"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "group"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "icon"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "is_archived"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "is_closed"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "message"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "name"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "overwrite"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "public_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "published_typebot"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "published_typebot_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "results_table_preference"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "risk_level"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "selected_theme_template_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "setting"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "space_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "theme"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "typebot"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "updated_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "variable"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "version"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      type: "`$ANY`"
+    }
+    {
+      name: "warning"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "whats_app_credentials_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "workspace_id"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "typebot"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "POST"
+          orig: "/v1/typebots/{typebotId}/publish"
+          parts: [
+            "v1"
+            "typebots"
+            "{id}"
+            "publish"
+          ]
+          rename: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          select: {
+            "$action": "publish"
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "POST"
+          orig: "/v1/typebots/{typebotId}/unpublish"
+          parts: [
+            "v1"
+            "typebots"
+            "{id}"
+            "unpublish"
+          ]
+          rename: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          select: {
+            "$action": "unpublish"
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "POST"
+          orig: "/v1/typebots"
+          parts: [
+            "v1"
+            "typebots"
+          ]
+          transform: {
+            req: {
+              typebot: "`reqdata`"
+            }
+            res: "`body.typebot`"
+          }
+        }
+        {
+          method: "POST"
+          orig: "/v1/typebots/import"
+          parts: [
+            "v1"
+            "typebots"
+            "import"
+          ]
+          select: {
+            "$action": "import"
+          }
+          transform: {
+            req: {
+              typebot: "`reqdata`"
+            }
+            res: "`body.typebot`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "folder_id"
+                orig: "folder_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "workspace_id"
+                orig: "workspace_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/typebots"
+          parts: [
+            "v1"
+            "typebots"
+          ]
+          select: {
+            exist: [
+              "folder_id"
+              "workspace_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.typebots`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                example: false
+                kind: "query"
+                name: "migrate_to_latest_version"
+                orig: "migrate_to_latest_version"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/typebots/{typebotId}"
+          parts: [
+            "v1"
+            "typebots"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+              "migrate_to_latest_version"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.typebot`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                example: false
+                kind: "query"
+                name: "migrate_to_latest_version"
+                orig: "migrate_to_latest_version"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/typebots/{typebotId}/publishedTypebot"
+          parts: [
+            "v1"
+            "typebots"
+            "{id}"
+            "publishedTypebot"
+          ]
+          rename: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          select: {
+            "$action": "published_typebot"
+            exist: [
+              "id"
+              "migrate_to_latest_version"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/v1/typebots/{typebotId}"
+          parts: [
+            "v1"
+            "typebots"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "PATCH"
+          orig: "/v1/typebots/{typebotId}"
+          parts: [
+            "v1"
+            "typebots"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: {
+              typebot: "`reqdata`"
+            }
+            res: "`body.typebot`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,40 @@
+# BasicBillingFlow
+
+main: kit: flow: BasicBillingFlow:
+{
+  entity: "billing",
+  kind: "basic",
+  name: "BasicBillingFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "billing_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "billing_ref01",
+        srcdatavar: "billing_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-billing_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicBillingFlow"
+}

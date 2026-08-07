@@ -1,0 +1,11 @@
+
+# preparePath joins point.parts with '/'. Path template markers ({id}) are
+# preserved verbatim; param substitution happens later, in makeUrl.
+basic: set: [
+  { ctx: { point: { parts: [] } }, out: '' }
+  { ctx: { point: { parts: ['v1'] } }, out: 'v1' }
+  { ctx: { point: { parts: ['v1', 'typebots'] } }, out: 'v1/typebots' }
+  { ctx: { point: { parts: ['v1', 'typebots', '{id}'] } }, out: 'v1/typebots/{id}' }
+  { ctx: { point: { parts: ['v1', 'typebots', '{id}', 'results'] } },
+    out: 'v1/typebots/{id}/results' }
+]

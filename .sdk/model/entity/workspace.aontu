@@ -1,0 +1,329 @@
+# Entity: workspace
+
+main: kit: entity: workspace: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "chats_hard_limit"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "created_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "current_user_mode"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "icon"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "inactive_first_email_sent_at"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "inactive_second_email_sent_at"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "is_past_due"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "is_suspended"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "is_verified"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "last_activity_at"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "plan"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "role"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "setting"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "stripe_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "updated_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "user"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "user_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "workspace"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "workspace_id"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "workspace"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/v1/workspaces"
+          parts: [
+            "v1"
+            "workspaces"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.workspace`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "workspace_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/workspaces/{workspaceId}/members"
+          parts: [
+            "v1"
+            "workspaces"
+            "{id}"
+            "members"
+          ]
+          rename: {
+            param: {
+              workspaceId: "id"
+            }
+          }
+          select: {
+            "$action": "member"
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.members`"
+          }
+        }
+        {
+          method: "GET"
+          orig: "/v1/workspaces"
+          parts: [
+            "v1"
+            "workspaces"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.workspaces`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "workspace_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/workspaces/{workspaceId}"
+          parts: [
+            "v1"
+            "workspaces"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              workspaceId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.workspace`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "workspace_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/v1/workspaces/{workspaceId}"
+          parts: [
+            "v1"
+            "workspaces"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              workspaceId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "workspace_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "PATCH"
+          orig: "/v1/workspaces/{workspaceId}"
+          parts: [
+            "v1"
+            "workspaces"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              workspaceId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.workspace`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

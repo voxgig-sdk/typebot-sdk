@@ -1,0 +1,126 @@
+# Entity: billing
+
+main: kit: entity: billing: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "amount"
+      req: true
+      type: "`$NUMBER`"
+    }
+    {
+      name: "currency"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "date"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "resets_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "total_chats_used"
+      req: true
+      type: "`$NUMBER`"
+    }
+    {
+      name: "url"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "billing"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "workspace_id"
+                orig: "workspace_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/billing/invoices"
+          parts: [
+            "v1"
+            "billing"
+            "invoices"
+          ]
+          select: {
+            "$action": "invoice"
+            exist: [
+              "workspace_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.invoices`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "workspace_id"
+                orig: "workspace_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/billing/usage"
+          parts: [
+            "v1"
+            "billing"
+            "usage"
+          ]
+          select: {
+            "$action": "usage"
+            exist: [
+              "workspace_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

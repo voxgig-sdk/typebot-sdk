@@ -1,0 +1,10 @@
+
+# clean redacts sensitive values in request data before logging. The
+# redaction rules are driven by options.__derived__.clean.keyre; with no
+# rules configured the value passes through unchanged.
+basic: set: [
+  { args: [{}, 'plain'], out: 'plain' }
+  { args: [{}, {}], out: {} }
+  { args: [{}, {name: 'typebot01'}], out: {name: 'typebot01'} }
+  { args: [{}, {token: 'abcdefghijklmnop'}], out: {token: 'abcdefghijklmnop'} }
+]

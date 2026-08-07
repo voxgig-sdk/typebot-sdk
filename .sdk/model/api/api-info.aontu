@@ -1,0 +1,26 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "The Builder API."
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "Authorization"
+        type: "http"
+      }
+      servers: [
+        {
+          url: "https://app.typebot.com/api"
+        }
+      ]
+      title: "Builder API"
+      version: "1.0.0"
+      website: "https://docs.typebot.com/api-reference"
+    }
+  }
+}
+

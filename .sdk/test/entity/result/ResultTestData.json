@@ -1,0 +1,73 @@
+{
+  "existing": {
+    "result": {
+      "RESULT00": {
+        "answer": [],
+        "context": "s8d",
+        "created_at": "s8e",
+        "description": "s8f",
+        "detail": "s90",
+        "has_started": false,
+        "id": "RESULT00",
+        "is_archived": false,
+        "is_completed": true,
+        "last_chat_session_id": "LAST_CHAT_SESSION01",
+        "result_id": "RESULT01",
+        "status": "s97",
+        "typebot_id": "TYPEBOT01",
+        "variable": []
+      },
+      "RESULT01": {
+        "answer": [],
+        "context": "s119",
+        "created_at": "s11a",
+        "description": "s11b",
+        "detail": "s11c",
+        "has_started": false,
+        "id": "RESULT01",
+        "is_archived": false,
+        "is_completed": true,
+        "last_chat_session_id": "LAST_CHAT_SESSION01",
+        "result_id": "RESULT01",
+        "status": "s123",
+        "typebot_id": "TYPEBOT01",
+        "variable": []
+      },
+      "RESULT02": {
+        "answer": [],
+        "context": "s1a5",
+        "created_at": "s1a6",
+        "description": "s1a7",
+        "detail": "s1a8",
+        "has_started": false,
+        "id": "RESULT02",
+        "is_archived": false,
+        "is_completed": true,
+        "last_chat_session_id": "LAST_CHAT_SESSION01",
+        "result_id": "RESULT01",
+        "status": "s1af",
+        "typebot_id": "TYPEBOT01",
+        "variable": []
+      }
+    }
+  },
+  "new": {
+    "result": {
+      "result_ref01": {
+        "answer": [],
+        "context": "s231",
+        "created_at": "s232",
+        "description": "s233",
+        "detail": "s234",
+        "has_started": false,
+        "is_archived": false,
+        "is_completed": true,
+        "last_chat_session_id": "LAST_CHAT_SESSION01",
+        "result_id": "RESULT01",
+        "status": "s23b",
+        "typebot_id": "TYPEBOT01",
+        "variable": []
+      }
+    }
+  }
+}

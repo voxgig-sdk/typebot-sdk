@@ -1,0 +1,101 @@
+{
+  "existing": {
+    "workspace": {
+      "WORKSPACE00": {
+        "chats_hard_limit": "sd2",
+        "created_at": "sd3",
+        "current_user_mode": "sd4",
+        "icon": "sd5",
+        "id": "WORKSPACE00",
+        "inactive_first_email_sent_at": "sd7",
+        "inactive_second_email_sent_at": "sd8",
+        "is_past_due": false,
+        "is_suspended": true,
+        "is_verified": false,
+        "last_activity_at": "sdc",
+        "name": "sdd",
+        "plan": "sde",
+        "role": "sdf",
+        "setting": "se0",
+        "stripe_id": "STRIPE01",
+        "updated_at": "se2",
+        "user": {},
+        "user_id": "USER01",
+        "workspace": {},
+        "workspace_id": "WORKSPACE01"
+      },
+      "WORKSPACE01": {
+        "chats_hard_limit": "s1a4",
+        "created_at": "s1a5",
+        "current_user_mode": "s1a6",
+        "icon": "s1a7",
+        "id": "WORKSPACE01",
+        "inactive_first_email_sent_at": "s1a9",
+        "inactive_second_email_sent_at": "s1aa",
+        "is_past_due": false,
+        "is_suspended": true,
+        "is_verified": false,
+        "last_activity_at": "s1ae",
+        "name": "s1af",
+        "plan": "s1b0",
+        "role": "s1b1",
+        "setting": "s1b2",
+        "stripe_id": "STRIPE01",
+        "updated_at": "s1b4",
+        "user": {},
+        "user_id": "USER01",
+        "workspace": {},
+        "workspace_id": "WORKSPACE01"
+      },
+      "WORKSPACE02": {
+        "chats_hard_limit": "s276",
+        "created_at": "s277",
+        "current_user_mode": "s278",
+        "icon": "s279",
+        "id": "WORKSPACE02",
+        "inactive_first_email_sent_at": "s27b",
+        "inactive_second_email_sent_at": "s27c",
+        "is_past_due": false,
+        "is_suspended": true,
+        "is_verified": false,
+        "last_activity_at": "s280",
+        "name": "s281",
+        "plan": "s282",
+        "role": "s283",
+        "setting": "s284",
+        "stripe_id": "STRIPE01",
+        "updated_at": "s286",
+        "user": {},
+        "user_id": "USER01",
+        "workspace": {},
+        "workspace_id": "WORKSPACE01"
+      }
+    }
+  },
+  "new": {
+    "workspace": {
+      "workspace_ref01": {
+        "chats_hard_limit": "s348",
+        "created_at": "s349",
+        "current_user_mode": "s34a",
+        "icon": "s34b",
+        "inactive_first_email_sent_at": "s34d",
+        "inactive_second_email_sent_at": "s34e",
+        "is_past_due": false,
+        "is_suspended": true,
+        "is_verified": false,
+        "last_activity_at": "s352",
+        "name": "s353",
+        "plan": "s354",
+        "role": "s355",
+        "setting": "s356",
+        "stripe_id": "STRIPE01",
+        "updated_at": "s358",
+        "user": {},
+        "user_id": "USER01",
+        "workspace": {},
+        "workspace_id": "WORKSPACE01"
+      }
+    }
+  }
+}

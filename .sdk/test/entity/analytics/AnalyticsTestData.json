@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "analytics": {
+      "ANALYTICS00": {
+        "total_completed": 30,
+        "total_start": 31,
+        "total_view": 32,
+        "typebot_id": "TYPEBOT01",
+        "id": "ANALYTICS00"
+      },
+      "ANALYTICS01": {
+        "total_completed": 60,
+        "total_start": 61,
+        "total_view": 62,
+        "typebot_id": "TYPEBOT01",
+        "id": "ANALYTICS01"
+      },
+      "ANALYTICS02": {
+        "total_completed": 90,
+        "total_start": 91,
+        "total_view": 92,
+        "typebot_id": "TYPEBOT01",
+        "id": "ANALYTICS02"
+      }
+    }
+  },
+  "new": {
+    "analytics": {
+      "analytics_ref01": {
+        "total_completed": 120,
+        "total_start": 121,
+        "total_view": 122
+      }
+    }
+  }
+}

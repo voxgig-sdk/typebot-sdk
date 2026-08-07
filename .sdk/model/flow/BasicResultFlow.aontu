@@ -1,0 +1,50 @@
+# BasicResultFlow
+
+main: kit: flow: BasicResultFlow:
+{
+  entity: "result",
+  kind: "basic",
+  name: "BasicResultFlow",
+  step: [
+    {
+      match: {
+        result_id: "result01",
+        typebot_id: "typebot01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "result_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "result_ref01",
+        srcdatavar: "result_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "result01",
+        typebot_id: "typebot01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-result_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicResultFlow"
+}

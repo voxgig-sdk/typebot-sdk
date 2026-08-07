@@ -1,0 +1,100 @@
+# Entity: analytics
+
+main: kit: entity: analytics: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "total_completed"
+      req: true
+      type: "`$NUMBER`"
+    }
+    {
+      name: "total_start"
+      req: true
+      type: "`$NUMBER`"
+    }
+    {
+      name: "total_view"
+      req: true
+      type: "`$NUMBER`"
+    }
+  ]
+
+  name: "analytics"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "typebot_id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                example: "last7Days"
+                kind: "query"
+                name: "time_filter"
+                orig: "time_filter"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "time_zone"
+                orig: "time_zone"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/typebots/{typebotId}/analytics/stats"
+          parts: [
+            "v1"
+            "typebots"
+            "{typebot_id}"
+            "analytics"
+            "stats"
+          ]
+          rename: {
+            param: {
+              typebotId: "typebot_id"
+            }
+          }
+          select: {
+            "$action": "stat"
+            exist: [
+              "time_filter"
+              "time_zone"
+              "typebot_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.stats`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "typebot"
+      ]
+    ]
+  }
+
+
+
+}

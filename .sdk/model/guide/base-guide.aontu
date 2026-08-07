@@ -1,0 +1,132 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 6
+  metrics: count: path: 17
+  metrics: count: method: 27
+
+  entity: analytics: {
+    path: "/v1/typebots/{typebotId}/analytics/stats": {
+      action: "stat": {}
+      rename: param: "typebotId": *"typebot_id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.stats`")|top
+    }
+  }
+
+  entity: billing: {
+    path: "/v1/billing/invoices": {
+      action: "invoice": {}
+      op: list: method: *GET
+      op: list: transform: res: *("`body.invoices`")|top
+    }
+    path: "/v1/billing/usage": {
+      action: "usage": {}
+      op: load: method: *GET
+    }
+  }
+
+  entity: folder: {
+    path: "/v1/folders": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.folder`")|top
+      op: list: method: *GET
+      op: list: transform: res: *("`body.folders`")|top
+    }
+    path: "/v1/folders/{folderId}": {
+      rename: param: "folderId": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.folder`")|top
+      op: patch: method: *PATCH
+      op: patch: transform: res: *("`body.folder`")|top
+      op: patch: transform: req: "folder": *("`reqdata`")|top
+      op: remove: method: *DELETE
+      op: remove: transform: res: *("`body.folder`")|top
+    }
+  }
+
+  entity: result: {
+    path: "/v1/typebots/{typebotId}/results": {
+      rename: param: "typebotId": *"typebot_id"
+      op: list: method: *GET
+      op: remove: method: *DELETE
+    }
+    path: "/v1/typebots/{typebotId}/results/{resultId}": {
+      rename: param: "resultId": *"id"
+      rename: param: "typebotId": *"typebot_id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.result`")|top
+    }
+    path: "/v1/typebots/{typebotId}/results/{resultId}/logs": {
+      action: "log": {}
+      rename: param: "resultId": *"id"
+      rename: param: "typebotId": *"typebot_id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.logs`")|top
+    }
+  }
+
+  entity: typebot: {
+    path: "/v1/typebots": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.typebot`")|top
+      op: create: transform: req: "typebot": *("`reqdata`")|top
+      op: list: method: *GET
+      op: list: transform: res: *("`body.typebots`")|top
+    }
+    path: "/v1/typebots/import": {
+      action: "import": {}
+      op: create: method: *POST
+      op: create: transform: res: *("`body.typebot`")|top
+      op: create: transform: req: "typebot": *("`reqdata`")|top
+    }
+    path: "/v1/typebots/{typebotId}": {
+      rename: param: "typebotId": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.typebot`")|top
+      op: patch: method: *PATCH
+      op: patch: transform: res: *("`body.typebot`")|top
+      op: patch: transform: req: "typebot": *("`reqdata`")|top
+      op: remove: method: *DELETE
+    }
+    path: "/v1/typebots/{typebotId}/publish": {
+      action: "publish": {}
+      rename: param: "typebotId": *"id"
+      op: create: method: *POST
+    }
+    path: "/v1/typebots/{typebotId}/publishedTypebot": {
+      action: "published_typebot": {}
+      rename: param: "typebotId": *"id"
+      op: load: method: *GET
+    }
+    path: "/v1/typebots/{typebotId}/unpublish": {
+      action: "unpublish": {}
+      rename: param: "typebotId": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: workspace: {
+    path: "/v1/workspaces": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.workspace`")|top
+      op: list: method: *GET
+      op: list: transform: res: *("`body.workspaces`")|top
+    }
+    path: "/v1/workspaces/{workspaceId}": {
+      rename: param: "workspaceId": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.workspace`")|top
+      op: patch: method: *PATCH
+      op: patch: transform: res: *("`body.workspace`")|top
+      op: remove: method: *DELETE
+    }
+    path: "/v1/workspaces/{workspaceId}/members": {
+      action: "member": {}
+      rename: param: "workspaceId": *"id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.members`")|top
+    }
+  }
+
+}

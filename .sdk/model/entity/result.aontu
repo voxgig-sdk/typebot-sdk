@@ -1,0 +1,312 @@
+# Entity: result
+
+main: kit: entity: result: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "answer"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "context"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "created_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "description"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "detail"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "has_started"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "is_archived"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "is_completed"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "last_chat_session_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "result_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "typebot_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "variable"
+      req: true
+      type: "`$ARRAY`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "result"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "typebot_id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "cursor"
+                orig: "cursor"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+              {
+                example: 50
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+              {
+                example: "last7Days"
+                kind: "query"
+                name: "time_filter"
+                orig: "time_filter"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "time_zone"
+                orig: "time_zone"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/typebots/{typebotId}/results"
+          parts: [
+            "v1"
+            "typebots"
+            "{typebot_id}"
+            "results"
+          ]
+          rename: {
+            param: {
+              typebotId: "typebot_id"
+            }
+          }
+          select: {
+            exist: [
+              "cursor"
+              "limit"
+              "time_filter"
+              "time_zone"
+              "typebot_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "result_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "param"
+                name: "typebot_id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/typebots/{typebotId}/results/{resultId}/logs"
+          parts: [
+            "v1"
+            "typebots"
+            "{typebot_id}"
+            "results"
+            "{id}"
+            "logs"
+          ]
+          rename: {
+            param: {
+              resultId: "id"
+              typebotId: "typebot_id"
+            }
+          }
+          select: {
+            "$action": "log"
+            exist: [
+              "id"
+              "typebot_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.logs`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "result_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "param"
+                name: "typebot_id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/typebots/{typebotId}/results/{resultId}"
+          parts: [
+            "v1"
+            "typebots"
+            "{typebot_id}"
+            "results"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              resultId: "id"
+              typebotId: "typebot_id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+              "typebot_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.result`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "typebot_id"
+                orig: "typebot_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/v1/typebots/{typebotId}/results"
+          parts: [
+            "v1"
+            "typebots"
+            "{typebot_id}"
+            "results"
+          ]
+          rename: {
+            param: {
+              typebotId: "typebot_id"
+            }
+          }
+          select: {
+            exist: [
+              "typebot_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "typebot"
+      ]
+    ]
+  }
+
+
+
+}

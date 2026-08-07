@@ -1,0 +1,260 @@
+# Entity: folder
+
+main: kit: entity: folder: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "created_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "folder"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "folder_name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "parent_folder_id"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "updated_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "workspace_id"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "folder"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/v1/folders"
+          parts: [
+            "v1"
+            "folders"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.folder`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "parent_folder_id"
+                orig: "parent_folder_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "workspace_id"
+                orig: "workspace_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/folders"
+          parts: [
+            "v1"
+            "folders"
+          ]
+          select: {
+            exist: [
+              "parent_folder_id"
+              "workspace_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.folders`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "folder_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "workspace_id"
+                orig: "workspace_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v1/folders/{folderId}"
+          parts: [
+            "v1"
+            "folders"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              folderId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+              "workspace_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.folder`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "folder_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/v1/folders/{folderId}"
+          parts: [
+            "v1"
+            "folders"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              folderId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.folder`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "folder_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "PATCH"
+          orig: "/v1/folders/{folderId}"
+          parts: [
+            "v1"
+            "folders"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              folderId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: {
+              folder: "`reqdata`"
+            }
+            res: "`body.folder`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
