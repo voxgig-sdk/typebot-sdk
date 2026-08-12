@@ -26,12 +26,12 @@ main: kit: entity: billing: {
       type: "`$STRING`"
     }
     {
-      name: "resets_at"
+      name: "resetsAt"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "total_chats_used"
+      name: "totalChatsUsed"
       req: true
       type: "`$NUMBER`"
     }

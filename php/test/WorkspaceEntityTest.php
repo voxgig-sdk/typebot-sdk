@@ -103,7 +103,7 @@ class WorkspaceEntityTest extends TestCase
             "id" => $workspace_ref01_data["id"],
         ];
 
-        $workspace_ref01_markdef_up0_name = "created_at";
+        $workspace_ref01_markdef_up0_name = "createdAt";
         $workspace_ref01_markdef_up0_value = "Mark01-workspace_ref01_" . $setup["now"];
         $workspace_ref01_data_up0_up[$workspace_ref01_markdef_up0_name] = $workspace_ref01_markdef_up0_value;
 

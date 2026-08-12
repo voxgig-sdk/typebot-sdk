@@ -103,7 +103,7 @@ class TypebotEntityTest extends TestCase
             "id" => $typebot_ref01_data["id"],
         ];
 
-        $typebot_ref01_markdef_up0_name = "access_right";
+        $typebot_ref01_markdef_up0_name = "accessRight";
         $typebot_ref01_markdef_up0_value = "Mark01-typebot_ref01_" . $setup["now"];
         $typebot_ref01_data_up0_up[$typebot_ref01_markdef_up0_name] = $typebot_ref01_markdef_up0_value;
 

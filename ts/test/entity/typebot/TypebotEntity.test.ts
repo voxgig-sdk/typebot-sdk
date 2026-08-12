@@ -78,7 +78,7 @@ describe('TypebotEntity', async () => {
     const typebot_ref01_data_up0: any = {}
     typebot_ref01_data_up0.id = typebot_ref01_data.id
 
-    const typebot_ref01_markdef_up0 = { name: 'access_right', value: 'Mark01-typebot_ref01_' + setup.now }
+    const typebot_ref01_markdef_up0 = { name: 'accessRight', value: 'Mark01-typebot_ref01_' + setup.now }
     ;(typebot_ref01_data_up0 as any)[typebot_ref01_markdef_up0.name] = typebot_ref01_markdef_up0.value
 
     const typebot_ref01_resdata_up0 = await typebot_ref01_ent.update(typebot_ref01_data_up0)

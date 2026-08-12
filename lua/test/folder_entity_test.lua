@@ -103,7 +103,7 @@ describe("FolderEntity", function()
       id = folder_ref01_data["id"],
     }
 
-    local folder_ref01_markdef_up0_name = "created_at"
+    local folder_ref01_markdef_up0_name = "createdAt"
     local folder_ref01_markdef_up0_value = "Mark01-folder_ref01_" .. tostring(setup.now)
     folder_ref01_data_up0_up[folder_ref01_markdef_up0_name] = folder_ref01_markdef_up0_value
 

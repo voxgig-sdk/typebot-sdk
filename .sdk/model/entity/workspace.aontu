@@ -6,19 +6,24 @@ main: kit: entity: workspace: {
 
   fields: [
     {
-      name: "chats_hard_limit"
+      name: "chatsHardLimit"
       req: true
       type: "`$ANY`"
     }
     {
-      name: "created_at"
+      name: "createdAt"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "current_user_mode"
+      name: "customChatsLimit"
       req: true
-      type: "`$STRING`"
+      type: "`$ANY`"
+    }
+    {
+      name: "customSeatsLimit"
+      req: true
+      type: "`$ANY`"
     }
     {
       name: "icon"
@@ -41,32 +46,32 @@ main: kit: entity: workspace: {
       type: "`$STRING`"
     }
     {
-      name: "inactive_first_email_sent_at"
+      name: "inactiveFirstEmailSentAt"
       req: true
       type: "`$ANY`"
     }
     {
-      name: "inactive_second_email_sent_at"
+      name: "inactiveSecondEmailSentAt"
       req: true
       type: "`$ANY`"
     }
     {
-      name: "is_past_due"
+      name: "isPastDue"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "is_suspended"
+      name: "isSuspended"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "is_verified"
+      name: "isVerified"
       req: true
-      type: "`$BOOLEAN`"
+      type: "`$ANY`"
     }
     {
-      name: "last_activity_at"
+      name: "lastActivityAt"
       req: true
       type: "`$ANY`"
     }
@@ -92,17 +97,17 @@ main: kit: entity: workspace: {
       type: "`$STRING`"
     }
     {
-      name: "setting"
+      name: "settings"
       req: true
       type: "`$ANY`"
     }
     {
-      name: "stripe_id"
+      name: "stripeId"
       req: true
-      type: "`$STRING`"
+      type: "`$ANY`"
     }
     {
-      name: "updated_at"
+      name: "updatedAt"
       req: true
       type: "`$STRING`"
     }
@@ -112,17 +117,12 @@ main: kit: entity: workspace: {
       type: "`$OBJECT`"
     }
     {
-      name: "user_id"
+      name: "userId"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "workspace"
-      req: true
-      type: "`$OBJECT`"
-    }
-    {
-      name: "workspace_id"
+      name: "workspaceId"
       req: true
       type: "`$STRING`"
     }

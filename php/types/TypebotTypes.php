@@ -15,9 +15,9 @@ declare(strict_types=1);
 /** Analytics entity data model. */
 class Analytics
 {
-    public float $total_completed;
-    public float $total_start;
-    public float $total_view;
+    public float $totalCompleted;
+    public float $totalStarts;
+    public float $totalViews;
 }
 
 /** Request payload for Analytics#load. */
@@ -33,8 +33,8 @@ class Billing
     public string $currency;
     public mixed $date;
     public string $id;
-    public string $resets_at;
-    public float $total_chats_used;
+    public string $resetsAt;
+    public float $totalChatsUsed;
     public string $url;
 }
 
@@ -45,8 +45,8 @@ class BillingLoadMatch
     public ?string $currency = null;
     public mixed $date = null;
     public string $id;
-    public ?string $resets_at = null;
-    public ?float $total_chats_used = null;
+    public ?string $resetsAt = null;
+    public ?float $totalChatsUsed = null;
     public ?string $url = null;
 }
 
@@ -57,22 +57,22 @@ class BillingListMatch
     public ?string $currency = null;
     public mixed $date = null;
     public ?string $id = null;
-    public ?string $resets_at = null;
-    public ?float $total_chats_used = null;
+    public ?string $resetsAt = null;
+    public ?float $totalChatsUsed = null;
     public ?string $url = null;
 }
 
 /** Folder entity data model. */
 class Folder
 {
-    public string $created_at;
+    public string $createdAt;
     public array $folder;
-    public ?string $folder_name = null;
+    public ?string $folderName = null;
     public string $id;
     public string $name;
-    public string $parent_folder_id;
-    public string $updated_at;
-    public string $workspace_id;
+    public mixed $parentFolderId;
+    public string $updatedAt;
+    public string $workspaceId;
 }
 
 /** Request payload for Folder#load. */
@@ -84,40 +84,40 @@ class FolderLoadMatch
 /** Request payload for Folder#list. */
 class FolderListMatch
 {
-    public ?string $created_at = null;
+    public ?string $createdAt = null;
     public ?array $folder = null;
-    public ?string $folder_name = null;
+    public ?string $folderName = null;
     public ?string $id = null;
     public ?string $name = null;
-    public ?string $parent_folder_id = null;
-    public ?string $updated_at = null;
-    public ?string $workspace_id = null;
+    public mixed $parentFolderId = null;
+    public ?string $updatedAt = null;
+    public ?string $workspaceId = null;
 }
 
 /** Request payload for Folder#create. */
 class FolderCreateData
 {
-    public string $created_at;
+    public string $createdAt;
     public array $folder;
-    public ?string $folder_name = null;
+    public ?string $folderName = null;
     public string $id;
     public string $name;
-    public string $parent_folder_id;
-    public string $updated_at;
-    public string $workspace_id;
+    public mixed $parentFolderId;
+    public string $updatedAt;
+    public string $workspaceId;
 }
 
 /** Request payload for Folder#update. */
 class FolderUpdateData
 {
     public string $id;
-    public ?string $created_at = null;
+    public ?string $createdAt = null;
     public ?array $folder = null;
-    public ?string $folder_name = null;
+    public ?string $folderName = null;
     public ?string $name = null;
-    public ?string $parent_folder_id = null;
-    public ?string $updated_at = null;
-    public ?string $workspace_id = null;
+    public mixed $parentFolderId = null;
+    public ?string $updatedAt = null;
+    public ?string $workspaceId = null;
 }
 
 /** Request payload for Folder#remove. */
@@ -129,20 +129,20 @@ class FolderRemoveMatch
 /** Result entity data model. */
 class Result
 {
-    public array $answer;
+    public array $answers;
     public mixed $context;
-    public string $created_at;
+    public string $createdAt;
     public string $description;
-    public mixed $detail;
-    public bool $has_started;
+    public mixed $details;
+    public mixed $hasStarted;
     public string $id;
-    public bool $is_archived;
-    public bool $is_completed;
-    public string $last_chat_session_id;
-    public string $result_id;
+    public mixed $isArchived;
+    public bool $isCompleted;
+    public mixed $lastChatSessionId;
+    public string $resultId;
     public string $status;
-    public string $typebot_id;
-    public array $variable;
+    public string $typebotId;
+    public array $variables;
 }
 
 /** Request payload for Result#load. */
@@ -167,39 +167,38 @@ class ResultRemoveMatch
 /** Typebot entity data model. */
 class Typebot
 {
-    public string $access_right;
-    public string $created_at;
-    public string $current_user_mode;
-    public mixed $custom_domain;
-    public array $edge;
-    public ?bool $enable_safety_flag = null;
-    public array $event;
-    public string $folder_id;
-    public ?string $from_template = null;
-    public array $group;
+    public string $accessRight;
+    public string $createdAt;
+    public mixed $customDomain;
+    public array $edges;
+    public ?bool $enableSafetyFlags = null;
+    public array $events;
+    public mixed $folderId;
+    public ?string $fromTemplate = null;
+    public array $groups;
     public mixed $icon;
     public string $id;
-    public bool $is_archived;
-    public bool $is_closed;
+    public bool $isArchived;
+    public bool $isClosed;
     public mixed $message;
     public string $name;
     public ?bool $overwrite = null;
-    public string $public_id;
-    public mixed $published_typebot;
-    public ?string $published_typebot_id = null;
-    public mixed $results_table_preference;
-    public mixed $risk_level;
-    public string $selected_theme_template_id;
-    public array $setting;
-    public string $space_id;
+    public mixed $publicId;
+    public mixed $publishedTypebot;
+    public ?string $publishedTypebotId = null;
+    public mixed $resultsTablePreferences;
+    public mixed $riskLevel;
+    public mixed $selectedThemeTemplateId;
+    public array $settings;
+    public mixed $spaceId;
     public array $theme;
-    public mixed $typebot;
-    public string $updated_at;
-    public array $variable;
+    public array $typebot;
+    public string $updatedAt;
+    public array $variables;
     public mixed $version = null;
-    public ?array $warning = null;
-    public string $whats_app_credentials_id;
-    public string $workspace_id;
+    public ?array $warnings = null;
+    public mixed $whatsAppCredentialsId;
+    public string $workspaceId;
 }
 
 /** Request payload for Typebot#load. */
@@ -211,115 +210,112 @@ class TypebotLoadMatch
 /** Request payload for Typebot#list. */
 class TypebotListMatch
 {
-    public ?string $access_right = null;
-    public ?string $created_at = null;
-    public ?string $current_user_mode = null;
-    public mixed $custom_domain = null;
-    public ?array $edge = null;
-    public ?bool $enable_safety_flag = null;
-    public ?array $event = null;
-    public ?string $folder_id = null;
-    public ?string $from_template = null;
-    public ?array $group = null;
+    public ?string $accessRight = null;
+    public ?string $createdAt = null;
+    public mixed $customDomain = null;
+    public ?array $edges = null;
+    public ?bool $enableSafetyFlags = null;
+    public ?array $events = null;
+    public mixed $folderId = null;
+    public ?string $fromTemplate = null;
+    public ?array $groups = null;
     public mixed $icon = null;
     public ?string $id = null;
-    public ?bool $is_archived = null;
-    public ?bool $is_closed = null;
+    public ?bool $isArchived = null;
+    public ?bool $isClosed = null;
     public mixed $message = null;
     public ?string $name = null;
     public ?bool $overwrite = null;
-    public ?string $public_id = null;
-    public mixed $published_typebot = null;
-    public ?string $published_typebot_id = null;
-    public mixed $results_table_preference = null;
-    public mixed $risk_level = null;
-    public ?string $selected_theme_template_id = null;
-    public ?array $setting = null;
-    public ?string $space_id = null;
+    public mixed $publicId = null;
+    public mixed $publishedTypebot = null;
+    public ?string $publishedTypebotId = null;
+    public mixed $resultsTablePreferences = null;
+    public mixed $riskLevel = null;
+    public mixed $selectedThemeTemplateId = null;
+    public ?array $settings = null;
+    public mixed $spaceId = null;
     public ?array $theme = null;
-    public mixed $typebot = null;
-    public ?string $updated_at = null;
-    public ?array $variable = null;
+    public ?array $typebot = null;
+    public ?string $updatedAt = null;
+    public ?array $variables = null;
     public mixed $version = null;
-    public ?array $warning = null;
-    public ?string $whats_app_credentials_id = null;
-    public ?string $workspace_id = null;
+    public ?array $warnings = null;
+    public mixed $whatsAppCredentialsId = null;
+    public ?string $workspaceId = null;
 }
 
 /** Request payload for Typebot#create. */
 class TypebotCreateData
 {
-    public string $access_right;
-    public string $created_at;
-    public string $current_user_mode;
-    public mixed $custom_domain;
-    public array $edge;
-    public ?bool $enable_safety_flag = null;
-    public array $event;
-    public string $folder_id;
-    public ?string $from_template = null;
-    public array $group;
+    public string $accessRight;
+    public string $createdAt;
+    public mixed $customDomain;
+    public array $edges;
+    public ?bool $enableSafetyFlags = null;
+    public array $events;
+    public mixed $folderId;
+    public ?string $fromTemplate = null;
+    public array $groups;
     public mixed $icon;
     public string $id;
-    public bool $is_archived;
-    public bool $is_closed;
+    public bool $isArchived;
+    public bool $isClosed;
     public mixed $message;
     public string $name;
     public ?bool $overwrite = null;
-    public string $public_id;
-    public mixed $published_typebot;
-    public ?string $published_typebot_id = null;
-    public mixed $results_table_preference;
-    public mixed $risk_level;
-    public string $selected_theme_template_id;
-    public array $setting;
-    public string $space_id;
+    public mixed $publicId;
+    public mixed $publishedTypebot;
+    public ?string $publishedTypebotId = null;
+    public mixed $resultsTablePreferences;
+    public mixed $riskLevel;
+    public mixed $selectedThemeTemplateId;
+    public array $settings;
+    public mixed $spaceId;
     public array $theme;
-    public mixed $typebot;
-    public string $updated_at;
-    public array $variable;
+    public array $typebot;
+    public string $updatedAt;
+    public array $variables;
     public mixed $version = null;
-    public ?array $warning = null;
-    public string $whats_app_credentials_id;
-    public string $workspace_id;
+    public ?array $warnings = null;
+    public mixed $whatsAppCredentialsId;
+    public string $workspaceId;
 }
 
 /** Request payload for Typebot#update. */
 class TypebotUpdateData
 {
     public string $id;
-    public ?string $access_right = null;
-    public ?string $created_at = null;
-    public ?string $current_user_mode = null;
-    public mixed $custom_domain = null;
-    public ?array $edge = null;
-    public ?bool $enable_safety_flag = null;
-    public ?array $event = null;
-    public ?string $folder_id = null;
-    public ?string $from_template = null;
-    public ?array $group = null;
+    public ?string $accessRight = null;
+    public ?string $createdAt = null;
+    public mixed $customDomain = null;
+    public ?array $edges = null;
+    public ?bool $enableSafetyFlags = null;
+    public ?array $events = null;
+    public mixed $folderId = null;
+    public ?string $fromTemplate = null;
+    public ?array $groups = null;
     public mixed $icon = null;
-    public ?bool $is_archived = null;
-    public ?bool $is_closed = null;
+    public ?bool $isArchived = null;
+    public ?bool $isClosed = null;
     public mixed $message = null;
     public ?string $name = null;
     public ?bool $overwrite = null;
-    public ?string $public_id = null;
-    public mixed $published_typebot = null;
-    public ?string $published_typebot_id = null;
-    public mixed $results_table_preference = null;
-    public mixed $risk_level = null;
-    public ?string $selected_theme_template_id = null;
-    public ?array $setting = null;
-    public ?string $space_id = null;
+    public mixed $publicId = null;
+    public mixed $publishedTypebot = null;
+    public ?string $publishedTypebotId = null;
+    public mixed $resultsTablePreferences = null;
+    public mixed $riskLevel = null;
+    public mixed $selectedThemeTemplateId = null;
+    public ?array $settings = null;
+    public mixed $spaceId = null;
     public ?array $theme = null;
-    public mixed $typebot = null;
-    public ?string $updated_at = null;
-    public ?array $variable = null;
+    public ?array $typebot = null;
+    public ?string $updatedAt = null;
+    public ?array $variables = null;
     public mixed $version = null;
-    public ?array $warning = null;
-    public ?string $whats_app_credentials_id = null;
-    public ?string $workspace_id = null;
+    public ?array $warnings = null;
+    public mixed $whatsAppCredentialsId = null;
+    public ?string $workspaceId = null;
 }
 
 /** Request payload for Typebot#remove. */
@@ -331,27 +327,27 @@ class TypebotRemoveMatch
 /** Workspace entity data model. */
 class Workspace
 {
-    public mixed $chats_hard_limit;
-    public string $created_at;
-    public string $current_user_mode;
+    public mixed $chatsHardLimit;
+    public string $createdAt;
+    public mixed $customChatsLimit;
+    public mixed $customSeatsLimit;
     public mixed $icon;
     public string $id;
-    public mixed $inactive_first_email_sent_at;
-    public mixed $inactive_second_email_sent_at;
-    public bool $is_past_due;
-    public bool $is_suspended;
-    public bool $is_verified;
-    public mixed $last_activity_at;
+    public mixed $inactiveFirstEmailSentAt;
+    public mixed $inactiveSecondEmailSentAt;
+    public bool $isPastDue;
+    public bool $isSuspended;
+    public mixed $isVerified;
+    public mixed $lastActivityAt;
     public string $name;
     public string $plan;
     public string $role;
-    public mixed $setting;
-    public string $stripe_id;
-    public string $updated_at;
+    public mixed $settings;
+    public mixed $stripeId;
+    public string $updatedAt;
     public array $user;
-    public string $user_id;
-    public array $workspace;
-    public string $workspace_id;
+    public string $userId;
+    public string $workspaceId;
 }
 
 /** Request payload for Workspace#load. */
@@ -363,79 +359,79 @@ class WorkspaceLoadMatch
 /** Request payload for Workspace#list. */
 class WorkspaceListMatch
 {
-    public mixed $chats_hard_limit = null;
-    public ?string $created_at = null;
-    public ?string $current_user_mode = null;
+    public mixed $chatsHardLimit = null;
+    public ?string $createdAt = null;
+    public mixed $customChatsLimit = null;
+    public mixed $customSeatsLimit = null;
     public mixed $icon = null;
     public ?string $id = null;
-    public mixed $inactive_first_email_sent_at = null;
-    public mixed $inactive_second_email_sent_at = null;
-    public ?bool $is_past_due = null;
-    public ?bool $is_suspended = null;
-    public ?bool $is_verified = null;
-    public mixed $last_activity_at = null;
+    public mixed $inactiveFirstEmailSentAt = null;
+    public mixed $inactiveSecondEmailSentAt = null;
+    public ?bool $isPastDue = null;
+    public ?bool $isSuspended = null;
+    public mixed $isVerified = null;
+    public mixed $lastActivityAt = null;
     public ?string $name = null;
     public ?string $plan = null;
     public ?string $role = null;
-    public mixed $setting = null;
-    public ?string $stripe_id = null;
-    public ?string $updated_at = null;
+    public mixed $settings = null;
+    public mixed $stripeId = null;
+    public ?string $updatedAt = null;
     public ?array $user = null;
-    public ?string $user_id = null;
-    public ?array $workspace = null;
-    public ?string $workspace_id = null;
+    public ?string $userId = null;
+    public ?string $workspaceId = null;
 }
 
 /** Request payload for Workspace#create. */
 class WorkspaceCreateData
 {
-    public mixed $chats_hard_limit;
-    public string $created_at;
-    public string $current_user_mode;
+    public mixed $chatsHardLimit;
+    public string $createdAt;
+    public mixed $customChatsLimit;
+    public mixed $customSeatsLimit;
     public mixed $icon;
     public string $id;
-    public mixed $inactive_first_email_sent_at;
-    public mixed $inactive_second_email_sent_at;
-    public bool $is_past_due;
-    public bool $is_suspended;
-    public bool $is_verified;
-    public mixed $last_activity_at;
+    public mixed $inactiveFirstEmailSentAt;
+    public mixed $inactiveSecondEmailSentAt;
+    public bool $isPastDue;
+    public bool $isSuspended;
+    public mixed $isVerified;
+    public mixed $lastActivityAt;
     public string $name;
     public string $plan;
     public string $role;
-    public mixed $setting;
-    public string $stripe_id;
-    public string $updated_at;
+    public mixed $settings;
+    public mixed $stripeId;
+    public string $updatedAt;
     public array $user;
-    public string $user_id;
-    public array $workspace;
-    public string $workspace_id;
+    public string $userId;
+    public string $workspaceId;
 }
 
 /** Request payload for Workspace#update. */
 class WorkspaceUpdateData
 {
     public string $id;
-    public mixed $chats_hard_limit = null;
-    public ?string $created_at = null;
-    public ?string $current_user_mode = null;
+    public mixed $chatsHardLimit = null;
+    public ?string $createdAt = null;
+    public mixed $customChatsLimit = null;
+    public mixed $customSeatsLimit = null;
     public mixed $icon = null;
-    public mixed $inactive_first_email_sent_at = null;
-    public mixed $inactive_second_email_sent_at = null;
-    public ?bool $is_past_due = null;
-    public ?bool $is_suspended = null;
-    public ?bool $is_verified = null;
-    public mixed $last_activity_at = null;
+    public mixed $inactiveFirstEmailSentAt = null;
+    public mixed $inactiveSecondEmailSentAt = null;
+    public ?bool $isPastDue = null;
+    public ?bool $isSuspended = null;
+    public mixed $isVerified = null;
+    public mixed $lastActivityAt = null;
     public ?string $name = null;
     public ?string $plan = null;
     public ?string $role = null;
-    public mixed $setting = null;
-    public ?string $stripe_id = null;
-    public ?string $updated_at = null;
+    public mixed $settings = null;
+    public mixed $stripeId = null;
+    public ?string $updatedAt = null;
     public ?array $user = null;
-    public ?string $user_id = null;
-    public ?array $workspace = null;
-    public ?string $workspace_id = null;
+    public ?string $userId = null;
+    public ?string $workspaceId = null;
 }
 
 /** Request payload for Workspace#remove. */

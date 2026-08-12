@@ -6,15 +6,15 @@ import re
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from typebot_sdk.utility.voxgig_struct import voxgig_struct as vs
 from typebot_sdk import TypebotSDK
-from core.spec import TypebotSpec
-from core.result import TypebotResult
-from core.response import TypebotResponse
-from core.operation import TypebotOperation
-from core.error import TypebotError
-from core import helpers
-from feature.base_feature import TypebotBaseFeature
+from typebot_sdk.core.spec import TypebotSpec
+from typebot_sdk.core.result import TypebotResult
+from typebot_sdk.core.response import TypebotResponse
+from typebot_sdk.core.operation import TypebotOperation
+from typebot_sdk.core.error import TypebotError
+from typebot_sdk.core import helpers
+from typebot_sdk.feature.base_feature import TypebotBaseFeature
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -468,6 +468,10 @@ class TestPrimaryUtility:
             return {"status": 200, "statusText": "OK"}, None
 
         live_client = TypebotSDK({
+            # Concrete base: a live construction must satisfy any server
+            # variables a templated base URL declares; a literal base
+            # sidesteps the requirement.
+            "base": "http://localhost:8080",
             "system": {
                 "fetch": mock_fetch,
             },
@@ -490,6 +494,7 @@ class TestPrimaryUtility:
             return {}, None
 
         blocked_client = TypebotSDK({
+            "base": "http://localhost:8080",
             "system": {
                 "fetch": mock_fetch,
             },

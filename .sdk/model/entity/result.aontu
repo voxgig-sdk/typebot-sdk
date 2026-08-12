@@ -6,7 +6,7 @@ main: kit: entity: result: {
 
   fields: [
     {
-      name: "answer"
+      name: "answers"
       req: true
       type: "`$ARRAY`"
     }
@@ -16,7 +16,7 @@ main: kit: entity: result: {
       type: "`$ANY`"
     }
     {
-      name: "created_at"
+      name: "createdAt"
       req: true
       type: "`$STRING`"
     }
@@ -26,14 +26,14 @@ main: kit: entity: result: {
       type: "`$STRING`"
     }
     {
-      name: "detail"
+      name: "details"
       req: true
       type: "`$ANY`"
     }
     {
-      name: "has_started"
+      name: "hasStarted"
       req: true
-      type: "`$BOOLEAN`"
+      type: "`$ANY`"
     }
     {
       name: "id"
@@ -41,22 +41,22 @@ main: kit: entity: result: {
       type: "`$STRING`"
     }
     {
-      name: "is_archived"
+      name: "isArchived"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "isCompleted"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "is_completed"
+      name: "lastChatSessionId"
       req: true
-      type: "`$BOOLEAN`"
+      type: "`$ANY`"
     }
     {
-      name: "last_chat_session_id"
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "result_id"
+      name: "resultId"
       req: true
       type: "`$STRING`"
     }
@@ -66,12 +66,12 @@ main: kit: entity: result: {
       type: "`$STRING`"
     }
     {
-      name: "typebot_id"
+      name: "typebotId"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "variable"
+      name: "variables"
       req: true
       type: "`$ARRAY`"
     }

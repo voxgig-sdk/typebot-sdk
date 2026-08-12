@@ -6,7 +6,7 @@ main: kit: entity: folder: {
 
   fields: [
     {
-      name: "created_at"
+      name: "createdAt"
       req: true
       type: "`$STRING`"
     }
@@ -16,7 +16,7 @@ main: kit: entity: folder: {
       type: "`$OBJECT`"
     }
     {
-      name: "folder_name"
+      name: "folderName"
       req: false
       type: "`$STRING`"
     }
@@ -37,7 +37,7 @@ main: kit: entity: folder: {
       type: "`$STRING`"
     }
     {
-      name: "parent_folder_id"
+      name: "parentFolderId"
       op: {
         create: {
           req: false
@@ -45,15 +45,15 @@ main: kit: entity: folder: {
         }
       }
       req: true
-      type: "`$STRING`"
+      type: "`$ANY`"
     }
     {
-      name: "updated_at"
+      name: "updatedAt"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "workspace_id"
+      name: "workspaceId"
       req: true
       type: "`$STRING`"
     }

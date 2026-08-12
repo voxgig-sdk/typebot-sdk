@@ -113,9 +113,9 @@ $analytics = $client->Analytics();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `total_completed` | `float` | Yes |  |
-| `total_start` | `float` | Yes |  |
-| `total_view` | `float` | Yes |  |
+| `totalCompleted` | `float` | Yes |  |
+| `totalStarts` | `float` | Yes |  |
+| `totalViews` | `float` | Yes |  |
 
 ### Operations
 
@@ -171,8 +171,8 @@ $billing = $client->Billing();
 | `currency` | `string` | Yes |  |
 | `date` | `mixed` | Yes |  |
 | `id` | `string` | Yes |  |
-| `resets_at` | `string` | Yes |  |
-| `total_chats_used` | `float` | Yes |  |
+| `resetsAt` | `string` | Yes |  |
+| `totalChatsUsed` | `float` | Yes |  |
 | `url` | `string` | Yes |  |
 
 ### Operations
@@ -233,27 +233,27 @@ $folder = $client->Folder();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
 | `folder` | `array` | Yes |  |
-| `folder_name` | `string` | No |  |
+| `folderName` | `string` | No |  |
 | `id` | `string` | Yes |  |
 | `name` | `string` | Yes |  |
-| `parent_folder_id` | `string` | Yes |  |
-| `updated_at` | `string` | Yes |  |
-| `workspace_id` | `string` | Yes |  |
+| `parentFolderId` | `mixed` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+| `workspaceId` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
 | `folder` | - | - | - | - | - |
-| `folder_name` | - | - | - | - | - |
+| `folderName` | - | - | - | - | - |
 | `id` | - | - | Yes | - | - |
 | `name` | - | - | - | - | - |
-| `parent_folder_id` | - | - | Yes | - | - |
-| `updated_at` | - | - | - | - | - |
-| `workspace_id` | - | - | - | - | - |
+| `parentFolderId` | - | - | Yes | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `workspaceId` | - | - | - | - | - |
 
 ### Operations
 
@@ -263,13 +263,13 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Folder()->create([
-  "created_at" => null, // string
+  "createdAt" => null, // string
   "folder" => null, // array
   "id" => null, // string
   "name" => null, // string
-  "parent_folder_id" => null, // string
-  "updated_at" => null, // string
-  "workspace_id" => null, // string
+  "parentFolderId" => null, // mixed
+  "updatedAt" => null, // string
+  "workspaceId" => null, // string
 ]);
 ```
 
@@ -348,20 +348,20 @@ $result = $client->Result();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `answer` | `array` | Yes |  |
+| `answers` | `array` | Yes |  |
 | `context` | `mixed` | Yes |  |
-| `created_at` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
 | `description` | `string` | Yes |  |
-| `detail` | `mixed` | Yes |  |
-| `has_started` | `bool` | Yes |  |
+| `details` | `mixed` | Yes |  |
+| `hasStarted` | `mixed` | Yes |  |
 | `id` | `string` | Yes |  |
-| `is_archived` | `bool` | Yes |  |
-| `is_completed` | `bool` | Yes |  |
-| `last_chat_session_id` | `string` | Yes |  |
-| `result_id` | `string` | Yes |  |
+| `isArchived` | `mixed` | Yes |  |
+| `isCompleted` | `bool` | Yes |  |
+| `lastChatSessionId` | `mixed` | Yes |  |
+| `resultId` | `string` | Yes |  |
 | `status` | `string` | Yes |  |
-| `typebot_id` | `string` | Yes |  |
-| `variable` | `array` | Yes |  |
+| `typebotId` | `string` | Yes |  |
+| `variables` | `array` | Yes |  |
 
 ### Operations
 
@@ -429,77 +429,75 @@ $typebot = $client->Typebot();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `access_right` | `string` | Yes |  |
-| `created_at` | `string` | Yes |  |
-| `current_user_mode` | `string` | Yes |  |
-| `custom_domain` | `mixed` | Yes |  |
-| `edge` | `array` | Yes |  |
-| `enable_safety_flag` | `bool` | No |  |
-| `event` | `array` | Yes |  |
-| `folder_id` | `string` | Yes |  |
-| `from_template` | `string` | No |  |
-| `group` | `array` | Yes |  |
+| `accessRight` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `customDomain` | `mixed` | Yes |  |
+| `edges` | `array` | Yes |  |
+| `enableSafetyFlags` | `bool` | No |  |
+| `events` | `array` | Yes |  |
+| `folderId` | `mixed` | Yes |  |
+| `fromTemplate` | `string` | No |  |
+| `groups` | `array` | Yes |  |
 | `icon` | `mixed` | Yes |  |
 | `id` | `string` | Yes |  |
-| `is_archived` | `bool` | Yes |  |
-| `is_closed` | `bool` | Yes |  |
+| `isArchived` | `bool` | Yes |  |
+| `isClosed` | `bool` | Yes |  |
 | `message` | `mixed` | Yes |  |
 | `name` | `string` | Yes |  |
 | `overwrite` | `bool` | No |  |
-| `public_id` | `string` | Yes |  |
-| `published_typebot` | `mixed` | Yes |  |
-| `published_typebot_id` | `string` | No |  |
-| `results_table_preference` | `mixed` | Yes |  |
-| `risk_level` | `mixed` | Yes |  |
-| `selected_theme_template_id` | `string` | Yes |  |
-| `setting` | `array` | Yes |  |
-| `space_id` | `string` | Yes |  |
+| `publicId` | `mixed` | Yes |  |
+| `publishedTypebot` | `mixed` | Yes |  |
+| `publishedTypebotId` | `string` | No |  |
+| `resultsTablePreferences` | `mixed` | Yes |  |
+| `riskLevel` | `mixed` | Yes |  |
+| `selectedThemeTemplateId` | `mixed` | Yes |  |
+| `settings` | `array` | Yes |  |
+| `spaceId` | `mixed` | Yes |  |
 | `theme` | `array` | Yes |  |
-| `typebot` | `mixed` | Yes |  |
-| `updated_at` | `string` | Yes |  |
-| `variable` | `array` | Yes |  |
+| `typebot` | `array` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+| `variables` | `array` | Yes |  |
 | `version` | `mixed` | No |  |
-| `warning` | `array` | No |  |
-| `whats_app_credentials_id` | `string` | Yes |  |
-| `workspace_id` | `string` | Yes |  |
+| `warnings` | `array` | No |  |
+| `whatsAppCredentialsId` | `mixed` | Yes |  |
+| `workspaceId` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `access_right` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `current_user_mode` | - | - | - | - | - |
-| `custom_domain` | - | - | - | - | - |
-| `edge` | - | - | - | - | - |
-| `enable_safety_flag` | - | - | - | - | - |
-| `event` | - | - | - | - | - |
-| `folder_id` | - | - | - | - | - |
-| `from_template` | - | - | - | - | - |
-| `group` | - | - | - | - | - |
+| `accessRight` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `customDomain` | - | - | - | - | - |
+| `edges` | - | - | - | - | - |
+| `enableSafetyFlags` | - | - | - | - | - |
+| `events` | - | - | - | - | - |
+| `folderId` | - | - | - | - | - |
+| `fromTemplate` | - | - | - | - | - |
+| `groups` | - | - | - | - | - |
 | `icon` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
-| `is_archived` | - | - | - | - | - |
-| `is_closed` | - | - | - | - | - |
+| `isArchived` | - | - | - | - | - |
+| `isClosed` | - | - | - | - | - |
 | `message` | - | - | - | - | - |
 | `name` | - | - | - | - | - |
 | `overwrite` | - | - | - | - | - |
-| `public_id` | - | - | - | - | - |
-| `published_typebot` | - | - | - | - | - |
-| `published_typebot_id` | - | - | - | - | - |
-| `results_table_preference` | - | - | - | - | - |
-| `risk_level` | - | - | - | - | - |
-| `selected_theme_template_id` | - | - | - | - | - |
-| `setting` | - | - | - | - | - |
-| `space_id` | - | - | - | - | - |
+| `publicId` | - | - | - | - | - |
+| `publishedTypebot` | - | - | - | - | - |
+| `publishedTypebotId` | - | - | - | - | - |
+| `resultsTablePreferences` | - | - | - | - | - |
+| `riskLevel` | - | - | - | - | - |
+| `selectedThemeTemplateId` | - | - | - | - | - |
+| `settings` | - | - | - | - | - |
+| `spaceId` | - | - | - | - | - |
 | `theme` | - | - | - | - | - |
 | `typebot` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
-| `variable` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `variables` | - | - | - | - | - |
 | `version` | - | - | Yes | Yes | - |
-| `warning` | - | - | - | - | - |
-| `whats_app_credentials_id` | - | - | - | - | - |
-| `workspace_id` | - | - | - | - | - |
+| `warnings` | - | - | - | - | - |
+| `whatsAppCredentialsId` | - | - | - | - | - |
+| `workspaceId` | - | - | - | - | - |
 
 ### Operations
 
@@ -509,33 +507,32 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Typebot()->create([
-  "access_right" => null, // string
-  "created_at" => null, // string
-  "current_user_mode" => null, // string
-  "custom_domain" => null, // mixed
-  "edge" => null, // array
-  "event" => null, // array
-  "folder_id" => null, // string
-  "group" => null, // array
+  "accessRight" => null, // string
+  "createdAt" => null, // string
+  "customDomain" => null, // mixed
+  "edges" => null, // array
+  "events" => null, // array
+  "folderId" => null, // mixed
+  "groups" => null, // array
   "icon" => null, // mixed
   "id" => null, // string
-  "is_archived" => null, // bool
-  "is_closed" => null, // bool
+  "isArchived" => null, // bool
+  "isClosed" => null, // bool
   "message" => null, // mixed
   "name" => null, // string
-  "public_id" => null, // string
-  "published_typebot" => null, // mixed
-  "results_table_preference" => null, // mixed
-  "risk_level" => null, // mixed
-  "selected_theme_template_id" => null, // string
-  "setting" => null, // array
-  "space_id" => null, // string
+  "publicId" => null, // mixed
+  "publishedTypebot" => null, // mixed
+  "resultsTablePreferences" => null, // mixed
+  "riskLevel" => null, // mixed
+  "selectedThemeTemplateId" => null, // mixed
+  "settings" => null, // array
+  "spaceId" => null, // mixed
   "theme" => null, // array
-  "typebot" => null, // mixed
-  "updated_at" => null, // string
-  "variable" => null, // array
-  "whats_app_credentials_id" => null, // string
-  "workspace_id" => null, // string
+  "typebot" => null, // array
+  "updatedAt" => null, // string
+  "variables" => null, // array
+  "whatsAppCredentialsId" => null, // mixed
+  "workspaceId" => null, // string
 ]);
 ```
 
@@ -614,53 +611,53 @@ $workspace = $client->Workspace();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `chats_hard_limit` | `mixed` | Yes |  |
-| `created_at` | `string` | Yes |  |
-| `current_user_mode` | `string` | Yes |  |
+| `chatsHardLimit` | `mixed` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `customChatsLimit` | `mixed` | Yes |  |
+| `customSeatsLimit` | `mixed` | Yes |  |
 | `icon` | `mixed` | Yes |  |
 | `id` | `string` | Yes |  |
-| `inactive_first_email_sent_at` | `mixed` | Yes |  |
-| `inactive_second_email_sent_at` | `mixed` | Yes |  |
-| `is_past_due` | `bool` | Yes |  |
-| `is_suspended` | `bool` | Yes |  |
-| `is_verified` | `bool` | Yes |  |
-| `last_activity_at` | `mixed` | Yes |  |
+| `inactiveFirstEmailSentAt` | `mixed` | Yes |  |
+| `inactiveSecondEmailSentAt` | `mixed` | Yes |  |
+| `isPastDue` | `bool` | Yes |  |
+| `isSuspended` | `bool` | Yes |  |
+| `isVerified` | `mixed` | Yes |  |
+| `lastActivityAt` | `mixed` | Yes |  |
 | `name` | `string` | Yes |  |
 | `plan` | `string` | Yes |  |
 | `role` | `string` | Yes |  |
-| `setting` | `mixed` | Yes |  |
-| `stripe_id` | `string` | Yes |  |
-| `updated_at` | `string` | Yes |  |
+| `settings` | `mixed` | Yes |  |
+| `stripeId` | `mixed` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 | `user` | `array` | Yes |  |
-| `user_id` | `string` | Yes |  |
-| `workspace` | `array` | Yes |  |
-| `workspace_id` | `string` | Yes |  |
+| `userId` | `string` | Yes |  |
+| `workspaceId` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `chats_hard_limit` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `current_user_mode` | - | - | - | - | - |
+| `chatsHardLimit` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `customChatsLimit` | - | - | - | - | - |
+| `customSeatsLimit` | - | - | - | - | - |
 | `icon` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `inactive_first_email_sent_at` | - | - | - | - | - |
-| `inactive_second_email_sent_at` | - | - | - | - | - |
-| `is_past_due` | - | - | - | - | - |
-| `is_suspended` | - | - | - | - | - |
-| `is_verified` | - | - | - | - | - |
-| `last_activity_at` | - | - | - | - | - |
+| `inactiveFirstEmailSentAt` | - | - | - | - | - |
+| `inactiveSecondEmailSentAt` | - | - | - | - | - |
+| `isPastDue` | - | - | - | - | - |
+| `isSuspended` | - | - | - | - | - |
+| `isVerified` | - | - | - | - | - |
+| `lastActivityAt` | - | - | - | - | - |
 | `name` | - | - | - | Yes | - |
 | `plan` | - | - | - | - | - |
 | `role` | - | - | - | - | - |
-| `setting` | - | - | - | - | - |
-| `stripe_id` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `settings` | - | - | - | - | - |
+| `stripeId` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 | `user` | - | - | - | - | - |
-| `user_id` | - | - | - | - | - |
-| `workspace` | - | - | - | - | - |
-| `workspace_id` | - | - | - | - | - |
+| `userId` | - | - | - | - | - |
+| `workspaceId` | - | - | - | - | - |
 
 ### Operations
 
@@ -670,27 +667,27 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Workspace()->create([
-  "chats_hard_limit" => null, // mixed
-  "created_at" => null, // string
-  "current_user_mode" => null, // string
+  "chatsHardLimit" => null, // mixed
+  "createdAt" => null, // string
+  "customChatsLimit" => null, // mixed
+  "customSeatsLimit" => null, // mixed
   "icon" => null, // mixed
   "id" => null, // string
-  "inactive_first_email_sent_at" => null, // mixed
-  "inactive_second_email_sent_at" => null, // mixed
-  "is_past_due" => null, // bool
-  "is_suspended" => null, // bool
-  "is_verified" => null, // bool
-  "last_activity_at" => null, // mixed
+  "inactiveFirstEmailSentAt" => null, // mixed
+  "inactiveSecondEmailSentAt" => null, // mixed
+  "isPastDue" => null, // bool
+  "isSuspended" => null, // bool
+  "isVerified" => null, // mixed
+  "lastActivityAt" => null, // mixed
   "name" => null, // string
   "plan" => null, // string
   "role" => null, // string
-  "setting" => null, // mixed
-  "stripe_id" => null, // string
-  "updated_at" => null, // string
+  "settings" => null, // mixed
+  "stripeId" => null, // mixed
+  "updatedAt" => null, // string
   "user" => null, // array
-  "user_id" => null, // string
-  "workspace" => null, // array
-  "workspace_id" => null, // string
+  "userId" => null, // string
+  "workspaceId" => null, // string
 ]);
 ```
 

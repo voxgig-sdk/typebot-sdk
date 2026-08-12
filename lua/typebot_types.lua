@@ -7,9 +7,9 @@
 -- edit by hand.
 
 ---@class Analytics
----@field total_completed number
----@field total_start number
----@field total_view number
+---@field totalCompleted number
+---@field totalStarts number
+---@field totalViews number
 
 ---@class AnalyticsLoadMatch
 ---@field typebot_id string
@@ -19,8 +19,8 @@
 ---@field currency string
 ---@field date any
 ---@field id string
----@field resets_at string
----@field total_chats_used number
+---@field resetsAt string
+---@field totalChatsUsed number
 ---@field url string
 
 ---@class BillingLoadMatch
@@ -28,8 +28,8 @@
 ---@field currency? string
 ---@field date? any
 ---@field id string
----@field resets_at? string
----@field total_chats_used? number
+---@field resetsAt? string
+---@field totalChatsUsed? number
 ---@field url? string
 
 ---@class BillingListMatch
@@ -37,71 +37,71 @@
 ---@field currency? string
 ---@field date? any
 ---@field id? string
----@field resets_at? string
----@field total_chats_used? number
+---@field resetsAt? string
+---@field totalChatsUsed? number
 ---@field url? string
 
 ---@class Folder
----@field created_at string
+---@field createdAt string
 ---@field folder table
----@field folder_name? string
+---@field folderName? string
 ---@field id string
 ---@field name string
----@field parent_folder_id string
----@field updated_at string
----@field workspace_id string
+---@field parentFolderId any
+---@field updatedAt string
+---@field workspaceId string
 
 ---@class FolderLoadMatch
 ---@field id string
 
 ---@class FolderListMatch
----@field created_at? string
+---@field createdAt? string
 ---@field folder? table
----@field folder_name? string
+---@field folderName? string
 ---@field id? string
 ---@field name? string
----@field parent_folder_id? string
----@field updated_at? string
----@field workspace_id? string
+---@field parentFolderId? any
+---@field updatedAt? string
+---@field workspaceId? string
 
 ---@class FolderCreateData
----@field created_at string
+---@field createdAt string
 ---@field folder table
----@field folder_name? string
+---@field folderName? string
 ---@field id string
 ---@field name string
----@field parent_folder_id string
----@field updated_at string
----@field workspace_id string
+---@field parentFolderId any
+---@field updatedAt string
+---@field workspaceId string
 
 ---@class FolderUpdateData
 ---@field id string
----@field created_at? string
+---@field createdAt? string
 ---@field folder? table
----@field folder_name? string
+---@field folderName? string
 ---@field name? string
----@field parent_folder_id? string
----@field updated_at? string
----@field workspace_id? string
+---@field parentFolderId? any
+---@field updatedAt? string
+---@field workspaceId? string
 
 ---@class FolderRemoveMatch
 ---@field id string
 
 ---@class Result
----@field answer table
+---@field answers table
 ---@field context any
----@field created_at string
+---@field createdAt string
 ---@field description string
----@field detail any
----@field has_started boolean
+---@field details any
+---@field hasStarted any
 ---@field id string
----@field is_archived boolean
----@field is_completed boolean
----@field last_chat_session_id string
----@field result_id string
+---@field isArchived any
+---@field isCompleted boolean
+---@field lastChatSessionId any
+---@field resultId string
 ---@field status string
----@field typebot_id string
----@field variable table
+---@field typebotId string
+---@field variables table
 
 ---@class ResultLoadMatch
 ---@field id string
@@ -114,245 +114,241 @@
 ---@field typebot_id string
 
 ---@class Typebot
----@field access_right string
----@field created_at string
----@field current_user_mode string
----@field custom_domain any
----@field edge table
----@field enable_safety_flag? boolean
----@field event table
----@field folder_id string
----@field from_template? string
----@field group table
+---@field accessRight string
+---@field createdAt string
+---@field customDomain any
+---@field edges table
+---@field enableSafetyFlags? boolean
+---@field events table
+---@field folderId any
+---@field fromTemplate? string
+---@field groups table
 ---@field icon any
 ---@field id string
----@field is_archived boolean
----@field is_closed boolean
+---@field isArchived boolean
+---@field isClosed boolean
 ---@field message any
 ---@field name string
 ---@field overwrite? boolean
----@field public_id string
----@field published_typebot any
----@field published_typebot_id? string
----@field results_table_preference any
----@field risk_level any
----@field selected_theme_template_id string
----@field setting table
----@field space_id string
+---@field publicId any
+---@field publishedTypebot any
+---@field publishedTypebotId? string
+---@field resultsTablePreferences any
+---@field riskLevel any
+---@field selectedThemeTemplateId any
+---@field settings table
+---@field spaceId any
 ---@field theme table
----@field typebot any
----@field updated_at string
----@field variable table
+---@field typebot table
+---@field updatedAt string
+---@field variables table
 ---@field version? any
----@field warning? table
----@field whats_app_credentials_id string
----@field workspace_id string
+---@field warnings? table
+---@field whatsAppCredentialsId any
+---@field workspaceId string
 
 ---@class TypebotLoadMatch
 ---@field id string
 
 ---@class TypebotListMatch
----@field access_right? string
----@field created_at? string
----@field current_user_mode? string
----@field custom_domain? any
----@field edge? table
----@field enable_safety_flag? boolean
----@field event? table
----@field folder_id? string
----@field from_template? string
----@field group? table
+---@field accessRight? string
+---@field createdAt? string
+---@field customDomain? any
+---@field edges? table
+---@field enableSafetyFlags? boolean
+---@field events? table
+---@field folderId? any
+---@field fromTemplate? string
+---@field groups? table
 ---@field icon? any
 ---@field id? string
----@field is_archived? boolean
----@field is_closed? boolean
+---@field isArchived? boolean
+---@field isClosed? boolean
 ---@field message? any
 ---@field name? string
 ---@field overwrite? boolean
----@field public_id? string
----@field published_typebot? any
----@field published_typebot_id? string
----@field results_table_preference? any
----@field risk_level? any
----@field selected_theme_template_id? string
----@field setting? table
----@field space_id? string
+---@field publicId? any
+---@field publishedTypebot? any
+---@field publishedTypebotId? string
+---@field resultsTablePreferences? any
+---@field riskLevel? any
+---@field selectedThemeTemplateId? any
+---@field settings? table
+---@field spaceId? any
 ---@field theme? table
----@field typebot? any
----@field updated_at? string
----@field variable? table
+---@field typebot? table
+---@field updatedAt? string
+---@field variables? table
 ---@field version? any
----@field warning? table
----@field whats_app_credentials_id? string
----@field workspace_id? string
+---@field warnings? table
+---@field whatsAppCredentialsId? any
+---@field workspaceId? string
 
 ---@class TypebotCreateData
----@field access_right string
----@field created_at string
----@field current_user_mode string
----@field custom_domain any
----@field edge table
----@field enable_safety_flag? boolean
----@field event table
----@field folder_id string
----@field from_template? string
----@field group table
+---@field accessRight string
+---@field createdAt string
+---@field customDomain any
+---@field edges table
+---@field enableSafetyFlags? boolean
+---@field events table
+---@field folderId any
+---@field fromTemplate? string
+---@field groups table
 ---@field icon any
 ---@field id string
----@field is_archived boolean
----@field is_closed boolean
+---@field isArchived boolean
+---@field isClosed boolean
 ---@field message any
 ---@field name string
 ---@field overwrite? boolean
----@field public_id string
----@field published_typebot any
----@field published_typebot_id? string
----@field results_table_preference any
----@field risk_level any
----@field selected_theme_template_id string
----@field setting table
----@field space_id string
+---@field publicId any
+---@field publishedTypebot any
+---@field publishedTypebotId? string
+---@field resultsTablePreferences any
+---@field riskLevel any
+---@field selectedThemeTemplateId any
+---@field settings table
+---@field spaceId any
 ---@field theme table
----@field typebot any
----@field updated_at string
----@field variable table
+---@field typebot table
+---@field updatedAt string
+---@field variables table
 ---@field version? any
----@field warning? table
----@field whats_app_credentials_id string
----@field workspace_id string
+---@field warnings? table
+---@field whatsAppCredentialsId any
+---@field workspaceId string
 
 ---@class TypebotUpdateData
 ---@field id string
----@field access_right? string
----@field created_at? string
----@field current_user_mode? string
----@field custom_domain? any
----@field edge? table
----@field enable_safety_flag? boolean
----@field event? table
----@field folder_id? string
----@field from_template? string
----@field group? table
+---@field accessRight? string
+---@field createdAt? string
+---@field customDomain? any
+---@field edges? table
+---@field enableSafetyFlags? boolean
+---@field events? table
+---@field folderId? any
+---@field fromTemplate? string
+---@field groups? table
 ---@field icon? any
----@field is_archived? boolean
----@field is_closed? boolean
+---@field isArchived? boolean
+---@field isClosed? boolean
 ---@field message? any
 ---@field name? string
 ---@field overwrite? boolean
----@field public_id? string
----@field published_typebot? any
----@field published_typebot_id? string
----@field results_table_preference? any
----@field risk_level? any
----@field selected_theme_template_id? string
----@field setting? table
----@field space_id? string
+---@field publicId? any
+---@field publishedTypebot? any
+---@field publishedTypebotId? string
+---@field resultsTablePreferences? any
+---@field riskLevel? any
+---@field selectedThemeTemplateId? any
+---@field settings? table
+---@field spaceId? any
 ---@field theme? table
----@field typebot? any
----@field updated_at? string
----@field variable? table
+---@field typebot? table
+---@field updatedAt? string
+---@field variables? table
 ---@field version? any
----@field warning? table
----@field whats_app_credentials_id? string
----@field workspace_id? string
+---@field warnings? table
+---@field whatsAppCredentialsId? any
+---@field workspaceId? string
 
 ---@class TypebotRemoveMatch
 ---@field id string
 
 ---@class Workspace
----@field chats_hard_limit any
----@field created_at string
----@field current_user_mode string
+---@field chatsHardLimit any
+---@field createdAt string
+---@field customChatsLimit any
+---@field customSeatsLimit any
 ---@field icon any
 ---@field id string
----@field inactive_first_email_sent_at any
----@field inactive_second_email_sent_at any
----@field is_past_due boolean
----@field is_suspended boolean
----@field is_verified boolean
----@field last_activity_at any
+---@field inactiveFirstEmailSentAt any
+---@field inactiveSecondEmailSentAt any
+---@field isPastDue boolean
+---@field isSuspended boolean
+---@field isVerified any
+---@field lastActivityAt any
 ---@field name string
 ---@field plan string
 ---@field role string
----@field setting any
----@field stripe_id string
----@field updated_at string
+---@field settings any
+---@field stripeId any
+---@field updatedAt string
 ---@field user table
----@field user_id string
----@field workspace table
----@field workspace_id string
+---@field userId string
+---@field workspaceId string
 
 ---@class WorkspaceLoadMatch
 ---@field id string
 
 ---@class WorkspaceListMatch
----@field chats_hard_limit? any
----@field created_at? string
----@field current_user_mode? string
+---@field chatsHardLimit? any
+---@field createdAt? string
+---@field customChatsLimit? any
+---@field customSeatsLimit? any
 ---@field icon? any
 ---@field id? string
----@field inactive_first_email_sent_at? any
----@field inactive_second_email_sent_at? any
----@field is_past_due? boolean
----@field is_suspended? boolean
----@field is_verified? boolean
----@field last_activity_at? any
+---@field inactiveFirstEmailSentAt? any
+---@field inactiveSecondEmailSentAt? any
+---@field isPastDue? boolean
+---@field isSuspended? boolean
+---@field isVerified? any
+---@field lastActivityAt? any
 ---@field name? string
 ---@field plan? string
 ---@field role? string
----@field setting? any
----@field stripe_id? string
----@field updated_at? string
+---@field settings? any
+---@field stripeId? any
+---@field updatedAt? string
 ---@field user? table
----@field user_id? string
----@field workspace? table
----@field workspace_id? string
+---@field userId? string
+---@field workspaceId? string
 
 ---@class WorkspaceCreateData
----@field chats_hard_limit any
----@field created_at string
----@field current_user_mode string
+---@field chatsHardLimit any
+---@field createdAt string
+---@field customChatsLimit any
+---@field customSeatsLimit any
 ---@field icon any
 ---@field id string
----@field inactive_first_email_sent_at any
----@field inactive_second_email_sent_at any
----@field is_past_due boolean
----@field is_suspended boolean
----@field is_verified boolean
----@field last_activity_at any
+---@field inactiveFirstEmailSentAt any
+---@field inactiveSecondEmailSentAt any
+---@field isPastDue boolean
+---@field isSuspended boolean
+---@field isVerified any
+---@field lastActivityAt any
 ---@field name string
 ---@field plan string
 ---@field role string
----@field setting any
----@field stripe_id string
----@field updated_at string
+---@field settings any
+---@field stripeId any
+---@field updatedAt string
 ---@field user table
----@field user_id string
----@field workspace table
----@field workspace_id string
+---@field userId string
+---@field workspaceId string
 
 ---@class WorkspaceUpdateData
 ---@field id string
----@field chats_hard_limit? any
----@field created_at? string
----@field current_user_mode? string
+---@field chatsHardLimit? any
+---@field createdAt? string
+---@field customChatsLimit? any
+---@field customSeatsLimit? any
 ---@field icon? any
----@field inactive_first_email_sent_at? any
----@field inactive_second_email_sent_at? any
----@field is_past_due? boolean
----@field is_suspended? boolean
----@field is_verified? boolean
----@field last_activity_at? any
+---@field inactiveFirstEmailSentAt? any
+---@field inactiveSecondEmailSentAt? any
+---@field isPastDue? boolean
+---@field isSuspended? boolean
+---@field isVerified? any
+---@field lastActivityAt? any
 ---@field name? string
 ---@field plan? string
 ---@field role? string
----@field setting? any
----@field stripe_id? string
----@field updated_at? string
+---@field settings? any
+---@field stripeId? any
+---@field updatedAt? string
 ---@field user? table
----@field user_id? string
----@field workspace? table
----@field workspace_id? string
+---@field userId? string
+---@field workspaceId? string
 
 ---@class WorkspaceRemoveMatch
 ---@field id string

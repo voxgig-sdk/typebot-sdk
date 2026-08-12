@@ -6,9 +6,9 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Analytics {
-  total_completed: number
-  total_start: number
-  total_view: number
+  totalCompleted: number
+  totalStarts: number
+  totalViews: number
 }
 
 export interface AnalyticsLoadMatch {
@@ -20,8 +20,8 @@ export interface Billing {
   currency: string
   date: any
   id: string
-  resets_at: string
-  total_chats_used: number
+  resetsAt: string
+  totalChatsUsed: number
   url: string
 }
 
@@ -30,8 +30,8 @@ export interface BillingLoadMatch {
   currency?: string
   date?: any
   id: string
-  resets_at?: string
-  total_chats_used?: number
+  resetsAt?: string
+  totalChatsUsed?: number
   url?: string
 }
 
@@ -40,20 +40,20 @@ export interface BillingListMatch {
   currency?: string
   date?: any
   id?: string
-  resets_at?: string
-  total_chats_used?: number
+  resetsAt?: string
+  totalChatsUsed?: number
   url?: string
 }
 
 export interface Folder {
-  created_at: string
+  createdAt: string
   folder: Record<string, any>
-  folder_name?: string
+  folderName?: string
   id: string
   name: string
-  parent_folder_id: string
-  updated_at: string
-  workspace_id: string
+  parentFolderId: any
+  updatedAt: string
+  workspaceId: string
 }
 
 export interface FolderLoadMatch {
@@ -61,36 +61,36 @@ export interface FolderLoadMatch {
 }
 
 export interface FolderListMatch {
-  created_at?: string
+  createdAt?: string
   folder?: Record<string, any>
-  folder_name?: string
+  folderName?: string
   id?: string
   name?: string
-  parent_folder_id?: string
-  updated_at?: string
-  workspace_id?: string
+  parentFolderId?: any
+  updatedAt?: string
+  workspaceId?: string
 }
 
 export interface FolderCreateData {
-  created_at: string
+  createdAt: string
   folder: Record<string, any>
-  folder_name?: string
+  folderName?: string
   id: string
   name: string
-  parent_folder_id: string
-  updated_at: string
-  workspace_id: string
+  parentFolderId: any
+  updatedAt: string
+  workspaceId: string
 }
 
 export interface FolderUpdateData {
   id: string
-  created_at?: string
+  createdAt?: string
   folder?: Record<string, any>
-  folder_name?: string
+  folderName?: string
   name?: string
-  parent_folder_id?: string
-  updated_at?: string
-  workspace_id?: string
+  parentFolderId?: any
+  updatedAt?: string
+  workspaceId?: string
 }
 
 export interface FolderRemoveMatch {
@@ -98,20 +98,20 @@ export interface FolderRemoveMatch {
 }
 
 export interface Result {
-  answer: any[]
+  answers: any[]
   context: any
-  created_at: string
+  createdAt: string
   description: string
-  detail: any
-  has_started: boolean
+  details: any
+  hasStarted: any
   id: string
-  is_archived: boolean
-  is_completed: boolean
-  last_chat_session_id: string
-  result_id: string
+  isArchived: any
+  isCompleted: boolean
+  lastChatSessionId: any
+  resultId: string
   status: string
-  typebot_id: string
-  variable: any[]
+  typebotId: string
+  variables: any[]
 }
 
 export interface ResultLoadMatch {
@@ -128,39 +128,38 @@ export interface ResultRemoveMatch {
 }
 
 export interface Typebot {
-  access_right: string
-  created_at: string
-  current_user_mode: string
-  custom_domain: any
-  edge: any[]
-  enable_safety_flag?: boolean
-  event: any[]
-  folder_id: string
-  from_template?: string
-  group: any[]
+  accessRight: string
+  createdAt: string
+  customDomain: any
+  edges: any[]
+  enableSafetyFlags?: boolean
+  events: any[]
+  folderId: any
+  fromTemplate?: string
+  groups: any[]
   icon: any
   id: string
-  is_archived: boolean
-  is_closed: boolean
+  isArchived: boolean
+  isClosed: boolean
   message: any
   name: string
   overwrite?: boolean
-  public_id: string
-  published_typebot: any
-  published_typebot_id?: string
-  results_table_preference: any
-  risk_level: any
-  selected_theme_template_id: string
-  setting: Record<string, any>
-  space_id: string
+  publicId: any
+  publishedTypebot: any
+  publishedTypebotId?: string
+  resultsTablePreferences: any
+  riskLevel: any
+  selectedThemeTemplateId: any
+  settings: Record<string, any>
+  spaceId: any
   theme: Record<string, any>
-  typebot: any
-  updated_at: string
-  variable: any[]
+  typebot: Record<string, any>
+  updatedAt: string
+  variables: any[]
   version?: any
-  warning?: any[]
-  whats_app_credentials_id: string
-  workspace_id: string
+  warnings?: any[]
+  whatsAppCredentialsId: any
+  workspaceId: string
 }
 
 export interface TypebotLoadMatch {
@@ -168,111 +167,108 @@ export interface TypebotLoadMatch {
 }
 
 export interface TypebotListMatch {
-  access_right?: string
-  created_at?: string
-  current_user_mode?: string
-  custom_domain?: any
-  edge?: any[]
-  enable_safety_flag?: boolean
-  event?: any[]
-  folder_id?: string
-  from_template?: string
-  group?: any[]
+  accessRight?: string
+  createdAt?: string
+  customDomain?: any
+  edges?: any[]
+  enableSafetyFlags?: boolean
+  events?: any[]
+  folderId?: any
+  fromTemplate?: string
+  groups?: any[]
   icon?: any
   id?: string
-  is_archived?: boolean
-  is_closed?: boolean
+  isArchived?: boolean
+  isClosed?: boolean
   message?: any
   name?: string
   overwrite?: boolean
-  public_id?: string
-  published_typebot?: any
-  published_typebot_id?: string
-  results_table_preference?: any
-  risk_level?: any
-  selected_theme_template_id?: string
-  setting?: Record<string, any>
-  space_id?: string
+  publicId?: any
+  publishedTypebot?: any
+  publishedTypebotId?: string
+  resultsTablePreferences?: any
+  riskLevel?: any
+  selectedThemeTemplateId?: any
+  settings?: Record<string, any>
+  spaceId?: any
   theme?: Record<string, any>
-  typebot?: any
-  updated_at?: string
-  variable?: any[]
+  typebot?: Record<string, any>
+  updatedAt?: string
+  variables?: any[]
   version?: any
-  warning?: any[]
-  whats_app_credentials_id?: string
-  workspace_id?: string
+  warnings?: any[]
+  whatsAppCredentialsId?: any
+  workspaceId?: string
 }
 
 export interface TypebotCreateData {
-  access_right: string
-  created_at: string
-  current_user_mode: string
-  custom_domain: any
-  edge: any[]
-  enable_safety_flag?: boolean
-  event: any[]
-  folder_id: string
-  from_template?: string
-  group: any[]
+  accessRight: string
+  createdAt: string
+  customDomain: any
+  edges: any[]
+  enableSafetyFlags?: boolean
+  events: any[]
+  folderId: any
+  fromTemplate?: string
+  groups: any[]
   icon: any
   id: string
-  is_archived: boolean
-  is_closed: boolean
+  isArchived: boolean
+  isClosed: boolean
   message: any
   name: string
   overwrite?: boolean
-  public_id: string
-  published_typebot: any
-  published_typebot_id?: string
-  results_table_preference: any
-  risk_level: any
-  selected_theme_template_id: string
-  setting: Record<string, any>
-  space_id: string
+  publicId: any
+  publishedTypebot: any
+  publishedTypebotId?: string
+  resultsTablePreferences: any
+  riskLevel: any
+  selectedThemeTemplateId: any
+  settings: Record<string, any>
+  spaceId: any
   theme: Record<string, any>
-  typebot: any
-  updated_at: string
-  variable: any[]
+  typebot: Record<string, any>
+  updatedAt: string
+  variables: any[]
   version?: any
-  warning?: any[]
-  whats_app_credentials_id: string
-  workspace_id: string
+  warnings?: any[]
+  whatsAppCredentialsId: any
+  workspaceId: string
 }
 
 export interface TypebotUpdateData {
   id: string
-  access_right?: string
-  created_at?: string
-  current_user_mode?: string
-  custom_domain?: any
-  edge?: any[]
-  enable_safety_flag?: boolean
-  event?: any[]
-  folder_id?: string
-  from_template?: string
-  group?: any[]
+  accessRight?: string
+  createdAt?: string
+  customDomain?: any
+  edges?: any[]
+  enableSafetyFlags?: boolean
+  events?: any[]
+  folderId?: any
+  fromTemplate?: string
+  groups?: any[]
   icon?: any
-  is_archived?: boolean
-  is_closed?: boolean
+  isArchived?: boolean
+  isClosed?: boolean
   message?: any
   name?: string
   overwrite?: boolean
-  public_id?: string
-  published_typebot?: any
-  published_typebot_id?: string
-  results_table_preference?: any
-  risk_level?: any
-  selected_theme_template_id?: string
-  setting?: Record<string, any>
-  space_id?: string
+  publicId?: any
+  publishedTypebot?: any
+  publishedTypebotId?: string
+  resultsTablePreferences?: any
+  riskLevel?: any
+  selectedThemeTemplateId?: any
+  settings?: Record<string, any>
+  spaceId?: any
   theme?: Record<string, any>
-  typebot?: any
-  updated_at?: string
-  variable?: any[]
+  typebot?: Record<string, any>
+  updatedAt?: string
+  variables?: any[]
   version?: any
-  warning?: any[]
-  whats_app_credentials_id?: string
-  workspace_id?: string
+  warnings?: any[]
+  whatsAppCredentialsId?: any
+  workspaceId?: string
 }
 
 export interface TypebotRemoveMatch {
@@ -280,27 +276,27 @@ export interface TypebotRemoveMatch {
 }
 
 export interface Workspace {
-  chats_hard_limit: any
-  created_at: string
-  current_user_mode: string
+  chatsHardLimit: any
+  createdAt: string
+  customChatsLimit: any
+  customSeatsLimit: any
   icon: any
   id: string
-  inactive_first_email_sent_at: any
-  inactive_second_email_sent_at: any
-  is_past_due: boolean
-  is_suspended: boolean
-  is_verified: boolean
-  last_activity_at: any
+  inactiveFirstEmailSentAt: any
+  inactiveSecondEmailSentAt: any
+  isPastDue: boolean
+  isSuspended: boolean
+  isVerified: any
+  lastActivityAt: any
   name: string
   plan: string
   role: string
-  setting: any
-  stripe_id: string
-  updated_at: string
+  settings: any
+  stripeId: any
+  updatedAt: string
   user: Record<string, any>
-  user_id: string
-  workspace: Record<string, any>
-  workspace_id: string
+  userId: string
+  workspaceId: string
 }
 
 export interface WorkspaceLoadMatch {
@@ -308,75 +304,75 @@ export interface WorkspaceLoadMatch {
 }
 
 export interface WorkspaceListMatch {
-  chats_hard_limit?: any
-  created_at?: string
-  current_user_mode?: string
+  chatsHardLimit?: any
+  createdAt?: string
+  customChatsLimit?: any
+  customSeatsLimit?: any
   icon?: any
   id?: string
-  inactive_first_email_sent_at?: any
-  inactive_second_email_sent_at?: any
-  is_past_due?: boolean
-  is_suspended?: boolean
-  is_verified?: boolean
-  last_activity_at?: any
+  inactiveFirstEmailSentAt?: any
+  inactiveSecondEmailSentAt?: any
+  isPastDue?: boolean
+  isSuspended?: boolean
+  isVerified?: any
+  lastActivityAt?: any
   name?: string
   plan?: string
   role?: string
-  setting?: any
-  stripe_id?: string
-  updated_at?: string
+  settings?: any
+  stripeId?: any
+  updatedAt?: string
   user?: Record<string, any>
-  user_id?: string
-  workspace?: Record<string, any>
-  workspace_id?: string
+  userId?: string
+  workspaceId?: string
 }
 
 export interface WorkspaceCreateData {
-  chats_hard_limit: any
-  created_at: string
-  current_user_mode: string
+  chatsHardLimit: any
+  createdAt: string
+  customChatsLimit: any
+  customSeatsLimit: any
   icon: any
   id: string
-  inactive_first_email_sent_at: any
-  inactive_second_email_sent_at: any
-  is_past_due: boolean
-  is_suspended: boolean
-  is_verified: boolean
-  last_activity_at: any
+  inactiveFirstEmailSentAt: any
+  inactiveSecondEmailSentAt: any
+  isPastDue: boolean
+  isSuspended: boolean
+  isVerified: any
+  lastActivityAt: any
   name: string
   plan: string
   role: string
-  setting: any
-  stripe_id: string
-  updated_at: string
+  settings: any
+  stripeId: any
+  updatedAt: string
   user: Record<string, any>
-  user_id: string
-  workspace: Record<string, any>
-  workspace_id: string
+  userId: string
+  workspaceId: string
 }
 
 export interface WorkspaceUpdateData {
   id: string
-  chats_hard_limit?: any
-  created_at?: string
-  current_user_mode?: string
+  chatsHardLimit?: any
+  createdAt?: string
+  customChatsLimit?: any
+  customSeatsLimit?: any
   icon?: any
-  inactive_first_email_sent_at?: any
-  inactive_second_email_sent_at?: any
-  is_past_due?: boolean
-  is_suspended?: boolean
-  is_verified?: boolean
-  last_activity_at?: any
+  inactiveFirstEmailSentAt?: any
+  inactiveSecondEmailSentAt?: any
+  isPastDue?: boolean
+  isSuspended?: boolean
+  isVerified?: any
+  lastActivityAt?: any
   name?: string
   plan?: string
   role?: string
-  setting?: any
-  stripe_id?: string
-  updated_at?: string
+  settings?: any
+  stripeId?: any
+  updatedAt?: string
   user?: Record<string, any>
-  user_id?: string
-  workspace?: Record<string, any>
-  workspace_id?: string
+  userId?: string
+  workspaceId?: string
 }
 
 export interface WorkspaceRemoveMatch {

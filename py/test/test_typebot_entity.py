@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from typebot_sdk.utility.voxgig_struct import voxgig_struct as vs
 from typebot_sdk import TypebotSDK
-from core import helpers
+from typebot_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -42,7 +42,7 @@ class TestTypebotEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from config import make_config
+        from typebot_sdk.config import make_config
         cfg = make_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = TypebotSDK.test(
@@ -98,7 +98,7 @@ class TestTypebotEntity:
             "id": typebot_ref01_data["id"],
         }
 
-        typebot_ref01_markdef_up0_name = "access_right"
+        typebot_ref01_markdef_up0_name = "accessRight"
         typebot_ref01_markdef_up0_value = "Mark01-typebot_ref01_" + str(setup["now"])
         typebot_ref01_data_up0_up[typebot_ref01_markdef_up0_name] = typebot_ref01_markdef_up0_value
 

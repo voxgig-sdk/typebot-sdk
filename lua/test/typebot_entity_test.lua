@@ -103,7 +103,7 @@ describe("TypebotEntity", function()
       id = typebot_ref01_data["id"],
     }
 
-    local typebot_ref01_markdef_up0_name = "access_right"
+    local typebot_ref01_markdef_up0_name = "accessRight"
     local typebot_ref01_markdef_up0_value = "Mark01-typebot_ref01_" .. tostring(setup.now)
     typebot_ref01_data_up0_up[typebot_ref01_markdef_up0_name] = typebot_ref01_markdef_up0_value
 

@@ -137,7 +137,7 @@ func TestFolderEntity(t *testing.T) {
 			"id": folderRef01Data["id"],
 		}
 
-		folderRef01MarkdefUp0Name := "created_at"
+		folderRef01MarkdefUp0Name := "createdAt"
 		folderRef01MarkdefUp0Value := fmt.Sprintf("Mark01-folder_ref01_%d", setup.now)
 		folderRef01DataUp0Up[folderRef01MarkdefUp0Name] = folderRef01MarkdefUp0Value
 

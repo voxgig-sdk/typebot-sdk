@@ -103,7 +103,7 @@ class FolderEntityTest extends TestCase
             "id" => $folder_ref01_data["id"],
         ];
 
-        $folder_ref01_markdef_up0_name = "created_at";
+        $folder_ref01_markdef_up0_name = "createdAt";
         $folder_ref01_markdef_up0_value = "Mark01-folder_ref01_" . $setup["now"];
         $folder_ref01_data_up0_up[$folder_ref01_markdef_up0_name] = $folder_ref01_markdef_up0_value;
 

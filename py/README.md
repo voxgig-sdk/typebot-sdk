@@ -255,9 +255,9 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `total_completed` |  |
-| `total_start` |  |
-| `total_view` |  |
+| `totalCompleted` |  |
+| `totalStarts` |  |
+| `totalViews` |  |
 
 Operations: Load.
 
@@ -271,8 +271,8 @@ API path: `/v1/typebots/{typebotId}/analytics/stats`
 | `currency` |  |
 | `date` |  |
 | `id` |  |
-| `resets_at` |  |
-| `total_chats_used` |  |
+| `resetsAt` |  |
+| `totalChatsUsed` |  |
 | `url` |  |
 
 Operations: List, Load.
@@ -283,14 +283,14 @@ API path: `/v1/billing/invoices`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `folder` |  |
-| `folder_name` |  |
+| `folderName` |  |
 | `id` |  |
 | `name` |  |
-| `parent_folder_id` |  |
-| `updated_at` |  |
-| `workspace_id` |  |
+| `parentFolderId` |  |
+| `updatedAt` |  |
+| `workspaceId` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -300,20 +300,20 @@ API path: `/v1/folders`
 
 | Field | Description |
 | --- | --- |
-| `answer` |  |
+| `answers` |  |
 | `context` |  |
-| `created_at` |  |
+| `createdAt` |  |
 | `description` |  |
-| `detail` |  |
-| `has_started` |  |
+| `details` |  |
+| `hasStarted` |  |
 | `id` |  |
-| `is_archived` |  |
-| `is_completed` |  |
-| `last_chat_session_id` |  |
-| `result_id` |  |
+| `isArchived` |  |
+| `isCompleted` |  |
+| `lastChatSessionId` |  |
+| `resultId` |  |
 | `status` |  |
-| `typebot_id` |  |
-| `variable` |  |
+| `typebotId` |  |
+| `variables` |  |
 
 Operations: List, Load, Remove.
 
@@ -323,39 +323,38 @@ API path: `/v1/typebots/{typebotId}/results`
 
 | Field | Description |
 | --- | --- |
-| `access_right` |  |
-| `created_at` |  |
-| `current_user_mode` |  |
-| `custom_domain` |  |
-| `edge` |  |
-| `enable_safety_flag` |  |
-| `event` |  |
-| `folder_id` |  |
-| `from_template` |  |
-| `group` |  |
+| `accessRight` |  |
+| `createdAt` |  |
+| `customDomain` |  |
+| `edges` |  |
+| `enableSafetyFlags` |  |
+| `events` |  |
+| `folderId` |  |
+| `fromTemplate` |  |
+| `groups` |  |
 | `icon` |  |
 | `id` |  |
-| `is_archived` |  |
-| `is_closed` |  |
+| `isArchived` |  |
+| `isClosed` |  |
 | `message` |  |
 | `name` |  |
 | `overwrite` |  |
-| `public_id` |  |
-| `published_typebot` |  |
-| `published_typebot_id` |  |
-| `results_table_preference` |  |
-| `risk_level` |  |
-| `selected_theme_template_id` |  |
-| `setting` |  |
-| `space_id` |  |
+| `publicId` |  |
+| `publishedTypebot` |  |
+| `publishedTypebotId` |  |
+| `resultsTablePreferences` |  |
+| `riskLevel` |  |
+| `selectedThemeTemplateId` |  |
+| `settings` |  |
+| `spaceId` |  |
 | `theme` |  |
 | `typebot` |  |
-| `updated_at` |  |
-| `variable` |  |
+| `updatedAt` |  |
+| `variables` |  |
 | `version` |  |
-| `warning` |  |
-| `whats_app_credentials_id` |  |
-| `workspace_id` |  |
+| `warnings` |  |
+| `whatsAppCredentialsId` |  |
+| `workspaceId` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -365,27 +364,27 @@ API path: `/v1/typebots/{typebotId}/publish`
 
 | Field | Description |
 | --- | --- |
-| `chats_hard_limit` |  |
-| `created_at` |  |
-| `current_user_mode` |  |
+| `chatsHardLimit` |  |
+| `createdAt` |  |
+| `customChatsLimit` |  |
+| `customSeatsLimit` |  |
 | `icon` |  |
 | `id` |  |
-| `inactive_first_email_sent_at` |  |
-| `inactive_second_email_sent_at` |  |
-| `is_past_due` |  |
-| `is_suspended` |  |
-| `is_verified` |  |
-| `last_activity_at` |  |
+| `inactiveFirstEmailSentAt` |  |
+| `inactiveSecondEmailSentAt` |  |
+| `isPastDue` |  |
+| `isSuspended` |  |
+| `isVerified` |  |
+| `lastActivityAt` |  |
 | `name` |  |
 | `plan` |  |
 | `role` |  |
-| `setting` |  |
-| `stripe_id` |  |
-| `updated_at` |  |
+| `settings` |  |
+| `stripeId` |  |
+| `updatedAt` |  |
 | `user` |  |
-| `user_id` |  |
-| `workspace` |  |
-| `workspace_id` |  |
+| `userId` |  |
+| `workspaceId` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -410,9 +409,9 @@ Create an instance: `analytics = client.Analytics()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `total_completed` | `float` |  |
-| `total_start` | `float` |  |
-| `total_view` | `float` |  |
+| `totalCompleted` | `float` |  |
+| `totalStarts` | `float` |  |
+| `totalViews` | `float` |  |
 
 #### Example: Load
 
@@ -440,8 +439,8 @@ Create an instance: `billing = client.Billing()`
 | `currency` | `str` |  |
 | `date` | `Any` |  |
 | `id` | `str` |  |
-| `resets_at` | `str` |  |
-| `total_chats_used` | `float` |  |
+| `resetsAt` | `str` |  |
+| `totalChatsUsed` | `float` |  |
 | `url` | `str` |  |
 
 #### Example: Load
@@ -475,14 +474,14 @@ Create an instance: `folder = client.Folder()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `str` |  |
+| `createdAt` | `str` |  |
 | `folder` | `dict` |  |
-| `folder_name` | `str` |  |
+| `folderName` | `str` |  |
 | `id` | `str` |  |
 | `name` | `str` |  |
-| `parent_folder_id` | `str` |  |
-| `updated_at` | `str` |  |
-| `workspace_id` | `str` |  |
+| `parentFolderId` | `Any` |  |
+| `updatedAt` | `str` |  |
+| `workspaceId` | `str` |  |
 
 #### Example: Load
 
@@ -500,13 +499,13 @@ folders = client.Folder().list()
 
 ```python
 folder = client.Folder().create({
-    "created_at": "example_created_at",  # str
+    "createdAt": "example_createdAt",  # str
     "folder": {},  # dict
     "id": "example_id",  # str
     "name": "example_name",  # str
-    "parent_folder_id": "example_parent_folder_id",  # str
-    "updated_at": "example_updated_at",  # str
-    "workspace_id": "example_workspace_id",  # str
+    "parentFolderId": "example_parentFolderId",  # Any
+    "updatedAt": "example_updatedAt",  # str
+    "workspaceId": "example_workspaceId",  # str
 })
 ```
 
@@ -527,20 +526,20 @@ Create an instance: `result = client.Result()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `answer` | `list` |  |
+| `answers` | `list` |  |
 | `context` | `Any` |  |
-| `created_at` | `str` |  |
+| `createdAt` | `str` |  |
 | `description` | `str` |  |
-| `detail` | `Any` |  |
-| `has_started` | `bool` |  |
+| `details` | `Any` |  |
+| `hasStarted` | `Any` |  |
 | `id` | `str` |  |
-| `is_archived` | `bool` |  |
-| `is_completed` | `bool` |  |
-| `last_chat_session_id` | `str` |  |
-| `result_id` | `str` |  |
+| `isArchived` | `Any` |  |
+| `isCompleted` | `bool` |  |
+| `lastChatSessionId` | `Any` |  |
+| `resultId` | `str` |  |
 | `status` | `str` |  |
-| `typebot_id` | `str` |  |
-| `variable` | `list` |  |
+| `typebotId` | `str` |  |
+| `variables` | `list` |  |
 
 #### Example: Load
 
@@ -573,39 +572,38 @@ Create an instance: `typebot = client.Typebot()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `access_right` | `str` |  |
-| `created_at` | `str` |  |
-| `current_user_mode` | `str` |  |
-| `custom_domain` | `Any` |  |
-| `edge` | `list` |  |
-| `enable_safety_flag` | `bool` |  |
-| `event` | `list` |  |
-| `folder_id` | `str` |  |
-| `from_template` | `str` |  |
-| `group` | `list` |  |
+| `accessRight` | `str` |  |
+| `createdAt` | `str` |  |
+| `customDomain` | `Any` |  |
+| `edges` | `list` |  |
+| `enableSafetyFlags` | `bool` |  |
+| `events` | `list` |  |
+| `folderId` | `Any` |  |
+| `fromTemplate` | `str` |  |
+| `groups` | `list` |  |
 | `icon` | `Any` |  |
 | `id` | `str` |  |
-| `is_archived` | `bool` |  |
-| `is_closed` | `bool` |  |
+| `isArchived` | `bool` |  |
+| `isClosed` | `bool` |  |
 | `message` | `Any` |  |
 | `name` | `str` |  |
 | `overwrite` | `bool` |  |
-| `public_id` | `str` |  |
-| `published_typebot` | `Any` |  |
-| `published_typebot_id` | `str` |  |
-| `results_table_preference` | `Any` |  |
-| `risk_level` | `Any` |  |
-| `selected_theme_template_id` | `str` |  |
-| `setting` | `dict` |  |
-| `space_id` | `str` |  |
+| `publicId` | `Any` |  |
+| `publishedTypebot` | `Any` |  |
+| `publishedTypebotId` | `str` |  |
+| `resultsTablePreferences` | `Any` |  |
+| `riskLevel` | `Any` |  |
+| `selectedThemeTemplateId` | `Any` |  |
+| `settings` | `dict` |  |
+| `spaceId` | `Any` |  |
 | `theme` | `dict` |  |
-| `typebot` | `Any` |  |
-| `updated_at` | `str` |  |
-| `variable` | `list` |  |
+| `typebot` | `dict` |  |
+| `updatedAt` | `str` |  |
+| `variables` | `list` |  |
 | `version` | `Any` |  |
-| `warning` | `list` |  |
-| `whats_app_credentials_id` | `str` |  |
-| `workspace_id` | `str` |  |
+| `warnings` | `list` |  |
+| `whatsAppCredentialsId` | `Any` |  |
+| `workspaceId` | `str` |  |
 
 #### Example: Load
 
@@ -623,33 +621,32 @@ typebots = client.Typebot().list()
 
 ```python
 typebot = client.Typebot().create({
-    "access_right": "example_access_right",  # str
-    "created_at": "example_created_at",  # str
-    "current_user_mode": "example_current_user_mode",  # str
-    "custom_domain": "example_custom_domain",  # Any
-    "edge": [],  # list
-    "event": [],  # list
-    "folder_id": "example_folder_id",  # str
-    "group": [],  # list
+    "accessRight": "example_accessRight",  # str
+    "createdAt": "example_createdAt",  # str
+    "customDomain": "example_customDomain",  # Any
+    "edges": [],  # list
+    "events": [],  # list
+    "folderId": "example_folderId",  # Any
+    "groups": [],  # list
     "icon": "example_icon",  # Any
     "id": "example_id",  # str
-    "is_archived": True,  # bool
-    "is_closed": True,  # bool
+    "isArchived": True,  # bool
+    "isClosed": True,  # bool
     "message": "example_message",  # Any
     "name": "example_name",  # str
-    "public_id": "example_public_id",  # str
-    "published_typebot": "example_published_typebot",  # Any
-    "results_table_preference": "example_results_table_preference",  # Any
-    "risk_level": "example_risk_level",  # Any
-    "selected_theme_template_id": "example_selected_theme_template_id",  # str
-    "setting": {},  # dict
-    "space_id": "example_space_id",  # str
+    "publicId": "example_publicId",  # Any
+    "publishedTypebot": "example_publishedTypebot",  # Any
+    "resultsTablePreferences": "example_resultsTablePreferences",  # Any
+    "riskLevel": "example_riskLevel",  # Any
+    "selectedThemeTemplateId": "example_selectedThemeTemplateId",  # Any
+    "settings": {},  # dict
+    "spaceId": "example_spaceId",  # Any
     "theme": {},  # dict
-    "typebot": "example_typebot",  # Any
-    "updated_at": "example_updated_at",  # str
-    "variable": [],  # list
-    "whats_app_credentials_id": "example_whats_app_credentials_id",  # str
-    "workspace_id": "example_workspace_id",  # str
+    "typebot": {},  # dict
+    "updatedAt": "example_updatedAt",  # str
+    "variables": [],  # list
+    "whatsAppCredentialsId": "example_whatsAppCredentialsId",  # Any
+    "workspaceId": "example_workspaceId",  # str
 })
 ```
 
@@ -672,27 +669,27 @@ Create an instance: `workspace = client.Workspace()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `chats_hard_limit` | `Any` |  |
-| `created_at` | `str` |  |
-| `current_user_mode` | `str` |  |
+| `chatsHardLimit` | `Any` |  |
+| `createdAt` | `str` |  |
+| `customChatsLimit` | `Any` |  |
+| `customSeatsLimit` | `Any` |  |
 | `icon` | `Any` |  |
 | `id` | `str` |  |
-| `inactive_first_email_sent_at` | `Any` |  |
-| `inactive_second_email_sent_at` | `Any` |  |
-| `is_past_due` | `bool` |  |
-| `is_suspended` | `bool` |  |
-| `is_verified` | `bool` |  |
-| `last_activity_at` | `Any` |  |
+| `inactiveFirstEmailSentAt` | `Any` |  |
+| `inactiveSecondEmailSentAt` | `Any` |  |
+| `isPastDue` | `bool` |  |
+| `isSuspended` | `bool` |  |
+| `isVerified` | `Any` |  |
+| `lastActivityAt` | `Any` |  |
 | `name` | `str` |  |
 | `plan` | `str` |  |
 | `role` | `str` |  |
-| `setting` | `Any` |  |
-| `stripe_id` | `str` |  |
-| `updated_at` | `str` |  |
+| `settings` | `Any` |  |
+| `stripeId` | `Any` |  |
+| `updatedAt` | `str` |  |
 | `user` | `dict` |  |
-| `user_id` | `str` |  |
-| `workspace` | `dict` |  |
-| `workspace_id` | `str` |  |
+| `userId` | `str` |  |
+| `workspaceId` | `str` |  |
 
 #### Example: Load
 
@@ -710,27 +707,27 @@ workspaces = client.Workspace().list()
 
 ```python
 workspace = client.Workspace().create({
-    "chats_hard_limit": "example_chats_hard_limit",  # Any
-    "created_at": "example_created_at",  # str
-    "current_user_mode": "example_current_user_mode",  # str
+    "chatsHardLimit": "example_chatsHardLimit",  # Any
+    "createdAt": "example_createdAt",  # str
+    "customChatsLimit": "example_customChatsLimit",  # Any
+    "customSeatsLimit": "example_customSeatsLimit",  # Any
     "icon": "example_icon",  # Any
     "id": "example_id",  # str
-    "inactive_first_email_sent_at": "example_inactive_first_email_sent_at",  # Any
-    "inactive_second_email_sent_at": "example_inactive_second_email_sent_at",  # Any
-    "is_past_due": True,  # bool
-    "is_suspended": True,  # bool
-    "is_verified": True,  # bool
-    "last_activity_at": "example_last_activity_at",  # Any
+    "inactiveFirstEmailSentAt": "example_inactiveFirstEmailSentAt",  # Any
+    "inactiveSecondEmailSentAt": "example_inactiveSecondEmailSentAt",  # Any
+    "isPastDue": True,  # bool
+    "isSuspended": True,  # bool
+    "isVerified": "example_isVerified",  # Any
+    "lastActivityAt": "example_lastActivityAt",  # Any
     "name": "example_name",  # str
     "plan": "example_plan",  # str
     "role": "example_role",  # str
-    "setting": "example_setting",  # Any
-    "stripe_id": "example_stripe_id",  # str
-    "updated_at": "example_updated_at",  # str
+    "settings": "example_settings",  # Any
+    "stripeId": "example_stripeId",  # Any
+    "updatedAt": "example_updatedAt",  # str
     "user": {},  # dict
-    "user_id": "example_user_id",  # str
-    "workspace": {},  # dict
-    "workspace_id": "example_workspace_id",  # str
+    "userId": "example_userId",  # str
+    "workspaceId": "example_workspaceId",  # str
 })
 ```
 

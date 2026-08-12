@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import TypebotSDK
-from core.error import TypebotError
-from core.result import TypebotResult
-from core.response import TypebotResponse
-from core.spec import TypebotSpec
-from feature.base_feature import TypebotBaseFeature
+from projectname_sdk.core.error import TypebotError
+from projectname_sdk.core.result import TypebotResult
+from projectname_sdk.core.response import TypebotResponse
+from projectname_sdk.core.spec import TypebotSpec
+from projectname_sdk.feature.base_feature import TypebotBaseFeature
 
 
 def _client():

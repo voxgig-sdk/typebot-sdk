@@ -31,7 +31,7 @@ main: kit: flow: BasicTypebotFlow:
         ref: "typebot_ref01",
         srcdatavar: "typebot_ref01_data",
         suffix: "_up0",
-        textfield: "access_right"
+        textfield: "accessRight"
       }
 
       op: "update",

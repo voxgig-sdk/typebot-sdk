@@ -137,7 +137,7 @@ func TestTypebotEntity(t *testing.T) {
 			"id": typebotRef01Data["id"],
 		}
 
-		typebotRef01MarkdefUp0Name := "access_right"
+		typebotRef01MarkdefUp0Name := "accessRight"
 		typebotRef01MarkdefUp0Value := fmt.Sprintf("Mark01-typebot_ref01_%d", setup.now)
 		typebotRef01DataUp0Up[typebotRef01MarkdefUp0Name] = typebotRef01MarkdefUp0Value
 

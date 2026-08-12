@@ -137,7 +137,7 @@ func TestWorkspaceEntity(t *testing.T) {
 			"id": workspaceRef01Data["id"],
 		}
 
-		workspaceRef01MarkdefUp0Name := "created_at"
+		workspaceRef01MarkdefUp0Name := "createdAt"
 		workspaceRef01MarkdefUp0Value := fmt.Sprintf("Mark01-workspace_ref01_%d", setup.now)
 		workspaceRef01DataUp0Up[workspaceRef01MarkdefUp0Name] = workspaceRef01MarkdefUp0Value
 

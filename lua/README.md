@@ -241,9 +241,9 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `total_completed` |  |
-| `total_start` |  |
-| `total_view` |  |
+| `totalCompleted` |  |
+| `totalStarts` |  |
+| `totalViews` |  |
 
 Operations: Load.
 
@@ -257,8 +257,8 @@ API path: `/v1/typebots/{typebotId}/analytics/stats`
 | `currency` |  |
 | `date` |  |
 | `id` |  |
-| `resets_at` |  |
-| `total_chats_used` |  |
+| `resetsAt` |  |
+| `totalChatsUsed` |  |
 | `url` |  |
 
 Operations: List, Load.
@@ -269,14 +269,14 @@ API path: `/v1/billing/invoices`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `folder` |  |
-| `folder_name` |  |
+| `folderName` |  |
 | `id` |  |
 | `name` |  |
-| `parent_folder_id` |  |
-| `updated_at` |  |
-| `workspace_id` |  |
+| `parentFolderId` |  |
+| `updatedAt` |  |
+| `workspaceId` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -286,20 +286,20 @@ API path: `/v1/folders`
 
 | Field | Description |
 | --- | --- |
-| `answer` |  |
+| `answers` |  |
 | `context` |  |
-| `created_at` |  |
+| `createdAt` |  |
 | `description` |  |
-| `detail` |  |
-| `has_started` |  |
+| `details` |  |
+| `hasStarted` |  |
 | `id` |  |
-| `is_archived` |  |
-| `is_completed` |  |
-| `last_chat_session_id` |  |
-| `result_id` |  |
+| `isArchived` |  |
+| `isCompleted` |  |
+| `lastChatSessionId` |  |
+| `resultId` |  |
 | `status` |  |
-| `typebot_id` |  |
-| `variable` |  |
+| `typebotId` |  |
+| `variables` |  |
 
 Operations: List, Load, Remove.
 
@@ -309,39 +309,38 @@ API path: `/v1/typebots/{typebotId}/results`
 
 | Field | Description |
 | --- | --- |
-| `access_right` |  |
-| `created_at` |  |
-| `current_user_mode` |  |
-| `custom_domain` |  |
-| `edge` |  |
-| `enable_safety_flag` |  |
-| `event` |  |
-| `folder_id` |  |
-| `from_template` |  |
-| `group` |  |
+| `accessRight` |  |
+| `createdAt` |  |
+| `customDomain` |  |
+| `edges` |  |
+| `enableSafetyFlags` |  |
+| `events` |  |
+| `folderId` |  |
+| `fromTemplate` |  |
+| `groups` |  |
 | `icon` |  |
 | `id` |  |
-| `is_archived` |  |
-| `is_closed` |  |
+| `isArchived` |  |
+| `isClosed` |  |
 | `message` |  |
 | `name` |  |
 | `overwrite` |  |
-| `public_id` |  |
-| `published_typebot` |  |
-| `published_typebot_id` |  |
-| `results_table_preference` |  |
-| `risk_level` |  |
-| `selected_theme_template_id` |  |
-| `setting` |  |
-| `space_id` |  |
+| `publicId` |  |
+| `publishedTypebot` |  |
+| `publishedTypebotId` |  |
+| `resultsTablePreferences` |  |
+| `riskLevel` |  |
+| `selectedThemeTemplateId` |  |
+| `settings` |  |
+| `spaceId` |  |
 | `theme` |  |
 | `typebot` |  |
-| `updated_at` |  |
-| `variable` |  |
+| `updatedAt` |  |
+| `variables` |  |
 | `version` |  |
-| `warning` |  |
-| `whats_app_credentials_id` |  |
-| `workspace_id` |  |
+| `warnings` |  |
+| `whatsAppCredentialsId` |  |
+| `workspaceId` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -351,27 +350,27 @@ API path: `/v1/typebots/{typebotId}/publish`
 
 | Field | Description |
 | --- | --- |
-| `chats_hard_limit` |  |
-| `created_at` |  |
-| `current_user_mode` |  |
+| `chatsHardLimit` |  |
+| `createdAt` |  |
+| `customChatsLimit` |  |
+| `customSeatsLimit` |  |
 | `icon` |  |
 | `id` |  |
-| `inactive_first_email_sent_at` |  |
-| `inactive_second_email_sent_at` |  |
-| `is_past_due` |  |
-| `is_suspended` |  |
-| `is_verified` |  |
-| `last_activity_at` |  |
+| `inactiveFirstEmailSentAt` |  |
+| `inactiveSecondEmailSentAt` |  |
+| `isPastDue` |  |
+| `isSuspended` |  |
+| `isVerified` |  |
+| `lastActivityAt` |  |
 | `name` |  |
 | `plan` |  |
 | `role` |  |
-| `setting` |  |
-| `stripe_id` |  |
-| `updated_at` |  |
+| `settings` |  |
+| `stripeId` |  |
+| `updatedAt` |  |
 | `user` |  |
-| `user_id` |  |
-| `workspace` |  |
-| `workspace_id` |  |
+| `userId` |  |
+| `workspaceId` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -396,9 +395,9 @@ Create an instance: `local analytics = client:Analytics(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `total_completed` | `number` |  |
-| `total_start` | `number` |  |
-| `total_view` | `number` |  |
+| `totalCompleted` | `number` |  |
+| `totalStarts` | `number` |  |
+| `totalViews` | `number` |  |
 
 #### Example: Load
 
@@ -426,8 +425,8 @@ Create an instance: `local billing = client:Billing(nil)`
 | `currency` | `string` |  |
 | `date` | `any` |  |
 | `id` | `string` |  |
-| `resets_at` | `string` |  |
-| `total_chats_used` | `number` |  |
+| `resetsAt` | `string` |  |
+| `totalChatsUsed` | `number` |  |
 | `url` | `string` |  |
 
 #### Example: Load
@@ -461,14 +460,14 @@ Create an instance: `local folder = client:Folder(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
+| `createdAt` | `string` |  |
 | `folder` | `table` |  |
-| `folder_name` | `string` |  |
+| `folderName` | `string` |  |
 | `id` | `string` |  |
 | `name` | `string` |  |
-| `parent_folder_id` | `string` |  |
-| `updated_at` | `string` |  |
-| `workspace_id` | `string` |  |
+| `parentFolderId` | `any` |  |
+| `updatedAt` | `string` |  |
+| `workspaceId` | `string` |  |
 
 #### Example: Load
 
@@ -486,13 +485,13 @@ local folders, err = client:Folder():list()
 
 ```lua
 local folder, err = client:Folder():create({
-  created_at = "example_created_at", -- string
+  createdAt = "example_createdAt", -- string
   folder = {}, -- table
   id = "example_id", -- string
   name = "example_name", -- string
-  parent_folder_id = "example_parent_folder_id", -- string
-  updated_at = "example_updated_at", -- string
-  workspace_id = "example_workspace_id", -- string
+  parentFolderId = "example_parentFolderId", -- any
+  updatedAt = "example_updatedAt", -- string
+  workspaceId = "example_workspaceId", -- string
 })
 ```
 
@@ -513,20 +512,20 @@ Create an instance: `local result = client:Result(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `answer` | `table` |  |
+| `answers` | `table` |  |
 | `context` | `any` |  |
-| `created_at` | `string` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
-| `detail` | `any` |  |
-| `has_started` | `boolean` |  |
+| `details` | `any` |  |
+| `hasStarted` | `any` |  |
 | `id` | `string` |  |
-| `is_archived` | `boolean` |  |
-| `is_completed` | `boolean` |  |
-| `last_chat_session_id` | `string` |  |
-| `result_id` | `string` |  |
+| `isArchived` | `any` |  |
+| `isCompleted` | `boolean` |  |
+| `lastChatSessionId` | `any` |  |
+| `resultId` | `string` |  |
 | `status` | `string` |  |
-| `typebot_id` | `string` |  |
-| `variable` | `table` |  |
+| `typebotId` | `string` |  |
+| `variables` | `table` |  |
 
 #### Example: Load
 
@@ -559,39 +558,38 @@ Create an instance: `local typebot = client:Typebot(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `access_right` | `string` |  |
-| `created_at` | `string` |  |
-| `current_user_mode` | `string` |  |
-| `custom_domain` | `any` |  |
-| `edge` | `table` |  |
-| `enable_safety_flag` | `boolean` |  |
-| `event` | `table` |  |
-| `folder_id` | `string` |  |
-| `from_template` | `string` |  |
-| `group` | `table` |  |
+| `accessRight` | `string` |  |
+| `createdAt` | `string` |  |
+| `customDomain` | `any` |  |
+| `edges` | `table` |  |
+| `enableSafetyFlags` | `boolean` |  |
+| `events` | `table` |  |
+| `folderId` | `any` |  |
+| `fromTemplate` | `string` |  |
+| `groups` | `table` |  |
 | `icon` | `any` |  |
 | `id` | `string` |  |
-| `is_archived` | `boolean` |  |
-| `is_closed` | `boolean` |  |
+| `isArchived` | `boolean` |  |
+| `isClosed` | `boolean` |  |
 | `message` | `any` |  |
 | `name` | `string` |  |
 | `overwrite` | `boolean` |  |
-| `public_id` | `string` |  |
-| `published_typebot` | `any` |  |
-| `published_typebot_id` | `string` |  |
-| `results_table_preference` | `any` |  |
-| `risk_level` | `any` |  |
-| `selected_theme_template_id` | `string` |  |
-| `setting` | `table` |  |
-| `space_id` | `string` |  |
+| `publicId` | `any` |  |
+| `publishedTypebot` | `any` |  |
+| `publishedTypebotId` | `string` |  |
+| `resultsTablePreferences` | `any` |  |
+| `riskLevel` | `any` |  |
+| `selectedThemeTemplateId` | `any` |  |
+| `settings` | `table` |  |
+| `spaceId` | `any` |  |
 | `theme` | `table` |  |
-| `typebot` | `any` |  |
-| `updated_at` | `string` |  |
-| `variable` | `table` |  |
+| `typebot` | `table` |  |
+| `updatedAt` | `string` |  |
+| `variables` | `table` |  |
 | `version` | `any` |  |
-| `warning` | `table` |  |
-| `whats_app_credentials_id` | `string` |  |
-| `workspace_id` | `string` |  |
+| `warnings` | `table` |  |
+| `whatsAppCredentialsId` | `any` |  |
+| `workspaceId` | `string` |  |
 
 #### Example: Load
 
@@ -609,33 +607,32 @@ local typebots, err = client:Typebot():list()
 
 ```lua
 local typebot, err = client:Typebot():create({
-  access_right = "example_access_right", -- string
-  created_at = "example_created_at", -- string
-  current_user_mode = "example_current_user_mode", -- string
-  custom_domain = "example_custom_domain", -- any
-  edge = {}, -- table
-  event = {}, -- table
-  folder_id = "example_folder_id", -- string
-  group = {}, -- table
+  accessRight = "example_accessRight", -- string
+  createdAt = "example_createdAt", -- string
+  customDomain = "example_customDomain", -- any
+  edges = {}, -- table
+  events = {}, -- table
+  folderId = "example_folderId", -- any
+  groups = {}, -- table
   icon = "example_icon", -- any
   id = "example_id", -- string
-  is_archived = true, -- boolean
-  is_closed = true, -- boolean
+  isArchived = true, -- boolean
+  isClosed = true, -- boolean
   message = "example_message", -- any
   name = "example_name", -- string
-  public_id = "example_public_id", -- string
-  published_typebot = "example_published_typebot", -- any
-  results_table_preference = "example_results_table_preference", -- any
-  risk_level = "example_risk_level", -- any
-  selected_theme_template_id = "example_selected_theme_template_id", -- string
-  setting = {}, -- table
-  space_id = "example_space_id", -- string
+  publicId = "example_publicId", -- any
+  publishedTypebot = "example_publishedTypebot", -- any
+  resultsTablePreferences = "example_resultsTablePreferences", -- any
+  riskLevel = "example_riskLevel", -- any
+  selectedThemeTemplateId = "example_selectedThemeTemplateId", -- any
+  settings = {}, -- table
+  spaceId = "example_spaceId", -- any
   theme = {}, -- table
-  typebot = "example_typebot", -- any
-  updated_at = "example_updated_at", -- string
-  variable = {}, -- table
-  whats_app_credentials_id = "example_whats_app_credentials_id", -- string
-  workspace_id = "example_workspace_id", -- string
+  typebot = {}, -- table
+  updatedAt = "example_updatedAt", -- string
+  variables = {}, -- table
+  whatsAppCredentialsId = "example_whatsAppCredentialsId", -- any
+  workspaceId = "example_workspaceId", -- string
 })
 ```
 
@@ -658,27 +655,27 @@ Create an instance: `local workspace = client:Workspace(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `chats_hard_limit` | `any` |  |
-| `created_at` | `string` |  |
-| `current_user_mode` | `string` |  |
+| `chatsHardLimit` | `any` |  |
+| `createdAt` | `string` |  |
+| `customChatsLimit` | `any` |  |
+| `customSeatsLimit` | `any` |  |
 | `icon` | `any` |  |
 | `id` | `string` |  |
-| `inactive_first_email_sent_at` | `any` |  |
-| `inactive_second_email_sent_at` | `any` |  |
-| `is_past_due` | `boolean` |  |
-| `is_suspended` | `boolean` |  |
-| `is_verified` | `boolean` |  |
-| `last_activity_at` | `any` |  |
+| `inactiveFirstEmailSentAt` | `any` |  |
+| `inactiveSecondEmailSentAt` | `any` |  |
+| `isPastDue` | `boolean` |  |
+| `isSuspended` | `boolean` |  |
+| `isVerified` | `any` |  |
+| `lastActivityAt` | `any` |  |
 | `name` | `string` |  |
 | `plan` | `string` |  |
 | `role` | `string` |  |
-| `setting` | `any` |  |
-| `stripe_id` | `string` |  |
-| `updated_at` | `string` |  |
+| `settings` | `any` |  |
+| `stripeId` | `any` |  |
+| `updatedAt` | `string` |  |
 | `user` | `table` |  |
-| `user_id` | `string` |  |
-| `workspace` | `table` |  |
-| `workspace_id` | `string` |  |
+| `userId` | `string` |  |
+| `workspaceId` | `string` |  |
 
 #### Example: Load
 
@@ -696,27 +693,27 @@ local workspaces, err = client:Workspace():list()
 
 ```lua
 local workspace, err = client:Workspace():create({
-  chats_hard_limit = "example_chats_hard_limit", -- any
-  created_at = "example_created_at", -- string
-  current_user_mode = "example_current_user_mode", -- string
+  chatsHardLimit = "example_chatsHardLimit", -- any
+  createdAt = "example_createdAt", -- string
+  customChatsLimit = "example_customChatsLimit", -- any
+  customSeatsLimit = "example_customSeatsLimit", -- any
   icon = "example_icon", -- any
   id = "example_id", -- string
-  inactive_first_email_sent_at = "example_inactive_first_email_sent_at", -- any
-  inactive_second_email_sent_at = "example_inactive_second_email_sent_at", -- any
-  is_past_due = true, -- boolean
-  is_suspended = true, -- boolean
-  is_verified = true, -- boolean
-  last_activity_at = "example_last_activity_at", -- any
+  inactiveFirstEmailSentAt = "example_inactiveFirstEmailSentAt", -- any
+  inactiveSecondEmailSentAt = "example_inactiveSecondEmailSentAt", -- any
+  isPastDue = true, -- boolean
+  isSuspended = true, -- boolean
+  isVerified = "example_isVerified", -- any
+  lastActivityAt = "example_lastActivityAt", -- any
   name = "example_name", -- string
   plan = "example_plan", -- string
   role = "example_role", -- string
-  setting = "example_setting", -- any
-  stripe_id = "example_stripe_id", -- string
-  updated_at = "example_updated_at", -- string
+  settings = "example_settings", -- any
+  stripeId = "example_stripeId", -- any
+  updatedAt = "example_updatedAt", -- string
   user = {}, -- table
-  user_id = "example_user_id", -- string
-  workspace = {}, -- table
-  workspace_id = "example_workspace_id", -- string
+  userId = "example_userId", -- string
+  workspaceId = "example_workspaceId", -- string
 })
 ```
 

@@ -6,52 +6,47 @@ main: kit: entity: typebot: {
 
   fields: [
     {
-      name: "access_right"
+      name: "accessRight"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "created_at"
+      name: "createdAt"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "current_user_mode"
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "custom_domain"
+      name: "customDomain"
       req: true
       type: "`$ANY`"
     }
     {
-      name: "edge"
+      name: "edges"
       req: true
       type: "`$ARRAY`"
     }
     {
-      name: "enable_safety_flag"
+      name: "enableSafetyFlags"
       req: false
       type: "`$BOOLEAN`"
     }
     {
-      name: "event"
+      name: "events"
       req: true
       type: "`$ARRAY`"
     }
     {
-      name: "folder_id"
+      name: "folderId"
       req: true
-      type: "`$STRING`"
+      type: "`$ANY`"
     }
     {
-      name: "from_template"
+      name: "fromTemplate"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "group"
+      name: "groups"
       req: true
       type: "`$ARRAY`"
     }
@@ -66,12 +61,12 @@ main: kit: entity: typebot: {
       type: "`$STRING`"
     }
     {
-      name: "is_archived"
+      name: "isArchived"
       req: true
       type: "`$BOOLEAN`"
     }
     {
-      name: "is_closed"
+      name: "isClosed"
       req: true
       type: "`$BOOLEAN`"
     }
@@ -91,44 +86,44 @@ main: kit: entity: typebot: {
       type: "`$BOOLEAN`"
     }
     {
-      name: "public_id"
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "published_typebot"
+      name: "publicId"
       req: true
       type: "`$ANY`"
     }
     {
-      name: "published_typebot_id"
+      name: "publishedTypebot"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "publishedTypebotId"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "results_table_preference"
+      name: "resultsTablePreferences"
       req: true
       type: "`$ANY`"
     }
     {
-      name: "risk_level"
+      name: "riskLevel"
       req: true
       type: "`$ANY`"
     }
     {
-      name: "selected_theme_template_id"
+      name: "selectedThemeTemplateId"
       req: true
-      type: "`$STRING`"
+      type: "`$ANY`"
     }
     {
-      name: "setting"
+      name: "settings"
       req: true
       type: "`$OBJECT`"
     }
     {
-      name: "space_id"
+      name: "spaceId"
       req: true
-      type: "`$STRING`"
+      type: "`$ANY`"
     }
     {
       name: "theme"
@@ -138,15 +133,15 @@ main: kit: entity: typebot: {
     {
       name: "typebot"
       req: true
-      type: "`$ANY`"
+      type: "`$OBJECT`"
     }
     {
-      name: "updated_at"
+      name: "updatedAt"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "variable"
+      name: "variables"
       req: true
       type: "`$ARRAY`"
     }
@@ -166,17 +161,17 @@ main: kit: entity: typebot: {
       type: "`$ANY`"
     }
     {
-      name: "warning"
+      name: "warnings"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "whats_app_credentials_id"
+      name: "whatsAppCredentialsId"
       req: true
-      type: "`$STRING`"
+      type: "`$ANY`"
     }
     {
-      name: "workspace_id"
+      name: "workspaceId"
       req: true
       type: "`$STRING`"
     }

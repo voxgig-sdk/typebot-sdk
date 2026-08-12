@@ -2,47 +2,47 @@
   "existing": {
     "folder": {
       "FOLDER00": {
-        "created_at": "s50",
+        "createdAt": "s50",
         "folder": {},
-        "folder_name": "s52",
+        "folderName": "s52",
         "id": "FOLDER00",
         "name": "s54",
-        "parent_folder_id": "PARENT_FOLDER01",
-        "updated_at": "s56",
-        "workspace_id": "WORKSPACE01"
+        "parentFolderId": "s55",
+        "updatedAt": "s56",
+        "workspaceId": "s57"
       },
       "FOLDER01": {
-        "created_at": "sa0",
+        "createdAt": "sa0",
         "folder": {},
-        "folder_name": "sa2",
+        "folderName": "sa2",
         "id": "FOLDER01",
         "name": "sa4",
-        "parent_folder_id": "PARENT_FOLDER01",
-        "updated_at": "sa6",
-        "workspace_id": "WORKSPACE01"
+        "parentFolderId": "sa5",
+        "updatedAt": "sa6",
+        "workspaceId": "sa7"
       },
       "FOLDER02": {
-        "created_at": "sf0",
+        "createdAt": "sf0",
         "folder": {},
-        "folder_name": "sf2",
+        "folderName": "sf2",
         "id": "FOLDER02",
         "name": "sf4",
-        "parent_folder_id": "PARENT_FOLDER01",
-        "updated_at": "sf6",
-        "workspace_id": "WORKSPACE01"
+        "parentFolderId": "sf5",
+        "updatedAt": "sf6",
+        "workspaceId": "sf7"
       }
     }
   },
   "new": {
     "folder": {
       "folder_ref01": {
-        "created_at": "s140",
+        "createdAt": "s140",
         "folder": {},
-        "folder_name": "s142",
+        "folderName": "s142",
         "name": "s144",
-        "parent_folder_id": "PARENT_FOLDER01",
-        "updated_at": "s146",
-        "workspace_id": "WORKSPACE01"
+        "parentFolderId": "s145",
+        "updatedAt": "s146",
+        "workspaceId": "s147"
       }
     }
   }

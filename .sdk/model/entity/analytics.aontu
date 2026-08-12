@@ -6,17 +6,17 @@ main: kit: entity: analytics: {
 
   fields: [
     {
-      name: "total_completed"
+      name: "totalCompleted"
       req: true
       type: "`$NUMBER`"
     }
     {
-      name: "total_start"
+      name: "totalStarts"
       req: true
       type: "`$NUMBER`"
     }
     {
-      name: "total_view"
+      name: "totalViews"
       req: true
       type: "`$NUMBER`"
     }

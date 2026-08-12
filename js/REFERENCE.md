@@ -177,9 +177,9 @@ const analytics = client.Analytics()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `total_completed` | `number` | Yes |  |
-| `total_start` | `number` | Yes |  |
-| `total_view` | `number` | Yes |  |
+| `totalCompleted` | `number` | Yes |  |
+| `totalStarts` | `number` | Yes |  |
+| `totalViews` | `number` | Yes |  |
 
 ### Operations
 
@@ -233,8 +233,8 @@ const billing = client.Billing()
 | `currency` | `string` | Yes |  |
 | `date` | `*` | Yes |  |
 | `id` | `string` | Yes |  |
-| `resets_at` | `string` | Yes |  |
-| `total_chats_used` | `number` | Yes |  |
+| `resetsAt` | `string` | Yes |  |
+| `totalChatsUsed` | `number` | Yes |  |
 | `url` | `string` | Yes |  |
 
 ### Operations
@@ -293,27 +293,27 @@ const folder = client.Folder()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
 | `folder` | `Object` | Yes |  |
-| `folder_name` | `string` | No |  |
+| `folderName` | `string` | No |  |
 | `id` | `string` | Yes |  |
 | `name` | `string` | Yes |  |
-| `parent_folder_id` | `string` | Yes |  |
-| `updated_at` | `string` | Yes |  |
-| `workspace_id` | `string` | Yes |  |
+| `parentFolderId` | `*` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+| `workspaceId` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
 | `folder` | - | - | - | - | - |
-| `folder_name` | - | - | - | - | - |
+| `folderName` | - | - | - | - | - |
 | `id` | - | - | Yes | - | - |
 | `name` | - | - | - | - | - |
-| `parent_folder_id` | - | - | Yes | - | - |
-| `updated_at` | - | - | - | - | - |
-| `workspace_id` | - | - | - | - | - |
+| `parentFolderId` | - | - | Yes | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `workspaceId` | - | - | - | - | - |
 
 ### Operations
 
@@ -323,13 +323,13 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Folder().create({
-  created_at: 'example_created_at',
+  createdAt: 'example_createdAt',
   folder: {},
   id: 'example_id',
   name: 'example_name',
-  parent_folder_id: 'example_parent_folder_id',
-  updated_at: 'example_updated_at',
-  workspace_id: 'example_workspace_id',
+  parentFolderId: 'example_parentFolderId',
+  updatedAt: 'example_updatedAt',
+  workspaceId: 'example_workspaceId',
 })
 ```
 
@@ -406,20 +406,20 @@ const result = client.Result()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `answer` | `Array` | Yes |  |
+| `answers` | `Array` | Yes |  |
 | `context` | `*` | Yes |  |
-| `created_at` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
 | `description` | `string` | Yes |  |
-| `detail` | `*` | Yes |  |
-| `has_started` | `boolean` | Yes |  |
+| `details` | `*` | Yes |  |
+| `hasStarted` | `*` | Yes |  |
 | `id` | `string` | Yes |  |
-| `is_archived` | `boolean` | Yes |  |
-| `is_completed` | `boolean` | Yes |  |
-| `last_chat_session_id` | `string` | Yes |  |
-| `result_id` | `string` | Yes |  |
+| `isArchived` | `*` | Yes |  |
+| `isCompleted` | `boolean` | Yes |  |
+| `lastChatSessionId` | `*` | Yes |  |
+| `resultId` | `string` | Yes |  |
 | `status` | `string` | Yes |  |
-| `typebot_id` | `string` | Yes |  |
-| `variable` | `Array` | Yes |  |
+| `typebotId` | `string` | Yes |  |
+| `variables` | `Array` | Yes |  |
 
 ### Operations
 
@@ -485,77 +485,75 @@ const typebot = client.Typebot()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `access_right` | `string` | Yes |  |
-| `created_at` | `string` | Yes |  |
-| `current_user_mode` | `string` | Yes |  |
-| `custom_domain` | `*` | Yes |  |
-| `edge` | `Array` | Yes |  |
-| `enable_safety_flag` | `boolean` | No |  |
-| `event` | `Array` | Yes |  |
-| `folder_id` | `string` | Yes |  |
-| `from_template` | `string` | No |  |
-| `group` | `Array` | Yes |  |
+| `accessRight` | `string` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `customDomain` | `*` | Yes |  |
+| `edges` | `Array` | Yes |  |
+| `enableSafetyFlags` | `boolean` | No |  |
+| `events` | `Array` | Yes |  |
+| `folderId` | `*` | Yes |  |
+| `fromTemplate` | `string` | No |  |
+| `groups` | `Array` | Yes |  |
 | `icon` | `*` | Yes |  |
 | `id` | `string` | Yes |  |
-| `is_archived` | `boolean` | Yes |  |
-| `is_closed` | `boolean` | Yes |  |
+| `isArchived` | `boolean` | Yes |  |
+| `isClosed` | `boolean` | Yes |  |
 | `message` | `*` | Yes |  |
 | `name` | `string` | Yes |  |
 | `overwrite` | `boolean` | No |  |
-| `public_id` | `string` | Yes |  |
-| `published_typebot` | `*` | Yes |  |
-| `published_typebot_id` | `string` | No |  |
-| `results_table_preference` | `*` | Yes |  |
-| `risk_level` | `*` | Yes |  |
-| `selected_theme_template_id` | `string` | Yes |  |
-| `setting` | `Object` | Yes |  |
-| `space_id` | `string` | Yes |  |
+| `publicId` | `*` | Yes |  |
+| `publishedTypebot` | `*` | Yes |  |
+| `publishedTypebotId` | `string` | No |  |
+| `resultsTablePreferences` | `*` | Yes |  |
+| `riskLevel` | `*` | Yes |  |
+| `selectedThemeTemplateId` | `*` | Yes |  |
+| `settings` | `Object` | Yes |  |
+| `spaceId` | `*` | Yes |  |
 | `theme` | `Object` | Yes |  |
-| `typebot` | `*` | Yes |  |
-| `updated_at` | `string` | Yes |  |
-| `variable` | `Array` | Yes |  |
+| `typebot` | `Object` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
+| `variables` | `Array` | Yes |  |
 | `version` | `*` | No |  |
-| `warning` | `Array` | No |  |
-| `whats_app_credentials_id` | `string` | Yes |  |
-| `workspace_id` | `string` | Yes |  |
+| `warnings` | `Array` | No |  |
+| `whatsAppCredentialsId` | `*` | Yes |  |
+| `workspaceId` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `access_right` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `current_user_mode` | - | - | - | - | - |
-| `custom_domain` | - | - | - | - | - |
-| `edge` | - | - | - | - | - |
-| `enable_safety_flag` | - | - | - | - | - |
-| `event` | - | - | - | - | - |
-| `folder_id` | - | - | - | - | - |
-| `from_template` | - | - | - | - | - |
-| `group` | - | - | - | - | - |
+| `accessRight` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `customDomain` | - | - | - | - | - |
+| `edges` | - | - | - | - | - |
+| `enableSafetyFlags` | - | - | - | - | - |
+| `events` | - | - | - | - | - |
+| `folderId` | - | - | - | - | - |
+| `fromTemplate` | - | - | - | - | - |
+| `groups` | - | - | - | - | - |
 | `icon` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
-| `is_archived` | - | - | - | - | - |
-| `is_closed` | - | - | - | - | - |
+| `isArchived` | - | - | - | - | - |
+| `isClosed` | - | - | - | - | - |
 | `message` | - | - | - | - | - |
 | `name` | - | - | - | - | - |
 | `overwrite` | - | - | - | - | - |
-| `public_id` | - | - | - | - | - |
-| `published_typebot` | - | - | - | - | - |
-| `published_typebot_id` | - | - | - | - | - |
-| `results_table_preference` | - | - | - | - | - |
-| `risk_level` | - | - | - | - | - |
-| `selected_theme_template_id` | - | - | - | - | - |
-| `setting` | - | - | - | - | - |
-| `space_id` | - | - | - | - | - |
+| `publicId` | - | - | - | - | - |
+| `publishedTypebot` | - | - | - | - | - |
+| `publishedTypebotId` | - | - | - | - | - |
+| `resultsTablePreferences` | - | - | - | - | - |
+| `riskLevel` | - | - | - | - | - |
+| `selectedThemeTemplateId` | - | - | - | - | - |
+| `settings` | - | - | - | - | - |
+| `spaceId` | - | - | - | - | - |
 | `theme` | - | - | - | - | - |
 | `typebot` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
-| `variable` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
+| `variables` | - | - | - | - | - |
 | `version` | - | - | Yes | Yes | - |
-| `warning` | - | - | - | - | - |
-| `whats_app_credentials_id` | - | - | - | - | - |
-| `workspace_id` | - | - | - | - | - |
+| `warnings` | - | - | - | - | - |
+| `whatsAppCredentialsId` | - | - | - | - | - |
+| `workspaceId` | - | - | - | - | - |
 
 ### Operations
 
@@ -565,33 +563,32 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Typebot().create({
-  access_right: 'example_access_right',
-  created_at: 'example_created_at',
-  current_user_mode: 'example_current_user_mode',
-  custom_domain: 'example_custom_domain',
-  edge: [],
-  event: [],
-  folder_id: 'example_folder_id',
-  group: [],
+  accessRight: 'example_accessRight',
+  createdAt: 'example_createdAt',
+  customDomain: 'example_customDomain',
+  edges: [],
+  events: [],
+  folderId: 'example_folderId',
+  groups: [],
   icon: 'example_icon',
   id: 'example_id',
-  is_archived: true,
-  is_closed: true,
+  isArchived: true,
+  isClosed: true,
   message: 'example_message',
   name: 'example_name',
-  public_id: 'example_public_id',
-  published_typebot: 'example_published_typebot',
-  results_table_preference: 'example_results_table_preference',
-  risk_level: 'example_risk_level',
-  selected_theme_template_id: 'example_selected_theme_template_id',
-  setting: {},
-  space_id: 'example_space_id',
+  publicId: 'example_publicId',
+  publishedTypebot: 'example_publishedTypebot',
+  resultsTablePreferences: 'example_resultsTablePreferences',
+  riskLevel: 'example_riskLevel',
+  selectedThemeTemplateId: 'example_selectedThemeTemplateId',
+  settings: {},
+  spaceId: 'example_spaceId',
   theme: {},
-  typebot: 'example_typebot',
-  updated_at: 'example_updated_at',
-  variable: [],
-  whats_app_credentials_id: 'example_whats_app_credentials_id',
-  workspace_id: 'example_workspace_id',
+  typebot: {},
+  updatedAt: 'example_updatedAt',
+  variables: [],
+  whatsAppCredentialsId: 'example_whatsAppCredentialsId',
+  workspaceId: 'example_workspaceId',
 })
 ```
 
@@ -668,53 +665,53 @@ const workspace = client.Workspace()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `chats_hard_limit` | `*` | Yes |  |
-| `created_at` | `string` | Yes |  |
-| `current_user_mode` | `string` | Yes |  |
+| `chatsHardLimit` | `*` | Yes |  |
+| `createdAt` | `string` | Yes |  |
+| `customChatsLimit` | `*` | Yes |  |
+| `customSeatsLimit` | `*` | Yes |  |
 | `icon` | `*` | Yes |  |
 | `id` | `string` | Yes |  |
-| `inactive_first_email_sent_at` | `*` | Yes |  |
-| `inactive_second_email_sent_at` | `*` | Yes |  |
-| `is_past_due` | `boolean` | Yes |  |
-| `is_suspended` | `boolean` | Yes |  |
-| `is_verified` | `boolean` | Yes |  |
-| `last_activity_at` | `*` | Yes |  |
+| `inactiveFirstEmailSentAt` | `*` | Yes |  |
+| `inactiveSecondEmailSentAt` | `*` | Yes |  |
+| `isPastDue` | `boolean` | Yes |  |
+| `isSuspended` | `boolean` | Yes |  |
+| `isVerified` | `*` | Yes |  |
+| `lastActivityAt` | `*` | Yes |  |
 | `name` | `string` | Yes |  |
 | `plan` | `string` | Yes |  |
 | `role` | `string` | Yes |  |
-| `setting` | `*` | Yes |  |
-| `stripe_id` | `string` | Yes |  |
-| `updated_at` | `string` | Yes |  |
+| `settings` | `*` | Yes |  |
+| `stripeId` | `*` | Yes |  |
+| `updatedAt` | `string` | Yes |  |
 | `user` | `Object` | Yes |  |
-| `user_id` | `string` | Yes |  |
-| `workspace` | `Object` | Yes |  |
-| `workspace_id` | `string` | Yes |  |
+| `userId` | `string` | Yes |  |
+| `workspaceId` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `chats_hard_limit` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `current_user_mode` | - | - | - | - | - |
+| `chatsHardLimit` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `customChatsLimit` | - | - | - | - | - |
+| `customSeatsLimit` | - | - | - | - | - |
 | `icon` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `inactive_first_email_sent_at` | - | - | - | - | - |
-| `inactive_second_email_sent_at` | - | - | - | - | - |
-| `is_past_due` | - | - | - | - | - |
-| `is_suspended` | - | - | - | - | - |
-| `is_verified` | - | - | - | - | - |
-| `last_activity_at` | - | - | - | - | - |
+| `inactiveFirstEmailSentAt` | - | - | - | - | - |
+| `inactiveSecondEmailSentAt` | - | - | - | - | - |
+| `isPastDue` | - | - | - | - | - |
+| `isSuspended` | - | - | - | - | - |
+| `isVerified` | - | - | - | - | - |
+| `lastActivityAt` | - | - | - | - | - |
 | `name` | - | - | - | Yes | - |
 | `plan` | - | - | - | - | - |
 | `role` | - | - | - | - | - |
-| `setting` | - | - | - | - | - |
-| `stripe_id` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `settings` | - | - | - | - | - |
+| `stripeId` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 | `user` | - | - | - | - | - |
-| `user_id` | - | - | - | - | - |
-| `workspace` | - | - | - | - | - |
-| `workspace_id` | - | - | - | - | - |
+| `userId` | - | - | - | - | - |
+| `workspaceId` | - | - | - | - | - |
 
 ### Operations
 
@@ -724,27 +721,27 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Workspace().create({
-  chats_hard_limit: 'example_chats_hard_limit',
-  created_at: 'example_created_at',
-  current_user_mode: 'example_current_user_mode',
+  chatsHardLimit: 'example_chatsHardLimit',
+  createdAt: 'example_createdAt',
+  customChatsLimit: 'example_customChatsLimit',
+  customSeatsLimit: 'example_customSeatsLimit',
   icon: 'example_icon',
   id: 'example_id',
-  inactive_first_email_sent_at: 'example_inactive_first_email_sent_at',
-  inactive_second_email_sent_at: 'example_inactive_second_email_sent_at',
-  is_past_due: true,
-  is_suspended: true,
-  is_verified: true,
-  last_activity_at: 'example_last_activity_at',
+  inactiveFirstEmailSentAt: 'example_inactiveFirstEmailSentAt',
+  inactiveSecondEmailSentAt: 'example_inactiveSecondEmailSentAt',
+  isPastDue: true,
+  isSuspended: true,
+  isVerified: 'example_isVerified',
+  lastActivityAt: 'example_lastActivityAt',
   name: 'example_name',
   plan: 'example_plan',
   role: 'example_role',
-  setting: 'example_setting',
-  stripe_id: 'example_stripe_id',
-  updated_at: 'example_updated_at',
+  settings: 'example_settings',
+  stripeId: 'example_stripeId',
+  updatedAt: 'example_updatedAt',
   user: {},
-  user_id: 'example_user_id',
-  workspace: {},
-  workspace_id: 'example_workspace_id',
+  userId: 'example_userId',
+  workspaceId: 'example_workspaceId',
 })
 ```
 

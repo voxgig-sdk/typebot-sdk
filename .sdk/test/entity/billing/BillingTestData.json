@@ -6,8 +6,8 @@
         "currency": "s47",
         "date": "s48",
         "id": "BILLING00",
-        "resets_at": "s4a",
-        "total_chats_used": 75,
+        "resetsAt": "s4a",
+        "totalChatsUsed": 75,
         "url": "s4c"
       },
       "BILLING01": {
@@ -15,8 +15,8 @@
         "currency": "s8d",
         "date": "s8e",
         "id": "BILLING01",
-        "resets_at": "s90",
-        "total_chats_used": 145,
+        "resetsAt": "s90",
+        "totalChatsUsed": 145,
         "url": "s92"
       },
       "BILLING02": {
@@ -24,8 +24,8 @@
         "currency": "sd3",
         "date": "sd4",
         "id": "BILLING02",
-        "resets_at": "sd6",
-        "total_chats_used": 215,
+        "resetsAt": "sd6",
+        "totalChatsUsed": 215,
         "url": "sd8"
       }
     }
@@ -36,8 +36,8 @@
         "amount": 280,
         "currency": "s119",
         "date": "s11a",
-        "resets_at": "s11c",
-        "total_chats_used": 285,
+        "resetsAt": "s11c",
+        "totalChatsUsed": 285,
         "url": "s11e"
       }
     }

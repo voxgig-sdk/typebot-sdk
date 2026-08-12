@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import TypebotControl
-from core.error import TypebotError
-from core.result import TypebotResult
-from core.spec import TypebotSpec
+from typebot_sdk.config import make_config
+from typebot_sdk.features import _make_feature
+from typebot_sdk.core.control import TypebotControl
+from typebot_sdk.core.error import TypebotError
+from typebot_sdk.core.result import TypebotResult
+from typebot_sdk.core.spec import TypebotSpec
 
 
 # True when this SDK was generated with the named feature.

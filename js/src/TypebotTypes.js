@@ -8,9 +8,9 @@
 
 /**
  * @typedef {Object} Analytics
- * @property {number} total_completed
- * @property {number} total_start
- * @property {number} total_view
+ * @property {number} totalCompleted
+ * @property {number} totalStarts
+ * @property {number} totalViews
  */
 
 /**
@@ -24,8 +24,8 @@
  * @property {string} currency
  * @property {*} date
  * @property {string} id
- * @property {string} resets_at
- * @property {number} total_chats_used
+ * @property {string} resetsAt
+ * @property {number} totalChatsUsed
  * @property {string} url
  */
 
@@ -35,8 +35,8 @@
  * @property {string} [currency]
  * @property {*} [date]
  * @property {string} id
- * @property {string} [resets_at]
- * @property {number} [total_chats_used]
+ * @property {string} [resetsAt]
+ * @property {number} [totalChatsUsed]
  * @property {string} [url]
  */
 
@@ -46,21 +46,21 @@
  * @property {string} [currency]
  * @property {*} [date]
  * @property {string} [id]
- * @property {string} [resets_at]
- * @property {number} [total_chats_used]
+ * @property {string} [resetsAt]
+ * @property {number} [totalChatsUsed]
  * @property {string} [url]
  */
 
 /**
  * @typedef {Object} Folder
- * @property {string} created_at
+ * @property {string} createdAt
  * @property {Object} folder
- * @property {string} [folder_name]
+ * @property {string} [folderName]
  * @property {string} id
  * @property {string} name
- * @property {string} parent_folder_id
- * @property {string} updated_at
- * @property {string} workspace_id
+ * @property {*} parentFolderId
+ * @property {string} updatedAt
+ * @property {string} workspaceId
  */
 
 /**
@@ -70,38 +70,38 @@
 
 /**
  * @typedef {Object} FolderListMatch
- * @property {string} [created_at]
+ * @property {string} [createdAt]
  * @property {Object} [folder]
- * @property {string} [folder_name]
+ * @property {string} [folderName]
  * @property {string} [id]
  * @property {string} [name]
- * @property {string} [parent_folder_id]
- * @property {string} [updated_at]
- * @property {string} [workspace_id]
+ * @property {*} [parentFolderId]
+ * @property {string} [updatedAt]
+ * @property {string} [workspaceId]
  */
 
 /**
  * @typedef {Object} FolderCreateData
- * @property {string} created_at
+ * @property {string} createdAt
  * @property {Object} folder
- * @property {string} [folder_name]
+ * @property {string} [folderName]
  * @property {string} id
  * @property {string} name
- * @property {string} parent_folder_id
- * @property {string} updated_at
- * @property {string} workspace_id
+ * @property {*} parentFolderId
+ * @property {string} updatedAt
+ * @property {string} workspaceId
  */
 
 /**
  * @typedef {Object} FolderUpdateData
  * @property {string} id
- * @property {string} [created_at]
+ * @property {string} [createdAt]
  * @property {Object} [folder]
- * @property {string} [folder_name]
+ * @property {string} [folderName]
  * @property {string} [name]
- * @property {string} [parent_folder_id]
- * @property {string} [updated_at]
- * @property {string} [workspace_id]
+ * @property {*} [parentFolderId]
+ * @property {string} [updatedAt]
+ * @property {string} [workspaceId]
  */
 
 /**
@@ -111,20 +111,20 @@
 
 /**
  * @typedef {Object} Result
- * @property {Array} answer
+ * @property {Array} answers
  * @property {*} context
- * @property {string} created_at
+ * @property {string} createdAt
  * @property {string} description
- * @property {*} detail
- * @property {boolean} has_started
+ * @property {*} details
+ * @property {*} hasStarted
  * @property {string} id
- * @property {boolean} is_archived
- * @property {boolean} is_completed
- * @property {string} last_chat_session_id
- * @property {string} result_id
+ * @property {*} isArchived
+ * @property {boolean} isCompleted
+ * @property {*} lastChatSessionId
+ * @property {string} resultId
  * @property {string} status
- * @property {string} typebot_id
- * @property {Array} variable
+ * @property {string} typebotId
+ * @property {Array} variables
  */
 
 /**
@@ -145,39 +145,38 @@
 
 /**
  * @typedef {Object} Typebot
- * @property {string} access_right
- * @property {string} created_at
- * @property {string} current_user_mode
- * @property {*} custom_domain
- * @property {Array} edge
- * @property {boolean} [enable_safety_flag]
- * @property {Array} event
- * @property {string} folder_id
- * @property {string} [from_template]
- * @property {Array} group
+ * @property {string} accessRight
+ * @property {string} createdAt
+ * @property {*} customDomain
+ * @property {Array} edges
+ * @property {boolean} [enableSafetyFlags]
+ * @property {Array} events
+ * @property {*} folderId
+ * @property {string} [fromTemplate]
+ * @property {Array} groups
  * @property {*} icon
  * @property {string} id
- * @property {boolean} is_archived
- * @property {boolean} is_closed
+ * @property {boolean} isArchived
+ * @property {boolean} isClosed
  * @property {*} message
  * @property {string} name
  * @property {boolean} [overwrite]
- * @property {string} public_id
- * @property {*} published_typebot
- * @property {string} [published_typebot_id]
- * @property {*} results_table_preference
- * @property {*} risk_level
- * @property {string} selected_theme_template_id
- * @property {Object} setting
- * @property {string} space_id
+ * @property {*} publicId
+ * @property {*} publishedTypebot
+ * @property {string} [publishedTypebotId]
+ * @property {*} resultsTablePreferences
+ * @property {*} riskLevel
+ * @property {*} selectedThemeTemplateId
+ * @property {Object} settings
+ * @property {*} spaceId
  * @property {Object} theme
- * @property {*} typebot
- * @property {string} updated_at
- * @property {Array} variable
+ * @property {Object} typebot
+ * @property {string} updatedAt
+ * @property {Array} variables
  * @property {*} [version]
- * @property {Array} [warning]
- * @property {string} whats_app_credentials_id
- * @property {string} workspace_id
+ * @property {Array} [warnings]
+ * @property {*} whatsAppCredentialsId
+ * @property {string} workspaceId
  */
 
 /**
@@ -187,113 +186,110 @@
 
 /**
  * @typedef {Object} TypebotListMatch
- * @property {string} [access_right]
- * @property {string} [created_at]
- * @property {string} [current_user_mode]
- * @property {*} [custom_domain]
- * @property {Array} [edge]
- * @property {boolean} [enable_safety_flag]
- * @property {Array} [event]
- * @property {string} [folder_id]
- * @property {string} [from_template]
- * @property {Array} [group]
+ * @property {string} [accessRight]
+ * @property {string} [createdAt]
+ * @property {*} [customDomain]
+ * @property {Array} [edges]
+ * @property {boolean} [enableSafetyFlags]
+ * @property {Array} [events]
+ * @property {*} [folderId]
+ * @property {string} [fromTemplate]
+ * @property {Array} [groups]
  * @property {*} [icon]
  * @property {string} [id]
- * @property {boolean} [is_archived]
- * @property {boolean} [is_closed]
+ * @property {boolean} [isArchived]
+ * @property {boolean} [isClosed]
  * @property {*} [message]
  * @property {string} [name]
  * @property {boolean} [overwrite]
- * @property {string} [public_id]
- * @property {*} [published_typebot]
- * @property {string} [published_typebot_id]
- * @property {*} [results_table_preference]
- * @property {*} [risk_level]
- * @property {string} [selected_theme_template_id]
- * @property {Object} [setting]
- * @property {string} [space_id]
+ * @property {*} [publicId]
+ * @property {*} [publishedTypebot]
+ * @property {string} [publishedTypebotId]
+ * @property {*} [resultsTablePreferences]
+ * @property {*} [riskLevel]
+ * @property {*} [selectedThemeTemplateId]
+ * @property {Object} [settings]
+ * @property {*} [spaceId]
  * @property {Object} [theme]
- * @property {*} [typebot]
- * @property {string} [updated_at]
- * @property {Array} [variable]
+ * @property {Object} [typebot]
+ * @property {string} [updatedAt]
+ * @property {Array} [variables]
  * @property {*} [version]
- * @property {Array} [warning]
- * @property {string} [whats_app_credentials_id]
- * @property {string} [workspace_id]
+ * @property {Array} [warnings]
+ * @property {*} [whatsAppCredentialsId]
+ * @property {string} [workspaceId]
  */
 
 /**
  * @typedef {Object} TypebotCreateData
- * @property {string} access_right
- * @property {string} created_at
- * @property {string} current_user_mode
- * @property {*} custom_domain
- * @property {Array} edge
- * @property {boolean} [enable_safety_flag]
- * @property {Array} event
- * @property {string} folder_id
- * @property {string} [from_template]
- * @property {Array} group
+ * @property {string} accessRight
+ * @property {string} createdAt
+ * @property {*} customDomain
+ * @property {Array} edges
+ * @property {boolean} [enableSafetyFlags]
+ * @property {Array} events
+ * @property {*} folderId
+ * @property {string} [fromTemplate]
+ * @property {Array} groups
  * @property {*} icon
  * @property {string} id
- * @property {boolean} is_archived
- * @property {boolean} is_closed
+ * @property {boolean} isArchived
+ * @property {boolean} isClosed
  * @property {*} message
  * @property {string} name
  * @property {boolean} [overwrite]
- * @property {string} public_id
- * @property {*} published_typebot
- * @property {string} [published_typebot_id]
- * @property {*} results_table_preference
- * @property {*} risk_level
- * @property {string} selected_theme_template_id
- * @property {Object} setting
- * @property {string} space_id
+ * @property {*} publicId
+ * @property {*} publishedTypebot
+ * @property {string} [publishedTypebotId]
+ * @property {*} resultsTablePreferences
+ * @property {*} riskLevel
+ * @property {*} selectedThemeTemplateId
+ * @property {Object} settings
+ * @property {*} spaceId
  * @property {Object} theme
- * @property {*} typebot
- * @property {string} updated_at
- * @property {Array} variable
+ * @property {Object} typebot
+ * @property {string} updatedAt
+ * @property {Array} variables
  * @property {*} [version]
- * @property {Array} [warning]
- * @property {string} whats_app_credentials_id
- * @property {string} workspace_id
+ * @property {Array} [warnings]
+ * @property {*} whatsAppCredentialsId
+ * @property {string} workspaceId
  */
 
 /**
  * @typedef {Object} TypebotUpdateData
  * @property {string} id
- * @property {string} [access_right]
- * @property {string} [created_at]
- * @property {string} [current_user_mode]
- * @property {*} [custom_domain]
- * @property {Array} [edge]
- * @property {boolean} [enable_safety_flag]
- * @property {Array} [event]
- * @property {string} [folder_id]
- * @property {string} [from_template]
- * @property {Array} [group]
+ * @property {string} [accessRight]
+ * @property {string} [createdAt]
+ * @property {*} [customDomain]
+ * @property {Array} [edges]
+ * @property {boolean} [enableSafetyFlags]
+ * @property {Array} [events]
+ * @property {*} [folderId]
+ * @property {string} [fromTemplate]
+ * @property {Array} [groups]
  * @property {*} [icon]
- * @property {boolean} [is_archived]
- * @property {boolean} [is_closed]
+ * @property {boolean} [isArchived]
+ * @property {boolean} [isClosed]
  * @property {*} [message]
  * @property {string} [name]
  * @property {boolean} [overwrite]
- * @property {string} [public_id]
- * @property {*} [published_typebot]
- * @property {string} [published_typebot_id]
- * @property {*} [results_table_preference]
- * @property {*} [risk_level]
- * @property {string} [selected_theme_template_id]
- * @property {Object} [setting]
- * @property {string} [space_id]
+ * @property {*} [publicId]
+ * @property {*} [publishedTypebot]
+ * @property {string} [publishedTypebotId]
+ * @property {*} [resultsTablePreferences]
+ * @property {*} [riskLevel]
+ * @property {*} [selectedThemeTemplateId]
+ * @property {Object} [settings]
+ * @property {*} [spaceId]
  * @property {Object} [theme]
- * @property {*} [typebot]
- * @property {string} [updated_at]
- * @property {Array} [variable]
+ * @property {Object} [typebot]
+ * @property {string} [updatedAt]
+ * @property {Array} [variables]
  * @property {*} [version]
- * @property {Array} [warning]
- * @property {string} [whats_app_credentials_id]
- * @property {string} [workspace_id]
+ * @property {Array} [warnings]
+ * @property {*} [whatsAppCredentialsId]
+ * @property {string} [workspaceId]
  */
 
 /**
@@ -303,27 +299,27 @@
 
 /**
  * @typedef {Object} Workspace
- * @property {*} chats_hard_limit
- * @property {string} created_at
- * @property {string} current_user_mode
+ * @property {*} chatsHardLimit
+ * @property {string} createdAt
+ * @property {*} customChatsLimit
+ * @property {*} customSeatsLimit
  * @property {*} icon
  * @property {string} id
- * @property {*} inactive_first_email_sent_at
- * @property {*} inactive_second_email_sent_at
- * @property {boolean} is_past_due
- * @property {boolean} is_suspended
- * @property {boolean} is_verified
- * @property {*} last_activity_at
+ * @property {*} inactiveFirstEmailSentAt
+ * @property {*} inactiveSecondEmailSentAt
+ * @property {boolean} isPastDue
+ * @property {boolean} isSuspended
+ * @property {*} isVerified
+ * @property {*} lastActivityAt
  * @property {string} name
  * @property {string} plan
  * @property {string} role
- * @property {*} setting
- * @property {string} stripe_id
- * @property {string} updated_at
+ * @property {*} settings
+ * @property {*} stripeId
+ * @property {string} updatedAt
  * @property {Object} user
- * @property {string} user_id
- * @property {Object} workspace
- * @property {string} workspace_id
+ * @property {string} userId
+ * @property {string} workspaceId
  */
 
 /**
@@ -333,77 +329,77 @@
 
 /**
  * @typedef {Object} WorkspaceListMatch
- * @property {*} [chats_hard_limit]
- * @property {string} [created_at]
- * @property {string} [current_user_mode]
+ * @property {*} [chatsHardLimit]
+ * @property {string} [createdAt]
+ * @property {*} [customChatsLimit]
+ * @property {*} [customSeatsLimit]
  * @property {*} [icon]
  * @property {string} [id]
- * @property {*} [inactive_first_email_sent_at]
- * @property {*} [inactive_second_email_sent_at]
- * @property {boolean} [is_past_due]
- * @property {boolean} [is_suspended]
- * @property {boolean} [is_verified]
- * @property {*} [last_activity_at]
+ * @property {*} [inactiveFirstEmailSentAt]
+ * @property {*} [inactiveSecondEmailSentAt]
+ * @property {boolean} [isPastDue]
+ * @property {boolean} [isSuspended]
+ * @property {*} [isVerified]
+ * @property {*} [lastActivityAt]
  * @property {string} [name]
  * @property {string} [plan]
  * @property {string} [role]
- * @property {*} [setting]
- * @property {string} [stripe_id]
- * @property {string} [updated_at]
+ * @property {*} [settings]
+ * @property {*} [stripeId]
+ * @property {string} [updatedAt]
  * @property {Object} [user]
- * @property {string} [user_id]
- * @property {Object} [workspace]
- * @property {string} [workspace_id]
+ * @property {string} [userId]
+ * @property {string} [workspaceId]
  */
 
 /**
  * @typedef {Object} WorkspaceCreateData
- * @property {*} chats_hard_limit
- * @property {string} created_at
- * @property {string} current_user_mode
+ * @property {*} chatsHardLimit
+ * @property {string} createdAt
+ * @property {*} customChatsLimit
+ * @property {*} customSeatsLimit
  * @property {*} icon
  * @property {string} id
- * @property {*} inactive_first_email_sent_at
- * @property {*} inactive_second_email_sent_at
- * @property {boolean} is_past_due
- * @property {boolean} is_suspended
- * @property {boolean} is_verified
- * @property {*} last_activity_at
+ * @property {*} inactiveFirstEmailSentAt
+ * @property {*} inactiveSecondEmailSentAt
+ * @property {boolean} isPastDue
+ * @property {boolean} isSuspended
+ * @property {*} isVerified
+ * @property {*} lastActivityAt
  * @property {string} name
  * @property {string} plan
  * @property {string} role
- * @property {*} setting
- * @property {string} stripe_id
- * @property {string} updated_at
+ * @property {*} settings
+ * @property {*} stripeId
+ * @property {string} updatedAt
  * @property {Object} user
- * @property {string} user_id
- * @property {Object} workspace
- * @property {string} workspace_id
+ * @property {string} userId
+ * @property {string} workspaceId
  */
 
 /**
  * @typedef {Object} WorkspaceUpdateData
  * @property {string} id
- * @property {*} [chats_hard_limit]
- * @property {string} [created_at]
- * @property {string} [current_user_mode]
+ * @property {*} [chatsHardLimit]
+ * @property {string} [createdAt]
+ * @property {*} [customChatsLimit]
+ * @property {*} [customSeatsLimit]
  * @property {*} [icon]
- * @property {*} [inactive_first_email_sent_at]
- * @property {*} [inactive_second_email_sent_at]
- * @property {boolean} [is_past_due]
- * @property {boolean} [is_suspended]
- * @property {boolean} [is_verified]
- * @property {*} [last_activity_at]
+ * @property {*} [inactiveFirstEmailSentAt]
+ * @property {*} [inactiveSecondEmailSentAt]
+ * @property {boolean} [isPastDue]
+ * @property {boolean} [isSuspended]
+ * @property {*} [isVerified]
+ * @property {*} [lastActivityAt]
  * @property {string} [name]
  * @property {string} [plan]
  * @property {string} [role]
- * @property {*} [setting]
- * @property {string} [stripe_id]
- * @property {string} [updated_at]
+ * @property {*} [settings]
+ * @property {*} [stripeId]
+ * @property {string} [updatedAt]
  * @property {Object} [user]
- * @property {string} [user_id]
- * @property {Object} [workspace]
- * @property {string} [workspace_id]
+ * @property {string} [userId]
+ * @property {string} [workspaceId]
  */
 
 /**

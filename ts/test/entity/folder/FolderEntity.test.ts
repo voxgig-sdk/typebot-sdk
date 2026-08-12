@@ -78,7 +78,7 @@ describe('FolderEntity', async () => {
     const folder_ref01_data_up0: any = {}
     folder_ref01_data_up0.id = folder_ref01_data.id
 
-    const folder_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-folder_ref01_' + setup.now }
+    const folder_ref01_markdef_up0 = { name: 'createdAt', value: 'Mark01-folder_ref01_' + setup.now }
     ;(folder_ref01_data_up0 as any)[folder_ref01_markdef_up0.name] = folder_ref01_markdef_up0.value
 
     const folder_ref01_resdata_up0 = await folder_ref01_ent.update(folder_ref01_data_up0)

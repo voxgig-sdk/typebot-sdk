@@ -78,7 +78,7 @@ describe('WorkspaceEntity', async () => {
     const workspace_ref01_data_up0: any = {}
     workspace_ref01_data_up0.id = workspace_ref01_data.id
 
-    const workspace_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-workspace_ref01_' + setup.now }
+    const workspace_ref01_markdef_up0 = { name: 'createdAt', value: 'Mark01-workspace_ref01_' + setup.now }
     ;(workspace_ref01_data_up0 as any)[workspace_ref01_markdef_up0.name] = workspace_ref01_markdef_up0.value
 
     const workspace_ref01_resdata_up0 = await workspace_ref01_ent.update(workspace_ref01_data_up0)

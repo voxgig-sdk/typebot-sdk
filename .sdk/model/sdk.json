@@ -36,19 +36,19 @@
           "fields": [
             {
               "active": true,
-              "name": "total_completed",
+              "name": "totalCompleted",
               "req": true,
               "type": "`$NUMBER`"
             },
             {
               "active": true,
-              "name": "total_start",
+              "name": "totalStarts",
               "req": true,
               "type": "`$NUMBER`"
             },
             {
               "active": true,
-              "name": "total_view",
+              "name": "totalViews",
               "req": true,
               "type": "`$NUMBER`"
             }
@@ -162,13 +162,13 @@
             },
             {
               "active": true,
-              "name": "resets_at",
+              "name": "resetsAt",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "total_chats_used",
+              "name": "totalChatsUsed",
               "req": true,
               "type": "`$NUMBER`"
             },
@@ -274,7 +274,7 @@
           "fields": [
             {
               "active": true,
-              "name": "created_at",
+              "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
             },
@@ -286,7 +286,7 @@
             },
             {
               "active": true,
-              "name": "folder_name",
+              "name": "folderName",
               "req": false,
               "type": "`$STRING`"
             },
@@ -310,7 +310,7 @@
             },
             {
               "active": true,
-              "name": "parent_folder_id",
+              "name": "parentFolderId",
               "op": {
                 "create": {
                   "req": false,
@@ -318,17 +318,17 @@
                 }
               },
               "req": true,
-              "type": "`$STRING`"
+              "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "updated_at",
+              "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "workspace_id",
+              "name": "workspaceId",
               "req": true,
               "type": "`$STRING`"
             }
@@ -557,7 +557,7 @@
           "fields": [
             {
               "active": true,
-              "name": "answer",
+              "name": "answers",
               "req": true,
               "type": "`$ARRAY`"
             },
@@ -569,7 +569,7 @@
             },
             {
               "active": true,
-              "name": "created_at",
+              "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
             },
@@ -581,15 +581,15 @@
             },
             {
               "active": true,
-              "name": "detail",
+              "name": "details",
               "req": true,
               "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "has_started",
+              "name": "hasStarted",
               "req": true,
-              "type": "`$BOOLEAN`"
+              "type": "`$ANY`"
             },
             {
               "active": true,
@@ -599,25 +599,25 @@
             },
             {
               "active": true,
-              "name": "is_archived",
+              "name": "isArchived",
+              "req": true,
+              "type": "`$ANY`"
+            },
+            {
+              "active": true,
+              "name": "isCompleted",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "is_completed",
+              "name": "lastChatSessionId",
               "req": true,
-              "type": "`$BOOLEAN`"
+              "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "last_chat_session_id",
-              "req": true,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "result_id",
+              "name": "resultId",
               "req": true,
               "type": "`$STRING`"
             },
@@ -629,13 +629,13 @@
             },
             {
               "active": true,
-              "name": "typebot_id",
+              "name": "typebotId",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "variable",
+              "name": "variables",
               "req": true,
               "type": "`$ARRAY`"
             }
@@ -893,61 +893,55 @@
           "fields": [
             {
               "active": true,
-              "name": "access_right",
+              "name": "accessRight",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "created_at",
+              "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "current_user_mode",
-              "req": true,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "custom_domain",
+              "name": "customDomain",
               "req": true,
               "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "edge",
+              "name": "edges",
               "req": true,
               "type": "`$ARRAY`"
             },
             {
               "active": true,
-              "name": "enable_safety_flag",
+              "name": "enableSafetyFlags",
               "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "event",
+              "name": "events",
               "req": true,
               "type": "`$ARRAY`"
             },
             {
               "active": true,
-              "name": "folder_id",
+              "name": "folderId",
               "req": true,
-              "type": "`$STRING`"
+              "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "from_template",
+              "name": "fromTemplate",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "group",
+              "name": "groups",
               "req": true,
               "type": "`$ARRAY`"
             },
@@ -965,13 +959,13 @@
             },
             {
               "active": true,
-              "name": "is_archived",
+              "name": "isArchived",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "is_closed",
+              "name": "isClosed",
               "req": true,
               "type": "`$BOOLEAN`"
             },
@@ -995,51 +989,51 @@
             },
             {
               "active": true,
-              "name": "public_id",
-              "req": true,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "published_typebot",
+              "name": "publicId",
               "req": true,
               "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "published_typebot_id",
+              "name": "publishedTypebot",
+              "req": true,
+              "type": "`$ANY`"
+            },
+            {
+              "active": true,
+              "name": "publishedTypebotId",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "results_table_preference",
+              "name": "resultsTablePreferences",
               "req": true,
               "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "risk_level",
+              "name": "riskLevel",
               "req": true,
               "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "selected_theme_template_id",
+              "name": "selectedThemeTemplateId",
               "req": true,
-              "type": "`$STRING`"
+              "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "setting",
+              "name": "settings",
               "req": true,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
-              "name": "space_id",
+              "name": "spaceId",
               "req": true,
-              "type": "`$STRING`"
+              "type": "`$ANY`"
             },
             {
               "active": true,
@@ -1051,17 +1045,17 @@
               "active": true,
               "name": "typebot",
               "req": true,
-              "type": "`$ANY`"
+              "type": "`$OBJECT`"
             },
             {
               "active": true,
-              "name": "updated_at",
+              "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "variable",
+              "name": "variables",
               "req": true,
               "type": "`$ARRAY`"
             },
@@ -1083,19 +1077,19 @@
             },
             {
               "active": true,
-              "name": "warning",
+              "name": "warnings",
               "req": false,
               "type": "`$ARRAY`"
             },
             {
               "active": true,
-              "name": "whats_app_credentials_id",
+              "name": "whatsAppCredentialsId",
               "req": true,
-              "type": "`$STRING`"
+              "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "workspace_id",
+              "name": "workspaceId",
               "req": true,
               "type": "`$STRING`"
             }
@@ -1473,21 +1467,27 @@
           "fields": [
             {
               "active": true,
-              "name": "chats_hard_limit",
+              "name": "chatsHardLimit",
               "req": true,
               "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "created_at",
+              "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "current_user_mode",
+              "name": "customChatsLimit",
               "req": true,
-              "type": "`$STRING`"
+              "type": "`$ANY`"
+            },
+            {
+              "active": true,
+              "name": "customSeatsLimit",
+              "req": true,
+              "type": "`$ANY`"
             },
             {
               "active": true,
@@ -1513,37 +1513,37 @@
             },
             {
               "active": true,
-              "name": "inactive_first_email_sent_at",
+              "name": "inactiveFirstEmailSentAt",
               "req": true,
               "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "inactive_second_email_sent_at",
+              "name": "inactiveSecondEmailSentAt",
               "req": true,
               "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "is_past_due",
+              "name": "isPastDue",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "is_suspended",
+              "name": "isSuspended",
               "req": true,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "is_verified",
+              "name": "isVerified",
               "req": true,
-              "type": "`$BOOLEAN`"
+              "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "last_activity_at",
+              "name": "lastActivityAt",
               "req": true,
               "type": "`$ANY`"
             },
@@ -1573,19 +1573,19 @@
             },
             {
               "active": true,
-              "name": "setting",
+              "name": "settings",
               "req": true,
               "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "stripe_id",
+              "name": "stripeId",
               "req": true,
-              "type": "`$STRING`"
+              "type": "`$ANY`"
             },
             {
               "active": true,
-              "name": "updated_at",
+              "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
             },
@@ -1597,19 +1597,13 @@
             },
             {
               "active": true,
-              "name": "user_id",
+              "name": "userId",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "workspace",
-              "req": true,
-              "type": "`$OBJECT`"
-            },
-            {
-              "active": true,
-              "name": "workspace_id",
+              "name": "workspaceId",
               "req": true,
               "type": "`$STRING`"
             }
@@ -2046,7 +2040,7 @@
                 "ref": "folder_ref01",
                 "srcdatavar": "folder_ref01_data",
                 "suffix": "_up0",
-                "textfield": "created_at"
+                "textfield": "createdAt"
               },
               "match": {},
               "op": "update",
@@ -2210,7 +2204,7 @@
                 "ref": "typebot_ref01",
                 "srcdatavar": "typebot_ref01_data",
                 "suffix": "_up0",
-                "textfield": "access_right"
+                "textfield": "accessRight"
               },
               "match": {},
               "op": "update",
@@ -2322,7 +2316,7 @@
                 "ref": "workspace_ref01",
                 "srcdatavar": "workspace_ref01_data",
                 "suffix": "_up0",
-                "textfield": "created_at"
+                "textfield": "createdAt"
               },
               "match": {},
               "op": "update",

@@ -31,7 +31,7 @@ main: kit: flow: BasicWorkspaceFlow:
         ref: "workspace_ref01",
         srcdatavar: "workspace_ref01_data",
         suffix: "_up0",
-        textfield: "created_at"
+        textfield: "createdAt"
       }
 
       op: "update",

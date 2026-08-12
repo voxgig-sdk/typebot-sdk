@@ -10,9 +10,9 @@ import "encoding/json"
 
 // Analytics is the typed data model for the analytics entity.
 type Analytics struct {
-	TotalCompleted float64 `json:"total_completed"`
-	TotalStart float64 `json:"total_start"`
-	TotalView float64 `json:"total_view"`
+	TotalCompleted float64 `json:"totalCompleted"`
+	TotalStarts float64 `json:"totalStarts"`
+	TotalViews float64 `json:"totalViews"`
 }
 
 // AnalyticsLoadMatch is the typed request payload for Analytics.LoadTyped.
@@ -26,8 +26,8 @@ type Billing struct {
 	Currency string `json:"currency"`
 	Date any `json:"date"`
 	Id string `json:"id"`
-	ResetsAt string `json:"resets_at"`
-	TotalChatsUsed float64 `json:"total_chats_used"`
+	ResetsAt string `json:"resetsAt"`
+	TotalChatsUsed float64 `json:"totalChatsUsed"`
 	Url string `json:"url"`
 }
 
@@ -37,8 +37,8 @@ type BillingLoadMatch struct {
 	Currency *string `json:"currency,omitempty"`
 	Date *any `json:"date,omitempty"`
 	Id string `json:"id"`
-	ResetsAt *string `json:"resets_at,omitempty"`
-	TotalChatsUsed *float64 `json:"total_chats_used,omitempty"`
+	ResetsAt *string `json:"resetsAt,omitempty"`
+	TotalChatsUsed *float64 `json:"totalChatsUsed,omitempty"`
 	Url *string `json:"url,omitempty"`
 }
 
@@ -48,21 +48,21 @@ type BillingListMatch struct {
 	Currency *string `json:"currency,omitempty"`
 	Date *any `json:"date,omitempty"`
 	Id *string `json:"id,omitempty"`
-	ResetsAt *string `json:"resets_at,omitempty"`
-	TotalChatsUsed *float64 `json:"total_chats_used,omitempty"`
+	ResetsAt *string `json:"resetsAt,omitempty"`
+	TotalChatsUsed *float64 `json:"totalChatsUsed,omitempty"`
 	Url *string `json:"url,omitempty"`
 }
 
 // Folder is the typed data model for the folder entity.
 type Folder struct {
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"createdAt"`
 	Folder map[string]any `json:"folder"`
-	FolderName *string `json:"folder_name,omitempty"`
+	FolderName *string `json:"folderName,omitempty"`
 	Id string `json:"id"`
 	Name string `json:"name"`
-	ParentFolderId string `json:"parent_folder_id"`
-	UpdatedAt string `json:"updated_at"`
-	WorkspaceId string `json:"workspace_id"`
+	ParentFolderId any `json:"parentFolderId"`
+	UpdatedAt string `json:"updatedAt"`
+	WorkspaceId string `json:"workspaceId"`
 }
 
 // FolderLoadMatch is the typed request payload for Folder.LoadTyped.
@@ -72,38 +72,38 @@ type FolderLoadMatch struct {
 
 // FolderListMatch is the typed request payload for Folder.ListTyped.
 type FolderListMatch struct {
-	CreatedAt *string `json:"created_at,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
 	Folder *map[string]any `json:"folder,omitempty"`
-	FolderName *string `json:"folder_name,omitempty"`
+	FolderName *string `json:"folderName,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
-	ParentFolderId *string `json:"parent_folder_id,omitempty"`
-	UpdatedAt *string `json:"updated_at,omitempty"`
-	WorkspaceId *string `json:"workspace_id,omitempty"`
+	ParentFolderId *any `json:"parentFolderId,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
+	WorkspaceId *string `json:"workspaceId,omitempty"`
 }
 
 // FolderCreateData is the typed request payload for Folder.CreateTyped.
 type FolderCreateData struct {
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"createdAt"`
 	Folder map[string]any `json:"folder"`
-	FolderName *string `json:"folder_name,omitempty"`
+	FolderName *string `json:"folderName,omitempty"`
 	Id string `json:"id"`
 	Name string `json:"name"`
-	ParentFolderId string `json:"parent_folder_id"`
-	UpdatedAt string `json:"updated_at"`
-	WorkspaceId string `json:"workspace_id"`
+	ParentFolderId any `json:"parentFolderId"`
+	UpdatedAt string `json:"updatedAt"`
+	WorkspaceId string `json:"workspaceId"`
 }
 
 // FolderUpdateData is the typed request payload for Folder.UpdateTyped.
 type FolderUpdateData struct {
 	Id string `json:"id"`
-	CreatedAt *string `json:"created_at,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
 	Folder *map[string]any `json:"folder,omitempty"`
-	FolderName *string `json:"folder_name,omitempty"`
+	FolderName *string `json:"folderName,omitempty"`
 	Name *string `json:"name,omitempty"`
-	ParentFolderId *string `json:"parent_folder_id,omitempty"`
-	UpdatedAt *string `json:"updated_at,omitempty"`
-	WorkspaceId *string `json:"workspace_id,omitempty"`
+	ParentFolderId *any `json:"parentFolderId,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
+	WorkspaceId *string `json:"workspaceId,omitempty"`
 }
 
 // FolderRemoveMatch is the typed request payload for Folder.RemoveTyped.
@@ -113,20 +113,20 @@ type FolderRemoveMatch struct {
 
 // Result is the typed data model for the result entity.
 type Result struct {
-	Answer []any `json:"answer"`
+	Answers []any `json:"answers"`
 	Context any `json:"context"`
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"createdAt"`
 	Description string `json:"description"`
-	Detail any `json:"detail"`
-	HasStarted bool `json:"has_started"`
+	Details any `json:"details"`
+	HasStarted any `json:"hasStarted"`
 	Id string `json:"id"`
-	IsArchived bool `json:"is_archived"`
-	IsCompleted bool `json:"is_completed"`
-	LastChatSessionId string `json:"last_chat_session_id"`
-	ResultId string `json:"result_id"`
+	IsArchived any `json:"isArchived"`
+	IsCompleted bool `json:"isCompleted"`
+	LastChatSessionId any `json:"lastChatSessionId"`
+	ResultId string `json:"resultId"`
 	Status string `json:"status"`
-	TypebotId string `json:"typebot_id"`
-	Variable []any `json:"variable"`
+	TypebotId string `json:"typebotId"`
+	Variables []any `json:"variables"`
 }
 
 // ResultLoadMatch is the typed request payload for Result.LoadTyped.
@@ -147,39 +147,38 @@ type ResultRemoveMatch struct {
 
 // Typebot is the typed data model for the typebot entity.
 type Typebot struct {
-	AccessRight string `json:"access_right"`
-	CreatedAt string `json:"created_at"`
-	CurrentUserMode string `json:"current_user_mode"`
-	CustomDomain any `json:"custom_domain"`
-	Edge []any `json:"edge"`
-	EnableSafetyFlag *bool `json:"enable_safety_flag,omitempty"`
-	Event []any `json:"event"`
-	FolderId string `json:"folder_id"`
-	FromTemplate *string `json:"from_template,omitempty"`
-	Group []any `json:"group"`
+	AccessRight string `json:"accessRight"`
+	CreatedAt string `json:"createdAt"`
+	CustomDomain any `json:"customDomain"`
+	Edges []any `json:"edges"`
+	EnableSafetyFlags *bool `json:"enableSafetyFlags,omitempty"`
+	Events []any `json:"events"`
+	FolderId any `json:"folderId"`
+	FromTemplate *string `json:"fromTemplate,omitempty"`
+	Groups []any `json:"groups"`
 	Icon any `json:"icon"`
 	Id string `json:"id"`
-	IsArchived bool `json:"is_archived"`
-	IsClosed bool `json:"is_closed"`
+	IsArchived bool `json:"isArchived"`
+	IsClosed bool `json:"isClosed"`
 	Message any `json:"message"`
 	Name string `json:"name"`
 	Overwrite *bool `json:"overwrite,omitempty"`
-	PublicId string `json:"public_id"`
-	PublishedTypebot any `json:"published_typebot"`
-	PublishedTypebotId *string `json:"published_typebot_id,omitempty"`
-	ResultsTablePreference any `json:"results_table_preference"`
-	RiskLevel any `json:"risk_level"`
-	SelectedThemeTemplateId string `json:"selected_theme_template_id"`
-	Setting map[string]any `json:"setting"`
-	SpaceId string `json:"space_id"`
+	PublicId any `json:"publicId"`
+	PublishedTypebot any `json:"publishedTypebot"`
+	PublishedTypebotId *string `json:"publishedTypebotId,omitempty"`
+	ResultsTablePreferences any `json:"resultsTablePreferences"`
+	RiskLevel any `json:"riskLevel"`
+	SelectedThemeTemplateId any `json:"selectedThemeTemplateId"`
+	Settings map[string]any `json:"settings"`
+	SpaceId any `json:"spaceId"`
 	Theme map[string]any `json:"theme"`
-	Typebot any `json:"typebot"`
-	UpdatedAt string `json:"updated_at"`
-	Variable []any `json:"variable"`
+	Typebot map[string]any `json:"typebot"`
+	UpdatedAt string `json:"updatedAt"`
+	Variables []any `json:"variables"`
 	Version *any `json:"version,omitempty"`
-	Warning *[]any `json:"warning,omitempty"`
-	WhatsAppCredentialsId string `json:"whats_app_credentials_id"`
-	WorkspaceId string `json:"workspace_id"`
+	Warnings *[]any `json:"warnings,omitempty"`
+	WhatsAppCredentialsId any `json:"whatsAppCredentialsId"`
+	WorkspaceId string `json:"workspaceId"`
 }
 
 // TypebotLoadMatch is the typed request payload for Typebot.LoadTyped.
@@ -189,113 +188,110 @@ type TypebotLoadMatch struct {
 
 // TypebotListMatch is the typed request payload for Typebot.ListTyped.
 type TypebotListMatch struct {
-	AccessRight *string `json:"access_right,omitempty"`
-	CreatedAt *string `json:"created_at,omitempty"`
-	CurrentUserMode *string `json:"current_user_mode,omitempty"`
-	CustomDomain *any `json:"custom_domain,omitempty"`
-	Edge *[]any `json:"edge,omitempty"`
-	EnableSafetyFlag *bool `json:"enable_safety_flag,omitempty"`
-	Event *[]any `json:"event,omitempty"`
-	FolderId *string `json:"folder_id,omitempty"`
-	FromTemplate *string `json:"from_template,omitempty"`
-	Group *[]any `json:"group,omitempty"`
+	AccessRight *string `json:"accessRight,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
+	CustomDomain *any `json:"customDomain,omitempty"`
+	Edges *[]any `json:"edges,omitempty"`
+	EnableSafetyFlags *bool `json:"enableSafetyFlags,omitempty"`
+	Events *[]any `json:"events,omitempty"`
+	FolderId *any `json:"folderId,omitempty"`
+	FromTemplate *string `json:"fromTemplate,omitempty"`
+	Groups *[]any `json:"groups,omitempty"`
 	Icon *any `json:"icon,omitempty"`
 	Id *string `json:"id,omitempty"`
-	IsArchived *bool `json:"is_archived,omitempty"`
-	IsClosed *bool `json:"is_closed,omitempty"`
+	IsArchived *bool `json:"isArchived,omitempty"`
+	IsClosed *bool `json:"isClosed,omitempty"`
 	Message *any `json:"message,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Overwrite *bool `json:"overwrite,omitempty"`
-	PublicId *string `json:"public_id,omitempty"`
-	PublishedTypebot *any `json:"published_typebot,omitempty"`
-	PublishedTypebotId *string `json:"published_typebot_id,omitempty"`
-	ResultsTablePreference *any `json:"results_table_preference,omitempty"`
-	RiskLevel *any `json:"risk_level,omitempty"`
-	SelectedThemeTemplateId *string `json:"selected_theme_template_id,omitempty"`
-	Setting *map[string]any `json:"setting,omitempty"`
-	SpaceId *string `json:"space_id,omitempty"`
+	PublicId *any `json:"publicId,omitempty"`
+	PublishedTypebot *any `json:"publishedTypebot,omitempty"`
+	PublishedTypebotId *string `json:"publishedTypebotId,omitempty"`
+	ResultsTablePreferences *any `json:"resultsTablePreferences,omitempty"`
+	RiskLevel *any `json:"riskLevel,omitempty"`
+	SelectedThemeTemplateId *any `json:"selectedThemeTemplateId,omitempty"`
+	Settings *map[string]any `json:"settings,omitempty"`
+	SpaceId *any `json:"spaceId,omitempty"`
 	Theme *map[string]any `json:"theme,omitempty"`
-	Typebot *any `json:"typebot,omitempty"`
-	UpdatedAt *string `json:"updated_at,omitempty"`
-	Variable *[]any `json:"variable,omitempty"`
+	Typebot *map[string]any `json:"typebot,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
+	Variables *[]any `json:"variables,omitempty"`
 	Version *any `json:"version,omitempty"`
-	Warning *[]any `json:"warning,omitempty"`
-	WhatsAppCredentialsId *string `json:"whats_app_credentials_id,omitempty"`
-	WorkspaceId *string `json:"workspace_id,omitempty"`
+	Warnings *[]any `json:"warnings,omitempty"`
+	WhatsAppCredentialsId *any `json:"whatsAppCredentialsId,omitempty"`
+	WorkspaceId *string `json:"workspaceId,omitempty"`
 }
 
 // TypebotCreateData is the typed request payload for Typebot.CreateTyped.
 type TypebotCreateData struct {
-	AccessRight string `json:"access_right"`
-	CreatedAt string `json:"created_at"`
-	CurrentUserMode string `json:"current_user_mode"`
-	CustomDomain any `json:"custom_domain"`
-	Edge []any `json:"edge"`
-	EnableSafetyFlag *bool `json:"enable_safety_flag,omitempty"`
-	Event []any `json:"event"`
-	FolderId string `json:"folder_id"`
-	FromTemplate *string `json:"from_template,omitempty"`
-	Group []any `json:"group"`
+	AccessRight string `json:"accessRight"`
+	CreatedAt string `json:"createdAt"`
+	CustomDomain any `json:"customDomain"`
+	Edges []any `json:"edges"`
+	EnableSafetyFlags *bool `json:"enableSafetyFlags,omitempty"`
+	Events []any `json:"events"`
+	FolderId any `json:"folderId"`
+	FromTemplate *string `json:"fromTemplate,omitempty"`
+	Groups []any `json:"groups"`
 	Icon any `json:"icon"`
 	Id string `json:"id"`
-	IsArchived bool `json:"is_archived"`
-	IsClosed bool `json:"is_closed"`
+	IsArchived bool `json:"isArchived"`
+	IsClosed bool `json:"isClosed"`
 	Message any `json:"message"`
 	Name string `json:"name"`
 	Overwrite *bool `json:"overwrite,omitempty"`
-	PublicId string `json:"public_id"`
-	PublishedTypebot any `json:"published_typebot"`
-	PublishedTypebotId *string `json:"published_typebot_id,omitempty"`
-	ResultsTablePreference any `json:"results_table_preference"`
-	RiskLevel any `json:"risk_level"`
-	SelectedThemeTemplateId string `json:"selected_theme_template_id"`
-	Setting map[string]any `json:"setting"`
-	SpaceId string `json:"space_id"`
+	PublicId any `json:"publicId"`
+	PublishedTypebot any `json:"publishedTypebot"`
+	PublishedTypebotId *string `json:"publishedTypebotId,omitempty"`
+	ResultsTablePreferences any `json:"resultsTablePreferences"`
+	RiskLevel any `json:"riskLevel"`
+	SelectedThemeTemplateId any `json:"selectedThemeTemplateId"`
+	Settings map[string]any `json:"settings"`
+	SpaceId any `json:"spaceId"`
 	Theme map[string]any `json:"theme"`
-	Typebot any `json:"typebot"`
-	UpdatedAt string `json:"updated_at"`
-	Variable []any `json:"variable"`
+	Typebot map[string]any `json:"typebot"`
+	UpdatedAt string `json:"updatedAt"`
+	Variables []any `json:"variables"`
 	Version *any `json:"version,omitempty"`
-	Warning *[]any `json:"warning,omitempty"`
-	WhatsAppCredentialsId string `json:"whats_app_credentials_id"`
-	WorkspaceId string `json:"workspace_id"`
+	Warnings *[]any `json:"warnings,omitempty"`
+	WhatsAppCredentialsId any `json:"whatsAppCredentialsId"`
+	WorkspaceId string `json:"workspaceId"`
 }
 
 // TypebotUpdateData is the typed request payload for Typebot.UpdateTyped.
 type TypebotUpdateData struct {
 	Id string `json:"id"`
-	AccessRight *string `json:"access_right,omitempty"`
-	CreatedAt *string `json:"created_at,omitempty"`
-	CurrentUserMode *string `json:"current_user_mode,omitempty"`
-	CustomDomain *any `json:"custom_domain,omitempty"`
-	Edge *[]any `json:"edge,omitempty"`
-	EnableSafetyFlag *bool `json:"enable_safety_flag,omitempty"`
-	Event *[]any `json:"event,omitempty"`
-	FolderId *string `json:"folder_id,omitempty"`
-	FromTemplate *string `json:"from_template,omitempty"`
-	Group *[]any `json:"group,omitempty"`
+	AccessRight *string `json:"accessRight,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
+	CustomDomain *any `json:"customDomain,omitempty"`
+	Edges *[]any `json:"edges,omitempty"`
+	EnableSafetyFlags *bool `json:"enableSafetyFlags,omitempty"`
+	Events *[]any `json:"events,omitempty"`
+	FolderId *any `json:"folderId,omitempty"`
+	FromTemplate *string `json:"fromTemplate,omitempty"`
+	Groups *[]any `json:"groups,omitempty"`
 	Icon *any `json:"icon,omitempty"`
-	IsArchived *bool `json:"is_archived,omitempty"`
-	IsClosed *bool `json:"is_closed,omitempty"`
+	IsArchived *bool `json:"isArchived,omitempty"`
+	IsClosed *bool `json:"isClosed,omitempty"`
 	Message *any `json:"message,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Overwrite *bool `json:"overwrite,omitempty"`
-	PublicId *string `json:"public_id,omitempty"`
-	PublishedTypebot *any `json:"published_typebot,omitempty"`
-	PublishedTypebotId *string `json:"published_typebot_id,omitempty"`
-	ResultsTablePreference *any `json:"results_table_preference,omitempty"`
-	RiskLevel *any `json:"risk_level,omitempty"`
-	SelectedThemeTemplateId *string `json:"selected_theme_template_id,omitempty"`
-	Setting *map[string]any `json:"setting,omitempty"`
-	SpaceId *string `json:"space_id,omitempty"`
+	PublicId *any `json:"publicId,omitempty"`
+	PublishedTypebot *any `json:"publishedTypebot,omitempty"`
+	PublishedTypebotId *string `json:"publishedTypebotId,omitempty"`
+	ResultsTablePreferences *any `json:"resultsTablePreferences,omitempty"`
+	RiskLevel *any `json:"riskLevel,omitempty"`
+	SelectedThemeTemplateId *any `json:"selectedThemeTemplateId,omitempty"`
+	Settings *map[string]any `json:"settings,omitempty"`
+	SpaceId *any `json:"spaceId,omitempty"`
 	Theme *map[string]any `json:"theme,omitempty"`
-	Typebot *any `json:"typebot,omitempty"`
-	UpdatedAt *string `json:"updated_at,omitempty"`
-	Variable *[]any `json:"variable,omitempty"`
+	Typebot *map[string]any `json:"typebot,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
+	Variables *[]any `json:"variables,omitempty"`
 	Version *any `json:"version,omitempty"`
-	Warning *[]any `json:"warning,omitempty"`
-	WhatsAppCredentialsId *string `json:"whats_app_credentials_id,omitempty"`
-	WorkspaceId *string `json:"workspace_id,omitempty"`
+	Warnings *[]any `json:"warnings,omitempty"`
+	WhatsAppCredentialsId *any `json:"whatsAppCredentialsId,omitempty"`
+	WorkspaceId *string `json:"workspaceId,omitempty"`
 }
 
 // TypebotRemoveMatch is the typed request payload for Typebot.RemoveTyped.
@@ -305,27 +301,27 @@ type TypebotRemoveMatch struct {
 
 // Workspace is the typed data model for the workspace entity.
 type Workspace struct {
-	ChatsHardLimit any `json:"chats_hard_limit"`
-	CreatedAt string `json:"created_at"`
-	CurrentUserMode string `json:"current_user_mode"`
+	ChatsHardLimit any `json:"chatsHardLimit"`
+	CreatedAt string `json:"createdAt"`
+	CustomChatsLimit any `json:"customChatsLimit"`
+	CustomSeatsLimit any `json:"customSeatsLimit"`
 	Icon any `json:"icon"`
 	Id string `json:"id"`
-	InactiveFirstEmailSentAt any `json:"inactive_first_email_sent_at"`
-	InactiveSecondEmailSentAt any `json:"inactive_second_email_sent_at"`
-	IsPastDue bool `json:"is_past_due"`
-	IsSuspended bool `json:"is_suspended"`
-	IsVerified bool `json:"is_verified"`
-	LastActivityAt any `json:"last_activity_at"`
+	InactiveFirstEmailSentAt any `json:"inactiveFirstEmailSentAt"`
+	InactiveSecondEmailSentAt any `json:"inactiveSecondEmailSentAt"`
+	IsPastDue bool `json:"isPastDue"`
+	IsSuspended bool `json:"isSuspended"`
+	IsVerified any `json:"isVerified"`
+	LastActivityAt any `json:"lastActivityAt"`
 	Name string `json:"name"`
 	Plan string `json:"plan"`
 	Role string `json:"role"`
-	Setting any `json:"setting"`
-	StripeId string `json:"stripe_id"`
-	UpdatedAt string `json:"updated_at"`
+	Settings any `json:"settings"`
+	StripeId any `json:"stripeId"`
+	UpdatedAt string `json:"updatedAt"`
 	User map[string]any `json:"user"`
-	UserId string `json:"user_id"`
-	Workspace map[string]any `json:"workspace"`
-	WorkspaceId string `json:"workspace_id"`
+	UserId string `json:"userId"`
+	WorkspaceId string `json:"workspaceId"`
 }
 
 // WorkspaceLoadMatch is the typed request payload for Workspace.LoadTyped.
@@ -335,77 +331,77 @@ type WorkspaceLoadMatch struct {
 
 // WorkspaceListMatch is the typed request payload for Workspace.ListTyped.
 type WorkspaceListMatch struct {
-	ChatsHardLimit *any `json:"chats_hard_limit,omitempty"`
-	CreatedAt *string `json:"created_at,omitempty"`
-	CurrentUserMode *string `json:"current_user_mode,omitempty"`
+	ChatsHardLimit *any `json:"chatsHardLimit,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
+	CustomChatsLimit *any `json:"customChatsLimit,omitempty"`
+	CustomSeatsLimit *any `json:"customSeatsLimit,omitempty"`
 	Icon *any `json:"icon,omitempty"`
 	Id *string `json:"id,omitempty"`
-	InactiveFirstEmailSentAt *any `json:"inactive_first_email_sent_at,omitempty"`
-	InactiveSecondEmailSentAt *any `json:"inactive_second_email_sent_at,omitempty"`
-	IsPastDue *bool `json:"is_past_due,omitempty"`
-	IsSuspended *bool `json:"is_suspended,omitempty"`
-	IsVerified *bool `json:"is_verified,omitempty"`
-	LastActivityAt *any `json:"last_activity_at,omitempty"`
+	InactiveFirstEmailSentAt *any `json:"inactiveFirstEmailSentAt,omitempty"`
+	InactiveSecondEmailSentAt *any `json:"inactiveSecondEmailSentAt,omitempty"`
+	IsPastDue *bool `json:"isPastDue,omitempty"`
+	IsSuspended *bool `json:"isSuspended,omitempty"`
+	IsVerified *any `json:"isVerified,omitempty"`
+	LastActivityAt *any `json:"lastActivityAt,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Plan *string `json:"plan,omitempty"`
 	Role *string `json:"role,omitempty"`
-	Setting *any `json:"setting,omitempty"`
-	StripeId *string `json:"stripe_id,omitempty"`
-	UpdatedAt *string `json:"updated_at,omitempty"`
+	Settings *any `json:"settings,omitempty"`
+	StripeId *any `json:"stripeId,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 	User *map[string]any `json:"user,omitempty"`
-	UserId *string `json:"user_id,omitempty"`
-	Workspace *map[string]any `json:"workspace,omitempty"`
-	WorkspaceId *string `json:"workspace_id,omitempty"`
+	UserId *string `json:"userId,omitempty"`
+	WorkspaceId *string `json:"workspaceId,omitempty"`
 }
 
 // WorkspaceCreateData is the typed request payload for Workspace.CreateTyped.
 type WorkspaceCreateData struct {
-	ChatsHardLimit any `json:"chats_hard_limit"`
-	CreatedAt string `json:"created_at"`
-	CurrentUserMode string `json:"current_user_mode"`
+	ChatsHardLimit any `json:"chatsHardLimit"`
+	CreatedAt string `json:"createdAt"`
+	CustomChatsLimit any `json:"customChatsLimit"`
+	CustomSeatsLimit any `json:"customSeatsLimit"`
 	Icon any `json:"icon"`
 	Id string `json:"id"`
-	InactiveFirstEmailSentAt any `json:"inactive_first_email_sent_at"`
-	InactiveSecondEmailSentAt any `json:"inactive_second_email_sent_at"`
-	IsPastDue bool `json:"is_past_due"`
-	IsSuspended bool `json:"is_suspended"`
-	IsVerified bool `json:"is_verified"`
-	LastActivityAt any `json:"last_activity_at"`
+	InactiveFirstEmailSentAt any `json:"inactiveFirstEmailSentAt"`
+	InactiveSecondEmailSentAt any `json:"inactiveSecondEmailSentAt"`
+	IsPastDue bool `json:"isPastDue"`
+	IsSuspended bool `json:"isSuspended"`
+	IsVerified any `json:"isVerified"`
+	LastActivityAt any `json:"lastActivityAt"`
 	Name string `json:"name"`
 	Plan string `json:"plan"`
 	Role string `json:"role"`
-	Setting any `json:"setting"`
-	StripeId string `json:"stripe_id"`
-	UpdatedAt string `json:"updated_at"`
+	Settings any `json:"settings"`
+	StripeId any `json:"stripeId"`
+	UpdatedAt string `json:"updatedAt"`
 	User map[string]any `json:"user"`
-	UserId string `json:"user_id"`
-	Workspace map[string]any `json:"workspace"`
-	WorkspaceId string `json:"workspace_id"`
+	UserId string `json:"userId"`
+	WorkspaceId string `json:"workspaceId"`
 }
 
 // WorkspaceUpdateData is the typed request payload for Workspace.UpdateTyped.
 type WorkspaceUpdateData struct {
 	Id string `json:"id"`
-	ChatsHardLimit *any `json:"chats_hard_limit,omitempty"`
-	CreatedAt *string `json:"created_at,omitempty"`
-	CurrentUserMode *string `json:"current_user_mode,omitempty"`
+	ChatsHardLimit *any `json:"chatsHardLimit,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
+	CustomChatsLimit *any `json:"customChatsLimit,omitempty"`
+	CustomSeatsLimit *any `json:"customSeatsLimit,omitempty"`
 	Icon *any `json:"icon,omitempty"`
-	InactiveFirstEmailSentAt *any `json:"inactive_first_email_sent_at,omitempty"`
-	InactiveSecondEmailSentAt *any `json:"inactive_second_email_sent_at,omitempty"`
-	IsPastDue *bool `json:"is_past_due,omitempty"`
-	IsSuspended *bool `json:"is_suspended,omitempty"`
-	IsVerified *bool `json:"is_verified,omitempty"`
-	LastActivityAt *any `json:"last_activity_at,omitempty"`
+	InactiveFirstEmailSentAt *any `json:"inactiveFirstEmailSentAt,omitempty"`
+	InactiveSecondEmailSentAt *any `json:"inactiveSecondEmailSentAt,omitempty"`
+	IsPastDue *bool `json:"isPastDue,omitempty"`
+	IsSuspended *bool `json:"isSuspended,omitempty"`
+	IsVerified *any `json:"isVerified,omitempty"`
+	LastActivityAt *any `json:"lastActivityAt,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Plan *string `json:"plan,omitempty"`
 	Role *string `json:"role,omitempty"`
-	Setting *any `json:"setting,omitempty"`
-	StripeId *string `json:"stripe_id,omitempty"`
-	UpdatedAt *string `json:"updated_at,omitempty"`
+	Settings *any `json:"settings,omitempty"`
+	StripeId *any `json:"stripeId,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 	User *map[string]any `json:"user,omitempty"`
-	UserId *string `json:"user_id,omitempty"`
-	Workspace *map[string]any `json:"workspace,omitempty"`
-	WorkspaceId *string `json:"workspace_id,omitempty"`
+	UserId *string `json:"userId,omitempty"`
+	WorkspaceId *string `json:"workspaceId,omitempty"`
 }
 
 // WorkspaceRemoveMatch is the typed request payload for Workspace.RemoveTyped.
