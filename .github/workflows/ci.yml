@@ -33,11 +33,14 @@ name: ci
 # toolchain setup.
 # ---------------------------------------------------------------------------
 
+# This repo's default branch is master, not main. Triggering on main alone
+# meant CI had never run here — no push and no pull request could match it.
+# Both names are listed so the workflow is correct whichever the repo uses.
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   pull_request:
-    branches: [main]
+    branches: [main, master]
 
 permissions:
   contents: read
