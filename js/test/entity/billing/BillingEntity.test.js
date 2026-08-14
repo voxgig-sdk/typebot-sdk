@@ -45,13 +45,13 @@ describe('BillingEntity', async () => {
     const billing_ref01_ent = client.Billing()
     const billing_ref01_match = {}
 
-    const billing_ref01_list = await billing_ref01_ent.list(billing_ref01_match)
+    const billing_ref01_list = (await billing_ref01_ent.list(billing_ref01_match)).map((e) => e.data())
 
 
     // LOAD
     const billing_ref01_match_dt0 = {}
     billing_ref01_match_dt0.id = billing_ref01_data.id
-    const billing_ref01_data_dt0 = await billing_ref01_ent.load(billing_ref01_match_dt0)
+    const billing_ref01_data_dt0 = (await billing_ref01_ent.load(billing_ref01_match_dt0)).data()
     assert(billing_ref01_data_dt0.id === billing_ref01_data.id)
 
 

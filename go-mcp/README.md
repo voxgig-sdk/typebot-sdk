@@ -13,7 +13,7 @@ or **streamable HTTP** (one shared server for several agents).
 make build
 
 # 2. Provide credentials via the environment
-export TYPEBOT_APIKEY=your-api-token
+export TYPEBOT_APIKEY=sk_live_xxx
 
 # 3a. Install into Claude Code over stdio (most common)
 claude mcp add --scope user typebot \
@@ -49,7 +49,7 @@ Tool-call arguments (what an agent sends):
 2. **Set your API key:**
 
    ```sh
-   export TYPEBOT_APIKEY=your-api-token
+   export TYPEBOT_APIKEY=sk_live_xxx
    ```
 
 3. **Install it into Claude Code** (stdio transport):
@@ -70,7 +70,7 @@ Tool-call arguments (what an agent sends):
 Configuration is read from the environment — nothing is written to disk:
 
 ```sh
-export TYPEBOT_APIKEY=your-api-token            # API key
+export TYPEBOT_APIKEY=sk_live_xxx            # API key
 export TYPEBOT_BASE=https://api.example.com  # optional: override the API base URL
 ```
 

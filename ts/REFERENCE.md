@@ -181,6 +181,26 @@ const analytics = client.Analytics()
 | `totalStarts` | `number` | Yes |  |
 | `totalViews` | `number` | Yes |  |
 
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `stat` | `/v1/typebots/{typebotId}/analytics/stats` | `client.Analytics().load({ $action: 'stat', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Analytics record — check the API definition for its shape.
+
+```ts
+const result = await client.Analytics().load({
+  $action: 'stat',
+  /* ...the action's own arguments */
+})
+```
+
 ### Operations
 
 #### `load(match: object, ctrl?: object)`
@@ -236,6 +256,27 @@ const billing = client.Billing()
 | `resetsAt` | `string` | Yes |  |
 | `totalChatsUsed` | `number` | Yes |  |
 | `url` | `string` | Yes |  |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `invoice` | `/v1/billing/invoices` | `client.Billing().list({ $action: 'invoice', ... })` |
+| `usage` | `/v1/billing/usage` | `client.Billing().load({ $action: 'usage', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Billing record — check the API definition for its shape.
+
+```ts
+const result = await client.Billing().list({
+  $action: 'invoice',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 
@@ -421,6 +462,26 @@ const result = client.Result()
 | `typebotId` | `string` | Yes |  |
 | `variables` | `any[]` | Yes |  |
 
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `log` | `/v1/typebots/{typebotId}/results/{resultId}/logs` | `client.Result().list({ $action: 'log', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Result record — check the API definition for its shape.
+
+```ts
+const result = await client.Result().list({
+  $action: 'log',
+  /* ...the action's own arguments */
+})
+```
+
 ### Operations
 
 #### `list(match: object, ctrl?: object)`
@@ -428,7 +489,7 @@ const result = client.Result()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Result().list()
+const results = await client.Result().list({ typebot_id: "example" })
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -554,6 +615,29 @@ const typebot = client.Typebot()
 | `warnings` | - | - | - | - | - |
 | `whatsAppCredentialsId` | - | - | - | - | - |
 | `workspaceId` | - | - | - | - | - |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `import` | `/v1/typebots/import` | `client.Typebot().create({ $action: 'import', ... })` |
+| `publish` | `/v1/typebots/{typebotId}/publish` | `client.Typebot().create({ $action: 'publish', ... })` |
+| `unpublish` | `/v1/typebots/{typebotId}/unpublish` | `client.Typebot().create({ $action: 'unpublish', ... })` |
+| `published_typebot` | `/v1/typebots/{typebotId}/publishedTypebot` | `client.Typebot().load({ $action: 'published_typebot', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Typebot record — check the API definition for its shape.
+
+```ts
+const result = await client.Typebot().create({
+  $action: 'import',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 
@@ -712,6 +796,26 @@ const workspace = client.Workspace()
 | `user` | - | - | - | - | - |
 | `userId` | - | - | - | - | - |
 | `workspaceId` | - | - | - | - | - |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `member` | `/v1/workspaces/{workspaceId}/members` | `client.Workspace().list({ $action: 'member', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Workspace record — check the API definition for its shape.
+
+```ts
+const result = await client.Workspace().list({
+  $action: 'member',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 

@@ -40,7 +40,7 @@ class WorkspaceEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = TypebotConfig::make_config();
+        $cfg = TypebotConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = TypebotSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -83,7 +83,7 @@ class WorkspaceEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.workspace"), "workspace_ref01"));
 
         $workspace_ref01_data_result = $workspace_ref01_ent->create($workspace_ref01_data, null);
-        $workspace_ref01_data = Helpers::to_map($workspace_ref01_data_result);
+        $workspace_ref01_data = Helpers::to_map(is_object($workspace_ref01_data_result) && method_exists($workspace_ref01_data_result, 'data_get') ? $workspace_ref01_data_result->data_get() : $workspace_ref01_data_result);
         $this->assertNotNull($workspace_ref01_data);
         $this->assertNotNull($workspace_ref01_data["id"]);
 
@@ -108,7 +108,7 @@ class WorkspaceEntityTest extends TestCase
         $workspace_ref01_data_up0_up[$workspace_ref01_markdef_up0_name] = $workspace_ref01_markdef_up0_value;
 
         $workspace_ref01_resdata_up0_result = $workspace_ref01_ent->update($workspace_ref01_data_up0_up, null);
-        $workspace_ref01_resdata_up0 = Helpers::to_map($workspace_ref01_resdata_up0_result);
+        $workspace_ref01_resdata_up0 = Helpers::to_map(is_object($workspace_ref01_resdata_up0_result) && method_exists($workspace_ref01_resdata_up0_result, 'data_get') ? $workspace_ref01_resdata_up0_result->data_get() : $workspace_ref01_resdata_up0_result);
         $this->assertNotNull($workspace_ref01_resdata_up0);
         $this->assertEquals($workspace_ref01_resdata_up0["id"], $workspace_ref01_data_up0_up["id"]);
         $this->assertEquals($workspace_ref01_resdata_up0[$workspace_ref01_markdef_up0_name], $workspace_ref01_markdef_up0_value);
@@ -118,7 +118,7 @@ class WorkspaceEntityTest extends TestCase
             "id" => $workspace_ref01_data["id"],
         ];
         $workspace_ref01_data_dt0_loaded = $workspace_ref01_ent->load($workspace_ref01_match_dt0, null);
-        $workspace_ref01_data_dt0_load_result = Helpers::to_map($workspace_ref01_data_dt0_loaded);
+        $workspace_ref01_data_dt0_load_result = Helpers::to_map(is_object($workspace_ref01_data_dt0_loaded) && method_exists($workspace_ref01_data_dt0_loaded, 'data_get') ? $workspace_ref01_data_dt0_loaded->data_get() : $workspace_ref01_data_dt0_loaded);
         $this->assertNotNull($workspace_ref01_data_dt0_load_result);
         $this->assertEquals($workspace_ref01_data_dt0_load_result["id"], $workspace_ref01_data["id"]);
 

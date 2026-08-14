@@ -39,7 +39,7 @@ describe("BillingEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -97,7 +97,7 @@ describe("BillingEntity", function()
     }
     local billing_ref01_data_dt0_loaded, err = billing_ref01_ent:load(billing_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local billing_ref01_data_dt0_load_result = helpers.to_map(billing_ref01_data_dt0_loaded)
+    local billing_ref01_data_dt0_load_result = helpers.to_map(type(billing_ref01_data_dt0_loaded) == 'table' and billing_ref01_data_dt0_loaded.data_get and billing_ref01_data_dt0_loaded:data_get() or billing_ref01_data_dt0_loaded)
     assert.is_not_nil(billing_ref01_data_dt0_load_result)
     assert.are.equal(billing_ref01_data_dt0_load_result["id"], billing_ref01_data["id"])
 

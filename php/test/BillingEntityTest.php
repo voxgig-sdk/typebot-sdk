@@ -40,7 +40,7 @@ class BillingEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = TypebotConfig::make_config();
+        $cfg = TypebotConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = TypebotSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -97,7 +97,7 @@ class BillingEntityTest extends TestCase
             "id" => $billing_ref01_data["id"],
         ];
         $billing_ref01_data_dt0_loaded = $billing_ref01_ent->load($billing_ref01_match_dt0, null);
-        $billing_ref01_data_dt0_load_result = Helpers::to_map($billing_ref01_data_dt0_loaded);
+        $billing_ref01_data_dt0_load_result = Helpers::to_map(is_object($billing_ref01_data_dt0_loaded) && method_exists($billing_ref01_data_dt0_loaded, 'data_get') ? $billing_ref01_data_dt0_loaded->data_get() : $billing_ref01_data_dt0_loaded);
         $this->assertNotNull($billing_ref01_data_dt0_load_result);
         $this->assertEquals($billing_ref01_data_dt0_load_result["id"], $billing_ref01_data["id"]);
 

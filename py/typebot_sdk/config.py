@@ -1,7 +1,30 @@
 # Typebot SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "Typebot",
@@ -95,6 +118,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}/analytics/stats",
                 "parts": [
@@ -207,6 +231,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/billing/invoices",
                 "parts": [
@@ -247,6 +272,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/billing/usage",
                 "parts": [
@@ -354,6 +380,7 @@ def make_config():
               {
                 "active": True,
                 "args": {},
+                "kind": "http",
                 "method": "POST",
                 "orig": "/v1/folders",
                 "parts": [
@@ -396,6 +423,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/folders",
                 "parts": [
@@ -446,6 +474,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/folders/{folderId}",
                 "parts": [
@@ -492,6 +521,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "DELETE",
                 "orig": "/v1/folders/{folderId}",
                 "parts": [
@@ -537,6 +567,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "PATCH",
                 "orig": "/v1/folders/{folderId}",
                 "parts": [
@@ -668,6 +699,11 @@ def make_config():
             "name": "variables",
             "req": True,
             "type": "`$ARRAY`",
+            "union": {
+              "branches": 2,
+              "count": 1,
+              "depth": 3,
+            },
             "index$": 13,
           },
         ],
@@ -728,6 +764,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}/results",
                 "parts": [
@@ -778,6 +815,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}/results/{resultId}/logs",
                 "parts": [
@@ -838,6 +876,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}/results/{resultId}",
                 "parts": [
@@ -887,6 +926,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "DELETE",
                 "orig": "/v1/typebots/{typebotId}/results",
                 "parts": [
@@ -951,6 +991,11 @@ def make_config():
             "name": "edges",
             "req": True,
             "type": "`$ARRAY`",
+            "union": {
+              "branches": 2,
+              "count": 1,
+              "depth": 3,
+            },
             "index$": 3,
           },
           {
@@ -965,6 +1010,11 @@ def make_config():
             "name": "events",
             "req": True,
             "type": "`$ARRAY`",
+            "union": {
+              "branches": 3,
+              "count": 1,
+              "depth": 1,
+            },
             "index$": 5,
           },
           {
@@ -986,6 +1036,11 @@ def make_config():
             "name": "groups",
             "req": True,
             "type": "`$ARRAY`",
+            "union": {
+              "branches": 19,
+              "count": 31,
+              "depth": 14,
+            },
             "index$": 8,
           },
           {
@@ -1049,6 +1104,11 @@ def make_config():
             "name": "publishedTypebot",
             "req": True,
             "type": "`$ANY`",
+            "union": {
+              "branches": 19,
+              "count": 51,
+              "depth": 20,
+            },
             "index$": 17,
           },
           {
@@ -1098,6 +1158,11 @@ def make_config():
             "name": "theme",
             "req": True,
             "type": "`$OBJECT`",
+            "union": {
+              "branches": 2,
+              "count": 2,
+              "depth": 6,
+            },
             "index$": 24,
           },
           {
@@ -1105,6 +1170,11 @@ def make_config():
             "name": "typebot",
             "req": True,
             "type": "`$OBJECT`",
+            "union": {
+              "branches": 19,
+              "count": 88,
+              "depth": 24,
+            },
             "index$": 25,
           },
           {
@@ -1119,6 +1189,11 @@ def make_config():
             "name": "variables",
             "req": True,
             "type": "`$ARRAY`",
+            "union": {
+              "branches": 2,
+              "count": 1,
+              "depth": 5,
+            },
             "index$": 27,
           },
           {
@@ -1136,6 +1211,11 @@ def make_config():
             },
             "req": False,
             "type": "`$ANY`",
+            "union": {
+              "branches": 2,
+              "count": 1,
+              "depth": 0,
+            },
             "index$": 28,
           },
           {
@@ -1181,6 +1261,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "POST",
                 "orig": "/v1/typebots/{typebotId}/publish",
                 "parts": [
@@ -1221,6 +1302,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "POST",
                 "orig": "/v1/typebots/{typebotId}/unpublish",
                 "parts": [
@@ -1249,6 +1331,7 @@ def make_config():
               {
                 "active": True,
                 "args": {},
+                "kind": "http",
                 "method": "POST",
                 "orig": "/v1/typebots",
                 "parts": [
@@ -1267,6 +1350,7 @@ def make_config():
               {
                 "active": True,
                 "args": {},
+                "kind": "http",
                 "method": "POST",
                 "orig": "/v1/typebots/import",
                 "parts": [
@@ -1314,6 +1398,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots",
                 "parts": [
@@ -1365,6 +1450,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}",
                 "parts": [
@@ -1414,6 +1500,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}/publishedTypebot",
                 "parts": [
@@ -1462,6 +1549,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "DELETE",
                 "orig": "/v1/typebots/{typebotId}",
                 "parts": [
@@ -1507,6 +1595,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "PATCH",
                 "orig": "/v1/typebots/{typebotId}",
                 "parts": [
@@ -1715,6 +1804,7 @@ def make_config():
               {
                 "active": True,
                 "args": {},
+                "kind": "http",
                 "method": "POST",
                 "orig": "/v1/workspaces",
                 "parts": [
@@ -1749,6 +1839,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/workspaces/{workspaceId}/members",
                 "parts": [
@@ -1777,6 +1868,7 @@ def make_config():
               {
                 "active": True,
                 "args": {},
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/workspaces",
                 "parts": [
@@ -1812,6 +1904,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "GET",
                 "orig": "/v1/workspaces/{workspaceId}",
                 "parts": [
@@ -1857,6 +1950,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "DELETE",
                 "orig": "/v1/workspaces/{workspaceId}",
                 "parts": [
@@ -1902,6 +1996,7 @@ def make_config():
                     },
                   ],
                 },
+                "kind": "http",
                 "method": "PATCH",
                 "orig": "/v1/workspaces/{workspaceId}",
                 "parts": [

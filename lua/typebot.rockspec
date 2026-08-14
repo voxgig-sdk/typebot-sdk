@@ -23,6 +23,7 @@ build = {
   modules = {
     ["typebot_sdk"] = "typebot_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

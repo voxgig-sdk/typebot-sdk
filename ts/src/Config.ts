@@ -135,6 +135,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}/analytics/stats",
               "parts": [
@@ -247,6 +248,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/billing/invoices",
               "parts": [
@@ -287,6 +289,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/billing/usage",
               "parts": [
@@ -394,6 +397,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/v1/folders",
               "parts": [
@@ -436,6 +440,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/folders",
               "parts": [
@@ -486,6 +491,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/folders/{folderId}",
               "parts": [
@@ -532,6 +538,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "DELETE",
               "orig": "/v1/folders/{folderId}",
               "parts": [
@@ -577,6 +584,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "PATCH",
               "orig": "/v1/folders/{folderId}",
               "parts": [
@@ -708,6 +716,11 @@ class Config {
           "name": "variables",
           "req": true,
           "type": "`$ARRAY`",
+          "union": {
+            "branches": 2,
+            "count": 1,
+            "depth": 3
+          },
           "index$": 13
         }
       ],
@@ -768,6 +781,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}/results",
               "parts": [
@@ -818,6 +832,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}/results/{resultId}/logs",
               "parts": [
@@ -878,6 +893,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}/results/{resultId}",
               "parts": [
@@ -927,6 +943,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "DELETE",
               "orig": "/v1/typebots/{typebotId}/results",
               "parts": [
@@ -991,6 +1008,11 @@ class Config {
           "name": "edges",
           "req": true,
           "type": "`$ARRAY`",
+          "union": {
+            "branches": 2,
+            "count": 1,
+            "depth": 3
+          },
           "index$": 3
         },
         {
@@ -1005,6 +1027,11 @@ class Config {
           "name": "events",
           "req": true,
           "type": "`$ARRAY`",
+          "union": {
+            "branches": 3,
+            "count": 1,
+            "depth": 1
+          },
           "index$": 5
         },
         {
@@ -1026,6 +1053,11 @@ class Config {
           "name": "groups",
           "req": true,
           "type": "`$ARRAY`",
+          "union": {
+            "branches": 19,
+            "count": 31,
+            "depth": 14
+          },
           "index$": 8
         },
         {
@@ -1089,6 +1121,11 @@ class Config {
           "name": "publishedTypebot",
           "req": true,
           "type": "`$ANY`",
+          "union": {
+            "branches": 19,
+            "count": 51,
+            "depth": 20
+          },
           "index$": 17
         },
         {
@@ -1138,6 +1175,11 @@ class Config {
           "name": "theme",
           "req": true,
           "type": "`$OBJECT`",
+          "union": {
+            "branches": 2,
+            "count": 2,
+            "depth": 6
+          },
           "index$": 24
         },
         {
@@ -1145,6 +1187,11 @@ class Config {
           "name": "typebot",
           "req": true,
           "type": "`$OBJECT`",
+          "union": {
+            "branches": 19,
+            "count": 88,
+            "depth": 24
+          },
           "index$": 25
         },
         {
@@ -1159,6 +1206,11 @@ class Config {
           "name": "variables",
           "req": true,
           "type": "`$ARRAY`",
+          "union": {
+            "branches": 2,
+            "count": 1,
+            "depth": 5
+          },
           "index$": 27
         },
         {
@@ -1176,6 +1228,11 @@ class Config {
           },
           "req": false,
           "type": "`$ANY`",
+          "union": {
+            "branches": 2,
+            "count": 1,
+            "depth": 0
+          },
           "index$": 28
         },
         {
@@ -1221,6 +1278,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "POST",
               "orig": "/v1/typebots/{typebotId}/publish",
               "parts": [
@@ -1261,6 +1319,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "POST",
               "orig": "/v1/typebots/{typebotId}/unpublish",
               "parts": [
@@ -1289,6 +1348,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/v1/typebots",
               "parts": [
@@ -1307,6 +1367,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/v1/typebots/import",
               "parts": [
@@ -1354,6 +1415,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots",
               "parts": [
@@ -1405,6 +1467,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}",
               "parts": [
@@ -1454,6 +1517,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}/publishedTypebot",
               "parts": [
@@ -1502,6 +1566,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "DELETE",
               "orig": "/v1/typebots/{typebotId}",
               "parts": [
@@ -1547,6 +1612,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "PATCH",
               "orig": "/v1/typebots/{typebotId}",
               "parts": [
@@ -1755,6 +1821,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/v1/workspaces",
               "parts": [
@@ -1789,6 +1856,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/workspaces/{workspaceId}/members",
               "parts": [
@@ -1817,6 +1885,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/workspaces",
               "parts": [
@@ -1852,6 +1921,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/v1/workspaces/{workspaceId}",
               "parts": [
@@ -1897,6 +1967,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "DELETE",
               "orig": "/v1/workspaces/{workspaceId}",
               "parts": [
@@ -1942,6 +2013,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "PATCH",
               "orig": "/v1/workspaces/{workspaceId}",
               "parts": [

@@ -44,14 +44,14 @@ describe('FolderEntity', async () => {
     const folder_ref01_ent = client.Folder()
     let folder_ref01_data = setup.data.new.folder['folder_ref01']
 
-    folder_ref01_data = await folder_ref01_ent.create(folder_ref01_data)
+    folder_ref01_data = (await folder_ref01_ent.create(folder_ref01_data)).data()
     assert(null != folder_ref01_data.id)
 
 
     // LIST
     const folder_ref01_match = {}
 
-    const folder_ref01_list = await folder_ref01_ent.list(folder_ref01_match)
+    const folder_ref01_list = (await folder_ref01_ent.list(folder_ref01_match)).map((e) => e.data())
 
     assert(!isempty(select(folder_ref01_list, { id: folder_ref01_data.id })))
 
@@ -63,7 +63,7 @@ describe('FolderEntity', async () => {
     const folder_ref01_markdef_up0 = { name: 'createdAt', value: 'Mark01-folder_ref01_' + setup.now }
     folder_ref01_data_up0 [folder_ref01_markdef_up0.name] = folder_ref01_markdef_up0.value
 
-    const folder_ref01_resdata_up0 = await folder_ref01_ent.update(folder_ref01_data_up0)
+    const folder_ref01_resdata_up0 = (await folder_ref01_ent.update(folder_ref01_data_up0)).data()
     assert(folder_ref01_resdata_up0.id === folder_ref01_data_up0.id)
 
     assert(folder_ref01_resdata_up0[folder_ref01_markdef_up0.name] === folder_ref01_markdef_up0.value)
@@ -72,7 +72,7 @@ describe('FolderEntity', async () => {
     // LOAD
     const folder_ref01_match_dt0 = {}
     folder_ref01_match_dt0.id = folder_ref01_data.id
-    const folder_ref01_data_dt0 = await folder_ref01_ent.load(folder_ref01_match_dt0)
+    const folder_ref01_data_dt0 = (await folder_ref01_ent.load(folder_ref01_match_dt0)).data()
     assert(folder_ref01_data_dt0.id === folder_ref01_data.id)
 
 
@@ -85,7 +85,7 @@ describe('FolderEntity', async () => {
     // LIST
     const folder_ref01_match_rt0 = {}
 
-    const folder_ref01_list_rt0 = await folder_ref01_ent.list(folder_ref01_match_rt0)
+    const folder_ref01_list_rt0 = (await folder_ref01_ent.list(folder_ref01_match_rt0)).map((e) => e.data())
 
     assert(isempty(select(folder_ref01_list_rt0, { id: folder_ref01_data.id })))
 

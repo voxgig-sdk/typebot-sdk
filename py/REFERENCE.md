@@ -366,7 +366,7 @@ result = client.Result()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Result().list()
+results = client.Result().list({"typebot_id": "example"})
 for result in results:
     print(result)
 ```

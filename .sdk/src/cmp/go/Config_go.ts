@@ -11,6 +11,7 @@ import {
   each,
   isAuthActive,
   resolveAuthPrefix,
+  serverVariables,
 } from '@voxgig/sdkgen'
 
 
@@ -47,6 +48,14 @@ const Config = cmp(async function Config(props: any) {
   let baseUrl = ''
   try { baseUrl = getModelPath(model, `main.${KIT}.info.servers.0.url`) } catch (_e) { }
 
+  // Templated server URL: emit the spec's server-variable defaults so the
+  // runtime can substitute {name} placeholders in base (see make_options).
+  const svars = serverVariables(model)
+  const serverBlock = 0 === svars.length ? '' :
+    '\t\t\t"server": map[string]any{\n' +
+    svars.map((v: any) => `\t\t\t\t${JSON.stringify(v.name)}: ${JSON.stringify(v.dflt)},\n`).join('') +
+    '\t\t\t},\n'
+
   const authBlock = authActive
     ? `			"auth": map[string]any{
 				"prefix": "${authPrefix}",
@@ -58,9 +67,16 @@ const Config = cmp(async function Config(props: any) {
 
     Content(`package core
 
+import (
+	"sync"
+)
+
 `)
 
-    Content(`func MakeConfig() map[string]any {
+    Content(`// MakeConfig builds a fresh, fully materialised config map. Every call
+// rebuilds the whole structure, so prefer SharedConfig unless you need a
+// private copy you intend to mutate.
+func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "${model.const.Name}",
@@ -77,7 +93,7 @@ const Config = cmp(async function Config(props: any) {
     Content(`		},
 		"options": map[string]any{
 			"base": "${baseUrl}",
-${authBlock}			"headers": ${formatGoMap(headers, 3)},
+${serverBlock}${authBlock}			"headers": ${formatGoMap(headers, 3)},
 			"entity": map[string]any{
 `)
 
@@ -96,6 +112,24 @@ ${authBlock}			"headers": ${formatGoMap(headers, 3)},
         relations: n.relations,
       }), a), {}), 2)},
 	}
+}
+
+var (
+	sharedConfigOnce sync.Once
+	sharedConfigVal  map[string]any
+)
+
+// SharedConfig returns the process-wide config, built once on first use.
+// The SDK reads the config on every request and never writes to it, so one
+// instance is shared by every client rather than rebuilt per client.
+//
+// The returned map is shared: treat it as read-only. Callers that need to
+// mutate should use MakeConfig, which always returns a fresh copy.
+func SharedConfig() map[string]any {
+	sharedConfigOnce.Do(func() {
+		sharedConfigVal = MakeConfig()
+	})
+	return sharedConfigVal
 }
 
 func makeFeature(name string) Feature {

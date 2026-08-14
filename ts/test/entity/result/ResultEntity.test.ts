@@ -65,13 +65,13 @@ describe('ResultEntity', async () => {
     result_ref01_match['result_id'] = setup.idmap['result01']
     result_ref01_match['typebot_id'] = setup.idmap['typebot01']
 
-    const result_ref01_list = await result_ref01_ent.list(result_ref01_match)
+    const result_ref01_list = (await result_ref01_ent.list(result_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const result_ref01_match_dt0: any = {}
     result_ref01_match_dt0.id = result_ref01_data.id
-    const result_ref01_data_dt0 = await result_ref01_ent.load(result_ref01_match_dt0)
+    const result_ref01_data_dt0 = (await result_ref01_ent.load(result_ref01_match_dt0)).data()
     assert(result_ref01_data_dt0.id === result_ref01_data.id)
 
 

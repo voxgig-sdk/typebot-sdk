@@ -44,7 +44,7 @@ describe('AnalyticsEntity', async () => {
     // LOAD
     const analytics_ref01_ent = client.Analytics()
     const analytics_ref01_match_dt0 = {}
-    const analytics_ref01_data_dt0 = await analytics_ref01_ent.load(analytics_ref01_match_dt0)
+    const analytics_ref01_data_dt0 = (await analytics_ref01_ent.load(analytics_ref01_match_dt0)).data()
     assert(null != analytics_ref01_data_dt0)
 
 

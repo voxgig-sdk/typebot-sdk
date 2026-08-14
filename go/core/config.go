@@ -1,5 +1,12 @@
 package core
 
+import (
+	"sync"
+)
+
+// MakeConfig builds a fresh, fully materialised config map. Every call
+// rebuilds the whole structure, so prefer SharedConfig unless you need a
+// private copy you intend to mutate.
 func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
@@ -94,6 +101,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}/analytics/stats",
 								"parts": []any{
@@ -123,7 +131,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -206,6 +213,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/billing/invoices",
 								"parts": []any{
@@ -226,7 +234,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -246,6 +253,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/billing/usage",
 								"parts": []any{
@@ -266,7 +274,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -353,6 +360,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/folders",
 								"parts": []any{
@@ -367,7 +375,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"list": map[string]any{
 						"input": "data",
@@ -395,6 +402,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/folders",
 								"parts": []any{
@@ -414,7 +422,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -445,6 +452,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/folders/{folderId}",
 								"parts": []any{
@@ -470,7 +478,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 					"remove": map[string]any{
 						"input": "data",
@@ -491,6 +498,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "DELETE",
 								"orig": "/v1/folders/{folderId}",
 								"parts": []any{
@@ -515,7 +523,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "remove",
 					},
 					"update": map[string]any{
 						"input": "data",
@@ -536,6 +543,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "PATCH",
 								"orig": "/v1/folders/{folderId}",
 								"parts": []any{
@@ -562,7 +570,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "update",
 					},
 				},
 				"relations": map[string]any{
@@ -667,6 +674,11 @@ func MakeConfig() map[string]any {
 						"name": "variables",
 						"req": true,
 						"type": "`$ARRAY`",
+						"union": map[string]any{
+							"branches": 2,
+							"count": 1,
+							"depth": 3,
+						},
 						"index$": 13,
 					},
 				},
@@ -727,6 +739,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}/results",
 								"parts": []any{
@@ -777,6 +790,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}/results/{resultId}/logs",
 								"parts": []any{
@@ -807,7 +821,6 @@ func MakeConfig() map[string]any {
 								"index$": 1,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -837,6 +850,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}/results/{resultId}",
 								"parts": []any{
@@ -865,7 +879,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 					"remove": map[string]any{
 						"input": "data",
@@ -886,6 +899,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "DELETE",
 								"orig": "/v1/typebots/{typebotId}/results",
 								"parts": []any{
@@ -911,7 +925,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "remove",
 					},
 				},
 				"relations": map[string]any{
@@ -950,6 +963,11 @@ func MakeConfig() map[string]any {
 						"name": "edges",
 						"req": true,
 						"type": "`$ARRAY`",
+						"union": map[string]any{
+							"branches": 2,
+							"count": 1,
+							"depth": 3,
+						},
 						"index$": 3,
 					},
 					map[string]any{
@@ -964,6 +982,11 @@ func MakeConfig() map[string]any {
 						"name": "events",
 						"req": true,
 						"type": "`$ARRAY`",
+						"union": map[string]any{
+							"branches": 3,
+							"count": 1,
+							"depth": 1,
+						},
 						"index$": 5,
 					},
 					map[string]any{
@@ -985,6 +1008,11 @@ func MakeConfig() map[string]any {
 						"name": "groups",
 						"req": true,
 						"type": "`$ARRAY`",
+						"union": map[string]any{
+							"branches": 19,
+							"count": 31,
+							"depth": 14,
+						},
 						"index$": 8,
 					},
 					map[string]any{
@@ -1048,6 +1076,11 @@ func MakeConfig() map[string]any {
 						"name": "publishedTypebot",
 						"req": true,
 						"type": "`$ANY`",
+						"union": map[string]any{
+							"branches": 19,
+							"count": 51,
+							"depth": 20,
+						},
 						"index$": 17,
 					},
 					map[string]any{
@@ -1097,6 +1130,11 @@ func MakeConfig() map[string]any {
 						"name": "theme",
 						"req": true,
 						"type": "`$OBJECT`",
+						"union": map[string]any{
+							"branches": 2,
+							"count": 2,
+							"depth": 6,
+						},
 						"index$": 24,
 					},
 					map[string]any{
@@ -1104,6 +1142,11 @@ func MakeConfig() map[string]any {
 						"name": "typebot",
 						"req": true,
 						"type": "`$OBJECT`",
+						"union": map[string]any{
+							"branches": 19,
+							"count": 88,
+							"depth": 24,
+						},
 						"index$": 25,
 					},
 					map[string]any{
@@ -1118,6 +1161,11 @@ func MakeConfig() map[string]any {
 						"name": "variables",
 						"req": true,
 						"type": "`$ARRAY`",
+						"union": map[string]any{
+							"branches": 2,
+							"count": 1,
+							"depth": 5,
+						},
 						"index$": 27,
 					},
 					map[string]any{
@@ -1135,6 +1183,11 @@ func MakeConfig() map[string]any {
 						},
 						"req": false,
 						"type": "`$ANY`",
+						"union": map[string]any{
+							"branches": 2,
+							"count": 1,
+							"depth": 0,
+						},
 						"index$": 28,
 					},
 					map[string]any{
@@ -1179,6 +1232,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/typebots/{typebotId}/publish",
 								"parts": []any{
@@ -1218,6 +1272,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/typebots/{typebotId}/unpublish",
 								"parts": []any{
@@ -1246,6 +1301,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/typebots",
 								"parts": []any{
@@ -1264,6 +1320,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/typebots/import",
 								"parts": []any{
@@ -1283,7 +1340,6 @@ func MakeConfig() map[string]any {
 								"index$": 3,
 							},
 						},
-						"key$": "create",
 					},
 					"list": map[string]any{
 						"input": "data",
@@ -1311,6 +1367,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots",
 								"parts": []any{
@@ -1330,7 +1387,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -1362,6 +1418,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}",
 								"parts": []any{
@@ -1411,6 +1468,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}/publishedTypebot",
 								"parts": []any{
@@ -1438,7 +1496,6 @@ func MakeConfig() map[string]any {
 								"index$": 1,
 							},
 						},
-						"key$": "load",
 					},
 					"remove": map[string]any{
 						"input": "data",
@@ -1459,6 +1516,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "DELETE",
 								"orig": "/v1/typebots/{typebotId}",
 								"parts": []any{
@@ -1483,7 +1541,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "remove",
 					},
 					"update": map[string]any{
 						"input": "data",
@@ -1504,6 +1561,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "PATCH",
 								"orig": "/v1/typebots/{typebotId}",
 								"parts": []any{
@@ -1530,7 +1588,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "update",
 					},
 				},
 				"relations": map[string]any{
@@ -1712,6 +1769,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/workspaces",
 								"parts": []any{
@@ -1726,7 +1784,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"list": map[string]any{
 						"input": "data",
@@ -1746,6 +1803,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/workspaces/{workspaceId}/members",
 								"parts": []any{
@@ -1774,6 +1832,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/workspaces",
 								"parts": []any{
@@ -1788,7 +1847,6 @@ func MakeConfig() map[string]any {
 								"index$": 1,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -1809,6 +1867,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/workspaces/{workspaceId}",
 								"parts": []any{
@@ -1833,7 +1892,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 					"remove": map[string]any{
 						"input": "data",
@@ -1854,6 +1912,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "DELETE",
 								"orig": "/v1/workspaces/{workspaceId}",
 								"parts": []any{
@@ -1878,7 +1937,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "remove",
 					},
 					"update": map[string]any{
 						"input": "data",
@@ -1899,6 +1957,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "PATCH",
 								"orig": "/v1/workspaces/{workspaceId}",
 								"parts": []any{
@@ -1923,7 +1982,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "update",
 					},
 				},
 				"relations": map[string]any{
@@ -1932,6 +1990,24 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+var (
+	sharedConfigOnce sync.Once
+	sharedConfigVal  map[string]any
+)
+
+// SharedConfig returns the process-wide config, built once on first use.
+// The SDK reads the config on every request and never writes to it, so one
+// instance is shared by every client rather than rebuilt per client.
+//
+// The returned map is shared: treat it as read-only. Callers that need to
+// mutate should use MakeConfig, which always returns a fresh copy.
+func SharedConfig() map[string]any {
+	sharedConfigOnce.Do(func() {
+		sharedConfigVal = MakeConfig()
+	})
+	return sharedConfigVal
 }
 
 func makeFeature(name string) Feature {

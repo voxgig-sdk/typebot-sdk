@@ -43,39 +43,53 @@
         "set": [
           {
             "args": [
-              {},
-              "plain"
+              {
+                "options": {}
+              },
+              {
+                "a": "A"
+              }
             ],
-            "out": "plain"
+            "mark": 10,
+            "out": {
+              "a": "A"
+            }
           },
           {
             "args": [
-              {},
+              {
+                "options": {}
+              },
               {}
             ],
+            "mark": 20,
             "out": {}
           },
           {
             "args": [
-              {},
               {
-                "name": "typebot01"
-              }
+                "options": {}
+              },
+              "plain"
             ],
-            "out": {
-              "name": "typebot01"
-            }
+            "mark": 30,
+            "out": "plain"
           },
           {
             "args": [
-              {},
               {
-                "token": "abcdefghijklmnop"
-              }
+                "options": {}
+              },
+              [
+                1,
+                2
+              ]
             ],
-            "out": {
-              "token": "abcdefghijklmnop"
-            }
+            "mark": 40,
+            "out": [
+              1,
+              2
+            ]
           }
         ]
       }
@@ -768,6 +782,76 @@
             "ctx": {
               "opname": "bad"
             }
+          },
+          {
+            "ctx": {
+              "opname": "update",
+              "point": {
+                "method": "POST"
+              }
+            },
+            "out": "POST"
+          },
+          {
+            "ctx": {
+              "opname": "update",
+              "point": {
+                "method": "PATCH"
+              }
+            },
+            "out": "PATCH"
+          },
+          {
+            "ctx": {
+              "opname": "remove",
+              "point": {
+                "method": "POST"
+              }
+            },
+            "out": "POST"
+          },
+          {
+            "ctx": {
+              "opname": "load",
+              "point": {
+                "method": "POST"
+              }
+            },
+            "out": "POST"
+          },
+          {
+            "ctx": {
+              "opname": "create",
+              "point": {
+                "method": "POST"
+              }
+            },
+            "out": "POST"
+          },
+          {
+            "ctx": {
+              "opname": "update",
+              "point": {
+                "method": "post"
+              }
+            },
+            "out": "POST"
+          },
+          {
+            "ctx": {
+              "opname": "update",
+              "point": {
+                "method": ""
+              }
+            },
+            "out": "PUT"
+          },
+          {
+            "ctx": {
+              "opname": "remove",
+              "point": {}
+            },
+            "out": "DELETE"
           }
         ]
       }
@@ -883,56 +967,93 @@
           {
             "ctx": {
               "point": {
+                "args": {
+                  "params": []
+                },
+                "parts": [
+                  "api",
+                  "planet",
+                  "{id}"
+                ]
+              }
+            },
+            "mark": 10,
+            "out": "api/planet/{id}"
+          },
+          {
+            "ctx": {
+              "point": {
+                "args": {
+                  "params": []
+                },
+                "parts": [
+                  "items"
+                ]
+              }
+            },
+            "mark": 20,
+            "out": "items"
+          },
+          {
+            "ctx": {
+              "point": {
+                "args": {
+                  "params": []
+                },
                 "parts": []
               }
             },
+            "mark": 30,
             "out": ""
           },
           {
             "ctx": {
               "point": {
+                "args": {
+                  "params": []
+                },
                 "parts": [
-                  "v1"
+                  "a",
+                  "",
+                  "b"
                 ]
               }
             },
-            "out": "v1"
+            "mark": 40,
+            "out": "a/b"
           },
           {
             "ctx": {
               "point": {
+                "args": {
+                  "params": []
+                },
                 "parts": [
-                  "v1",
-                  "typebots"
+                  "",
+                  "a",
+                  ""
                 ]
               }
             },
-            "out": "v1/typebots"
+            "mark": 50,
+            "out": "a"
           },
           {
             "ctx": {
               "point": {
+                "args": {
+                  "params": []
+                },
                 "parts": [
-                  "v1",
-                  "typebots",
-                  "{id}"
+                  "api",
+                  "{a}",
+                  "sub",
+                  "{b}"
                 ]
               }
             },
-            "out": "v1/typebots/{id}"
-          },
-          {
-            "ctx": {
-              "point": {
-                "parts": [
-                  "v1",
-                  "typebots",
-                  "{id}",
-                  "results"
-                ]
-              }
-            },
-            "out": "v1/typebots/{id}/results"
+            "mark": 60,
+            "out": "api/{a}/sub/{b}"
           }
         ]
       }

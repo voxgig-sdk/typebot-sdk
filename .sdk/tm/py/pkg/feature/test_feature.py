@@ -1,4 +1,4 @@
-# Typebot SDK test feature
+# ProjectName SDK test feature
 
 from __future__ import annotations
 import re
@@ -6,7 +6,7 @@ import random
 import time
 
 from projectname_sdk.utility.voxgig_struct import voxgig_struct as vs
-from projectname_sdk.feature.base_feature import TypebotBaseFeature
+from projectname_sdk.feature.base_feature import ProjectNameBaseFeature
 
 
 # The `body.<key>` form of an op's response transform: the mock wraps its
@@ -14,7 +14,7 @@ from projectname_sdk.feature.base_feature import TypebotBaseFeature
 ENVELOPE_RES_RE = re.compile(r"^`body\.([^`.]+)`$")
 
 
-class TypebotTestFeature(TypebotBaseFeature):
+class ProjectNameTestFeature(ProjectNameBaseFeature):
     def __init__(self):
         super().__init__()
         self.version = "0.0.1"

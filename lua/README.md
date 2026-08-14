@@ -718,6 +718,27 @@ local workspace, err = client:Workspace():create({
 ```
 
 
+## Open types
+
+4 fields are carried as open values rather than typed structures.
+This follows from the API definition, not from a gap in this SDK: the
+definition describes them with untagged unions —
+`oneOf`/`anyOf` branches with no `discriminator` — so it never states which
+variant a given value is. Nothing can select a branch reliably, so the SDK
+passes the value through unchanged rather than assert a shape the API does not
+guarantee.
+
+| Entity | Field | Variants | Nesting |
+| --- | --- | --- | --- |
+| `typebot` | `groups` | 19 | 14 levels |
+| `typebot` | `publishedTypebot` | 19 | 20 levels |
+| `typebot` | `typebot` | 19 | 24 levels |
+| `typebot` | `events` | 3 | 1 level |
+
+These values round-trip unchanged — read them, modify them, send them back. If
+the API adds a `discriminator` to the definition, regenerating will type them.
+Every other field is typed normally.
+
 ## Advanced
 
 > The sections above cover everyday use. The material below explains the
