@@ -24,6 +24,11 @@ main: kit: entity: typebot: {
       name: "edges"
       req: true
       type: "`$ARRAY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 3
+      }
     }
     {
       name: "enableSafetyFlags"
@@ -34,6 +39,11 @@ main: kit: entity: typebot: {
       name: "events"
       req: true
       type: "`$ARRAY`"
+      union: {
+        branches: 3
+        count: 1
+        depth: 1
+      }
     }
     {
       name: "folderId"
@@ -49,6 +59,11 @@ main: kit: entity: typebot: {
       name: "groups"
       req: true
       type: "`$ARRAY`"
+      union: {
+        branches: 19
+        count: 31
+        depth: 14
+      }
     }
     {
       name: "icon"
@@ -94,6 +109,11 @@ main: kit: entity: typebot: {
       name: "publishedTypebot"
       req: true
       type: "`$ANY`"
+      union: {
+        branches: 19
+        count: 51
+        depth: 20
+      }
     }
     {
       name: "publishedTypebotId"
@@ -129,11 +149,21 @@ main: kit: entity: typebot: {
       name: "theme"
       req: true
       type: "`$OBJECT`"
+      union: {
+        branches: 2
+        count: 2
+        depth: 6
+      }
     }
     {
       name: "typebot"
       req: true
       type: "`$OBJECT`"
+      union: {
+        branches: 19
+        count: 88
+        depth: 24
+      }
     }
     {
       name: "updatedAt"
@@ -144,6 +174,11 @@ main: kit: entity: typebot: {
       name: "variables"
       req: true
       type: "`$ARRAY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 5
+      }
     }
     {
       name: "version"
@@ -159,6 +194,11 @@ main: kit: entity: typebot: {
       }
       req: false
       type: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
     }
     {
       name: "warnings"

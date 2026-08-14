@@ -11,6 +11,7 @@ import {
   each,
   isAuthActive,
   resolveAuthPrefix,
+  serverVariables,
 } from '@voxgig/sdkgen'
 
 
@@ -46,6 +47,16 @@ const Config = cmp(async function Config(props: any) {
   let baseUrl = ''
   try { baseUrl = getModelPath(model, `main.${KIT}.info.servers.0.url`) } catch (_e) { }
 
+  // Templated server URL: emit the spec's server-variable defaults so the
+  // runtime can substitute {name} placeholders in base (see MakeOptions).
+  // `$` is escaped so a default can never open a PHP interpolation.
+  const svars = serverVariables(model)
+  const phps = (s: string) => JSON.stringify(s).replace(/\$/g, '\\$')
+  const serverBlock = 0 === svars.length ? '' :
+    '                "server" => [\n' +
+    svars.map((v: any) => `                    ${phps(v.name)} => ${phps(v.dflt)},\n`).join('') +
+    '                ],\n'
+
   const authBlock = authActive
     ? `                "auth" => [
                     "prefix" => "${authPrefix}",
@@ -61,6 +72,29 @@ declare(strict_types=1);
 
 class ${model.const.Name}Config
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $shared_config = null;
+
+    /**
+     * Return the process-wide config, built once on first use. The SDK reads
+     * the config on every request and never writes to it, so one instance is
+     * shared by every client rather than rebuilt per client.
+     *
+     * PHP arrays are copy-on-write, so callers that do mutate the result get
+     * their own copy and cannot disturb the shared one.
+     */
+    public static function shared_config(): array
+    {
+        if (self::$shared_config === null) {
+            self::$shared_config = self::make_config();
+        }
+        return self::$shared_config;
+    }
+
+    /**
+     * Build a fresh, fully materialised config array. Every call rebuilds the
+     * whole structure, so prefer shared_config unless you need a private copy.
+     */
     public static function make_config(): array
     {
         return [
@@ -84,7 +118,7 @@ class ${model.const.Name}Config
       Content(`            ],
             "options" => [
                 "base" => "${baseUrl}",
-${authBlock}                "headers" => ${formatPhpArray(headers, 4)},
+${serverBlock}${authBlock}                "headers" => ${formatPhpArray(headers, 4)},
                 "entity" => (object)[],
             ],
             "entity" => (object)[],
@@ -94,7 +128,7 @@ ${authBlock}                "headers" => ${formatPhpArray(headers, 4)},
     Content(`            ],
             "options" => [
                 "base" => "${baseUrl}",
-${authBlock}                "headers" => ${formatPhpArray(headers, 4)},
+${serverBlock}${authBlock}                "headers" => ${formatPhpArray(headers, 4)},
                 "entity" => [
 `)
 

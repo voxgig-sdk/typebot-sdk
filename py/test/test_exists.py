@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Typebot SDK exists test
 
 import pytest
 from typebot_sdk import TypebotSDK

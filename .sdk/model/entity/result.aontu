@@ -74,6 +74,11 @@ main: kit: entity: result: {
       name: "variables"
       req: true
       type: "`$ARRAY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 3
+      }
     }
   ]
 

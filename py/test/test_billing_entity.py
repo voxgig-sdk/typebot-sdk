@@ -42,8 +42,8 @@ class TestBillingEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from typebot_sdk.config import make_config
-        cfg = make_config()
+        from typebot_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = TypebotSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -92,7 +92,7 @@ class TestBillingEntity:
             "id": billing_ref01_data["id"],
         }
         billing_ref01_data_dt0_loaded = billing_ref01_ent.load(billing_ref01_match_dt0, None)
-        billing_ref01_data_dt0_load_result = helpers.to_map(billing_ref01_data_dt0_loaded)
+        billing_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(billing_ref01_data_dt0_loaded))
         assert billing_ref01_data_dt0_load_result is not None
         assert billing_ref01_data_dt0_load_result["id"] == billing_ref01_data["id"]
 

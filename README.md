@@ -17,6 +17,22 @@ surface stays in sync with the API.
 **Why this exists:** Voxgig builds public SDK and MCP examples for APIs we think are
 interesting. This is one of those. MIT-licensed, take whatever's useful.
 
+## Packages
+
+| Language | Package | Install |
+| --- | --- | --- |
+| TypeScript | `@voxgig-sdk/typebot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/typebot-sdk/releases) |
+| JavaScript | `@voxgig-sdk/typebot-js` | publish pending — [install from git tag](https://github.com/voxgig-sdk/typebot-sdk/releases) |
+| Python | `voxgig-sdk-typebot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/typebot-sdk/releases) |
+| PHP | `voxgig-sdk/typebot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/typebot-sdk/releases) |
+| Lua | `voxgig-sdk-typebot` | publish pending — [install from git tag](https://github.com/voxgig-sdk/typebot-sdk/releases) |
+| Golang | `github.com/voxgig-sdk/typebot-sdk/go` | `go get github.com/voxgig-sdk/typebot-sdk/go@latest` |
+| Go CLI | `github.com/voxgig-sdk/typebot-sdk/go-cli` | `go install github.com/voxgig-sdk/typebot-sdk/go-cli@latest` |
+| Go MCP server | `github.com/voxgig-sdk/typebot-sdk/go-mcp` | `go get github.com/voxgig-sdk/typebot-sdk/go-mcp@latest` |
+
+Each release tags every language target in lockstep, so a given version is the same
+generated SDK across all of them.
+
 ## Try it (TypeScript)
 
 ```bash
@@ -98,19 +114,23 @@ The server exposes two tools, `typebot_list` and `typebot_load`, each taking an 
 argument (one of the six below) and an optional `query` match map. Your customers' AI agents
 can call the Typebot API through this today.
 
-## Honest state
+## Known limitations
 
 Generated from Typebot's public Builder API OpenAPI spec on 2026-08-07. Not production-tuned.
 
-Known rough edge: **the typebot definition itself is not typed**. The block schema is an
-untagged union of 1,796 `const` variants across 335 `oneOf` and 880 `anyOf` branches, nested
-32 levels deep, with no `discriminator` keyword anywhere. No generator can pick a variant out
-of that, so the SDK models `group`, `event`, `edge`, `variable`, `theme` and `setting` as open
-arrays and maps rather than pretend to type them. Everything around the definition (ids,
-names, timestamps, workspace and folder fields, results, analytics, billing) is typed
-normally. A second, smaller edge: four different POSTs under `/v1/typebots` (create, import,
-publish, unpublish) collapse onto one `create` operation with four endpoints, because publish
-and unpublish are actions rather than resource creations.
+**The typebot definition itself is not typed.** The block schema is an untagged union with no
+`discriminator` keyword anywhere: 1,867 `anyOf` and 270 `oneOf` branches, 874 `const`
+variants, nested up to 32 levels deep. Nothing in the definition says which variant a given
+value is, so no generator can select a branch — the SDK carries `groups`, `events` and the
+nested `typebot`/`publishedTypebot` values through as open arrays and maps rather than assert
+a shape the API does not guarantee. The per-language READMEs list these under **Open types**,
+with the branch count and nesting depth for each. Everything around the definition — ids,
+names, timestamps, workspace and folder fields, results, analytics, billing — is typed
+normally, and the open values round-trip unchanged: read them, modify them, send them back.
+
+A second, smaller edge: four different POSTs under `/v1/typebots` (create, import, publish,
+unpublish) collapse onto one `create` operation with four endpoints, because publish and
+unpublish are actions rather than resource creations.
 
 Use it as a starting point or a reference.
 

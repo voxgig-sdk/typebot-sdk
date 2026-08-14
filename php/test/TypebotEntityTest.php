@@ -40,7 +40,7 @@ class TypebotEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = TypebotConfig::make_config();
+        $cfg = TypebotConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = TypebotSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -83,7 +83,7 @@ class TypebotEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.typebot"), "typebot_ref01"));
 
         $typebot_ref01_data_result = $typebot_ref01_ent->create($typebot_ref01_data, null);
-        $typebot_ref01_data = Helpers::to_map($typebot_ref01_data_result);
+        $typebot_ref01_data = Helpers::to_map(is_object($typebot_ref01_data_result) && method_exists($typebot_ref01_data_result, 'data_get') ? $typebot_ref01_data_result->data_get() : $typebot_ref01_data_result);
         $this->assertNotNull($typebot_ref01_data);
         $this->assertNotNull($typebot_ref01_data["id"]);
 
@@ -108,7 +108,7 @@ class TypebotEntityTest extends TestCase
         $typebot_ref01_data_up0_up[$typebot_ref01_markdef_up0_name] = $typebot_ref01_markdef_up0_value;
 
         $typebot_ref01_resdata_up0_result = $typebot_ref01_ent->update($typebot_ref01_data_up0_up, null);
-        $typebot_ref01_resdata_up0 = Helpers::to_map($typebot_ref01_resdata_up0_result);
+        $typebot_ref01_resdata_up0 = Helpers::to_map(is_object($typebot_ref01_resdata_up0_result) && method_exists($typebot_ref01_resdata_up0_result, 'data_get') ? $typebot_ref01_resdata_up0_result->data_get() : $typebot_ref01_resdata_up0_result);
         $this->assertNotNull($typebot_ref01_resdata_up0);
         $this->assertEquals($typebot_ref01_resdata_up0["id"], $typebot_ref01_data_up0_up["id"]);
         $this->assertEquals($typebot_ref01_resdata_up0[$typebot_ref01_markdef_up0_name], $typebot_ref01_markdef_up0_value);
@@ -118,7 +118,7 @@ class TypebotEntityTest extends TestCase
             "id" => $typebot_ref01_data["id"],
         ];
         $typebot_ref01_data_dt0_loaded = $typebot_ref01_ent->load($typebot_ref01_match_dt0, null);
-        $typebot_ref01_data_dt0_load_result = Helpers::to_map($typebot_ref01_data_dt0_loaded);
+        $typebot_ref01_data_dt0_load_result = Helpers::to_map(is_object($typebot_ref01_data_dt0_loaded) && method_exists($typebot_ref01_data_dt0_loaded, 'data_get') ? $typebot_ref01_data_dt0_loaded->data_get() : $typebot_ref01_data_dt0_loaded);
         $this->assertNotNull($typebot_ref01_data_dt0_load_result);
         $this->assertEquals($typebot_ref01_data_dt0_load_result["id"], $typebot_ref01_data["id"]);
 

@@ -62,14 +62,14 @@ describe('WorkspaceEntity', async () => {
     const workspace_ref01_ent = client.Workspace()
     let workspace_ref01_data = setup.data.new.workspace['workspace_ref01']
 
-    workspace_ref01_data = await workspace_ref01_ent.create(workspace_ref01_data)
+    workspace_ref01_data = (await workspace_ref01_ent.create(workspace_ref01_data)).data()
     assert(null != workspace_ref01_data.id)
 
 
     // LIST
     const workspace_ref01_match: any = {}
 
-    const workspace_ref01_list = await workspace_ref01_ent.list(workspace_ref01_match)
+    const workspace_ref01_list = (await workspace_ref01_ent.list(workspace_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(workspace_ref01_list, { id: workspace_ref01_data.id })))
 
@@ -81,7 +81,7 @@ describe('WorkspaceEntity', async () => {
     const workspace_ref01_markdef_up0 = { name: 'createdAt', value: 'Mark01-workspace_ref01_' + setup.now }
     ;(workspace_ref01_data_up0 as any)[workspace_ref01_markdef_up0.name] = workspace_ref01_markdef_up0.value
 
-    const workspace_ref01_resdata_up0 = await workspace_ref01_ent.update(workspace_ref01_data_up0)
+    const workspace_ref01_resdata_up0 = (await workspace_ref01_ent.update(workspace_ref01_data_up0)).data()
     assert(workspace_ref01_resdata_up0.id === workspace_ref01_data_up0.id)
 
     assert((workspace_ref01_resdata_up0 as any)[workspace_ref01_markdef_up0.name] === workspace_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('WorkspaceEntity', async () => {
     // LOAD
     const workspace_ref01_match_dt0: any = {}
     workspace_ref01_match_dt0.id = workspace_ref01_data.id
-    const workspace_ref01_data_dt0 = await workspace_ref01_ent.load(workspace_ref01_match_dt0)
+    const workspace_ref01_data_dt0 = (await workspace_ref01_ent.load(workspace_ref01_match_dt0)).data()
     assert(workspace_ref01_data_dt0.id === workspace_ref01_data.id)
 
 
@@ -102,7 +102,7 @@ describe('WorkspaceEntity', async () => {
     // LIST
     const workspace_ref01_match_rt0: any = {}
 
-    const workspace_ref01_list_rt0 = await workspace_ref01_ent.list(workspace_ref01_match_rt0)
+    const workspace_ref01_list_rt0 = (await workspace_ref01_ent.list(workspace_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(workspace_ref01_list_rt0, { id: workspace_ref01_data.id })))
 

@@ -3,7 +3,7 @@ import * as Path from 'node:path'
 
 import {
   cmp, each, deriveEntityNames,
-  File, Content, Fragment, Slot,
+  File, Content, Fragment, Slot, goModule, goVersion
 } from '@voxgig/sdkgen'
 
 import type {
@@ -50,8 +50,8 @@ const Main = cmp(function Main(props: any) {
   const { model } = props.ctx$
 
   const org = model.origin || 'voxgig-sdk'
-  const sdkModule = `github.com/${org}/${model.name}-sdk/go`
-  const mcpModule = `github.com/${org}/${model.name}-sdk/go-mcp`
+  const sdkModule = goModule(model, 'go')
+  const mcpModule = goModule(model, 'go-mcp')
 
   const entityMap: any = getModelPath(model, `main.${KIT}.entity`)
   // Derive each entity's PascalCase `Name` here rather than relying on another
@@ -124,7 +124,7 @@ or **streamable HTTP** (one shared server for several agents).
 make build
 
 # 2. Provide credentials via the environment
-export ${apiKeyEnv}=your-api-token
+export ${apiKeyEnv}=sk_live_xxx
 
 # 3a. Install into Claude Code over stdio (most common)
 claude mcp add --scope user ${slugLower} \\
@@ -160,7 +160,7 @@ Tool-call arguments (what an agent sends):
 2. **Set your API key:**
 
    \`\`\`sh
-   export ${apiKeyEnv}=your-api-token
+   export ${apiKeyEnv}=sk_live_xxx
    \`\`\`
 
 3. **Install it into Claude Code** (stdio transport):
@@ -181,7 +181,7 @@ Tool-call arguments (what an agent sends):
 Configuration is read from the environment — nothing is written to disk:
 
 \`\`\`sh
-export ${apiKeyEnv}=your-api-token            # API key
+export ${apiKeyEnv}=sk_live_xxx            # API key
 export ${baseEnv}=https://api.example.com  # optional: override the API base URL
 \`\`\`
 
@@ -319,7 +319,7 @@ this repo, or upstream at
   // the public proxy. The MCP Go SDK requires go >= 1.25.
   File({ name: 'go.mod' }, () => Content(`module ${mcpModule}
 
-go 1.25.0
+go ${goVersion(model, 'go-mcp', '1.25.0')}
 
 require ${sdkModule} v0.0.0
 require github.com/modelcontextprotocol/go-sdk ${MCP_GO_SDK_VERSION}

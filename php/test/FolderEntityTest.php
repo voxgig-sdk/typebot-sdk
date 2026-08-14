@@ -40,7 +40,7 @@ class FolderEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = TypebotConfig::make_config();
+        $cfg = TypebotConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = TypebotSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -83,7 +83,7 @@ class FolderEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.folder"), "folder_ref01"));
 
         $folder_ref01_data_result = $folder_ref01_ent->create($folder_ref01_data, null);
-        $folder_ref01_data = Helpers::to_map($folder_ref01_data_result);
+        $folder_ref01_data = Helpers::to_map(is_object($folder_ref01_data_result) && method_exists($folder_ref01_data_result, 'data_get') ? $folder_ref01_data_result->data_get() : $folder_ref01_data_result);
         $this->assertNotNull($folder_ref01_data);
         $this->assertNotNull($folder_ref01_data["id"]);
 
@@ -108,7 +108,7 @@ class FolderEntityTest extends TestCase
         $folder_ref01_data_up0_up[$folder_ref01_markdef_up0_name] = $folder_ref01_markdef_up0_value;
 
         $folder_ref01_resdata_up0_result = $folder_ref01_ent->update($folder_ref01_data_up0_up, null);
-        $folder_ref01_resdata_up0 = Helpers::to_map($folder_ref01_resdata_up0_result);
+        $folder_ref01_resdata_up0 = Helpers::to_map(is_object($folder_ref01_resdata_up0_result) && method_exists($folder_ref01_resdata_up0_result, 'data_get') ? $folder_ref01_resdata_up0_result->data_get() : $folder_ref01_resdata_up0_result);
         $this->assertNotNull($folder_ref01_resdata_up0);
         $this->assertEquals($folder_ref01_resdata_up0["id"], $folder_ref01_data_up0_up["id"]);
         $this->assertEquals($folder_ref01_resdata_up0[$folder_ref01_markdef_up0_name], $folder_ref01_markdef_up0_value);
@@ -118,7 +118,7 @@ class FolderEntityTest extends TestCase
             "id" => $folder_ref01_data["id"],
         ];
         $folder_ref01_data_dt0_loaded = $folder_ref01_ent->load($folder_ref01_match_dt0, null);
-        $folder_ref01_data_dt0_load_result = Helpers::to_map($folder_ref01_data_dt0_loaded);
+        $folder_ref01_data_dt0_load_result = Helpers::to_map(is_object($folder_ref01_data_dt0_loaded) && method_exists($folder_ref01_data_dt0_loaded, 'data_get') ? $folder_ref01_data_dt0_loaded->data_get() : $folder_ref01_data_dt0_loaded);
         $this->assertNotNull($folder_ref01_data_dt0_load_result);
         $this->assertEquals($folder_ref01_data_dt0_load_result["id"], $folder_ref01_data["id"]);
 

@@ -1,4 +1,4 @@
--- Typebot SDK test feature
+-- ProjectName SDK test feature
 
 local vs = require("utility.struct.struct")
 local BaseFeature = require("feature.base_feature")
@@ -44,23 +44,24 @@ function TestFeature:init(ctx, options)
     -- Shape the mock payload the way the real API would, so the op's
     -- response transform recovers the entity from it. A point carrying
     -- transform.res of `body.item` describes an API that answers
-    -- {item = {...}}; handing back the bare entity means the transform
-    -- unwraps a property that is not there and the caller gets nil. The
-    -- mock has to agree with the model, or it only ever simulates APIs
-    -- whose responses happen to be unwrapped. Mirrors the ts mock.
+    -- { item = {...} }; handing back the bare entity means the transform
+    -- unwraps a property that is not there and the caller gets nil.
+    -- The mock has to agree with the model, or it only ever simulates
+    -- APIs whose responses happen to be unwrapped. Mirrors the ts/py mocks.
     local function envelope(data)
-      if data == nil or type(fctx.point) ~= "table" then
+      local point = fctx.point
+      if data == nil or type(point) ~= "table" then
         return data
       end
-      local transform = fctx.point["transform"]
+      local transform = point.transform
       if type(transform) ~= "table" then
         return data
       end
-      local restf = transform["res"]
+      local restf = transform.res
       if type(restf) ~= "string" then
         return data
       end
-      local key = restf:match("^`body%.([^`.]+)`$")
+      local key = string.match(restf, "^`body%.([^`%.]+)`$")
       if key == nil then
         return data
       end
@@ -68,11 +69,11 @@ function TestFeature:init(ctx, options)
     end
 
     local function respond(status, data, extra)
-      data = envelope(data)
+      local payload = envelope(data)
       local out = {
         status = status,
         statusText = "OK",
-        json = function() return data end,
+        json = function() return payload end,
         body = "not-used",
       }
       if type(extra) == "table" then

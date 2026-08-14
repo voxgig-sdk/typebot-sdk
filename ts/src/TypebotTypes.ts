@@ -13,6 +13,12 @@ export interface Analytics {
 
 export interface AnalyticsLoadMatch {
   typebot_id: string
+
+  // Selects a custom action instead of the plain load:
+  //   'stat'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface Billing {
@@ -33,6 +39,12 @@ export interface BillingLoadMatch {
   resetsAt?: string
   totalChatsUsed?: number
   url?: string
+
+  // Selects a custom action instead of the plain load:
+  //   'usage'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface BillingListMatch {
@@ -43,6 +55,12 @@ export interface BillingListMatch {
   resetsAt?: string
   totalChatsUsed?: number
   url?: string
+
+  // Selects a custom action instead of the plain list:
+  //   'invoice'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface Folder {
@@ -121,6 +139,12 @@ export interface ResultLoadMatch {
 
 export interface ResultListMatch {
   typebot_id: string
+
+  // Selects a custom action instead of the plain list:
+  //   'log'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface ResultRemoveMatch {
@@ -164,6 +188,12 @@ export interface Typebot {
 
 export interface TypebotLoadMatch {
   id: string
+
+  // Selects a custom action instead of the plain load:
+  //   'published_typebot'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface TypebotListMatch {
@@ -234,6 +264,12 @@ export interface TypebotCreateData {
   warnings?: any[]
   whatsAppCredentialsId: any
   workspaceId: string
+
+  // Selects a custom action instead of the plain create:
+  //   'import' | 'publish' | 'unpublish'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface TypebotUpdateData {
@@ -325,6 +361,12 @@ export interface WorkspaceListMatch {
   user?: Record<string, any>
   userId?: string
   workspaceId?: string
+
+  // Selects a custom action instead of the plain list:
+  //   'member'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface WorkspaceCreateData {

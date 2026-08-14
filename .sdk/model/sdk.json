@@ -1,19 +1,14 @@
 {
-  "NAME": "TYPEBOT",
-  "Name": "Typebot",
   "def": "typebot-builder.json",
   "main": {
-    "api": {
-      "entity": {},
-      "guide": {}
-    },
-    "custom": {
-      "plurals": {}
-    },
     "def": {
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -27,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "analytics": {
           "active": true,
@@ -92,6 +88,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}/analytics/stats",
                   "parts": [
@@ -203,6 +200,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/billing/invoices",
                   "parts": [
@@ -241,6 +239,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/billing/usage",
                   "parts": [
@@ -346,6 +345,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/v1/folders",
                   "parts": [
@@ -386,6 +386,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/folders",
                   "parts": [
@@ -433,6 +434,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/folders/{folderId}",
                   "parts": [
@@ -476,6 +478,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "DELETE",
                   "orig": "/v1/folders/{folderId}",
                   "parts": [
@@ -518,6 +521,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "PATCH",
                   "orig": "/v1/folders/{folderId}",
                   "parts": [
@@ -637,7 +641,12 @@
               "active": true,
               "name": "variables",
               "req": true,
-              "type": "`$ARRAY`"
+              "type": "`$ARRAY`",
+              "union": {
+                "branches": 2,
+                "count": 1,
+                "depth": 3
+              }
             }
           ],
           "id": {
@@ -700,6 +709,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}/results",
                   "parts": [
@@ -749,6 +759,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}/results/{resultId}/logs",
                   "parts": [
@@ -805,6 +816,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}/results/{resultId}",
                   "parts": [
@@ -851,6 +863,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "DELETE",
                   "orig": "/v1/typebots/{typebotId}/results",
                   "parts": [
@@ -913,7 +926,12 @@
               "active": true,
               "name": "edges",
               "req": true,
-              "type": "`$ARRAY`"
+              "type": "`$ARRAY`",
+              "union": {
+                "branches": 2,
+                "count": 1,
+                "depth": 3
+              }
             },
             {
               "active": true,
@@ -925,7 +943,12 @@
               "active": true,
               "name": "events",
               "req": true,
-              "type": "`$ARRAY`"
+              "type": "`$ARRAY`",
+              "union": {
+                "branches": 3,
+                "count": 1,
+                "depth": 1
+              }
             },
             {
               "active": true,
@@ -943,7 +966,12 @@
               "active": true,
               "name": "groups",
               "req": true,
-              "type": "`$ARRAY`"
+              "type": "`$ARRAY`",
+              "union": {
+                "branches": 19,
+                "count": 31,
+                "depth": 14
+              }
             },
             {
               "active": true,
@@ -997,7 +1025,12 @@
               "active": true,
               "name": "publishedTypebot",
               "req": true,
-              "type": "`$ANY`"
+              "type": "`$ANY`",
+              "union": {
+                "branches": 19,
+                "count": 51,
+                "depth": 20
+              }
             },
             {
               "active": true,
@@ -1039,13 +1072,23 @@
               "active": true,
               "name": "theme",
               "req": true,
-              "type": "`$OBJECT`"
+              "type": "`$OBJECT`",
+              "union": {
+                "branches": 2,
+                "count": 2,
+                "depth": 6
+              }
             },
             {
               "active": true,
               "name": "typebot",
               "req": true,
-              "type": "`$OBJECT`"
+              "type": "`$OBJECT`",
+              "union": {
+                "branches": 19,
+                "count": 88,
+                "depth": 24
+              }
             },
             {
               "active": true,
@@ -1057,7 +1100,12 @@
               "active": true,
               "name": "variables",
               "req": true,
-              "type": "`$ARRAY`"
+              "type": "`$ARRAY`",
+              "union": {
+                "branches": 2,
+                "count": 1,
+                "depth": 5
+              }
             },
             {
               "active": true,
@@ -1073,7 +1121,12 @@
                 }
               },
               "req": false,
-              "type": "`$ANY`"
+              "type": "`$ANY`",
+              "union": {
+                "branches": 2,
+                "count": 1,
+                "depth": 0
+              }
             },
             {
               "active": true,
@@ -1118,6 +1171,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/v1/typebots/{typebotId}/publish",
                   "parts": [
@@ -1156,6 +1210,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/v1/typebots/{typebotId}/unpublish",
                   "parts": [
@@ -1183,6 +1238,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/v1/typebots",
                   "parts": [
@@ -1200,6 +1256,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/v1/typebots/import",
                   "parts": [
@@ -1245,6 +1302,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots",
                   "parts": [
@@ -1293,6 +1351,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}",
                   "parts": [
@@ -1341,6 +1400,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}/publishedTypebot",
                   "parts": [
@@ -1386,6 +1446,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "DELETE",
                   "orig": "/v1/typebots/{typebotId}",
                   "parts": [
@@ -1428,6 +1489,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "PATCH",
                   "orig": "/v1/typebots/{typebotId}",
                   "parts": [
@@ -1621,6 +1683,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/v1/workspaces",
                   "parts": [
@@ -1653,6 +1716,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/workspaces/{workspaceId}/members",
                   "parts": [
@@ -1680,6 +1744,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/workspaces",
                   "parts": [
@@ -1712,6 +1777,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v1/workspaces/{workspaceId}",
                   "parts": [
@@ -1754,6 +1820,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "DELETE",
                   "orig": "/v1/workspaces/{workspaceId}",
                   "parts": [
@@ -1796,6 +1863,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "PATCH",
                   "orig": "/v1/workspaces/{workspaceId}",
                   "parts": [
@@ -2406,18 +2474,41 @@
         "website": "https://docs.typebot.com/api-reference"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "typebot"
+            "goversion": "",
+            "name": "typebot",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2439,22 +2530,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "go-cli": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "typebot"
+            "goversion": "",
+            "name": "typebot",
+            "package": "",
+            "path": ""
           },
           "name": "go-cli",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -2493,21 +2602,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go CLI"
         },
         "go-mcp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "typebot"
+            "goversion": "",
+            "name": "typebot",
+            "package": "",
+            "path": ""
           },
           "name": "go-mcp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -2546,12 +2673,17 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go MCP server"
         },
         "js": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
@@ -2563,10 +2695,23 @@
             }
           },
           "ext": "js",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "typebot"
+            "goversion": "",
+            "name": "typebot",
+            "package": "",
+            "path": ""
           },
           "name": "js",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2588,12 +2733,17 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "JavaScript"
         },
         "lua": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
@@ -2605,10 +2755,23 @@
             }
           },
           "ext": "lua",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "typebot"
+            "goversion": "",
+            "name": "typebot",
+            "package": "",
+            "path": ""
           },
           "name": "lua",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2630,22 +2793,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Lua"
         },
         "php": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "php",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "typebot"
+            "goversion": "",
+            "name": "typebot",
+            "package": "",
+            "path": ""
           },
           "name": "php",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2667,13 +2848,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "PHP"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -2685,10 +2871,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "typebot"
+            "goversion": "",
+            "name": "typebot",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2710,13 +2909,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -2739,10 +2943,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "typebot"
+            "goversion": "",
+            "name": "typebot",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2764,16 +2981,21 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }
   },
   "name": "typebot",
-  "name-": "typebot",
-  "name_": "typebot",
-  "name__orig": "typebot",
   "origin": "voxgig-sdk"
 }

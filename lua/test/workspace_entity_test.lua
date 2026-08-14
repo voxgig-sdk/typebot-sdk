@@ -39,7 +39,7 @@ describe("WorkspaceEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -82,7 +82,7 @@ describe("WorkspaceEntity", function()
 
     local workspace_ref01_data_result, err = workspace_ref01_ent:create(workspace_ref01_data, nil)
     assert.is_nil(err)
-    workspace_ref01_data = helpers.to_map(workspace_ref01_data_result)
+    workspace_ref01_data = helpers.to_map(type(workspace_ref01_data_result) == 'table' and workspace_ref01_data_result.data_get and workspace_ref01_data_result:data_get() or workspace_ref01_data_result)
     assert.is_not_nil(workspace_ref01_data)
     assert.is_not_nil(workspace_ref01_data["id"])
 
@@ -109,7 +109,7 @@ describe("WorkspaceEntity", function()
 
     local workspace_ref01_resdata_up0_result, err = workspace_ref01_ent:update(workspace_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local workspace_ref01_resdata_up0 = helpers.to_map(workspace_ref01_resdata_up0_result)
+    local workspace_ref01_resdata_up0 = helpers.to_map(type(workspace_ref01_resdata_up0_result) == 'table' and workspace_ref01_resdata_up0_result.data_get and workspace_ref01_resdata_up0_result:data_get() or workspace_ref01_resdata_up0_result)
     assert.is_not_nil(workspace_ref01_resdata_up0)
     assert.are.equal(workspace_ref01_resdata_up0["id"], workspace_ref01_data_up0_up["id"])
     assert.are.equal(workspace_ref01_resdata_up0[workspace_ref01_markdef_up0_name], workspace_ref01_markdef_up0_value)
@@ -120,7 +120,7 @@ describe("WorkspaceEntity", function()
     }
     local workspace_ref01_data_dt0_loaded, err = workspace_ref01_ent:load(workspace_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local workspace_ref01_data_dt0_load_result = helpers.to_map(workspace_ref01_data_dt0_loaded)
+    local workspace_ref01_data_dt0_load_result = helpers.to_map(type(workspace_ref01_data_dt0_loaded) == 'table' and workspace_ref01_data_dt0_loaded.data_get and workspace_ref01_data_dt0_loaded:data_get() or workspace_ref01_data_dt0_loaded)
     assert.is_not_nil(workspace_ref01_data_dt0_load_result)
     assert.are.equal(workspace_ref01_data_dt0_load_result["id"], workspace_ref01_data["id"])
 

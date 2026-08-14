@@ -40,7 +40,7 @@ class ResultEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = TypebotConfig::make_config();
+        $cfg = TypebotConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = TypebotSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -100,7 +100,7 @@ class ResultEntityTest extends TestCase
             "id" => $result_ref01_data["id"],
         ];
         $result_ref01_data_dt0_loaded = $result_ref01_ent->load($result_ref01_match_dt0, null);
-        $result_ref01_data_dt0_load_result = Helpers::to_map($result_ref01_data_dt0_loaded);
+        $result_ref01_data_dt0_load_result = Helpers::to_map(is_object($result_ref01_data_dt0_loaded) && method_exists($result_ref01_data_dt0_loaded, 'data_get') ? $result_ref01_data_dt0_loaded->data_get() : $result_ref01_data_dt0_loaded);
         $this->assertNotNull($result_ref01_data_dt0_load_result);
         $this->assertEquals($result_ref01_data_dt0_load_result["id"], $result_ref01_data["id"]);
 

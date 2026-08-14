@@ -1,5 +1,8 @@
 -- Typebot SDK configuration
 
+-- Build a fresh, fully materialised config table. Every call rebuilds the
+-- whole structure, so prefer require("config_shared") unless you need a
+-- private copy you intend to mutate.
 local function make_config()
   return {
     main = {
@@ -94,6 +97,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}/analytics/stats",
                 ["parts"] = {
@@ -206,6 +210,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/billing/invoices",
                 ["parts"] = {
@@ -246,6 +251,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/billing/usage",
                 ["parts"] = {
@@ -353,6 +359,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/folders",
                 ["parts"] = {
@@ -395,6 +402,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/folders",
                 ["parts"] = {
@@ -445,6 +453,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/folders/{folderId}",
                 ["parts"] = {
@@ -491,6 +500,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/v1/folders/{folderId}",
                 ["parts"] = {
@@ -536,6 +546,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "PATCH",
                 ["orig"] = "/v1/folders/{folderId}",
                 ["parts"] = {
@@ -667,6 +678,11 @@ local function make_config()
             ["name"] = "variables",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
+            ["union"] = {
+              ["branches"] = 2,
+              ["count"] = 1,
+              ["depth"] = 3,
+            },
             ["index$"] = 13,
           },
         },
@@ -727,6 +743,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}/results",
                 ["parts"] = {
@@ -777,6 +794,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}/results/{resultId}/logs",
                 ["parts"] = {
@@ -837,6 +855,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}/results/{resultId}",
                 ["parts"] = {
@@ -886,6 +905,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/v1/typebots/{typebotId}/results",
                 ["parts"] = {
@@ -950,6 +970,11 @@ local function make_config()
             ["name"] = "edges",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
+            ["union"] = {
+              ["branches"] = 2,
+              ["count"] = 1,
+              ["depth"] = 3,
+            },
             ["index$"] = 3,
           },
           {
@@ -964,6 +989,11 @@ local function make_config()
             ["name"] = "events",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
+            ["union"] = {
+              ["branches"] = 3,
+              ["count"] = 1,
+              ["depth"] = 1,
+            },
             ["index$"] = 5,
           },
           {
@@ -985,6 +1015,11 @@ local function make_config()
             ["name"] = "groups",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
+            ["union"] = {
+              ["branches"] = 19,
+              ["count"] = 31,
+              ["depth"] = 14,
+            },
             ["index$"] = 8,
           },
           {
@@ -1048,6 +1083,11 @@ local function make_config()
             ["name"] = "publishedTypebot",
             ["req"] = true,
             ["type"] = "`$ANY`",
+            ["union"] = {
+              ["branches"] = 19,
+              ["count"] = 51,
+              ["depth"] = 20,
+            },
             ["index$"] = 17,
           },
           {
@@ -1097,6 +1137,11 @@ local function make_config()
             ["name"] = "theme",
             ["req"] = true,
             ["type"] = "`$OBJECT`",
+            ["union"] = {
+              ["branches"] = 2,
+              ["count"] = 2,
+              ["depth"] = 6,
+            },
             ["index$"] = 24,
           },
           {
@@ -1104,6 +1149,11 @@ local function make_config()
             ["name"] = "typebot",
             ["req"] = true,
             ["type"] = "`$OBJECT`",
+            ["union"] = {
+              ["branches"] = 19,
+              ["count"] = 88,
+              ["depth"] = 24,
+            },
             ["index$"] = 25,
           },
           {
@@ -1118,6 +1168,11 @@ local function make_config()
             ["name"] = "variables",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
+            ["union"] = {
+              ["branches"] = 2,
+              ["count"] = 1,
+              ["depth"] = 5,
+            },
             ["index$"] = 27,
           },
           {
@@ -1135,6 +1190,11 @@ local function make_config()
             },
             ["req"] = false,
             ["type"] = "`$ANY`",
+            ["union"] = {
+              ["branches"] = 2,
+              ["count"] = 1,
+              ["depth"] = 0,
+            },
             ["index$"] = 28,
           },
           {
@@ -1180,6 +1240,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/typebots/{typebotId}/publish",
                 ["parts"] = {
@@ -1220,6 +1281,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/typebots/{typebotId}/unpublish",
                 ["parts"] = {
@@ -1248,6 +1310,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/typebots",
                 ["parts"] = {
@@ -1266,6 +1329,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/typebots/import",
                 ["parts"] = {
@@ -1313,6 +1377,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots",
                 ["parts"] = {
@@ -1364,6 +1429,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}",
                 ["parts"] = {
@@ -1413,6 +1479,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}/publishedTypebot",
                 ["parts"] = {
@@ -1461,6 +1528,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/v1/typebots/{typebotId}",
                 ["parts"] = {
@@ -1506,6 +1574,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "PATCH",
                 ["orig"] = "/v1/typebots/{typebotId}",
                 ["parts"] = {
@@ -1714,6 +1783,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/workspaces",
                 ["parts"] = {
@@ -1748,6 +1818,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/workspaces/{workspaceId}/members",
                 ["parts"] = {
@@ -1776,6 +1847,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/workspaces",
                 ["parts"] = {
@@ -1811,6 +1883,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/workspaces/{workspaceId}",
                 ["parts"] = {
@@ -1856,6 +1929,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/v1/workspaces/{workspaceId}",
                 ["parts"] = {
@@ -1901,6 +1975,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "PATCH",
                 ["orig"] = "/v1/workspaces/{workspaceId}",
                 ["parts"] = {

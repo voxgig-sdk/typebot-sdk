@@ -52,7 +52,7 @@ func TestFolderEntity(t *testing.T) {
 
 		// Inbound: streaming active -> yields each item from the feature iterator.
 		hasStreaming := false
-		if fm, ok := core.MakeConfig()["feature"].(map[string]any); ok {
+		if fm, ok := core.SharedConfig()["feature"].(map[string]any); ok {
 			_, hasStreaming = fm["streaming"]
 		}
 		if hasStreaming {
@@ -107,7 +107,7 @@ func TestFolderEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		folderRef01Data = core.ToMapAny(folderRef01DataResult)
+		folderRef01Data = core.ToMapAny(entityData(folderRef01DataResult))
 		if folderRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -145,7 +145,7 @@ func TestFolderEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		folderRef01ResdataUp0 := core.ToMapAny(folderRef01ResdataUp0Result)
+		folderRef01ResdataUp0 := core.ToMapAny(entityData(folderRef01ResdataUp0Result))
 		if folderRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -164,7 +164,7 @@ func TestFolderEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		folderRef01DataDt0LoadResult := core.ToMapAny(folderRef01DataDt0Loaded)
+		folderRef01DataDt0LoadResult := core.ToMapAny(entityData(folderRef01DataDt0Loaded))
 		if folderRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

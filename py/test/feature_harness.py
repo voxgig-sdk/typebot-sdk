@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from typebot_sdk.config import make_config
+from typebot_sdk.config import shared_config
 from typebot_sdk.features import _make_feature
 from typebot_sdk.core.control import TypebotControl
 from typebot_sdk.core.error import TypebotError
@@ -24,7 +24,7 @@ from typebot_sdk.core.spec import TypebotSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

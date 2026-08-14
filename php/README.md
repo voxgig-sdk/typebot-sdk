@@ -39,7 +39,7 @@ Analytics is nested under typebot, so provide the `typebot_id`.
 
 ```php
 try {
-    // load() returns the bare Analytics record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Analytics record (throws on error).
     $analytics = $client->Analytics()->load(["typebot_id" => "example_typebot_id"]);
     print_r($analytics);
 } catch (\Throwable $err) {
@@ -130,7 +130,8 @@ $client = TypebotSDK::test([
     "entity" => ["billing" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $billing = $client->Billing()->list();
 print_r($billing);
 ```
@@ -240,7 +241,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -423,7 +424,7 @@ Create an instance: `$analytics = $client->Analytics();`
 #### Example: Load
 
 ```php
-// load() returns the bare Analytics record (throws on error).
+// load() returns the ENTITY — call data_get() for the Analytics record (throws on error).
 $analytics = $client->Analytics()->load(["typebot_id" => "typebot_id"]);
 ```
 
@@ -454,7 +455,7 @@ Create an instance: `$billing = $client->Billing();`
 #### Example: Load
 
 ```php
-// load() returns the bare Billing record (throws on error).
+// load() returns the ENTITY — call data_get() for the Billing record (throws on error).
 $billing = $client->Billing()->load(["id" => "billing_id"]);
 ```
 
@@ -496,7 +497,7 @@ Create an instance: `$folder = $client->Folder();`
 #### Example: Load
 
 ```php
-// load() returns the bare Folder record (throws on error).
+// load() returns the ENTITY — call data_get() for the Folder record (throws on error).
 $folder = $client->Folder()->load(["id" => "folder_id"]);
 ```
 
@@ -556,7 +557,7 @@ Create an instance: `$result = $client->Result();`
 #### Example: Load
 
 ```php
-// load() returns the bare Result record (throws on error).
+// load() returns the ENTITY — call data_get() for the Result record (throws on error).
 $result = $client->Result()->load(["id" => "result_id", "typebot_id" => "typebot_id"]);
 ```
 
@@ -622,7 +623,7 @@ Create an instance: `$typebot = $client->Typebot();`
 #### Example: Load
 
 ```php
-// load() returns the bare Typebot record (throws on error).
+// load() returns the ENTITY — call data_get() for the Typebot record (throws on error).
 $typebot = $client->Typebot()->load(["id" => "typebot_id"]);
 ```
 
@@ -710,7 +711,7 @@ Create an instance: `$workspace = $client->Workspace();`
 #### Example: Load
 
 ```php
-// load() returns the bare Workspace record (throws on error).
+// load() returns the ENTITY — call data_get() for the Workspace record (throws on error).
 $workspace = $client->Workspace()->load(["id" => "workspace_id"]);
 ```
 
@@ -749,6 +750,27 @@ $workspace = $client->Workspace()->create([
 ]);
 ```
 
+
+## Open types
+
+4 fields are carried as open values rather than typed structures.
+This follows from the API definition, not from a gap in this SDK: the
+definition describes them with untagged unions —
+`oneOf`/`anyOf` branches with no `discriminator` — so it never states which
+variant a given value is. Nothing can select a branch reliably, so the SDK
+passes the value through unchanged rather than assert a shape the API does not
+guarantee.
+
+| Entity | Field | Variants | Nesting |
+| --- | --- | --- | --- |
+| `typebot` | `groups` | 19 | 14 levels |
+| `typebot` | `publishedTypebot` | 19 | 20 levels |
+| `typebot` | `typebot` | 19 | 24 levels |
+| `typebot` | `events` | 3 | 1 level |
+
+These values round-trip unchanged — read them, modify them, send them back. If
+the API adds a `discriminator` to the definition, regenerating will type them.
+Every other field is typed normally.
 
 ## Advanced
 

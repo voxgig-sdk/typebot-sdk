@@ -39,7 +39,7 @@ describe("FolderEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -82,7 +82,7 @@ describe("FolderEntity", function()
 
     local folder_ref01_data_result, err = folder_ref01_ent:create(folder_ref01_data, nil)
     assert.is_nil(err)
-    folder_ref01_data = helpers.to_map(folder_ref01_data_result)
+    folder_ref01_data = helpers.to_map(type(folder_ref01_data_result) == 'table' and folder_ref01_data_result.data_get and folder_ref01_data_result:data_get() or folder_ref01_data_result)
     assert.is_not_nil(folder_ref01_data)
     assert.is_not_nil(folder_ref01_data["id"])
 
@@ -109,7 +109,7 @@ describe("FolderEntity", function()
 
     local folder_ref01_resdata_up0_result, err = folder_ref01_ent:update(folder_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local folder_ref01_resdata_up0 = helpers.to_map(folder_ref01_resdata_up0_result)
+    local folder_ref01_resdata_up0 = helpers.to_map(type(folder_ref01_resdata_up0_result) == 'table' and folder_ref01_resdata_up0_result.data_get and folder_ref01_resdata_up0_result:data_get() or folder_ref01_resdata_up0_result)
     assert.is_not_nil(folder_ref01_resdata_up0)
     assert.are.equal(folder_ref01_resdata_up0["id"], folder_ref01_data_up0_up["id"])
     assert.are.equal(folder_ref01_resdata_up0[folder_ref01_markdef_up0_name], folder_ref01_markdef_up0_value)
@@ -120,7 +120,7 @@ describe("FolderEntity", function()
     }
     local folder_ref01_data_dt0_loaded, err = folder_ref01_ent:load(folder_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local folder_ref01_data_dt0_load_result = helpers.to_map(folder_ref01_data_dt0_loaded)
+    local folder_ref01_data_dt0_load_result = helpers.to_map(type(folder_ref01_data_dt0_loaded) == 'table' and folder_ref01_data_dt0_loaded.data_get and folder_ref01_data_dt0_loaded:data_get() or folder_ref01_data_dt0_loaded)
     assert.is_not_nil(folder_ref01_data_dt0_load_result)
     assert.are.equal(folder_ref01_data_dt0_load_result["id"], folder_ref01_data["id"])
 

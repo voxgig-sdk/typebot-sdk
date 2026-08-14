@@ -42,8 +42,8 @@ class TestResultEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from typebot_sdk.config import make_config
-        cfg = make_config()
+        from typebot_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = TypebotSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -95,7 +95,7 @@ class TestResultEntity:
             "id": result_ref01_data["id"],
         }
         result_ref01_data_dt0_loaded = result_ref01_ent.load(result_ref01_match_dt0, None)
-        result_ref01_data_dt0_load_result = helpers.to_map(result_ref01_data_dt0_loaded)
+        result_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(result_ref01_data_dt0_loaded))
         assert result_ref01_data_dt0_load_result is not None
         assert result_ref01_data_dt0_load_result["id"] == result_ref01_data["id"]
 

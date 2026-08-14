@@ -5,6 +5,29 @@ declare(strict_types=1);
 
 class TypebotConfig
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $shared_config = null;
+
+    /**
+     * Return the process-wide config, built once on first use. The SDK reads
+     * the config on every request and never writes to it, so one instance is
+     * shared by every client rather than rebuilt per client.
+     *
+     * PHP arrays are copy-on-write, so callers that do mutate the result get
+     * their own copy and cannot disturb the shared one.
+     */
+    public static function shared_config(): array
+    {
+        if (self::$shared_config === null) {
+            self::$shared_config = self::make_config();
+        }
+        return self::$shared_config;
+    }
+
+    /**
+     * Build a fresh, fully materialised config array. Every call rebuilds the
+     * whole structure, so prefer shared_config unless you need a private copy.
+     */
     public static function make_config(): array
     {
         return [
@@ -100,6 +123,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}/analytics/stats',
                   'parts' => [
@@ -212,6 +236,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/billing/invoices',
                   'parts' => [
@@ -252,6 +277,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/billing/usage',
                   'parts' => [
@@ -359,6 +385,7 @@ class TypebotConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/folders',
                   'parts' => [
@@ -401,6 +428,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/folders',
                   'parts' => [
@@ -451,6 +479,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/folders/{folderId}',
                   'parts' => [
@@ -497,6 +526,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/v1/folders/{folderId}',
                   'parts' => [
@@ -542,6 +572,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'PATCH',
                   'orig' => '/v1/folders/{folderId}',
                   'parts' => [
@@ -673,6 +704,11 @@ class TypebotConfig
               'name' => 'variables',
               'req' => true,
               'type' => '`$ARRAY`',
+              'union' => [
+                'branches' => 2,
+                'count' => 1,
+                'depth' => 3,
+              ],
               'index$' => 13,
             ],
           ],
@@ -733,6 +769,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}/results',
                   'parts' => [
@@ -783,6 +820,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}/results/{resultId}/logs',
                   'parts' => [
@@ -843,6 +881,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}/results/{resultId}',
                   'parts' => [
@@ -892,6 +931,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/v1/typebots/{typebotId}/results',
                   'parts' => [
@@ -956,6 +996,11 @@ class TypebotConfig
               'name' => 'edges',
               'req' => true,
               'type' => '`$ARRAY`',
+              'union' => [
+                'branches' => 2,
+                'count' => 1,
+                'depth' => 3,
+              ],
               'index$' => 3,
             ],
             [
@@ -970,6 +1015,11 @@ class TypebotConfig
               'name' => 'events',
               'req' => true,
               'type' => '`$ARRAY`',
+              'union' => [
+                'branches' => 3,
+                'count' => 1,
+                'depth' => 1,
+              ],
               'index$' => 5,
             ],
             [
@@ -991,6 +1041,11 @@ class TypebotConfig
               'name' => 'groups',
               'req' => true,
               'type' => '`$ARRAY`',
+              'union' => [
+                'branches' => 19,
+                'count' => 31,
+                'depth' => 14,
+              ],
               'index$' => 8,
             ],
             [
@@ -1054,6 +1109,11 @@ class TypebotConfig
               'name' => 'publishedTypebot',
               'req' => true,
               'type' => '`$ANY`',
+              'union' => [
+                'branches' => 19,
+                'count' => 51,
+                'depth' => 20,
+              ],
               'index$' => 17,
             ],
             [
@@ -1103,6 +1163,11 @@ class TypebotConfig
               'name' => 'theme',
               'req' => true,
               'type' => '`$OBJECT`',
+              'union' => [
+                'branches' => 2,
+                'count' => 2,
+                'depth' => 6,
+              ],
               'index$' => 24,
             ],
             [
@@ -1110,6 +1175,11 @@ class TypebotConfig
               'name' => 'typebot',
               'req' => true,
               'type' => '`$OBJECT`',
+              'union' => [
+                'branches' => 19,
+                'count' => 88,
+                'depth' => 24,
+              ],
               'index$' => 25,
             ],
             [
@@ -1124,6 +1194,11 @@ class TypebotConfig
               'name' => 'variables',
               'req' => true,
               'type' => '`$ARRAY`',
+              'union' => [
+                'branches' => 2,
+                'count' => 1,
+                'depth' => 5,
+              ],
               'index$' => 27,
             ],
             [
@@ -1141,6 +1216,11 @@ class TypebotConfig
               ],
               'req' => false,
               'type' => '`$ANY`',
+              'union' => [
+                'branches' => 2,
+                'count' => 1,
+                'depth' => 0,
+              ],
               'index$' => 28,
             ],
             [
@@ -1186,6 +1266,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/typebots/{typebotId}/publish',
                   'parts' => [
@@ -1226,6 +1307,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/typebots/{typebotId}/unpublish',
                   'parts' => [
@@ -1254,6 +1336,7 @@ class TypebotConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/typebots',
                   'parts' => [
@@ -1272,6 +1355,7 @@ class TypebotConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/typebots/import',
                   'parts' => [
@@ -1319,6 +1403,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots',
                   'parts' => [
@@ -1370,6 +1455,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}',
                   'parts' => [
@@ -1419,6 +1505,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}/publishedTypebot',
                   'parts' => [
@@ -1467,6 +1554,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/v1/typebots/{typebotId}',
                   'parts' => [
@@ -1512,6 +1600,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'PATCH',
                   'orig' => '/v1/typebots/{typebotId}',
                   'parts' => [
@@ -1720,6 +1809,7 @@ class TypebotConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/workspaces',
                   'parts' => [
@@ -1754,6 +1844,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/workspaces/{workspaceId}/members',
                   'parts' => [
@@ -1782,6 +1873,7 @@ class TypebotConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/workspaces',
                   'parts' => [
@@ -1817,6 +1909,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/workspaces/{workspaceId}',
                   'parts' => [
@@ -1862,6 +1955,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/v1/workspaces/{workspaceId}',
                   'parts' => [
@@ -1907,6 +2001,7 @@ class TypebotConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'PATCH',
                   'orig' => '/v1/workspaces/{workspaceId}',
                   'parts' => [

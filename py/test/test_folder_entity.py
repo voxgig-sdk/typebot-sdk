@@ -42,8 +42,8 @@ class TestFolderEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from typebot_sdk.config import make_config
-        cfg = make_config()
+        from typebot_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = TypebotSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestFolderEntity:
         folder_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.folder"), "folder_ref01"))
 
-        folder_ref01_data = helpers.to_map(folder_ref01_ent.create(folder_ref01_data, None))
+        folder_ref01_data = helpers.to_map(runner.entity_data(folder_ref01_ent.create(folder_ref01_data, None)))
         assert folder_ref01_data is not None
         assert folder_ref01_data["id"] is not None
 
@@ -102,7 +102,7 @@ class TestFolderEntity:
         folder_ref01_markdef_up0_value = "Mark01-folder_ref01_" + str(setup["now"])
         folder_ref01_data_up0_up[folder_ref01_markdef_up0_name] = folder_ref01_markdef_up0_value
 
-        folder_ref01_resdata_up0 = helpers.to_map(folder_ref01_ent.update(folder_ref01_data_up0_up, None))
+        folder_ref01_resdata_up0 = helpers.to_map(runner.entity_data(folder_ref01_ent.update(folder_ref01_data_up0_up, None)))
         assert folder_ref01_resdata_up0 is not None
         assert folder_ref01_resdata_up0["id"] == folder_ref01_data_up0_up["id"]
         assert folder_ref01_resdata_up0[folder_ref01_markdef_up0_name] == folder_ref01_markdef_up0_value
@@ -112,7 +112,7 @@ class TestFolderEntity:
             "id": folder_ref01_data["id"],
         }
         folder_ref01_data_dt0_loaded = folder_ref01_ent.load(folder_ref01_match_dt0, None)
-        folder_ref01_data_dt0_load_result = helpers.to_map(folder_ref01_data_dt0_loaded)
+        folder_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(folder_ref01_data_dt0_loaded))
         assert folder_ref01_data_dt0_load_result is not None
         assert folder_ref01_data_dt0_load_result["id"] == folder_ref01_data["id"]
 
