@@ -44,21 +44,21 @@ class Config {
             "fields": [
                 {
                     "active": true,
-                    "name": "total_completed",
+                    "name": "totalCompleted",
                     "req": true,
                     "type": "`$NUMBER`",
                     "index$": 0
                 },
                 {
                     "active": true,
-                    "name": "total_start",
+                    "name": "totalStarts",
                     "req": true,
                     "type": "`$NUMBER`",
                     "index$": 1
                 },
                 {
                     "active": true,
-                    "name": "total_view",
+                    "name": "totalViews",
                     "req": true,
                     "type": "`$NUMBER`",
                     "index$": 2
@@ -104,6 +104,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/typebots/{typebotId}/analytics/stats",
                             "parts": [
@@ -176,14 +177,14 @@ class Config {
                 },
                 {
                     "active": true,
-                    "name": "resets_at",
+                    "name": "resetsAt",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 4
                 },
                 {
                     "active": true,
-                    "name": "total_chats_used",
+                    "name": "totalChatsUsed",
                     "req": true,
                     "type": "`$NUMBER`",
                     "index$": 5
@@ -216,6 +217,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/billing/invoices",
                             "parts": [
@@ -256,6 +258,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/billing/usage",
                             "parts": [
@@ -287,7 +290,7 @@ class Config {
             "fields": [
                 {
                     "active": true,
-                    "name": "created_at",
+                    "name": "createdAt",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 0
@@ -301,7 +304,7 @@ class Config {
                 },
                 {
                     "active": true,
-                    "name": "folder_name",
+                    "name": "folderName",
                     "req": false,
                     "type": "`$STRING`",
                     "index$": 2
@@ -328,7 +331,7 @@ class Config {
                 },
                 {
                     "active": true,
-                    "name": "parent_folder_id",
+                    "name": "parentFolderId",
                     "op": {
                         "create": {
                             "req": false,
@@ -336,19 +339,19 @@ class Config {
                         }
                     },
                     "req": true,
-                    "type": "`$STRING`",
+                    "type": "`$ANY`",
                     "index$": 5
                 },
                 {
                     "active": true,
-                    "name": "updated_at",
+                    "name": "updatedAt",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 6
                 },
                 {
                     "active": true,
-                    "name": "workspace_id",
+                    "name": "workspaceId",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 7
@@ -363,6 +366,7 @@ class Config {
                         {
                             "active": true,
                             "args": {},
+                            "kind": "http",
                             "method": "POST",
                             "orig": "/v1/folders",
                             "parts": [
@@ -405,6 +409,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/folders",
                             "parts": [
@@ -455,6 +460,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/folders/{folderId}",
                             "parts": [
@@ -501,6 +507,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "DELETE",
                             "orig": "/v1/folders/{folderId}",
                             "parts": [
@@ -546,6 +553,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "PATCH",
                             "orig": "/v1/folders/{folderId}",
                             "parts": [
@@ -583,7 +591,7 @@ class Config {
             "fields": [
                 {
                     "active": true,
-                    "name": "answer",
+                    "name": "answers",
                     "req": true,
                     "type": "`$ARRAY`",
                     "index$": 0
@@ -597,7 +605,7 @@ class Config {
                 },
                 {
                     "active": true,
-                    "name": "created_at",
+                    "name": "createdAt",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 2
@@ -611,16 +619,16 @@ class Config {
                 },
                 {
                     "active": true,
-                    "name": "detail",
+                    "name": "details",
                     "req": true,
                     "type": "`$ANY`",
                     "index$": 4
                 },
                 {
                     "active": true,
-                    "name": "has_started",
+                    "name": "hasStarted",
                     "req": true,
-                    "type": "`$BOOLEAN`",
+                    "type": "`$ANY`",
                     "index$": 5
                 },
                 {
@@ -632,28 +640,28 @@ class Config {
                 },
                 {
                     "active": true,
-                    "name": "is_archived",
+                    "name": "isArchived",
                     "req": true,
-                    "type": "`$BOOLEAN`",
+                    "type": "`$ANY`",
                     "index$": 7
                 },
                 {
                     "active": true,
-                    "name": "is_completed",
+                    "name": "isCompleted",
                     "req": true,
                     "type": "`$BOOLEAN`",
                     "index$": 8
                 },
                 {
                     "active": true,
-                    "name": "last_chat_session_id",
+                    "name": "lastChatSessionId",
                     "req": true,
-                    "type": "`$STRING`",
+                    "type": "`$ANY`",
                     "index$": 9
                 },
                 {
                     "active": true,
-                    "name": "result_id",
+                    "name": "resultId",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 10
@@ -667,16 +675,21 @@ class Config {
                 },
                 {
                     "active": true,
-                    "name": "typebot_id",
+                    "name": "typebotId",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 12
                 },
                 {
                     "active": true,
-                    "name": "variable",
+                    "name": "variables",
                     "req": true,
                     "type": "`$ARRAY`",
+                    "union": {
+                        "branches": 2,
+                        "count": 1,
+                        "depth": 3
+                    },
                     "index$": 13
                 }
             ],
@@ -737,6 +750,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/typebots/{typebotId}/results",
                             "parts": [
@@ -787,6 +801,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/typebots/{typebotId}/results/{resultId}/logs",
                             "parts": [
@@ -847,6 +862,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/typebots/{typebotId}/results/{resultId}",
                             "parts": [
@@ -896,6 +912,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "DELETE",
                             "orig": "/v1/typebots/{typebotId}/results",
                             "parts": [
@@ -936,206 +953,234 @@ class Config {
             "fields": [
                 {
                     "active": true,
-                    "name": "access_right",
+                    "name": "accessRight",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 0
                 },
                 {
                     "active": true,
-                    "name": "created_at",
+                    "name": "createdAt",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 1
                 },
                 {
                     "active": true,
-                    "name": "current_user_mode",
+                    "name": "customDomain",
                     "req": true,
-                    "type": "`$STRING`",
+                    "type": "`$ANY`",
                     "index$": 2
                 },
                 {
                     "active": true,
-                    "name": "custom_domain",
+                    "name": "edges",
                     "req": true,
-                    "type": "`$ANY`",
+                    "type": "`$ARRAY`",
+                    "union": {
+                        "branches": 2,
+                        "count": 1,
+                        "depth": 3
+                    },
                     "index$": 3
                 },
                 {
                     "active": true,
-                    "name": "edge",
-                    "req": true,
-                    "type": "`$ARRAY`",
+                    "name": "enableSafetyFlags",
+                    "req": false,
+                    "type": "`$BOOLEAN`",
                     "index$": 4
                 },
                 {
                     "active": true,
-                    "name": "enable_safety_flag",
-                    "req": false,
-                    "type": "`$BOOLEAN`",
+                    "name": "events",
+                    "req": true,
+                    "type": "`$ARRAY`",
+                    "union": {
+                        "branches": 3,
+                        "count": 1,
+                        "depth": 1
+                    },
                     "index$": 5
                 },
                 {
                     "active": true,
-                    "name": "event",
+                    "name": "folderId",
                     "req": true,
-                    "type": "`$ARRAY`",
+                    "type": "`$ANY`",
                     "index$": 6
                 },
                 {
                     "active": true,
-                    "name": "folder_id",
-                    "req": true,
+                    "name": "fromTemplate",
+                    "req": false,
                     "type": "`$STRING`",
                     "index$": 7
                 },
                 {
                     "active": true,
-                    "name": "from_template",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 8
-                },
-                {
-                    "active": true,
-                    "name": "group",
+                    "name": "groups",
                     "req": true,
                     "type": "`$ARRAY`",
-                    "index$": 9
+                    "union": {
+                        "branches": 19,
+                        "count": 31,
+                        "depth": 14
+                    },
+                    "index$": 8
                 },
                 {
                     "active": true,
                     "name": "icon",
                     "req": true,
                     "type": "`$ANY`",
-                    "index$": 10
+                    "index$": 9
                 },
                 {
                     "active": true,
                     "name": "id",
                     "req": true,
                     "type": "`$STRING`",
+                    "index$": 10
+                },
+                {
+                    "active": true,
+                    "name": "isArchived",
+                    "req": true,
+                    "type": "`$BOOLEAN`",
                     "index$": 11
                 },
                 {
                     "active": true,
-                    "name": "is_archived",
+                    "name": "isClosed",
                     "req": true,
                     "type": "`$BOOLEAN`",
                     "index$": 12
                 },
                 {
                     "active": true,
-                    "name": "is_closed",
-                    "req": true,
-                    "type": "`$BOOLEAN`",
-                    "index$": 13
-                },
-                {
-                    "active": true,
                     "name": "message",
                     "req": true,
                     "type": "`$ANY`",
-                    "index$": 14
+                    "index$": 13
                 },
                 {
                     "active": true,
                     "name": "name",
                     "req": true,
                     "type": "`$STRING`",
-                    "index$": 15
+                    "index$": 14
                 },
                 {
                     "active": true,
                     "name": "overwrite",
                     "req": false,
                     "type": "`$BOOLEAN`",
+                    "index$": 15
+                },
+                {
+                    "active": true,
+                    "name": "publicId",
+                    "req": true,
+                    "type": "`$ANY`",
                     "index$": 16
                 },
                 {
                     "active": true,
-                    "name": "public_id",
+                    "name": "publishedTypebot",
                     "req": true,
-                    "type": "`$STRING`",
+                    "type": "`$ANY`",
+                    "union": {
+                        "branches": 19,
+                        "count": 51,
+                        "depth": 20
+                    },
                     "index$": 17
                 },
                 {
                     "active": true,
-                    "name": "published_typebot",
-                    "req": true,
-                    "type": "`$ANY`",
+                    "name": "publishedTypebotId",
+                    "req": false,
+                    "type": "`$STRING`",
                     "index$": 18
                 },
                 {
                     "active": true,
-                    "name": "published_typebot_id",
-                    "req": false,
-                    "type": "`$STRING`",
+                    "name": "resultsTablePreferences",
+                    "req": true,
+                    "type": "`$ANY`",
                     "index$": 19
                 },
                 {
                     "active": true,
-                    "name": "results_table_preference",
+                    "name": "riskLevel",
                     "req": true,
                     "type": "`$ANY`",
                     "index$": 20
                 },
                 {
                     "active": true,
-                    "name": "risk_level",
+                    "name": "selectedThemeTemplateId",
                     "req": true,
                     "type": "`$ANY`",
                     "index$": 21
                 },
                 {
                     "active": true,
-                    "name": "selected_theme_template_id",
+                    "name": "settings",
                     "req": true,
-                    "type": "`$STRING`",
+                    "type": "`$OBJECT`",
                     "index$": 22
                 },
                 {
                     "active": true,
-                    "name": "setting",
+                    "name": "spaceId",
                     "req": true,
-                    "type": "`$OBJECT`",
+                    "type": "`$ANY`",
                     "index$": 23
-                },
-                {
-                    "active": true,
-                    "name": "space_id",
-                    "req": true,
-                    "type": "`$STRING`",
-                    "index$": 24
                 },
                 {
                     "active": true,
                     "name": "theme",
                     "req": true,
                     "type": "`$OBJECT`",
-                    "index$": 25
+                    "union": {
+                        "branches": 2,
+                        "count": 2,
+                        "depth": 6
+                    },
+                    "index$": 24
                 },
                 {
                     "active": true,
                     "name": "typebot",
                     "req": true,
-                    "type": "`$ANY`",
+                    "type": "`$OBJECT`",
+                    "union": {
+                        "branches": 19,
+                        "count": 88,
+                        "depth": 24
+                    },
+                    "index$": 25
+                },
+                {
+                    "active": true,
+                    "name": "updatedAt",
+                    "req": true,
+                    "type": "`$STRING`",
                     "index$": 26
                 },
                 {
                     "active": true,
-                    "name": "updated_at",
-                    "req": true,
-                    "type": "`$STRING`",
-                    "index$": 27
-                },
-                {
-                    "active": true,
-                    "name": "variable",
+                    "name": "variables",
                     "req": true,
                     "type": "`$ARRAY`",
-                    "index$": 28
+                    "union": {
+                        "branches": 2,
+                        "count": 1,
+                        "depth": 5
+                    },
+                    "index$": 27
                 },
                 {
                     "active": true,
@@ -1152,28 +1197,33 @@ class Config {
                     },
                     "req": false,
                     "type": "`$ANY`",
+                    "union": {
+                        "branches": 2,
+                        "count": 1,
+                        "depth": 0
+                    },
+                    "index$": 28
+                },
+                {
+                    "active": true,
+                    "name": "warnings",
+                    "req": false,
+                    "type": "`$ARRAY`",
                     "index$": 29
                 },
                 {
                     "active": true,
-                    "name": "warning",
-                    "req": false,
-                    "type": "`$ARRAY`",
+                    "name": "whatsAppCredentialsId",
+                    "req": true,
+                    "type": "`$ANY`",
                     "index$": 30
                 },
                 {
                     "active": true,
-                    "name": "whats_app_credentials_id",
+                    "name": "workspaceId",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 31
-                },
-                {
-                    "active": true,
-                    "name": "workspace_id",
-                    "req": true,
-                    "type": "`$STRING`",
-                    "index$": 32
                 }
             ],
             "name": "typebot",
@@ -1197,6 +1247,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "POST",
                             "orig": "/v1/typebots/{typebotId}/publish",
                             "parts": [
@@ -1237,6 +1288,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "POST",
                             "orig": "/v1/typebots/{typebotId}/unpublish",
                             "parts": [
@@ -1265,6 +1317,7 @@ class Config {
                         {
                             "active": true,
                             "args": {},
+                            "kind": "http",
                             "method": "POST",
                             "orig": "/v1/typebots",
                             "parts": [
@@ -1283,6 +1336,7 @@ class Config {
                         {
                             "active": true,
                             "args": {},
+                            "kind": "http",
                             "method": "POST",
                             "orig": "/v1/typebots/import",
                             "parts": [
@@ -1330,6 +1384,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/typebots",
                             "parts": [
@@ -1381,6 +1436,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/typebots/{typebotId}",
                             "parts": [
@@ -1430,6 +1486,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/typebots/{typebotId}/publishedTypebot",
                             "parts": [
@@ -1478,6 +1535,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "DELETE",
                             "orig": "/v1/typebots/{typebotId}",
                             "parts": [
@@ -1523,6 +1581,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "PATCH",
                             "orig": "/v1/typebots/{typebotId}",
                             "parts": [
@@ -1560,24 +1619,31 @@ class Config {
             "fields": [
                 {
                     "active": true,
-                    "name": "chats_hard_limit",
+                    "name": "chatsHardLimit",
                     "req": true,
                     "type": "`$ANY`",
                     "index$": 0
                 },
                 {
                     "active": true,
-                    "name": "created_at",
+                    "name": "createdAt",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 1
                 },
                 {
                     "active": true,
-                    "name": "current_user_mode",
+                    "name": "customChatsLimit",
                     "req": true,
-                    "type": "`$STRING`",
+                    "type": "`$ANY`",
                     "index$": 2
+                },
+                {
+                    "active": true,
+                    "name": "customSeatsLimit",
+                    "req": true,
+                    "type": "`$ANY`",
+                    "index$": 3
                 },
                 {
                     "active": true,
@@ -1594,56 +1660,56 @@ class Config {
                     },
                     "req": true,
                     "type": "`$ANY`",
-                    "index$": 3
+                    "index$": 4
                 },
                 {
                     "active": true,
                     "name": "id",
                     "req": true,
                     "type": "`$STRING`",
-                    "index$": 4
-                },
-                {
-                    "active": true,
-                    "name": "inactive_first_email_sent_at",
-                    "req": true,
-                    "type": "`$ANY`",
                     "index$": 5
                 },
                 {
                     "active": true,
-                    "name": "inactive_second_email_sent_at",
+                    "name": "inactiveFirstEmailSentAt",
                     "req": true,
                     "type": "`$ANY`",
                     "index$": 6
                 },
                 {
                     "active": true,
-                    "name": "is_past_due",
+                    "name": "inactiveSecondEmailSentAt",
                     "req": true,
-                    "type": "`$BOOLEAN`",
+                    "type": "`$ANY`",
                     "index$": 7
                 },
                 {
                     "active": true,
-                    "name": "is_suspended",
+                    "name": "isPastDue",
                     "req": true,
                     "type": "`$BOOLEAN`",
                     "index$": 8
                 },
                 {
                     "active": true,
-                    "name": "is_verified",
+                    "name": "isSuspended",
                     "req": true,
                     "type": "`$BOOLEAN`",
                     "index$": 9
                 },
                 {
                     "active": true,
-                    "name": "last_activity_at",
+                    "name": "isVerified",
                     "req": true,
                     "type": "`$ANY`",
                     "index$": 10
+                },
+                {
+                    "active": true,
+                    "name": "lastActivityAt",
+                    "req": true,
+                    "type": "`$ANY`",
+                    "index$": 11
                 },
                 {
                     "active": true,
@@ -1656,67 +1722,60 @@ class Config {
                     },
                     "req": true,
                     "type": "`$STRING`",
-                    "index$": 11
+                    "index$": 12
                 },
                 {
                     "active": true,
                     "name": "plan",
                     "req": true,
                     "type": "`$STRING`",
-                    "index$": 12
+                    "index$": 13
                 },
                 {
                     "active": true,
                     "name": "role",
                     "req": true,
                     "type": "`$STRING`",
-                    "index$": 13
-                },
-                {
-                    "active": true,
-                    "name": "setting",
-                    "req": true,
-                    "type": "`$ANY`",
                     "index$": 14
                 },
                 {
                     "active": true,
-                    "name": "stripe_id",
+                    "name": "settings",
                     "req": true,
-                    "type": "`$STRING`",
+                    "type": "`$ANY`",
                     "index$": 15
                 },
                 {
                     "active": true,
-                    "name": "updated_at",
+                    "name": "stripeId",
+                    "req": true,
+                    "type": "`$ANY`",
+                    "index$": 16
+                },
+                {
+                    "active": true,
+                    "name": "updatedAt",
                     "req": true,
                     "type": "`$STRING`",
-                    "index$": 16
+                    "index$": 17
                 },
                 {
                     "active": true,
                     "name": "user",
                     "req": true,
                     "type": "`$OBJECT`",
-                    "index$": 17
-                },
-                {
-                    "active": true,
-                    "name": "user_id",
-                    "req": true,
-                    "type": "`$STRING`",
                     "index$": 18
                 },
                 {
                     "active": true,
-                    "name": "workspace",
+                    "name": "userId",
                     "req": true,
-                    "type": "`$OBJECT`",
+                    "type": "`$STRING`",
                     "index$": 19
                 },
                 {
                     "active": true,
-                    "name": "workspace_id",
+                    "name": "workspaceId",
                     "req": true,
                     "type": "`$STRING`",
                     "index$": 20
@@ -1731,6 +1790,7 @@ class Config {
                         {
                             "active": true,
                             "args": {},
+                            "kind": "http",
                             "method": "POST",
                             "orig": "/v1/workspaces",
                             "parts": [
@@ -1765,6 +1825,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/workspaces/{workspaceId}/members",
                             "parts": [
@@ -1793,6 +1854,7 @@ class Config {
                         {
                             "active": true,
                             "args": {},
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/workspaces",
                             "parts": [
@@ -1828,6 +1890,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "GET",
                             "orig": "/v1/workspaces/{workspaceId}",
                             "parts": [
@@ -1873,6 +1936,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "DELETE",
                             "orig": "/v1/workspaces/{workspaceId}",
                             "parts": [
@@ -1918,6 +1982,7 @@ class Config {
                                     }
                                 ]
                             },
+                            "kind": "http",
                             "method": "PATCH",
                             "orig": "/v1/workspaces/{workspaceId}",
                             "parts": [

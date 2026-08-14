@@ -12,7 +12,10 @@ declare class TypebotEntityBase<D = any> {
     _data: Partial<D>;
     _match: Partial<D>;
     _entctx: Context;
+    _deleted: boolean;
     constructor(client: TypebotSDK, entopts: any);
+    markDeleted(this: any): void;
+    deleted(this: any): boolean;
     entopts(): any;
     client(): TypebotSDK;
     data(this: any, data?: Partial<D>): D;

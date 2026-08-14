@@ -35,6 +35,20 @@ declare class TypebotSDK {
         headers?: undefined;
         data?: undefined;
     }>;
+    _rawRequest(fetchargs?: any): Promise<Error | {
+        ok: boolean;
+        status: number;
+        headers: any;
+        data: any;
+        err?: undefined;
+    } | {
+        ok: boolean;
+        err: any;
+        status?: undefined;
+        headers?: undefined;
+        data?: undefined;
+    }>;
+    graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     Analytics(entopts?: Record<string, any>): AnalyticsEntity;
     Billing(entopts?: Record<string, any>): BillingEntity;
     Folder(entopts?: Record<string, any>): FolderEntity;

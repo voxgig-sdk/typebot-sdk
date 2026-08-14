@@ -169,6 +169,8 @@ const index_1 = require("./index");
             body: 'present',
         });
         const reqClient = new index_1.SDK({
+            // Concrete base: a live construction must satisfy any server variables a templated base URL declares; a literal base sidesteps the requirement.
+            base: 'http://localhost:8080',
             system: { fetch: mockFetch }
         });
         const reqUtility = reqClient.utility();
@@ -315,6 +317,7 @@ const index_1 = require("./index");
     (0, node_test_1.test)('fetcher-live', async () => {
         const calls = [];
         const liveClient = new index_1.SDK({
+            base: 'http://localhost:8080',
             system: {
                 fetch: async (url, init) => {
                     calls.push({ url, init });
@@ -333,6 +336,7 @@ const index_1 = require("./index");
     });
     (0, node_test_1.test)('fetcher-blocked-test-mode', async () => {
         const blockedClient = new index_1.SDK({
+            base: 'http://localhost:8080',
             system: { fetch: async () => ({}) }
         });
         blockedClient._mode = 'test';

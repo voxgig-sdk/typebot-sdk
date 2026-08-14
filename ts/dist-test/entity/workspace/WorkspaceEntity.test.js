@@ -74,31 +74,31 @@ const utility_1 = require("../../utility");
         // CREATE
         const workspace_ref01_ent = client.Workspace();
         let workspace_ref01_data = setup.data.new.workspace['workspace_ref01'];
-        workspace_ref01_data = await workspace_ref01_ent.create(workspace_ref01_data);
+        workspace_ref01_data = (await workspace_ref01_ent.create(workspace_ref01_data)).data();
         (0, node_assert_1.default)(null != workspace_ref01_data.id);
         // LIST
         const workspace_ref01_match = {};
-        const workspace_ref01_list = await workspace_ref01_ent.list(workspace_ref01_match);
+        const workspace_ref01_list = (await workspace_ref01_ent.list(workspace_ref01_match)).map((e) => e.data());
         (0, node_assert_1.default)(!isempty(select(workspace_ref01_list, { id: workspace_ref01_data.id })));
         // UPDATE
         const workspace_ref01_data_up0 = {};
         workspace_ref01_data_up0.id = workspace_ref01_data.id;
-        const workspace_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-workspace_ref01_' + setup.now };
+        const workspace_ref01_markdef_up0 = { name: 'createdAt', value: 'Mark01-workspace_ref01_' + setup.now };
         workspace_ref01_data_up0[workspace_ref01_markdef_up0.name] = workspace_ref01_markdef_up0.value;
-        const workspace_ref01_resdata_up0 = await workspace_ref01_ent.update(workspace_ref01_data_up0);
+        const workspace_ref01_resdata_up0 = (await workspace_ref01_ent.update(workspace_ref01_data_up0)).data();
         (0, node_assert_1.default)(workspace_ref01_resdata_up0.id === workspace_ref01_data_up0.id);
         (0, node_assert_1.default)(workspace_ref01_resdata_up0[workspace_ref01_markdef_up0.name] === workspace_ref01_markdef_up0.value);
         // LOAD
         const workspace_ref01_match_dt0 = {};
         workspace_ref01_match_dt0.id = workspace_ref01_data.id;
-        const workspace_ref01_data_dt0 = await workspace_ref01_ent.load(workspace_ref01_match_dt0);
+        const workspace_ref01_data_dt0 = (await workspace_ref01_ent.load(workspace_ref01_match_dt0)).data();
         (0, node_assert_1.default)(workspace_ref01_data_dt0.id === workspace_ref01_data.id);
         // REMOVE
         const workspace_ref01_match_rm0 = { id: workspace_ref01_data.id };
         await workspace_ref01_ent.remove(workspace_ref01_match_rm0);
         // LIST
         const workspace_ref01_match_rt0 = {};
-        const workspace_ref01_list_rt0 = await workspace_ref01_ent.list(workspace_ref01_match_rt0);
+        const workspace_ref01_list_rt0 = (await workspace_ref01_ent.list(workspace_ref01_match_rt0)).map((e) => e.data());
         (0, node_assert_1.default)(isempty(select(workspace_ref01_list_rt0, { id: workspace_ref01_data.id })));
     });
 });

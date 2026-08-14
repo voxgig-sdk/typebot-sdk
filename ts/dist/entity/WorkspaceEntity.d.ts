@@ -5,10 +5,10 @@ import type { Workspace, WorkspaceLoadMatch, WorkspaceListMatch, WorkspaceCreate
 declare class WorkspaceEntity extends TypebotEntityBase<Workspace> {
     constructor(client: TypebotSDK, entopts: any);
     make(this: WorkspaceEntity): WorkspaceEntity;
-    load(this: any, reqmatch?: WorkspaceLoadMatch, ctrl?: Control): Promise<Workspace>;
-    list(this: any, reqmatch?: WorkspaceListMatch, ctrl?: Control): Promise<Workspace[]>;
-    create(this: any, reqdata?: WorkspaceCreateData, ctrl?: Control): Promise<Workspace>;
-    update(this: any, reqdata?: WorkspaceUpdateData, ctrl?: Control): Promise<Workspace>;
-    remove(this: any, reqmatch?: WorkspaceRemoveMatch, ctrl?: Control): Promise<Workspace>;
+    load(this: any, reqmatch?: WorkspaceLoadMatch, ctrl?: Control): Promise<WorkspaceEntity>;
+    list(this: any, reqmatch?: WorkspaceListMatch, ctrl?: Control): Promise<WorkspaceEntity[]>;
+    create(this: any, reqdata?: WorkspaceCreateData, ctrl?: Control): Promise<WorkspaceEntity>;
+    update(this: any, reqdata?: WorkspaceUpdateData, ctrl?: Control): Promise<WorkspaceEntity>;
+    remove(this: any, reqmatch?: WorkspaceRemoveMatch, ctrl?: Control): Promise<WorkspaceEntity>;
 }
 export { WorkspaceEntity };

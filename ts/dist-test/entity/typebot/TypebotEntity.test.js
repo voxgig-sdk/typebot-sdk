@@ -74,31 +74,31 @@ const utility_1 = require("../../utility");
         // CREATE
         const typebot_ref01_ent = client.Typebot();
         let typebot_ref01_data = setup.data.new.typebot['typebot_ref01'];
-        typebot_ref01_data = await typebot_ref01_ent.create(typebot_ref01_data);
+        typebot_ref01_data = (await typebot_ref01_ent.create(typebot_ref01_data)).data();
         (0, node_assert_1.default)(null != typebot_ref01_data.id);
         // LIST
         const typebot_ref01_match = {};
-        const typebot_ref01_list = await typebot_ref01_ent.list(typebot_ref01_match);
+        const typebot_ref01_list = (await typebot_ref01_ent.list(typebot_ref01_match)).map((e) => e.data());
         (0, node_assert_1.default)(!isempty(select(typebot_ref01_list, { id: typebot_ref01_data.id })));
         // UPDATE
         const typebot_ref01_data_up0 = {};
         typebot_ref01_data_up0.id = typebot_ref01_data.id;
-        const typebot_ref01_markdef_up0 = { name: 'access_right', value: 'Mark01-typebot_ref01_' + setup.now };
+        const typebot_ref01_markdef_up0 = { name: 'accessRight', value: 'Mark01-typebot_ref01_' + setup.now };
         typebot_ref01_data_up0[typebot_ref01_markdef_up0.name] = typebot_ref01_markdef_up0.value;
-        const typebot_ref01_resdata_up0 = await typebot_ref01_ent.update(typebot_ref01_data_up0);
+        const typebot_ref01_resdata_up0 = (await typebot_ref01_ent.update(typebot_ref01_data_up0)).data();
         (0, node_assert_1.default)(typebot_ref01_resdata_up0.id === typebot_ref01_data_up0.id);
         (0, node_assert_1.default)(typebot_ref01_resdata_up0[typebot_ref01_markdef_up0.name] === typebot_ref01_markdef_up0.value);
         // LOAD
         const typebot_ref01_match_dt0 = {};
         typebot_ref01_match_dt0.id = typebot_ref01_data.id;
-        const typebot_ref01_data_dt0 = await typebot_ref01_ent.load(typebot_ref01_match_dt0);
+        const typebot_ref01_data_dt0 = (await typebot_ref01_ent.load(typebot_ref01_match_dt0)).data();
         (0, node_assert_1.default)(typebot_ref01_data_dt0.id === typebot_ref01_data.id);
         // REMOVE
         const typebot_ref01_match_rm0 = { id: typebot_ref01_data.id };
         await typebot_ref01_ent.remove(typebot_ref01_match_rm0);
         // LIST
         const typebot_ref01_match_rt0 = {};
-        const typebot_ref01_list_rt0 = await typebot_ref01_ent.list(typebot_ref01_match_rt0);
+        const typebot_ref01_list_rt0 = (await typebot_ref01_ent.list(typebot_ref01_match_rt0)).map((e) => e.data());
         (0, node_assert_1.default)(isempty(select(typebot_ref01_list_rt0, { id: typebot_ref01_data.id })));
     });
 });

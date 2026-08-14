@@ -72,6 +72,7 @@ declare class Config {
                                 example?: undefined;
                             })[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -122,6 +123,7 @@ declare class Config {
                                 type: string;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -152,6 +154,7 @@ declare class Config {
                                 type: string;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -201,6 +204,7 @@ declare class Config {
                     points: {
                         active: boolean;
                         args: {};
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -228,6 +232,7 @@ declare class Config {
                                 type: string;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -266,6 +271,7 @@ declare class Config {
                                 type: string;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -301,6 +307,7 @@ declare class Config {
                                 index$: number;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -336,6 +343,7 @@ declare class Config {
                                 index$: number;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -363,13 +371,25 @@ declare class Config {
             };
         };
         result: {
-            fields: {
+            fields: ({
                 active: boolean;
                 name: string;
                 req: boolean;
                 type: string;
                 index$: number;
-            }[];
+                union?: undefined;
+            } | {
+                active: boolean;
+                name: string;
+                req: boolean;
+                type: string;
+                union: {
+                    branches: number;
+                    count: number;
+                    depth: number;
+                };
+                index$: number;
+            })[];
             name: string;
             op: {
                 list: {
@@ -413,6 +433,7 @@ declare class Config {
                                 type: string;
                             })[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -444,6 +465,7 @@ declare class Config {
                             }[];
                             query?: undefined;
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -481,6 +503,7 @@ declare class Config {
                                 index$: number;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -517,6 +540,7 @@ declare class Config {
                                 index$: number;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -548,6 +572,19 @@ declare class Config {
                 req: boolean;
                 type: string;
                 index$: number;
+                union?: undefined;
+                op?: undefined;
+            } | {
+                active: boolean;
+                name: string;
+                req: boolean;
+                type: string;
+                union: {
+                    branches: number;
+                    count: number;
+                    depth: number;
+                };
+                index$: number;
                 op?: undefined;
             } | {
                 active: boolean;
@@ -564,6 +601,11 @@ declare class Config {
                 };
                 req: boolean;
                 type: string;
+                union: {
+                    branches: number;
+                    count: number;
+                    depth: number;
+                };
                 index$: number;
             })[];
             name: string;
@@ -584,6 +626,7 @@ declare class Config {
                                 index$: number;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -606,6 +649,7 @@ declare class Config {
                         args: {
                             params?: undefined;
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -626,6 +670,7 @@ declare class Config {
                         args: {
                             params?: undefined;
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -659,6 +704,7 @@ declare class Config {
                                 type: string;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -698,6 +744,7 @@ declare class Config {
                                 type: string;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -736,6 +783,7 @@ declare class Config {
                                 type: string;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -772,6 +820,7 @@ declare class Config {
                                 index$: number;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -807,6 +856,7 @@ declare class Config {
                                 index$: number;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -879,6 +929,7 @@ declare class Config {
                     points: {
                         active: boolean;
                         args: {};
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -906,6 +957,7 @@ declare class Config {
                                 type: string;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -928,6 +980,7 @@ declare class Config {
                         args: {
                             params?: undefined;
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -960,6 +1013,7 @@ declare class Config {
                                 index$: number;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -995,6 +1049,7 @@ declare class Config {
                                 index$: number;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];
@@ -1030,6 +1085,7 @@ declare class Config {
                                 index$: number;
                             }[];
                         };
+                        kind: string;
                         method: string;
                         orig: string;
                         parts: string[];

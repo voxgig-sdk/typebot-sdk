@@ -58,13 +58,16 @@ const client = new TypebotSDK({
   apikey: process.env.TYPEBOT_APIKEY,
 })
 
-// List the workspaces this token can see (returns Workspace[])
+// List the workspaces this token can see (returns WorkspaceEntity[])
 const workspaces = await client.Workspace().list()
 console.log(workspaces)
 
-// List the typebots in the first one (returns Typebot[])
+// Operations return ENTITIES — call data() for the record itself.
+const first = workspaces[0]
+
+// List the typebots in that workspace (returns TypebotEntity[])
 const typebots = await client.Typebot().list({
-  workspace_id: workspaces[0]?.id,
+  workspaceId: first ? first.data().id : undefined,
 })
 console.log(typebots)
 ```

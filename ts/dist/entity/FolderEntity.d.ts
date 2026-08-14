@@ -5,10 +5,10 @@ import type { Folder, FolderLoadMatch, FolderListMatch, FolderCreateData, Folder
 declare class FolderEntity extends TypebotEntityBase<Folder> {
     constructor(client: TypebotSDK, entopts: any);
     make(this: FolderEntity): FolderEntity;
-    load(this: any, reqmatch?: FolderLoadMatch, ctrl?: Control): Promise<Folder>;
-    list(this: any, reqmatch?: FolderListMatch, ctrl?: Control): Promise<Folder[]>;
-    create(this: any, reqdata?: FolderCreateData, ctrl?: Control): Promise<Folder>;
-    update(this: any, reqdata?: FolderUpdateData, ctrl?: Control): Promise<Folder>;
-    remove(this: any, reqmatch?: FolderRemoveMatch, ctrl?: Control): Promise<Folder>;
+    load(this: any, reqmatch?: FolderLoadMatch, ctrl?: Control): Promise<FolderEntity>;
+    list(this: any, reqmatch?: FolderListMatch, ctrl?: Control): Promise<FolderEntity[]>;
+    create(this: any, reqdata?: FolderCreateData, ctrl?: Control): Promise<FolderEntity>;
+    update(this: any, reqdata?: FolderUpdateData, ctrl?: Control): Promise<FolderEntity>;
+    remove(this: any, reqmatch?: FolderRemoveMatch, ctrl?: Control): Promise<FolderEntity>;
 }
 export { FolderEntity };

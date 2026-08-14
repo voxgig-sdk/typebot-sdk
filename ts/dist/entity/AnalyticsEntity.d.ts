@@ -5,6 +5,6 @@ import type { Analytics, AnalyticsLoadMatch } from '../TypebotTypes';
 declare class AnalyticsEntity extends TypebotEntityBase<Analytics> {
     constructor(client: TypebotSDK, entopts: any);
     make(this: AnalyticsEntity): AnalyticsEntity;
-    load(this: any, reqmatch?: AnalyticsLoadMatch, ctrl?: Control): Promise<Analytics>;
+    load(this: any, reqmatch?: AnalyticsLoadMatch, ctrl?: Control): Promise<AnalyticsEntity>;
 }
 export { AnalyticsEntity };
