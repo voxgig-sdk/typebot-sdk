@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `js`, `lua`, `php`, `py` — see
 > the [top-level README](../README.md).
 
 
@@ -389,7 +389,7 @@ API path: `/v1/typebots/{typebotId}/results`
 | `isClosed` |  |
 | `message` |  |
 | `name` |  |
-| `overwrite` |  |
+| `overwrite` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` |  |
 | `publishedTypebot` |  |
 | `publishedTypebotId` |  |
@@ -402,10 +402,10 @@ API path: `/v1/typebots/{typebotId}/results`
 | `typebot` |  |
 | `updatedAt` |  |
 | `variables` |  |
-| `version` |  |
+| `version` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `warnings` |  |
 | `whatsAppCredentialsId` |  |
-| `workspaceId` |  |
+| `workspaceId` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 Operations: create, list, load, remove, update.
 
@@ -638,7 +638,7 @@ Create an instance: `const typebot = client.Typebot()`
 | `isClosed` | `boolean` |  |
 | `message` | `any` |  |
 | `name` | `string` |  |
-| `overwrite` | `boolean` |  |
+| `overwrite` | `boolean` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `any` |  |
 | `publishedTypebot` | `any` |  |
 | `publishedTypebotId` | `string` |  |
@@ -651,10 +651,10 @@ Create an instance: `const typebot = client.Typebot()`
 | `typebot` | `Record<string, any>` |  |
 | `updatedAt` | `string` |  |
 | `variables` | `any[]` |  |
-| `version` | `any` |  |
+| `version` | `any` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `warnings` | `any[]` |  |
 | `whatsAppCredentialsId` | `any` |  |
-| `workspaceId` | `string` |  |
+| `workspaceId` | `string` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 #### Example: Load
 

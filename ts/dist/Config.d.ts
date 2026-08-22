@@ -1,8 +1,12 @@
 import { BaseFeature } from './feature/base/BaseFeature';
 declare class Config {
     makeFeature(this: any, fn: string): BaseFeature;
+    hasFeature(this: any, fn: string): boolean;
     main: {
         name: string;
+        slug: string;
+        version: string;
+        target: string;
     };
     feature: {
         test: {
@@ -31,11 +35,9 @@ declare class Config {
     entity: {
         analytics: {
             fields: {
-                active: boolean;
                 name: string;
                 req: boolean;
                 type: string;
-                index$: number;
             }[];
             name: string;
             op: {
@@ -43,31 +45,24 @@ declare class Config {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                             query: ({
-                                active: boolean;
                                 example: string;
                                 kind: string;
                                 name: string;
                                 orig: string;
-                                reqd: boolean;
                                 type: string;
                             } | {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
-                                reqd: boolean;
                                 type: string;
                                 example?: undefined;
                             })[];
@@ -89,9 +84,7 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
             };
             relations: {
@@ -100,11 +93,9 @@ declare class Config {
         };
         billing: {
             fields: {
-                active: boolean;
                 name: string;
                 req: boolean;
                 type: string;
-                index$: number;
             }[];
             name: string;
             op: {
@@ -112,10 +103,8 @@ declare class Config {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             query: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
@@ -135,18 +124,14 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 load: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             query: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
@@ -166,9 +151,7 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
             };
             relations: {
@@ -177,24 +160,24 @@ declare class Config {
         };
         folder: {
             fields: ({
-                active: boolean;
                 name: string;
                 req: boolean;
                 type: string;
-                index$: number;
                 op?: undefined;
             } | {
-                active: boolean;
+                name: string;
+                type: string;
+                req?: undefined;
+                op?: undefined;
+            } | {
                 name: string;
                 op: {
                     create: {
-                        req: boolean;
                         type: string;
                     };
                 };
                 req: boolean;
                 type: string;
-                index$: number;
             })[];
             name: string;
             op: {
@@ -202,7 +185,6 @@ declare class Config {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {};
                         kind: string;
                         method: string;
@@ -213,24 +195,26 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 list: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
-                            query: {
-                                active: boolean;
+                            query: ({
+                                kind: string;
+                                name: string;
+                                orig: string;
+                                type: string;
+                                reqd?: undefined;
+                            } | {
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                            }[];
+                            })[];
                         };
                         kind: string;
                         method: string;
@@ -243,27 +227,21 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 load: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                             query: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
@@ -287,24 +265,19 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 remove: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                         };
                         kind: string;
@@ -323,24 +296,19 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 update: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                         };
                         kind: string;
@@ -361,9 +329,7 @@ declare class Config {
                             };
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
             };
             relations: {
@@ -372,14 +338,11 @@ declare class Config {
         };
         result: {
             fields: ({
-                active: boolean;
                 name: string;
                 req: boolean;
                 type: string;
-                index$: number;
                 union?: undefined;
             } | {
-                active: boolean;
                 name: string;
                 req: boolean;
                 type: string;
@@ -388,7 +351,6 @@ declare class Config {
                     count: number;
                     depth: number;
                 };
-                index$: number;
             })[];
             name: string;
             op: {
@@ -396,40 +358,31 @@ declare class Config {
                     input: string;
                     name: string;
                     points: ({
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                             query: ({
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
-                                reqd: boolean;
                                 type: string;
                                 example?: undefined;
                             } | {
-                                active: boolean;
                                 example: number;
                                 kind: string;
                                 name: string;
                                 orig: string;
-                                reqd: boolean;
                                 type: string;
                             } | {
-                                active: boolean;
                                 example: string;
                                 kind: string;
                                 name: string;
                                 orig: string;
-                                reqd: boolean;
                                 type: string;
                             })[];
                         };
@@ -451,12 +404,9 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     } | {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
@@ -483,24 +433,19 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     })[];
-                    key$: string;
                 };
                 load: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                         };
                         kind: string;
@@ -520,24 +465,19 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 remove: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                         };
                         kind: string;
@@ -556,9 +496,7 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
             };
             relations: {
@@ -567,15 +505,13 @@ declare class Config {
         };
         typebot: {
             fields: ({
-                active: boolean;
                 name: string;
                 req: boolean;
                 type: string;
-                index$: number;
                 union?: undefined;
+                short?: undefined;
                 op?: undefined;
             } | {
-                active: boolean;
                 name: string;
                 req: boolean;
                 type: string;
@@ -584,10 +520,23 @@ declare class Config {
                     count: number;
                     depth: number;
                 };
-                index$: number;
+                short?: undefined;
                 op?: undefined;
             } | {
-                active: boolean;
+                name: string;
+                type: string;
+                req?: undefined;
+                union?: undefined;
+                short?: undefined;
+                op?: undefined;
+            } | {
+                name: string;
+                short: string;
+                type: string;
+                req?: undefined;
+                union?: undefined;
+                op?: undefined;
+            } | {
                 name: string;
                 op: {
                     create: {
@@ -599,14 +548,21 @@ declare class Config {
                         type: string;
                     };
                 };
-                req: boolean;
+                short: string;
                 type: string;
                 union: {
                     branches: number;
                     count: number;
                     depth: number;
                 };
-                index$: number;
+                req?: undefined;
+            } | {
+                name: string;
+                req: boolean;
+                short: string;
+                type: string;
+                union?: undefined;
+                op?: undefined;
             })[];
             name: string;
             op: {
@@ -614,16 +570,13 @@ declare class Config {
                     input: string;
                     name: string;
                     points: ({
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                         };
                         kind: string;
@@ -643,9 +596,7 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     } | {
-                        active: boolean;
                         args: {
                             params?: undefined;
                         };
@@ -663,10 +614,8 @@ declare class Config {
                             };
                             res: string;
                         };
-                        index$: number;
                         rename?: undefined;
                     } | {
-                        active: boolean;
                         args: {
                             params?: undefined;
                         };
@@ -684,25 +633,27 @@ declare class Config {
                             };
                             res: string;
                         };
-                        index$: number;
                         rename?: undefined;
                     })[];
-                    key$: string;
                 };
                 list: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
-                            query: {
-                                active: boolean;
+                            query: ({
+                                kind: string;
+                                name: string;
+                                orig: string;
+                                type: string;
+                                reqd?: undefined;
+                            } | {
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                            }[];
+                            })[];
                         };
                         kind: string;
                         method: string;
@@ -715,32 +666,25 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 load: {
                     input: string;
                     name: string;
                     points: ({
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                             query: {
-                                active: boolean;
                                 example: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
-                                reqd: boolean;
                                 type: string;
                             }[];
                         };
@@ -761,12 +705,9 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     } | {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
@@ -774,12 +715,10 @@ declare class Config {
                                 type: string;
                             }[];
                             query: {
-                                active: boolean;
                                 example: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
-                                reqd: boolean;
                                 type: string;
                             }[];
                         };
@@ -800,24 +739,19 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     })[];
-                    key$: string;
                 };
                 remove: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                         };
                         kind: string;
@@ -836,24 +770,19 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 update: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                         };
                         kind: string;
@@ -874,9 +803,7 @@ declare class Config {
                             };
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
             };
             relations: {
@@ -885,41 +812,32 @@ declare class Config {
         };
         workspace: {
             fields: ({
-                active: boolean;
                 name: string;
                 req: boolean;
                 type: string;
-                index$: number;
                 op?: undefined;
             } | {
-                active: boolean;
                 name: string;
                 op: {
                     create: {
-                        req: boolean;
                         type: string;
                     };
                     update: {
-                        req: boolean;
                         type: string;
                     };
                 };
                 req: boolean;
                 type: string;
-                index$: number;
             } | {
-                active: boolean;
                 name: string;
                 op: {
                     update: {
-                        req: boolean;
                         type: string;
                     };
                     create?: undefined;
                 };
                 req: boolean;
                 type: string;
-                index$: number;
             })[];
             name: string;
             op: {
@@ -927,7 +845,6 @@ declare class Config {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {};
                         kind: string;
                         method: string;
@@ -938,18 +855,14 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 list: {
                     input: string;
                     name: string;
                     points: ({
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
@@ -974,9 +887,7 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     } | {
-                        active: boolean;
                         args: {
                             params?: undefined;
                         };
@@ -992,25 +903,20 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                         rename?: undefined;
                     })[];
-                    key$: string;
                 };
                 load: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                         };
                         kind: string;
@@ -1029,24 +935,19 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 remove: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                         };
                         kind: string;
@@ -1065,24 +966,19 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
                 update: {
                     input: string;
                     name: string;
                     points: {
-                        active: boolean;
                         args: {
                             params: {
-                                active: boolean;
                                 kind: string;
                                 name: string;
                                 orig: string;
                                 reqd: boolean;
                                 type: string;
-                                index$: number;
                             }[];
                         };
                         kind: string;
@@ -1101,9 +997,7 @@ declare class Config {
                             req: string;
                             res: string;
                         };
-                        index$: number;
                     }[];
-                    key$: string;
                 };
             };
             relations: {

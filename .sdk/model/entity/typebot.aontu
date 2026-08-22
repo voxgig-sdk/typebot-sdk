@@ -98,6 +98,7 @@ main: kit: entity: typebot: {
     {
       name: "overwrite"
       req: false
+      short: "If true, even if we detect a conflict, we will overwrite push the updates to the typebot"
       type: "`$BOOLEAN`"
     }
     {
@@ -193,6 +194,7 @@ main: kit: entity: typebot: {
         }
       }
       req: false
+      short: "Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`."
       type: "`$ANY`"
       union: {
         branches: 2
@@ -213,6 +215,7 @@ main: kit: entity: typebot: {
     {
       name: "workspaceId"
       req: true
+      short: "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)"
       type: "`$STRING`"
     }
   ]

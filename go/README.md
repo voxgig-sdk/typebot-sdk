@@ -6,7 +6,7 @@ The Golang SDK for the Typebot API — an entity-oriented client using standard 
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Analytics(nil)` — each with the same small set of operations (`List`, `Load`, `Create`, `Update`, `Remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `js`, `lua`, `php`, `py`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -356,7 +356,7 @@ API path: `/v1/typebots/{typebotId}/results`
 | `"isClosed"` |  |
 | `"message"` |  |
 | `"name"` |  |
-| `"overwrite"` |  |
+| `"overwrite"` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `"publicId"` |  |
 | `"publishedTypebot"` |  |
 | `"publishedTypebotId"` |  |
@@ -369,10 +369,10 @@ API path: `/v1/typebots/{typebotId}/results`
 | `"typebot"` |  |
 | `"updatedAt"` |  |
 | `"variables"` |  |
-| `"version"` |  |
+| `"version"` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `"warnings"` |  |
 | `"whatsAppCredentialsId"` |  |
-| `"workspaceId"` |  |
+| `"workspaceId"` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -637,7 +637,7 @@ Create an instance: `typebot := client.Typebot(nil)`
 | `isClosed` | `bool` |  |
 | `message` | `any` |  |
 | `name` | `string` |  |
-| `overwrite` | `bool` |  |
+| `overwrite` | `bool` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `any` |  |
 | `publishedTypebot` | `any` |  |
 | `publishedTypebotId` | `string` |  |
@@ -650,10 +650,10 @@ Create an instance: `typebot := client.Typebot(nil)`
 | `typebot` | `map[string]any` |  |
 | `updatedAt` | `string` |  |
 | `variables` | `[]any` |  |
-| `version` | `any` |  |
+| `version` | `any` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `warnings` | `[]any` |  |
 | `whatsAppCredentialsId` | `any` |  |
-| `workspaceId` | `string` |  |
+| `workspaceId` | `string` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 #### Example: Load
 

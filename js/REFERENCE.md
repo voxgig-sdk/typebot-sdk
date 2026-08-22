@@ -500,7 +500,7 @@ const typebot = client.Typebot()
 | `isClosed` | `boolean` | Yes |  |
 | `message` | `*` | Yes |  |
 | `name` | `string` | Yes |  |
-| `overwrite` | `boolean` | No |  |
+| `overwrite` | `boolean` | No | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `*` | Yes |  |
 | `publishedTypebot` | `*` | Yes |  |
 | `publishedTypebotId` | `string` | No |  |
@@ -513,10 +513,10 @@ const typebot = client.Typebot()
 | `typebot` | `Object` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 | `variables` | `Array` | Yes |  |
-| `version` | `*` | No |  |
+| `version` | `*` | No | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `warnings` | `Array` | No |  |
 | `whatsAppCredentialsId` | `*` | Yes |  |
-| `workspaceId` | `string` | Yes |  |
+| `workspaceId` | `string` | Yes | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 ### Field Usage by Operation
 

@@ -324,7 +324,7 @@ API path: `/v1/typebots/{typebotId}/results`
 | `isClosed` |  |
 | `message` |  |
 | `name` |  |
-| `overwrite` |  |
+| `overwrite` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` |  |
 | `publishedTypebot` |  |
 | `publishedTypebotId` |  |
@@ -337,10 +337,10 @@ API path: `/v1/typebots/{typebotId}/results`
 | `typebot` |  |
 | `updatedAt` |  |
 | `variables` |  |
-| `version` |  |
+| `version` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `warnings` |  |
 | `whatsAppCredentialsId` |  |
-| `workspaceId` |  |
+| `workspaceId` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -573,7 +573,7 @@ Create an instance: `local typebot = client:Typebot(nil)`
 | `isClosed` | `boolean` |  |
 | `message` | `any` |  |
 | `name` | `string` |  |
-| `overwrite` | `boolean` |  |
+| `overwrite` | `boolean` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `any` |  |
 | `publishedTypebot` | `any` |  |
 | `publishedTypebotId` | `string` |  |
@@ -586,10 +586,10 @@ Create an instance: `local typebot = client:Typebot(nil)`
 | `typebot` | `table` |  |
 | `updatedAt` | `string` |  |
 | `variables` | `table` |  |
-| `version` | `any` |  |
+| `version` | `any` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `warnings` | `table` |  |
 | `whatsAppCredentialsId` | `any` |  |
-| `workspaceId` | `string` |  |
+| `workspaceId` | `string` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 #### Example: Load
 

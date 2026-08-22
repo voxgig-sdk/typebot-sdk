@@ -474,7 +474,7 @@ fmt.Println(typebot.GetName()) // "typebot"
 | `isClosed` | `bool` | Yes |  |
 | `message` | `any` | Yes |  |
 | `name` | `string` | Yes |  |
-| `overwrite` | `bool` | No |  |
+| `overwrite` | `bool` | No | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `any` | Yes |  |
 | `publishedTypebot` | `any` | Yes |  |
 | `publishedTypebotId` | `string` | No |  |
@@ -487,10 +487,10 @@ fmt.Println(typebot.GetName()) // "typebot"
 | `typebot` | `map[string]any` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 | `variables` | `[]any` | Yes |  |
-| `version` | `any` | No |  |
+| `version` | `any` | No | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `warnings` | `[]any` | No |  |
 | `whatsAppCredentialsId` | `any` | Yes |  |
-| `workspaceId` | `string` | Yes |  |
+| `workspaceId` | `string` | Yes | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 ### Field Usage by Operation
 

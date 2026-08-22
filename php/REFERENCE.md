@@ -444,7 +444,7 @@ $typebot = $client->Typebot();
 | `isClosed` | `bool` | Yes |  |
 | `message` | `mixed` | Yes |  |
 | `name` | `string` | Yes |  |
-| `overwrite` | `bool` | No |  |
+| `overwrite` | `bool` | No | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `mixed` | Yes |  |
 | `publishedTypebot` | `mixed` | Yes |  |
 | `publishedTypebotId` | `string` | No |  |
@@ -457,10 +457,10 @@ $typebot = $client->Typebot();
 | `typebot` | `array` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 | `variables` | `array` | Yes |  |
-| `version` | `mixed` | No |  |
+| `version` | `mixed` | No | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `warnings` | `array` | No |  |
 | `whatsAppCredentialsId` | `mixed` | Yes |  |
-| `workspaceId` | `string` | Yes |  |
+| `workspaceId` | `string` | Yes | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 ### Field Usage by Operation
 

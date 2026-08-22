@@ -387,7 +387,7 @@ API path: `/v1/typebots/{typebotId}/results`
 | `isClosed` |  |
 | `message` |  |
 | `name` |  |
-| `overwrite` |  |
+| `overwrite` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` |  |
 | `publishedTypebot` |  |
 | `publishedTypebotId` |  |
@@ -400,10 +400,10 @@ API path: `/v1/typebots/{typebotId}/results`
 | `typebot` |  |
 | `updatedAt` |  |
 | `variables` |  |
-| `version` |  |
+| `version` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `warnings` |  |
 | `whatsAppCredentialsId` |  |
-| `workspaceId` |  |
+| `workspaceId` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 Operations: create, list, load, remove, update.
 
@@ -636,7 +636,7 @@ Create an instance: `const typebot = client.Typebot()`
 | `isClosed` | `boolean` |  |
 | `message` | `*` |  |
 | `name` | `string` |  |
-| `overwrite` | `boolean` |  |
+| `overwrite` | `boolean` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `*` |  |
 | `publishedTypebot` | `*` |  |
 | `publishedTypebotId` | `string` |  |
@@ -649,10 +649,10 @@ Create an instance: `const typebot = client.Typebot()`
 | `typebot` | `Object` |  |
 | `updatedAt` | `string` |  |
 | `variables` | `Array` |  |
-| `version` | `*` |  |
+| `version` | `*` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
 | `warnings` | `Array` |  |
 | `whatsAppCredentialsId` | `*` |  |
-| `workspaceId` | `string` |  |
+| `workspaceId` | `string` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
 
 #### Example: Load
 

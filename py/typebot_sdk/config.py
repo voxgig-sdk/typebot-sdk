@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "Typebot",
+            "slug": "typebot",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -57,25 +60,19 @@ def make_config():
       "analytics": {
         "fields": [
           {
-            "active": True,
             "name": "totalCompleted",
             "req": True,
             "type": "`$NUMBER`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "totalStarts",
             "req": True,
             "type": "`$NUMBER`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "totalViews",
             "req": True,
             "type": "`$NUMBER`",
-            "index$": 2,
           },
         ],
         "name": "analytics",
@@ -85,35 +82,28 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "typebot_id",
                       "orig": "typebot_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                   "query": [
                     {
-                      "active": True,
                       "example": "last7Days",
                       "kind": "query",
                       "name": "time_filter",
                       "orig": "time_filter",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "time_zone",
                       "orig": "time_zone",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -145,10 +135,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.stats`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -162,53 +150,39 @@ def make_config():
       "billing": {
         "fields": [
           {
-            "active": True,
             "name": "amount",
             "req": True,
             "type": "`$NUMBER`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "currency",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "date",
             "req": True,
             "type": "`$ANY`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "id",
             "req": True,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "resetsAt",
             "req": True,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "totalChatsUsed",
             "req": True,
             "type": "`$NUMBER`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "url",
             "req": True,
             "type": "`$STRING`",
-            "index$": 6,
           },
         ],
         "name": "billing",
@@ -218,11 +192,9 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "workspace_id",
                       "orig": "workspace_id",
@@ -249,21 +221,17 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.invoices`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "workspace_id",
                       "orig": "workspace_id",
@@ -290,10 +258,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -303,72 +269,53 @@ def make_config():
       "folder": {
         "fields": [
           {
-            "active": True,
             "name": "createdAt",
             "req": True,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "folder",
             "req": True,
             "type": "`$OBJECT`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "folderName",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "id",
             "op": {
               "create": {
-                "req": False,
                 "type": "`$STRING`",
               },
             },
             "req": True,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "name",
             "req": True,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "parentFolderId",
             "op": {
               "create": {
-                "req": False,
                 "type": "`$STRING`",
               },
             },
             "req": True,
             "type": "`$ANY`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "updatedAt",
             "req": True,
             "type": "`$STRING`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "workspaceId",
             "req": True,
             "type": "`$STRING`",
-            "index$": 7,
           },
         ],
         "name": "folder",
@@ -378,7 +325,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -392,29 +338,23 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.folder`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "create",
           },
           "list": {
             "input": "data",
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "parent_folder_id",
                       "orig": "parent_folder_id",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "workspace_id",
                       "orig": "workspace_id",
@@ -440,32 +380,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.folders`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "folder_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "workspace_id",
                       "orig": "workspace_id",
@@ -497,27 +431,22 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.folder`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
           "remove": {
             "input": "data",
             "name": "remove",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "folder_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -543,27 +472,22 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.folder`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "remove",
           },
           "update": {
             "input": "data",
             "name": "update",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "folder_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -591,10 +515,8 @@ def make_config():
                   },
                   "res": "`body.folder`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "update",
           },
         },
         "relations": {
@@ -604,98 +526,71 @@ def make_config():
       "result": {
         "fields": [
           {
-            "active": True,
             "name": "answers",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "context",
             "req": True,
             "type": "`$ANY`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "createdAt",
             "req": True,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "description",
             "req": True,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "details",
             "req": True,
             "type": "`$ANY`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "hasStarted",
             "req": True,
             "type": "`$ANY`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "id",
             "req": True,
             "type": "`$STRING`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "isArchived",
             "req": True,
             "type": "`$ANY`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "isCompleted",
             "req": True,
             "type": "`$BOOLEAN`",
-            "index$": 8,
           },
           {
-            "active": True,
             "name": "lastChatSessionId",
             "req": True,
             "type": "`$ANY`",
-            "index$": 9,
           },
           {
-            "active": True,
             "name": "resultId",
             "req": True,
             "type": "`$STRING`",
-            "index$": 10,
           },
           {
-            "active": True,
             "name": "status",
             "req": True,
             "type": "`$STRING`",
-            "index$": 11,
           },
           {
-            "active": True,
             "name": "typebotId",
             "req": True,
             "type": "`$STRING`",
-            "index$": 12,
           },
           {
-            "active": True,
             "name": "variables",
             "req": True,
             "type": "`$ARRAY`",
@@ -704,7 +599,6 @@ def make_config():
               "count": 1,
               "depth": 3,
             },
-            "index$": 13,
           },
         ],
         "name": "result",
@@ -714,52 +608,41 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "typebot_id",
                       "orig": "typebot_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "cursor",
                       "orig": "cursor",
-                      "reqd": False,
                       "type": "`$NUMBER`",
                     },
                     {
-                      "active": True,
                       "example": 50,
                       "kind": "query",
                       "name": "limit",
                       "orig": "limit",
-                      "reqd": False,
                       "type": "`$NUMBER`",
                     },
                     {
-                      "active": True,
                       "example": "last7Days",
                       "kind": "query",
                       "name": "time_filter",
                       "orig": "time_filter",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "time_zone",
                       "orig": "time_zone",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -791,14 +674,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "result_id",
@@ -806,7 +686,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "typebot_id",
                       "orig": "typebot_id",
@@ -843,36 +722,29 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.logs`",
                 },
-                "index$": 1,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "result_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "typebot_id",
                       "orig": "typebot_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 1,
                     },
                   ],
                 },
@@ -902,27 +774,22 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.result`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
           "remove": {
             "input": "data",
             "name": "remove",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "typebot_id",
                       "orig": "typebot_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -949,10 +816,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "remove",
           },
         },
         "relations": {
@@ -966,28 +831,21 @@ def make_config():
       "typebot": {
         "fields": [
           {
-            "active": True,
             "name": "accessRight",
             "req": True,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "createdAt",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "customDomain",
             "req": True,
             "type": "`$ANY`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "edges",
             "req": True,
             "type": "`$ARRAY`",
@@ -996,17 +854,12 @@ def make_config():
               "count": 1,
               "depth": 3,
             },
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "enableSafetyFlags",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "events",
             "req": True,
             "type": "`$ARRAY`",
@@ -1015,24 +868,17 @@ def make_config():
               "count": 1,
               "depth": 1,
             },
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "folderId",
             "req": True,
             "type": "`$ANY`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "fromTemplate",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "groups",
             "req": True,
             "type": "`$ARRAY`",
@@ -1041,66 +887,48 @@ def make_config():
               "count": 31,
               "depth": 14,
             },
-            "index$": 8,
           },
           {
-            "active": True,
             "name": "icon",
             "req": True,
             "type": "`$ANY`",
-            "index$": 9,
           },
           {
-            "active": True,
             "name": "id",
             "req": True,
             "type": "`$STRING`",
-            "index$": 10,
           },
           {
-            "active": True,
             "name": "isArchived",
             "req": True,
             "type": "`$BOOLEAN`",
-            "index$": 11,
           },
           {
-            "active": True,
             "name": "isClosed",
             "req": True,
             "type": "`$BOOLEAN`",
-            "index$": 12,
           },
           {
-            "active": True,
             "name": "message",
             "req": True,
             "type": "`$ANY`",
-            "index$": 13,
           },
           {
-            "active": True,
             "name": "name",
             "req": True,
             "type": "`$STRING`",
-            "index$": 14,
           },
           {
-            "active": True,
             "name": "overwrite",
-            "req": False,
+            "short": "If true, even if we detect a conflict, we will overwrite push the updates to the typebot",
             "type": "`$BOOLEAN`",
-            "index$": 15,
           },
           {
-            "active": True,
             "name": "publicId",
             "req": True,
             "type": "`$ANY`",
-            "index$": 16,
           },
           {
-            "active": True,
             "name": "publishedTypebot",
             "req": True,
             "type": "`$ANY`",
@@ -1109,52 +937,37 @@ def make_config():
               "count": 51,
               "depth": 20,
             },
-            "index$": 17,
           },
           {
-            "active": True,
             "name": "publishedTypebotId",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 18,
           },
           {
-            "active": True,
             "name": "resultsTablePreferences",
             "req": True,
             "type": "`$ANY`",
-            "index$": 19,
           },
           {
-            "active": True,
             "name": "riskLevel",
             "req": True,
             "type": "`$ANY`",
-            "index$": 20,
           },
           {
-            "active": True,
             "name": "selectedThemeTemplateId",
             "req": True,
             "type": "`$ANY`",
-            "index$": 21,
           },
           {
-            "active": True,
             "name": "settings",
             "req": True,
             "type": "`$OBJECT`",
-            "index$": 22,
           },
           {
-            "active": True,
             "name": "spaceId",
             "req": True,
             "type": "`$ANY`",
-            "index$": 23,
           },
           {
-            "active": True,
             "name": "theme",
             "req": True,
             "type": "`$OBJECT`",
@@ -1163,10 +976,8 @@ def make_config():
               "count": 2,
               "depth": 6,
             },
-            "index$": 24,
           },
           {
-            "active": True,
             "name": "typebot",
             "req": True,
             "type": "`$OBJECT`",
@@ -1175,17 +986,13 @@ def make_config():
               "count": 88,
               "depth": 24,
             },
-            "index$": 25,
           },
           {
-            "active": True,
             "name": "updatedAt",
             "req": True,
             "type": "`$STRING`",
-            "index$": 26,
           },
           {
-            "active": True,
             "name": "variables",
             "req": True,
             "type": "`$ARRAY`",
@@ -1194,10 +1001,8 @@ def make_config():
               "count": 1,
               "depth": 5,
             },
-            "index$": 27,
           },
           {
-            "active": True,
             "name": "version",
             "op": {
               "create": {
@@ -1209,35 +1014,28 @@ def make_config():
                 "type": "`$STRING`",
               },
             },
-            "req": False,
+            "short": "Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`.",
             "type": "`$ANY`",
             "union": {
               "branches": 2,
               "count": 1,
               "depth": 0,
             },
-            "index$": 28,
           },
           {
-            "active": True,
             "name": "warnings",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 29,
           },
           {
-            "active": True,
             "name": "whatsAppCredentialsId",
             "req": True,
             "type": "`$ANY`",
-            "index$": 30,
           },
           {
-            "active": True,
             "name": "workspaceId",
             "req": True,
+            "short": "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)",
             "type": "`$STRING`",
-            "index$": 31,
           },
         ],
         "name": "typebot",
@@ -1247,17 +1045,14 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "typebot_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -1285,20 +1080,16 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "typebot_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -1326,10 +1117,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 1,
               },
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -1345,10 +1134,8 @@ def make_config():
                   },
                   "res": "`body.typebot`",
                 },
-                "index$": 2,
               },
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -1367,29 +1154,23 @@ def make_config():
                   },
                   "res": "`body.typebot`",
                 },
-                "index$": 3,
               },
             ],
-            "key$": "create",
           },
           "list": {
             "input": "data",
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "folder_id",
                       "orig": "folder_id",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "workspace_id",
                       "orig": "workspace_id",
@@ -1415,37 +1196,30 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.typebots`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "typebot_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                   "query": [
                     {
-                      "active": True,
                       "example": False,
                       "kind": "query",
                       "name": "migrate_to_latest_version",
                       "orig": "migrate_to_latest_version",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                   ],
@@ -1473,14 +1247,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.typebot`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "typebot_id",
@@ -1490,12 +1261,10 @@ def make_config():
                   ],
                   "query": [
                     {
-                      "active": True,
                       "example": False,
                       "kind": "query",
                       "name": "migrate_to_latest_version",
                       "orig": "migrate_to_latest_version",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                   ],
@@ -1525,27 +1294,22 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 1,
               },
             ],
-            "key$": "load",
           },
           "remove": {
             "input": "data",
             "name": "remove",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "typebot_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -1571,27 +1335,22 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "remove",
           },
           "update": {
             "input": "data",
             "name": "update",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "typebot_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -1619,10 +1378,8 @@ def make_config():
                   },
                   "res": "`body.typebot`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "update",
           },
         },
         "relations": {
@@ -1632,167 +1389,122 @@ def make_config():
       "workspace": {
         "fields": [
           {
-            "active": True,
             "name": "chatsHardLimit",
             "req": True,
             "type": "`$ANY`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "createdAt",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "customChatsLimit",
             "req": True,
             "type": "`$ANY`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "customSeatsLimit",
             "req": True,
             "type": "`$ANY`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "icon",
             "op": {
               "create": {
-                "req": False,
                 "type": "`$STRING`",
               },
               "update": {
-                "req": False,
                 "type": "`$STRING`",
               },
             },
             "req": True,
             "type": "`$ANY`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "id",
             "req": True,
             "type": "`$STRING`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "inactiveFirstEmailSentAt",
             "req": True,
             "type": "`$ANY`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "inactiveSecondEmailSentAt",
             "req": True,
             "type": "`$ANY`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "isPastDue",
             "req": True,
             "type": "`$BOOLEAN`",
-            "index$": 8,
           },
           {
-            "active": True,
             "name": "isSuspended",
             "req": True,
             "type": "`$BOOLEAN`",
-            "index$": 9,
           },
           {
-            "active": True,
             "name": "isVerified",
             "req": True,
             "type": "`$ANY`",
-            "index$": 10,
           },
           {
-            "active": True,
             "name": "lastActivityAt",
             "req": True,
             "type": "`$ANY`",
-            "index$": 11,
           },
           {
-            "active": True,
             "name": "name",
             "op": {
               "update": {
-                "req": False,
                 "type": "`$STRING`",
               },
             },
             "req": True,
             "type": "`$STRING`",
-            "index$": 12,
           },
           {
-            "active": True,
             "name": "plan",
             "req": True,
             "type": "`$STRING`",
-            "index$": 13,
           },
           {
-            "active": True,
             "name": "role",
             "req": True,
             "type": "`$STRING`",
-            "index$": 14,
           },
           {
-            "active": True,
             "name": "settings",
             "req": True,
             "type": "`$ANY`",
-            "index$": 15,
           },
           {
-            "active": True,
             "name": "stripeId",
             "req": True,
             "type": "`$ANY`",
-            "index$": 16,
           },
           {
-            "active": True,
             "name": "updatedAt",
             "req": True,
             "type": "`$STRING`",
-            "index$": 17,
           },
           {
-            "active": True,
             "name": "user",
             "req": True,
             "type": "`$OBJECT`",
-            "index$": 18,
           },
           {
-            "active": True,
             "name": "userId",
             "req": True,
             "type": "`$STRING`",
-            "index$": 19,
           },
           {
-            "active": True,
             "name": "workspaceId",
             "req": True,
             "type": "`$STRING`",
-            "index$": 20,
           },
         ],
         "name": "workspace",
@@ -1802,7 +1514,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -1816,21 +1527,17 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.workspace`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "create",
           },
           "list": {
             "input": "data",
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "workspace_id",
@@ -1863,10 +1570,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.members`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "GET",
@@ -1880,27 +1585,22 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.workspaces`",
                 },
-                "index$": 1,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "workspace_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -1926,27 +1626,22 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.workspace`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
           "remove": {
             "input": "data",
             "name": "remove",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "workspace_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -1972,27 +1667,22 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "remove",
           },
           "update": {
             "input": "data",
             "name": "update",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "workspace_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -2018,10 +1708,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.workspace`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "update",
           },
         },
         "relations": {

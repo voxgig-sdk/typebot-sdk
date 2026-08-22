@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "Typebot",
+      slug = "typebot",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -36,25 +39,19 @@ local function make_config()
       ["analytics"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "totalCompleted",
             ["req"] = true,
             ["type"] = "`$NUMBER`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "totalStarts",
             ["req"] = true,
             ["type"] = "`$NUMBER`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "totalViews",
             ["req"] = true,
             ["type"] = "`$NUMBER`",
-            ["index$"] = 2,
           },
         },
         ["name"] = "analytics",
@@ -64,35 +61,28 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "typebot_id",
                       ["orig"] = "typebot_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "last7Days",
                       ["kind"] = "query",
                       ["name"] = "time_filter",
                       ["orig"] = "time_filter",
-                      ["reqd"] = false,
                       ["type"] = "`$STRING`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "time_zone",
                       ["orig"] = "time_zone",
-                      ["reqd"] = false,
                       ["type"] = "`$STRING`",
                     },
                   },
@@ -124,10 +114,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.stats`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -141,53 +129,39 @@ local function make_config()
       ["billing"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "amount",
             ["req"] = true,
             ["type"] = "`$NUMBER`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "currency",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "date",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "id",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "resetsAt",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "totalChatsUsed",
             ["req"] = true,
             ["type"] = "`$NUMBER`",
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
             ["name"] = "url",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 6,
           },
         },
         ["name"] = "billing",
@@ -197,11 +171,9 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "workspace_id",
                       ["orig"] = "workspace_id",
@@ -228,21 +200,17 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.invoices`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "list",
           },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "workspace_id",
                       ["orig"] = "workspace_id",
@@ -269,10 +237,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -282,72 +248,53 @@ local function make_config()
       ["folder"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "createdAt",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "folder",
             ["req"] = true,
             ["type"] = "`$OBJECT`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "folderName",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "id",
             ["op"] = {
               ["create"] = {
-                ["req"] = false,
                 ["type"] = "`$STRING`",
               },
             },
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "name",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "parentFolderId",
             ["op"] = {
               ["create"] = {
-                ["req"] = false,
                 ["type"] = "`$STRING`",
               },
             },
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
             ["name"] = "updatedAt",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 6,
           },
           {
-            ["active"] = true,
             ["name"] = "workspaceId",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 7,
           },
         },
         ["name"] = "folder",
@@ -357,7 +304,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
@@ -371,29 +317,23 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.folder`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "create",
           },
           ["list"] = {
             ["input"] = "data",
             ["name"] = "list",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "parent_folder_id",
                       ["orig"] = "parent_folder_id",
-                      ["reqd"] = false,
                       ["type"] = "`$STRING`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "workspace_id",
                       ["orig"] = "workspace_id",
@@ -419,32 +359,26 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.folders`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "list",
           },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "folder_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "workspace_id",
                       ["orig"] = "workspace_id",
@@ -476,27 +410,22 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.folder`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
           ["remove"] = {
             ["input"] = "data",
             ["name"] = "remove",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "folder_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -522,27 +451,22 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.folder`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "remove",
           },
           ["update"] = {
             ["input"] = "data",
             ["name"] = "update",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "folder_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -570,10 +494,8 @@ local function make_config()
                   },
                   ["res"] = "`body.folder`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "update",
           },
         },
         ["relations"] = {
@@ -583,98 +505,71 @@ local function make_config()
       ["result"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "answers",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "context",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "createdAt",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "description",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "details",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "hasStarted",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
             ["name"] = "id",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 6,
           },
           {
-            ["active"] = true,
             ["name"] = "isArchived",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 7,
           },
           {
-            ["active"] = true,
             ["name"] = "isCompleted",
             ["req"] = true,
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 8,
           },
           {
-            ["active"] = true,
             ["name"] = "lastChatSessionId",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 9,
           },
           {
-            ["active"] = true,
             ["name"] = "resultId",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 10,
           },
           {
-            ["active"] = true,
             ["name"] = "status",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 11,
           },
           {
-            ["active"] = true,
             ["name"] = "typebotId",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 12,
           },
           {
-            ["active"] = true,
             ["name"] = "variables",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
@@ -683,7 +578,6 @@ local function make_config()
               ["count"] = 1,
               ["depth"] = 3,
             },
-            ["index$"] = 13,
           },
         },
         ["name"] = "result",
@@ -693,52 +587,41 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "typebot_id",
                       ["orig"] = "typebot_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "cursor",
                       ["orig"] = "cursor",
-                      ["reqd"] = false,
                       ["type"] = "`$NUMBER`",
                     },
                     {
-                      ["active"] = true,
                       ["example"] = 50,
                       ["kind"] = "query",
                       ["name"] = "limit",
                       ["orig"] = "limit",
-                      ["reqd"] = false,
                       ["type"] = "`$NUMBER`",
                     },
                     {
-                      ["active"] = true,
                       ["example"] = "last7Days",
                       ["kind"] = "query",
                       ["name"] = "time_filter",
                       ["orig"] = "time_filter",
-                      ["reqd"] = false,
                       ["type"] = "`$STRING`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "time_zone",
                       ["orig"] = "time_zone",
-                      ["reqd"] = false,
                       ["type"] = "`$STRING`",
                     },
                   },
@@ -770,14 +653,11 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "result_id",
@@ -785,7 +665,6 @@ local function make_config()
                       ["type"] = "`$STRING`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "typebot_id",
                       ["orig"] = "typebot_id",
@@ -822,36 +701,29 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.logs`",
                 },
-                ["index$"] = 1,
               },
             },
-            ["key$"] = "list",
           },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "result_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "typebot_id",
                       ["orig"] = "typebot_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 1,
                     },
                   },
                 },
@@ -881,27 +753,22 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.result`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
           ["remove"] = {
             ["input"] = "data",
             ["name"] = "remove",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "typebot_id",
                       ["orig"] = "typebot_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -928,10 +795,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "remove",
           },
         },
         ["relations"] = {
@@ -945,28 +810,21 @@ local function make_config()
       ["typebot"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "accessRight",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "createdAt",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "customDomain",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "edges",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
@@ -975,17 +833,12 @@ local function make_config()
               ["count"] = 1,
               ["depth"] = 3,
             },
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "enableSafetyFlags",
-            ["req"] = false,
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "events",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
@@ -994,24 +847,17 @@ local function make_config()
               ["count"] = 1,
               ["depth"] = 1,
             },
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
             ["name"] = "folderId",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 6,
           },
           {
-            ["active"] = true,
             ["name"] = "fromTemplate",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 7,
           },
           {
-            ["active"] = true,
             ["name"] = "groups",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
@@ -1020,66 +866,48 @@ local function make_config()
               ["count"] = 31,
               ["depth"] = 14,
             },
-            ["index$"] = 8,
           },
           {
-            ["active"] = true,
             ["name"] = "icon",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 9,
           },
           {
-            ["active"] = true,
             ["name"] = "id",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 10,
           },
           {
-            ["active"] = true,
             ["name"] = "isArchived",
             ["req"] = true,
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 11,
           },
           {
-            ["active"] = true,
             ["name"] = "isClosed",
             ["req"] = true,
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 12,
           },
           {
-            ["active"] = true,
             ["name"] = "message",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 13,
           },
           {
-            ["active"] = true,
             ["name"] = "name",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 14,
           },
           {
-            ["active"] = true,
             ["name"] = "overwrite",
-            ["req"] = false,
+            ["short"] = "If true, even if we detect a conflict, we will overwrite push the updates to the typebot",
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 15,
           },
           {
-            ["active"] = true,
             ["name"] = "publicId",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 16,
           },
           {
-            ["active"] = true,
             ["name"] = "publishedTypebot",
             ["req"] = true,
             ["type"] = "`$ANY`",
@@ -1088,52 +916,37 @@ local function make_config()
               ["count"] = 51,
               ["depth"] = 20,
             },
-            ["index$"] = 17,
           },
           {
-            ["active"] = true,
             ["name"] = "publishedTypebotId",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 18,
           },
           {
-            ["active"] = true,
             ["name"] = "resultsTablePreferences",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 19,
           },
           {
-            ["active"] = true,
             ["name"] = "riskLevel",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 20,
           },
           {
-            ["active"] = true,
             ["name"] = "selectedThemeTemplateId",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 21,
           },
           {
-            ["active"] = true,
             ["name"] = "settings",
             ["req"] = true,
             ["type"] = "`$OBJECT`",
-            ["index$"] = 22,
           },
           {
-            ["active"] = true,
             ["name"] = "spaceId",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 23,
           },
           {
-            ["active"] = true,
             ["name"] = "theme",
             ["req"] = true,
             ["type"] = "`$OBJECT`",
@@ -1142,10 +955,8 @@ local function make_config()
               ["count"] = 2,
               ["depth"] = 6,
             },
-            ["index$"] = 24,
           },
           {
-            ["active"] = true,
             ["name"] = "typebot",
             ["req"] = true,
             ["type"] = "`$OBJECT`",
@@ -1154,17 +965,13 @@ local function make_config()
               ["count"] = 88,
               ["depth"] = 24,
             },
-            ["index$"] = 25,
           },
           {
-            ["active"] = true,
             ["name"] = "updatedAt",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 26,
           },
           {
-            ["active"] = true,
             ["name"] = "variables",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
@@ -1173,10 +980,8 @@ local function make_config()
               ["count"] = 1,
               ["depth"] = 5,
             },
-            ["index$"] = 27,
           },
           {
-            ["active"] = true,
             ["name"] = "version",
             ["op"] = {
               ["create"] = {
@@ -1188,35 +993,28 @@ local function make_config()
                 ["type"] = "`$STRING`",
               },
             },
-            ["req"] = false,
+            ["short"] = "Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`.",
             ["type"] = "`$ANY`",
             ["union"] = {
               ["branches"] = 2,
               ["count"] = 1,
               ["depth"] = 0,
             },
-            ["index$"] = 28,
           },
           {
-            ["active"] = true,
             ["name"] = "warnings",
-            ["req"] = false,
             ["type"] = "`$ARRAY`",
-            ["index$"] = 29,
           },
           {
-            ["active"] = true,
             ["name"] = "whatsAppCredentialsId",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 30,
           },
           {
-            ["active"] = true,
             ["name"] = "workspaceId",
             ["req"] = true,
+            ["short"] = "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)",
             ["type"] = "`$STRING`",
-            ["index$"] = 31,
           },
         },
         ["name"] = "typebot",
@@ -1226,17 +1024,14 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "typebot_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -1264,20 +1059,16 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "typebot_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -1305,10 +1096,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 1,
               },
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
@@ -1324,10 +1113,8 @@ local function make_config()
                   },
                   ["res"] = "`body.typebot`",
                 },
-                ["index$"] = 2,
               },
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
@@ -1346,29 +1133,23 @@ local function make_config()
                   },
                   ["res"] = "`body.typebot`",
                 },
-                ["index$"] = 3,
               },
             },
-            ["key$"] = "create",
           },
           ["list"] = {
             ["input"] = "data",
             ["name"] = "list",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "folder_id",
                       ["orig"] = "folder_id",
-                      ["reqd"] = false,
                       ["type"] = "`$STRING`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "workspace_id",
                       ["orig"] = "workspace_id",
@@ -1394,37 +1175,30 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.typebots`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "list",
           },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "typebot_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["example"] = false,
                       ["kind"] = "query",
                       ["name"] = "migrate_to_latest_version",
                       ["orig"] = "migrate_to_latest_version",
-                      ["reqd"] = false,
                       ["type"] = "`$BOOLEAN`",
                     },
                   },
@@ -1452,14 +1226,11 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.typebot`",
                 },
-                ["index$"] = 0,
               },
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "typebot_id",
@@ -1469,12 +1240,10 @@ local function make_config()
                   },
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["example"] = false,
                       ["kind"] = "query",
                       ["name"] = "migrate_to_latest_version",
                       ["orig"] = "migrate_to_latest_version",
-                      ["reqd"] = false,
                       ["type"] = "`$BOOLEAN`",
                     },
                   },
@@ -1504,27 +1273,22 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 1,
               },
             },
-            ["key$"] = "load",
           },
           ["remove"] = {
             ["input"] = "data",
             ["name"] = "remove",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "typebot_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -1550,27 +1314,22 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "remove",
           },
           ["update"] = {
             ["input"] = "data",
             ["name"] = "update",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "typebot_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -1598,10 +1357,8 @@ local function make_config()
                   },
                   ["res"] = "`body.typebot`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "update",
           },
         },
         ["relations"] = {
@@ -1611,167 +1368,122 @@ local function make_config()
       ["workspace"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "chatsHardLimit",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "createdAt",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "customChatsLimit",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "customSeatsLimit",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "icon",
             ["op"] = {
               ["create"] = {
-                ["req"] = false,
                 ["type"] = "`$STRING`",
               },
               ["update"] = {
-                ["req"] = false,
                 ["type"] = "`$STRING`",
               },
             },
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "id",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
             ["name"] = "inactiveFirstEmailSentAt",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 6,
           },
           {
-            ["active"] = true,
             ["name"] = "inactiveSecondEmailSentAt",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 7,
           },
           {
-            ["active"] = true,
             ["name"] = "isPastDue",
             ["req"] = true,
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 8,
           },
           {
-            ["active"] = true,
             ["name"] = "isSuspended",
             ["req"] = true,
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 9,
           },
           {
-            ["active"] = true,
             ["name"] = "isVerified",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 10,
           },
           {
-            ["active"] = true,
             ["name"] = "lastActivityAt",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 11,
           },
           {
-            ["active"] = true,
             ["name"] = "name",
             ["op"] = {
               ["update"] = {
-                ["req"] = false,
                 ["type"] = "`$STRING`",
               },
             },
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 12,
           },
           {
-            ["active"] = true,
             ["name"] = "plan",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 13,
           },
           {
-            ["active"] = true,
             ["name"] = "role",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 14,
           },
           {
-            ["active"] = true,
             ["name"] = "settings",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 15,
           },
           {
-            ["active"] = true,
             ["name"] = "stripeId",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 16,
           },
           {
-            ["active"] = true,
             ["name"] = "updatedAt",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 17,
           },
           {
-            ["active"] = true,
             ["name"] = "user",
             ["req"] = true,
             ["type"] = "`$OBJECT`",
-            ["index$"] = 18,
           },
           {
-            ["active"] = true,
             ["name"] = "userId",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 19,
           },
           {
-            ["active"] = true,
             ["name"] = "workspaceId",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 20,
           },
         },
         ["name"] = "workspace",
@@ -1781,7 +1493,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
@@ -1795,21 +1506,17 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.workspace`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "create",
           },
           ["list"] = {
             ["input"] = "data",
             ["name"] = "list",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "workspace_id",
@@ -1842,10 +1549,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.members`",
                 },
-                ["index$"] = 0,
               },
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
@@ -1859,27 +1564,22 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.workspaces`",
                 },
-                ["index$"] = 1,
               },
             },
-            ["key$"] = "list",
           },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "workspace_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -1905,27 +1605,22 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.workspace`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
           ["remove"] = {
             ["input"] = "data",
             ["name"] = "remove",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "workspace_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -1951,27 +1646,22 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "remove",
           },
           ["update"] = {
             ["input"] = "data",
             ["name"] = "update",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "workspace_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -1997,10 +1687,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.workspace`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "update",
           },
         },
         ["relations"] = {
