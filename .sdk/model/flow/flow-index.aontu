@@ -1,8 +1,0 @@
-# Flows
-
-@"BasicAnalyticsFlow.aontu"
-@"BasicBillingFlow.aontu"
-@"BasicFolderFlow.aontu"
-@"BasicResultFlow.aontu"
-@"BasicTypebotFlow.aontu"
-@"BasicWorkspaceFlow.aontu"
