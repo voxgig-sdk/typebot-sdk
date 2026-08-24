@@ -1,15 +1,6 @@
 {
-  "NAME": "TYPEBOT",
-  "Name": "Typebot",
   "def": "typebot-builder.json",
   "main": {
-    "api": {
-      "entity": {},
-      "guide": {}
-    },
-    "custom": {
-      "plurals": {}
-    },
     "def": {
       "desc": ""
     },
@@ -3037,8 +3028,5 @@
     }
   },
   "name": "typebot",
-  "name-": "typebot",
-  "name_": "typebot",
-  "name__orig": "typebot",
   "origin": "voxgig-sdk"
 }
