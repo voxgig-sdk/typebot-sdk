@@ -432,7 +432,7 @@ Create an instance: `local billing = client:Billing(nil)`
 #### Example: Load
 
 ```lua
-local billing, err = client:Billing():load({ id = "billing_id" })
+local billing, err = client:Billing():load({ workspace_id = "workspace_id" })
 ```
 
 #### Example: List
@@ -472,7 +472,7 @@ Create an instance: `local folder = client:Folder(nil)`
 #### Example: Load
 
 ```lua
-local folder, err = client:Folder():load({ id = "folder_id" })
+local folder, err = client:Folder():load({ id = "folder_id", workspace_id = "workspace_id" })
 ```
 
 #### Example: List
@@ -716,6 +716,29 @@ local workspace, err = client:Workspace():create({
   workspaceId = "example_workspaceId", -- string
 })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Open types

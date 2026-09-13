@@ -98,7 +98,7 @@ func TestResultEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		resultRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.result", setup.data)))
+		resultRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.result")))
 		var resultRef01Data map[string]any
 		if len(resultRef01DataRaw) > 0 {
 			resultRef01Data = core.ToMapAny(resultRef01DataRaw[0][1])
@@ -166,7 +166,7 @@ func resultBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"result01", "result02", "result03", "typebot01", "typebot02", "typebot03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -186,7 +186,7 @@ func resultBasicSetup(extra map[string]any) *entityTestSetup {
 		"TYPEBOT_TEST_RESULT_ENTID": idmap,
 		"TYPEBOT_TEST_LIVE":      "FALSE",
 		"TYPEBOT_TEST_EXPLAIN":   "FALSE",
-		"TYPEBOT_APIKEY":         "NONE",
+		"TYPEBOT_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["TYPEBOT_TEST_RESULT_ENTID"])
@@ -195,11 +195,23 @@ func resultBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["TYPEBOT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["TYPEBOT_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewTypebotSDK(core.ToMapAny(mergedOpts))
 	}

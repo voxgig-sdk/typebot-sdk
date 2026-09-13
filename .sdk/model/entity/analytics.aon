@@ -58,18 +58,28 @@ main: kit: entity: analytics: {
           }
           method: "GET"
           orig: "/v1/typebots/{typebotId}/analytics/stats"
-          parts: [
-            "v1"
-            "typebots"
-            "{typebot_id}"
-            "analytics"
-            "stats"
-          ]
           rename: {
             param: {
               typebotId: "typebot_id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "typebot_id"
+            }
+            {
+              lit: "analytics"
+            }
+            {
+              lit: "stats"
+            }
+          ]
           select: {
             "$action": "stat"
             exist: [

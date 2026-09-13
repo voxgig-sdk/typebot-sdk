@@ -6,6 +6,7 @@ main: kit: entity: folder: {
 
   fields: [
     {
+      format: "date-time"
       name: "createdAt"
       req: true
       type: "`$STRING`"
@@ -48,6 +49,7 @@ main: kit: entity: folder: {
       type: "`$ANY`"
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: true
       type: "`$STRING`"
@@ -72,9 +74,13 @@ main: kit: entity: folder: {
         {
           method: "POST"
           orig: "/v1/folders"
-          parts: [
-            "v1"
-            "folders"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "folders"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -107,9 +113,13 @@ main: kit: entity: folder: {
           }
           method: "GET"
           orig: "/v1/folders"
-          parts: [
-            "v1"
-            "folders"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "folders"
+            }
           ]
           select: {
             exist: [
@@ -150,16 +160,22 @@ main: kit: entity: folder: {
           }
           method: "GET"
           orig: "/v1/folders/{folderId}"
-          parts: [
-            "v1"
-            "folders"
-            "{id}"
-          ]
           rename: {
             param: {
               folderId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "folders"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -190,16 +206,22 @@ main: kit: entity: folder: {
           }
           method: "DELETE"
           orig: "/v1/folders/{folderId}"
-          parts: [
-            "v1"
-            "folders"
-            "{id}"
-          ]
           rename: {
             param: {
               folderId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "folders"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -229,16 +251,22 @@ main: kit: entity: folder: {
           }
           method: "PATCH"
           orig: "/v1/folders/{folderId}"
-          parts: [
-            "v1"
-            "folders"
-            "{id}"
-          ]
           rename: {
             param: {
               folderId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "folders"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

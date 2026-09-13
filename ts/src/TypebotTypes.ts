@@ -13,6 +13,8 @@ export interface Analytics {
 
 export interface AnalyticsLoadMatch {
   typebot_id: string
+  time_filter?: string
+  time_zone?: string
 
   // Selects a custom action instead of the plain load:
   //   'stat'
@@ -32,13 +34,7 @@ export interface Billing {
 }
 
 export interface BillingLoadMatch {
-  amount?: number
-  currency?: string
-  date?: any
-  id: string
-  resetsAt?: string
-  totalChatsUsed?: number
-  url?: string
+  workspace_id: string
 
   // Selects a custom action instead of the plain load:
   //   'usage'
@@ -48,13 +44,7 @@ export interface BillingLoadMatch {
 }
 
 export interface BillingListMatch {
-  amount?: number
-  currency?: string
-  date?: any
-  id?: string
-  resetsAt?: string
-  totalChatsUsed?: number
-  url?: string
+  workspace_id: string
 
   // Selects a custom action instead of the plain list:
   //   'invoice'
@@ -76,17 +66,12 @@ export interface Folder {
 
 export interface FolderLoadMatch {
   id: string
+  workspace_id: string
 }
 
 export interface FolderListMatch {
-  createdAt?: string
-  folder?: Record<string, any>
-  folderName?: string
-  id?: string
-  name?: string
-  parentFolderId?: any
-  updatedAt?: string
-  workspaceId?: string
+  parent_folder_id?: string
+  workspace_id: string
 }
 
 export interface FolderCreateData {
@@ -139,6 +124,10 @@ export interface ResultLoadMatch {
 
 export interface ResultListMatch {
   typebot_id: string
+  cursor?: number
+  limit?: number
+  time_filter?: string
+  time_zone?: string
 
   // Selects a custom action instead of the plain list:
   //   'log'
@@ -188,6 +177,7 @@ export interface Typebot {
 
 export interface TypebotLoadMatch {
   id: string
+  migrate_to_latest_version?: boolean
 
   // Selects a custom action instead of the plain load:
   //   'published_typebot'
@@ -197,38 +187,8 @@ export interface TypebotLoadMatch {
 }
 
 export interface TypebotListMatch {
-  accessRight?: string
-  createdAt?: string
-  customDomain?: any
-  edges?: any[]
-  enableSafetyFlags?: boolean
-  events?: any[]
-  folderId?: any
-  fromTemplate?: string
-  groups?: any[]
-  icon?: any
-  id?: string
-  isArchived?: boolean
-  isClosed?: boolean
-  message?: any
-  name?: string
-  overwrite?: boolean
-  publicId?: any
-  publishedTypebot?: any
-  publishedTypebotId?: string
-  resultsTablePreferences?: any
-  riskLevel?: any
-  selectedThemeTemplateId?: any
-  settings?: Record<string, any>
-  spaceId?: any
-  theme?: Record<string, any>
-  typebot?: Record<string, any>
-  updatedAt?: string
-  variables?: any[]
-  version?: any
-  warnings?: any[]
-  whatsAppCredentialsId?: any
-  workspaceId?: string
+  folder_id?: string
+  workspace_id: string
 }
 
 export interface TypebotCreateData {

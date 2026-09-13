@@ -26,6 +26,7 @@ main: kit: entity: billing: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "resetsAt"
       req: true
       type: "`$STRING`"
@@ -66,10 +67,16 @@ main: kit: entity: billing: {
           }
           method: "GET"
           orig: "/v1/billing/invoices"
-          parts: [
-            "v1"
-            "billing"
-            "invoices"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "billing"
+            }
+            {
+              lit: "invoices"
+            }
           ]
           select: {
             "$action": "invoice"
@@ -101,10 +108,16 @@ main: kit: entity: billing: {
           }
           method: "GET"
           orig: "/v1/billing/usage"
-          parts: [
-            "v1"
-            "billing"
-            "usage"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "billing"
+            }
+            {
+              lit: "usage"
+            }
           ]
           select: {
             "$action": "usage"

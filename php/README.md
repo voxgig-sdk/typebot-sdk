@@ -122,13 +122,10 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = TypebotSDK::test([
-    "entity" => ["billing" => ["test01" => ["id" => "test01"]]],
-]);
+$client = TypebotSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
@@ -456,7 +453,7 @@ Create an instance: `$billing = $client->Billing();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Billing record (throws on error).
-$billing = $client->Billing()->load(["id" => "billing_id"]);
+$billing = $client->Billing()->load(["workspace_id" => "workspace_id"]);
 ```
 
 #### Example: List
@@ -498,7 +495,7 @@ Create an instance: `$folder = $client->Folder();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Folder record (throws on error).
-$folder = $client->Folder()->load(["id" => "folder_id"]);
+$folder = $client->Folder()->load(["id" => "folder_id", "workspace_id" => "workspace_id"]);
 ```
 
 #### Example: List
@@ -749,6 +746,29 @@ $workspace = $client->Workspace()->create([
     "workspaceId" => null, // string
 ]);
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Open types

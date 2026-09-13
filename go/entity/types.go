@@ -22,6 +22,8 @@ type Analytics struct {
 // AnalyticsLoadMatch is the typed request payload for Analytics.LoadTyped.
 type AnalyticsLoadMatch struct {
 	TypebotId string `json:"typebot_id"`
+	TimeFilter *string `json:"time_filter,omitempty"`
+	TimeZone *string `json:"time_zone,omitempty"`
 }
 
 // Billing is the typed data model for the billing entity.
@@ -37,24 +39,12 @@ type Billing struct {
 
 // BillingLoadMatch is the typed request payload for Billing.LoadTyped.
 type BillingLoadMatch struct {
-	Amount *float64 `json:"amount,omitempty"`
-	Currency *string `json:"currency,omitempty"`
-	Date *any `json:"date,omitempty"`
-	Id string `json:"id"`
-	ResetsAt *string `json:"resetsAt,omitempty"`
-	TotalChatsUsed *float64 `json:"totalChatsUsed,omitempty"`
-	Url *string `json:"url,omitempty"`
+	WorkspaceId string `json:"workspace_id"`
 }
 
 // BillingListMatch is the typed request payload for Billing.ListTyped.
 type BillingListMatch struct {
-	Amount *float64 `json:"amount,omitempty"`
-	Currency *string `json:"currency,omitempty"`
-	Date *any `json:"date,omitempty"`
-	Id *string `json:"id,omitempty"`
-	ResetsAt *string `json:"resetsAt,omitempty"`
-	TotalChatsUsed *float64 `json:"totalChatsUsed,omitempty"`
-	Url *string `json:"url,omitempty"`
+	WorkspaceId string `json:"workspace_id"`
 }
 
 // Folder is the typed data model for the folder entity.
@@ -72,18 +62,13 @@ type Folder struct {
 // FolderLoadMatch is the typed request payload for Folder.LoadTyped.
 type FolderLoadMatch struct {
 	Id string `json:"id"`
+	WorkspaceId string `json:"workspace_id"`
 }
 
 // FolderListMatch is the typed request payload for Folder.ListTyped.
 type FolderListMatch struct {
-	CreatedAt *string `json:"createdAt,omitempty"`
-	Folder *map[string]any `json:"folder,omitempty"`
-	FolderName *string `json:"folderName,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-	ParentFolderId *any `json:"parentFolderId,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	WorkspaceId *string `json:"workspaceId,omitempty"`
+	ParentFolderId *string `json:"parent_folder_id,omitempty"`
+	WorkspaceId string `json:"workspace_id"`
 }
 
 // FolderCreateData is the typed request payload for Folder.CreateTyped.
@@ -142,6 +127,10 @@ type ResultLoadMatch struct {
 // ResultListMatch is the typed request payload for Result.ListTyped.
 type ResultListMatch struct {
 	TypebotId string `json:"typebot_id"`
+	Cursor *float64 `json:"cursor,omitempty"`
+	Limit *float64 `json:"limit,omitempty"`
+	TimeFilter *string `json:"time_filter,omitempty"`
+	TimeZone *string `json:"time_zone,omitempty"`
 }
 
 // ResultRemoveMatch is the typed request payload for Result.RemoveTyped.
@@ -188,42 +177,13 @@ type Typebot struct {
 // TypebotLoadMatch is the typed request payload for Typebot.LoadTyped.
 type TypebotLoadMatch struct {
 	Id string `json:"id"`
+	MigrateToLatestVersion *bool `json:"migrate_to_latest_version,omitempty"`
 }
 
 // TypebotListMatch is the typed request payload for Typebot.ListTyped.
 type TypebotListMatch struct {
-	AccessRight *string `json:"accessRight,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	CustomDomain *any `json:"customDomain,omitempty"`
-	Edges *[]any `json:"edges,omitempty"`
-	EnableSafetyFlags *bool `json:"enableSafetyFlags,omitempty"`
-	Events *[]any `json:"events,omitempty"`
-	FolderId *any `json:"folderId,omitempty"`
-	FromTemplate *string `json:"fromTemplate,omitempty"`
-	Groups *[]any `json:"groups,omitempty"`
-	Icon *any `json:"icon,omitempty"`
-	Id *string `json:"id,omitempty"`
-	IsArchived *bool `json:"isArchived,omitempty"`
-	IsClosed *bool `json:"isClosed,omitempty"`
-	Message *any `json:"message,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Overwrite *bool `json:"overwrite,omitempty"`
-	PublicId *any `json:"publicId,omitempty"`
-	PublishedTypebot *any `json:"publishedTypebot,omitempty"`
-	PublishedTypebotId *string `json:"publishedTypebotId,omitempty"`
-	ResultsTablePreferences *any `json:"resultsTablePreferences,omitempty"`
-	RiskLevel *any `json:"riskLevel,omitempty"`
-	SelectedThemeTemplateId *any `json:"selectedThemeTemplateId,omitempty"`
-	Settings *map[string]any `json:"settings,omitempty"`
-	SpaceId *any `json:"spaceId,omitempty"`
-	Theme *map[string]any `json:"theme,omitempty"`
-	Typebot *map[string]any `json:"typebot,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	Variables *[]any `json:"variables,omitempty"`
-	Version *any `json:"version,omitempty"`
-	Warnings *[]any `json:"warnings,omitempty"`
-	WhatsAppCredentialsId *any `json:"whatsAppCredentialsId,omitempty"`
-	WorkspaceId *string `json:"workspaceId,omitempty"`
+	FolderId *string `json:"folder_id,omitempty"`
+	WorkspaceId string `json:"workspace_id"`
 }
 
 // TypebotCreateData is the typed request payload for Typebot.CreateTyped.

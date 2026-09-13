@@ -16,6 +16,7 @@ main: kit: entity: result: {
       type: "`$ANY`"
     }
     {
+      format: "date-time"
       name: "createdAt"
       req: true
       type: "`$STRING`"
@@ -138,17 +139,25 @@ main: kit: entity: result: {
           }
           method: "GET"
           orig: "/v1/typebots/{typebotId}/results"
-          parts: [
-            "v1"
-            "typebots"
-            "{typebot_id}"
-            "results"
-          ]
           rename: {
             param: {
               typebotId: "typebot_id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "typebot_id"
+            }
+            {
+              lit: "results"
+            }
+          ]
           select: {
             exist: [
               "cursor"
@@ -184,20 +193,32 @@ main: kit: entity: result: {
           }
           method: "GET"
           orig: "/v1/typebots/{typebotId}/results/{resultId}/logs"
-          parts: [
-            "v1"
-            "typebots"
-            "{typebot_id}"
-            "results"
-            "{id}"
-            "logs"
-          ]
           rename: {
             param: {
               resultId: "id"
               typebotId: "typebot_id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "typebot_id"
+            }
+            {
+              lit: "results"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "logs"
+            }
+          ]
           select: {
             "$action": "log"
             exist: [
@@ -236,19 +257,29 @@ main: kit: entity: result: {
           }
           method: "GET"
           orig: "/v1/typebots/{typebotId}/results/{resultId}"
-          parts: [
-            "v1"
-            "typebots"
-            "{typebot_id}"
-            "results"
-            "{id}"
-          ]
           rename: {
             param: {
               resultId: "id"
               typebotId: "typebot_id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "typebot_id"
+            }
+            {
+              lit: "results"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -279,17 +310,25 @@ main: kit: entity: result: {
           }
           method: "DELETE"
           orig: "/v1/typebots/{typebotId}/results"
-          parts: [
-            "v1"
-            "typebots"
-            "{typebot_id}"
-            "results"
-          ]
           rename: {
             param: {
               typebotId: "typebot_id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "typebot_id"
+            }
+            {
+              lit: "results"
+            }
+          ]
           select: {
             exist: [
               "typebot_id"

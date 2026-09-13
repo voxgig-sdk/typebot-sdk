@@ -468,7 +468,7 @@ Create an instance: `billing := client.Billing(nil)`
 #### Example: Load
 
 ```go
-billing, err := client.Billing(nil).Load(map[string]any{"id": "billing_id"}, nil)
+billing, err := client.Billing(nil).Load(map[string]any{"workspace_id": "workspace_id"}, nil)
 if err != nil {
     panic(err)
 }
@@ -516,7 +516,7 @@ Create an instance: `folder := client.Folder(nil)`
 #### Example: Load
 
 ```go
-folder, err := client.Folder(nil).Load(map[string]any{"id": "folder_id"}, nil)
+folder, err := client.Folder(nil).Load(map[string]any{"id": "folder_id", "workspace_id": "workspace_id"}, nil)
 if err != nil {
     panic(err)
 }
@@ -804,6 +804,29 @@ if err != nil {
 }
 fmt.Println(result)
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Open types

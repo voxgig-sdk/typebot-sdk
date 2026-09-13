@@ -11,6 +11,7 @@ main: kit: entity: workspace: {
       type: "`$ANY`"
     }
     {
+      format: "date-time"
       name: "createdAt"
       req: true
       type: "`$STRING`"
@@ -107,6 +108,7 @@ main: kit: entity: workspace: {
       type: "`$ANY`"
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: true
       type: "`$STRING`"
@@ -141,9 +143,13 @@ main: kit: entity: workspace: {
         {
           method: "POST"
           orig: "/v1/workspaces"
-          parts: [
-            "v1"
-            "workspaces"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -169,17 +175,25 @@ main: kit: entity: workspace: {
           }
           method: "GET"
           orig: "/v1/workspaces/{workspaceId}/members"
-          parts: [
-            "v1"
-            "workspaces"
-            "{id}"
-            "members"
-          ]
           rename: {
             param: {
               workspaceId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "members"
+            }
+          ]
           select: {
             "$action": "member"
             exist: [
@@ -194,9 +208,13 @@ main: kit: entity: workspace: {
         {
           method: "GET"
           orig: "/v1/workspaces"
-          parts: [
-            "v1"
-            "workspaces"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -222,16 +240,22 @@ main: kit: entity: workspace: {
           }
           method: "GET"
           orig: "/v1/workspaces/{workspaceId}"
-          parts: [
-            "v1"
-            "workspaces"
-            "{id}"
-          ]
           rename: {
             param: {
               workspaceId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -261,16 +285,22 @@ main: kit: entity: workspace: {
           }
           method: "DELETE"
           orig: "/v1/workspaces/{workspaceId}"
-          parts: [
-            "v1"
-            "workspaces"
-            "{id}"
-          ]
           rename: {
             param: {
               workspaceId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -300,16 +330,22 @@ main: kit: entity: workspace: {
           }
           method: "PATCH"
           orig: "/v1/workspaces/{workspaceId}"
-          parts: [
-            "v1"
-            "workspaces"
-            "{id}"
-          ]
           rename: {
             param: {
               workspaceId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

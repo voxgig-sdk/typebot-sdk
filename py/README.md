@@ -447,13 +447,13 @@ Create an instance: `billing = client.Billing()`
 #### Example: Load
 
 ```python
-billing = client.Billing().load({"id": "billing_id"})
+billing = client.Billing().load({"workspace_id": "workspace_id"})
 ```
 
 #### Example: List
 
 ```python
-billings = client.Billing().list()
+billings = client.Billing().list({"workspace_id": "example"})
 ```
 
 
@@ -487,13 +487,13 @@ Create an instance: `folder = client.Folder()`
 #### Example: Load
 
 ```python
-folder = client.Folder().load({"id": "folder_id"})
+folder = client.Folder().load({"id": "folder_id", "workspace_id": "workspace_id"})
 ```
 
 #### Example: List
 
 ```python
-folders = client.Folder().list()
+folders = client.Folder().list({"workspace_id": "example"})
 ```
 
 #### Example: Create
@@ -615,7 +615,7 @@ typebot = client.Typebot().load({"id": "typebot_id"})
 #### Example: List
 
 ```python
-typebots = client.Typebot().list()
+typebots = client.Typebot().list({"workspace_id": "example"})
 ```
 
 #### Example: Create
@@ -731,6 +731,29 @@ workspace = client.Workspace().create({
     "workspaceId": "example_workspaceId",  # str
 })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Open types

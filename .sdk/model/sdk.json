@@ -93,18 +93,28 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}/analytics/stats",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{typebot_id}",
-                    "analytics",
-                    "stats"
-                  ],
                   "rename": {
                     "param": {
                       "typebotId": "typebot_id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "typebot_id"
+                    },
+                    {
+                      "lit": "analytics"
+                    },
+                    {
+                      "lit": "stats"
+                    }
+                  ],
                   "select": {
                     "$action": "stat",
                     "exist": [
@@ -161,6 +171,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "resetsAt",
               "req": true,
               "type": "`$STRING`"
@@ -205,10 +216,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/billing/invoices",
-                  "parts": [
-                    "v1",
-                    "billing",
-                    "invoices"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "billing"
+                    },
+                    {
+                      "lit": "invoices"
+                    }
                   ],
                   "select": {
                     "$action": "invoice",
@@ -244,10 +261,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/billing/usage",
-                  "parts": [
-                    "v1",
-                    "billing",
-                    "usage"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "billing"
+                    },
+                    {
+                      "lit": "usage"
+                    }
                   ],
                   "select": {
                     "$action": "usage",
@@ -275,6 +298,7 @@
           "fields": [
             {
               "active": true,
+              "format": "date-time",
               "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
@@ -323,6 +347,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
@@ -350,9 +375,13 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v1/folders",
-                  "parts": [
-                    "v1",
-                    "folders"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "folders"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -391,9 +420,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/folders",
-                  "parts": [
-                    "v1",
-                    "folders"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "folders"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -439,16 +472,22 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/folders/{folderId}",
-                  "parts": [
-                    "v1",
-                    "folders",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "folderId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "folders"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id",
@@ -483,16 +522,22 @@
                   "kind": "http",
                   "method": "DELETE",
                   "orig": "/v1/folders/{folderId}",
-                  "parts": [
-                    "v1",
-                    "folders",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "folderId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "folders"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id"
@@ -526,16 +571,22 @@
                   "kind": "http",
                   "method": "PATCH",
                   "orig": "/v1/folders/{folderId}",
-                  "parts": [
-                    "v1",
-                    "folders",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "folderId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "folders"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id"
@@ -575,6 +626,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
@@ -714,17 +766,25 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}/results",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{typebot_id}",
-                    "results"
-                  ],
                   "rename": {
                     "param": {
                       "typebotId": "typebot_id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "typebot_id"
+                    },
+                    {
+                      "lit": "results"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "cursor",
@@ -764,20 +824,32 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}/results/{resultId}/logs",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{typebot_id}",
-                    "results",
-                    "{id}",
-                    "logs"
-                  ],
                   "rename": {
                     "param": {
                       "resultId": "id",
                       "typebotId": "typebot_id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "typebot_id"
+                    },
+                    {
+                      "lit": "results"
+                    },
+                    {
+                      "var": "id"
+                    },
+                    {
+                      "lit": "logs"
+                    }
+                  ],
                   "select": {
                     "$action": "log",
                     "exist": [
@@ -821,19 +893,29 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}/results/{resultId}",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{typebot_id}",
-                    "results",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "resultId": "id",
                       "typebotId": "typebot_id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "typebot_id"
+                    },
+                    {
+                      "lit": "results"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id",
@@ -868,17 +950,25 @@
                   "kind": "http",
                   "method": "DELETE",
                   "orig": "/v1/typebots/{typebotId}/results",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{typebot_id}",
-                    "results"
-                  ],
                   "rename": {
                     "param": {
                       "typebotId": "typebot_id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "typebot_id"
+                    },
+                    {
+                      "lit": "results"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "typebot_id"
@@ -914,6 +1004,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
@@ -1095,6 +1186,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
@@ -1179,17 +1271,25 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v1/typebots/{typebotId}/publish",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{id}",
-                    "publish"
-                  ],
                   "rename": {
                     "param": {
                       "typebotId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "id"
+                    },
+                    {
+                      "lit": "publish"
+                    }
+                  ],
                   "select": {
                     "$action": "publish",
                     "exist": [
@@ -1218,17 +1318,25 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v1/typebots/{typebotId}/unpublish",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{id}",
-                    "unpublish"
-                  ],
                   "rename": {
                     "param": {
                       "typebotId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "id"
+                    },
+                    {
+                      "lit": "unpublish"
+                    }
+                  ],
                   "select": {
                     "$action": "unpublish",
                     "exist": [
@@ -1246,9 +1354,13 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v1/typebots",
-                  "parts": [
-                    "v1",
-                    "typebots"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1264,10 +1376,16 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v1/typebots/import",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "import"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "lit": "import"
+                    }
                   ],
                   "select": {
                     "$action": "import"
@@ -1310,9 +1428,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots",
-                  "parts": [
-                    "v1",
-                    "typebots"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1359,16 +1481,22 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "typebotId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id",
@@ -1408,17 +1536,25 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/typebots/{typebotId}/publishedTypebot",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{id}",
-                    "publishedTypebot"
-                  ],
                   "rename": {
                     "param": {
                       "typebotId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "id"
+                    },
+                    {
+                      "lit": "publishedTypebot"
+                    }
+                  ],
                   "select": {
                     "$action": "published_typebot",
                     "exist": [
@@ -1454,16 +1590,22 @@
                   "kind": "http",
                   "method": "DELETE",
                   "orig": "/v1/typebots/{typebotId}",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "typebotId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id"
@@ -1497,16 +1639,22 @@
                   "kind": "http",
                   "method": "PATCH",
                   "orig": "/v1/typebots/{typebotId}",
-                  "parts": [
-                    "v1",
-                    "typebots",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "typebotId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id"
@@ -1540,6 +1688,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "createdAt",
               "req": true,
               "type": "`$STRING`"
@@ -1652,6 +1801,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "updatedAt",
               "req": true,
               "type": "`$STRING`"
@@ -1691,9 +1841,13 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v1/workspaces",
-                  "parts": [
-                    "v1",
-                    "workspaces"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "workspaces"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1724,17 +1878,25 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/workspaces/{workspaceId}/members",
-                  "parts": [
-                    "v1",
-                    "workspaces",
-                    "{id}",
-                    "members"
-                  ],
                   "rename": {
                     "param": {
                       "workspaceId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "workspaces"
+                    },
+                    {
+                      "var": "id"
+                    },
+                    {
+                      "lit": "members"
+                    }
+                  ],
                   "select": {
                     "$action": "member",
                     "exist": [
@@ -1752,9 +1914,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/workspaces",
-                  "parts": [
-                    "v1",
-                    "workspaces"
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "workspaces"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1785,16 +1951,22 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v1/workspaces/{workspaceId}",
-                  "parts": [
-                    "v1",
-                    "workspaces",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "workspaceId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "workspaces"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id"
@@ -1828,16 +2000,22 @@
                   "kind": "http",
                   "method": "DELETE",
                   "orig": "/v1/workspaces/{workspaceId}",
-                  "parts": [
-                    "v1",
-                    "workspaces",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "workspaceId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "workspaces"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id"
@@ -1871,16 +2049,22 @@
                   "kind": "http",
                   "method": "PATCH",
                   "orig": "/v1/workspaces/{workspaceId}",
-                  "parts": [
-                    "v1",
-                    "workspaces",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "workspaceId": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "workspaces"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id"
@@ -1963,8 +2147,11 @@
             }
           },
           "name": "test",
+          "needs": {},
           "origname": "",
           "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
           "target": {
             "go": {
               "deps": {}
@@ -2522,6 +2709,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2547,6 +2737,10 @@
             "version": "0.1.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/runner_test.go",
+            "test/struct_runner_test.go"
+          ],
           "title": "Golang"
         },
         "go-cli": {
@@ -2598,6 +2792,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -2622,6 +2817,7 @@
             },
             "version": "0.1.1"
           },
+          "superseded": [],
           "title": "Go CLI"
         },
         "go-mcp": {
@@ -2673,6 +2869,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -2697,6 +2894,7 @@
             },
             "version": "0.1.1"
           },
+          "superseded": [],
           "title": "Go MCP server"
         },
         "js": {
@@ -2737,6 +2935,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2761,6 +2962,9 @@
             },
             "version": "0.1.1"
           },
+          "superseded": [
+            "test/runner.js"
+          ],
           "title": "JavaScript"
         },
         "lua": {
@@ -2801,6 +3005,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2826,6 +3033,9 @@
             "version": "0.1.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.lua"
+          ],
           "title": "Lua"
         },
         "php": {
@@ -2860,6 +3070,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2885,6 +3098,9 @@
             "version": "0.1.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/StructRunner.php"
+          ],
           "title": "PHP"
         },
         "py": {
@@ -2925,6 +3141,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2950,6 +3169,9 @@
             "version": "0.1.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.py"
+          ],
           "title": "Python"
         },
         "ts": {
@@ -2967,11 +3189,6 @@
               "active": true,
               "kind": "dev",
               "version": "^25.6.0"
-            },
-            "dotenv": {
-              "active": true,
-              "kind": "dev",
-              "version": "^17.4.2"
             },
             "typescript": {
               "active": true,
@@ -3000,6 +3217,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3024,6 +3244,14 @@
             },
             "version": "0.1.1"
           },
+          "superseded": [
+            "test/runner.ts",
+            "test/vendor/omni/compat.ts",
+            "src/feature/secrets/sekreto/Providers.ts",
+            "src/feature/secrets/sekreto/Sigv4.ts",
+            "src/feature/secrets/sekreto/provider/Registry.ts",
+            "src/feature/secrets/sekreto/provider/http.ts"
+          ],
           "title": "TypeScript"
         }
       },

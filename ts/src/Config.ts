@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -137,18 +148,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}/analytics/stats",
-              "parts": [
-                "v1",
-                "typebots",
-                "{typebot_id}",
-                "analytics",
-                "stats"
-              ],
               "rename": {
                 "param": {
                   "typebotId": "typebot_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "typebot_id"
+                },
+                {
+                  "lit": "analytics"
+                },
+                {
+                  "lit": "stats"
+                }
+              ],
               "select": {
                 "$action": "stat",
                 "exist": [
@@ -160,7 +181,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.stats`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{typebot_id}",
+                "analytics",
+                "stats"
+              ]
             }
           ]
         }
@@ -196,6 +224,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "resetsAt",
           "req": true,
           "type": "`$STRING`"
@@ -211,6 +240,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "billing",
       "op": {
         "list": {
@@ -232,10 +265,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/billing/invoices",
-              "parts": [
-                "v1",
-                "billing",
-                "invoices"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "billing"
+                },
+                {
+                  "lit": "invoices"
+                }
               ],
               "select": {
                 "$action": "invoice",
@@ -246,7 +285,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.invoices`"
-              }
+              },
+              "parts": [
+                "v1",
+                "billing",
+                "invoices"
+              ]
             }
           ]
         },
@@ -269,10 +313,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/billing/usage",
-              "parts": [
-                "v1",
-                "billing",
-                "usage"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "billing"
+                },
+                {
+                  "lit": "usage"
+                }
               ],
               "select": {
                 "$action": "usage",
@@ -283,7 +333,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "v1",
+                "billing",
+                "usage"
+              ]
             }
           ]
         }
@@ -295,6 +350,7 @@ class Config {
     "folder": {
       "fields": [
         {
+          "format": "date-time",
           "name": "createdAt",
           "req": true,
           "type": "`$STRING`"
@@ -334,6 +390,7 @@ class Config {
           "type": "`$ANY`"
         },
         {
+          "format": "date-time",
           "name": "updatedAt",
           "req": true,
           "type": "`$STRING`"
@@ -344,6 +401,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "folder",
       "op": {
         "create": {
@@ -355,15 +416,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/v1/folders",
-              "parts": [
-                "v1",
-                "folders"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "folders"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.folder`"
-              }
+              },
+              "parts": [
+                "v1",
+                "folders"
+              ]
             }
           ]
         },
@@ -392,9 +461,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/folders",
-              "parts": [
-                "v1",
-                "folders"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "folders"
+                }
               ],
               "select": {
                 "exist": [
@@ -405,7 +478,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.folders`"
-              }
+              },
+              "parts": [
+                "v1",
+                "folders"
+              ]
             }
           ]
         },
@@ -437,16 +514,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/folders/{folderId}",
-              "parts": [
-                "v1",
-                "folders",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "folderId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "folders"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -456,7 +539,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.folder`"
-              }
+              },
+              "parts": [
+                "v1",
+                "folders",
+                "{id}"
+              ]
             }
           ]
         },
@@ -479,16 +567,22 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/v1/folders/{folderId}",
-              "parts": [
-                "v1",
-                "folders",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "folderId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "folders"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -497,7 +591,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.folder`"
-              }
+              },
+              "parts": [
+                "v1",
+                "folders",
+                "{id}"
+              ]
             }
           ]
         },
@@ -520,16 +619,22 @@ class Config {
               "kind": "http",
               "method": "PATCH",
               "orig": "/v1/folders/{folderId}",
-              "parts": [
-                "v1",
-                "folders",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "folderId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "folders"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -540,7 +645,12 @@ class Config {
                   "folder": "`reqdata`"
                 },
                 "res": "`body.folder`"
-              }
+              },
+              "parts": [
+                "v1",
+                "folders",
+                "{id}"
+              ]
             }
           ]
         }
@@ -562,6 +672,7 @@ class Config {
           "type": "`$ANY`"
         },
         {
+          "format": "date-time",
           "name": "createdAt",
           "req": true,
           "type": "`$STRING`"
@@ -627,6 +738,10 @@ class Config {
           }
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "result",
       "op": {
         "list": {
@@ -676,17 +791,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}/results",
-              "parts": [
-                "v1",
-                "typebots",
-                "{typebot_id}",
-                "results"
-              ],
               "rename": {
                 "param": {
                   "typebotId": "typebot_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "typebot_id"
+                },
+                {
+                  "lit": "results"
+                }
+              ],
               "select": {
                 "exist": [
                   "cursor",
@@ -699,7 +822,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{typebot_id}",
+                "results"
+              ]
             },
             {
               "args": {
@@ -723,20 +852,32 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}/results/{resultId}/logs",
-              "parts": [
-                "v1",
-                "typebots",
-                "{typebot_id}",
-                "results",
-                "{id}",
-                "logs"
-              ],
               "rename": {
                 "param": {
                   "resultId": "id",
                   "typebotId": "typebot_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "typebot_id"
+                },
+                {
+                  "lit": "results"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "logs"
+                }
+              ],
               "select": {
                 "$action": "log",
                 "exist": [
@@ -747,7 +888,15 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.logs`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{typebot_id}",
+                "results",
+                "{id}",
+                "logs"
+              ]
             }
           ]
         },
@@ -777,19 +926,29 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}/results/{resultId}",
-              "parts": [
-                "v1",
-                "typebots",
-                "{typebot_id}",
-                "results",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "resultId": "id",
                   "typebotId": "typebot_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "typebot_id"
+                },
+                {
+                  "lit": "results"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -799,7 +958,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.result`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{typebot_id}",
+                "results",
+                "{id}"
+              ]
             }
           ]
         },
@@ -822,17 +988,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/v1/typebots/{typebotId}/results",
-              "parts": [
-                "v1",
-                "typebots",
-                "{typebot_id}",
-                "results"
-              ],
               "rename": {
                 "param": {
                   "typebotId": "typebot_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "typebot_id"
+                },
+                {
+                  "lit": "results"
+                }
+              ],
               "select": {
                 "exist": [
                   "typebot_id"
@@ -841,7 +1015,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{typebot_id}",
+                "results"
+              ]
             }
           ]
         }
@@ -862,6 +1042,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "createdAt",
           "req": true,
           "type": "`$STRING`"
@@ -1014,6 +1195,7 @@ class Config {
           }
         },
         {
+          "format": "date-time",
           "name": "updatedAt",
           "req": true,
           "type": "`$STRING`"
@@ -1064,6 +1246,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "typebot",
       "op": {
         "create": {
@@ -1085,17 +1271,25 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/v1/typebots/{typebotId}/publish",
-              "parts": [
-                "v1",
-                "typebots",
-                "{id}",
-                "publish"
-              ],
               "rename": {
                 "param": {
                   "typebotId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "publish"
+                }
+              ],
               "select": {
                 "$action": "publish",
                 "exist": [
@@ -1105,7 +1299,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{id}",
+                "publish"
+              ]
             },
             {
               "args": {
@@ -1122,17 +1322,25 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/v1/typebots/{typebotId}/unpublish",
-              "parts": [
-                "v1",
-                "typebots",
-                "{id}",
-                "unpublish"
-              ],
               "rename": {
                 "param": {
                   "typebotId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "unpublish"
+                }
+              ],
               "select": {
                 "$action": "unpublish",
                 "exist": [
@@ -1142,16 +1350,26 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{id}",
+                "unpublish"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/v1/typebots",
-              "parts": [
-                "v1",
-                "typebots"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                }
               ],
               "select": {},
               "transform": {
@@ -1159,17 +1377,27 @@ class Config {
                   "typebot": "`reqdata`"
                 },
                 "res": "`body.typebot`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/v1/typebots/import",
-              "parts": [
-                "v1",
-                "typebots",
-                "import"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "lit": "import"
+                }
               ],
               "select": {
                 "$action": "import"
@@ -1179,7 +1407,12 @@ class Config {
                   "typebot": "`reqdata`"
                 },
                 "res": "`body.typebot`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "import"
+              ]
             }
           ]
         },
@@ -1208,9 +1441,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots",
-              "parts": [
-                "v1",
-                "typebots"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                }
               ],
               "select": {
                 "exist": [
@@ -1221,7 +1458,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.typebots`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots"
+              ]
             }
           ]
         },
@@ -1253,16 +1494,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}",
-              "parts": [
-                "v1",
-                "typebots",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "typebotId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -1272,7 +1519,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.typebot`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{id}"
+              ]
             },
             {
               "args": {
@@ -1298,17 +1550,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/typebots/{typebotId}/publishedTypebot",
-              "parts": [
-                "v1",
-                "typebots",
-                "{id}",
-                "publishedTypebot"
-              ],
               "rename": {
                 "param": {
                   "typebotId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "publishedTypebot"
+                }
+              ],
               "select": {
                 "$action": "published_typebot",
                 "exist": [
@@ -1319,7 +1579,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{id}",
+                "publishedTypebot"
+              ]
             }
           ]
         },
@@ -1342,16 +1608,22 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/v1/typebots/{typebotId}",
-              "parts": [
-                "v1",
-                "typebots",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "typebotId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -1360,7 +1632,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{id}"
+              ]
             }
           ]
         },
@@ -1383,16 +1660,22 @@ class Config {
               "kind": "http",
               "method": "PATCH",
               "orig": "/v1/typebots/{typebotId}",
-              "parts": [
-                "v1",
-                "typebots",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "typebotId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -1403,7 +1686,12 @@ class Config {
                   "typebot": "`reqdata`"
                 },
                 "res": "`body.typebot`"
-              }
+              },
+              "parts": [
+                "v1",
+                "typebots",
+                "{id}"
+              ]
             }
           ]
         }
@@ -1420,6 +1708,7 @@ class Config {
           "type": "`$ANY`"
         },
         {
+          "format": "date-time",
           "name": "createdAt",
           "req": true,
           "type": "`$STRING`"
@@ -1513,6 +1802,7 @@ class Config {
           "type": "`$ANY`"
         },
         {
+          "format": "date-time",
           "name": "updatedAt",
           "req": true,
           "type": "`$STRING`"
@@ -1533,6 +1823,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "workspace",
       "op": {
         "create": {
@@ -1544,15 +1838,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/v1/workspaces",
-              "parts": [
-                "v1",
-                "workspaces"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "workspaces"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.workspace`"
-              }
+              },
+              "parts": [
+                "v1",
+                "workspaces"
+              ]
             }
           ]
         },
@@ -1575,17 +1877,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/workspaces/{workspaceId}/members",
-              "parts": [
-                "v1",
-                "workspaces",
-                "{id}",
-                "members"
-              ],
               "rename": {
                 "param": {
                   "workspaceId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "workspaces"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "members"
+                }
+              ],
               "select": {
                 "$action": "member",
                 "exist": [
@@ -1595,22 +1905,36 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.members`"
-              }
+              },
+              "parts": [
+                "v1",
+                "workspaces",
+                "{id}",
+                "members"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/v1/workspaces",
-              "parts": [
-                "v1",
-                "workspaces"
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "workspaces"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.workspaces`"
-              }
+              },
+              "parts": [
+                "v1",
+                "workspaces"
+              ]
             }
           ]
         },
@@ -1633,16 +1957,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/v1/workspaces/{workspaceId}",
-              "parts": [
-                "v1",
-                "workspaces",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "workspaceId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "workspaces"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -1651,7 +1981,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.workspace`"
-              }
+              },
+              "parts": [
+                "v1",
+                "workspaces",
+                "{id}"
+              ]
             }
           ]
         },
@@ -1674,16 +2009,22 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/v1/workspaces/{workspaceId}",
-              "parts": [
-                "v1",
-                "workspaces",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "workspaceId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "workspaces"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -1692,7 +2033,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "v1",
+                "workspaces",
+                "{id}"
+              ]
             }
           ]
         },
@@ -1715,16 +2061,22 @@ class Config {
               "kind": "http",
               "method": "PATCH",
               "orig": "/v1/workspaces/{workspaceId}",
-              "parts": [
-                "v1",
-                "workspaces",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "workspaceId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "workspaces"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -1733,7 +2085,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.workspace`"
-              }
+              },
+              "parts": [
+                "v1",
+                "workspaces",
+                "{id}"
+              ]
             }
           ]
         }
@@ -1749,6 +2106,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

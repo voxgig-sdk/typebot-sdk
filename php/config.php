@@ -117,16 +117,26 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}/analytics/stats',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{typebot_id}',
-                    'analytics',
-                    'stats',
-                  ],
                   'rename' => [
                     'param' => [
                       'typebotId' => 'typebot_id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'typebot_id',
+                    ],
+                    [
+                      'lit' => 'analytics',
+                    ],
+                    [
+                      'lit' => 'stats',
                     ],
                   ],
                   'select' => [
@@ -140,6 +150,13 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.stats`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{typebot_id}',
+                    'analytics',
+                    'stats',
                   ],
                 ],
               ],
@@ -176,6 +193,7 @@ class TypebotConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'resetsAt',
               'req' => true,
               'type' => '`$STRING`',
@@ -190,6 +208,10 @@ class TypebotConfig
               'req' => true,
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'billing',
           'op' => [
@@ -212,10 +234,16 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/billing/invoices',
-                  'parts' => [
-                    'v1',
-                    'billing',
-                    'invoices',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'billing',
+                    ],
+                    [
+                      'lit' => 'invoices',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'invoice',
@@ -226,6 +254,11 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.invoices`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'billing',
+                    'invoices',
                   ],
                 ],
               ],
@@ -249,10 +282,16 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/billing/usage',
-                  'parts' => [
-                    'v1',
-                    'billing',
-                    'usage',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'billing',
+                    ],
+                    [
+                      'lit' => 'usage',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'usage',
@@ -263,6 +302,11 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'billing',
+                    'usage',
                   ],
                 ],
               ],
@@ -275,6 +319,7 @@ class TypebotConfig
         'folder' => [
           'fields' => [
             [
+              'format' => 'date-time',
               'name' => 'createdAt',
               'req' => true,
               'type' => '`$STRING`',
@@ -314,6 +359,7 @@ class TypebotConfig
               'type' => '`$ANY`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'updatedAt',
               'req' => true,
               'type' => '`$STRING`',
@@ -323,6 +369,10 @@ class TypebotConfig
               'req' => true,
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'folder',
           'op' => [
@@ -335,14 +385,22 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/folders',
-                  'parts' => [
-                    'v1',
-                    'folders',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'folders',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.folder`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'folders',
                   ],
                 ],
               ],
@@ -372,9 +430,13 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/folders',
-                  'parts' => [
-                    'v1',
-                    'folders',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'folders',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -385,6 +447,10 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.folders`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'folders',
                   ],
                 ],
               ],
@@ -417,14 +483,20 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/folders/{folderId}',
-                  'parts' => [
-                    'v1',
-                    'folders',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'folderId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'folders',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -436,6 +508,11 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.folder`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'folders',
+                    '{id}',
                   ],
                 ],
               ],
@@ -459,14 +536,20 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/v1/folders/{folderId}',
-                  'parts' => [
-                    'v1',
-                    'folders',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'folderId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'folders',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -477,6 +560,11 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.folder`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'folders',
+                    '{id}',
                   ],
                 ],
               ],
@@ -500,14 +588,20 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'PATCH',
                   'orig' => '/v1/folders/{folderId}',
-                  'parts' => [
-                    'v1',
-                    'folders',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'folderId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'folders',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -520,6 +614,11 @@ class TypebotConfig
                       'folder' => '`reqdata`',
                     ],
                     'res' => '`body.folder`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'folders',
+                    '{id}',
                   ],
                 ],
               ],
@@ -542,6 +641,7 @@ class TypebotConfig
               'type' => '`$ANY`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'createdAt',
               'req' => true,
               'type' => '`$STRING`',
@@ -607,6 +707,10 @@ class TypebotConfig
               ],
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'result',
           'op' => [
             'list' => [
@@ -656,15 +760,23 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}/results',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{typebot_id}',
-                    'results',
-                  ],
                   'rename' => [
                     'param' => [
                       'typebotId' => 'typebot_id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'typebot_id',
+                    ],
+                    [
+                      'lit' => 'results',
                     ],
                   ],
                   'select' => [
@@ -679,6 +791,12 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{typebot_id}',
+                    'results',
                   ],
                 ],
                 [
@@ -703,18 +821,30 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}/results/{resultId}/logs',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{typebot_id}',
-                    'results',
-                    '{id}',
-                    'logs',
-                  ],
                   'rename' => [
                     'param' => [
                       'resultId' => 'id',
                       'typebotId' => 'typebot_id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'typebot_id',
+                    ],
+                    [
+                      'lit' => 'results',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
+                    [
+                      'lit' => 'logs',
                     ],
                   ],
                   'select' => [
@@ -727,6 +857,14 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.logs`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{typebot_id}',
+                    'results',
+                    '{id}',
+                    'logs',
                   ],
                 ],
               ],
@@ -757,17 +895,27 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}/results/{resultId}',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{typebot_id}',
-                    'results',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'resultId' => 'id',
                       'typebotId' => 'typebot_id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'typebot_id',
+                    ],
+                    [
+                      'lit' => 'results',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -779,6 +927,13 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.result`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{typebot_id}',
+                    'results',
+                    '{id}',
                   ],
                 ],
               ],
@@ -802,15 +957,23 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/v1/typebots/{typebotId}/results',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{typebot_id}',
-                    'results',
-                  ],
                   'rename' => [
                     'param' => [
                       'typebotId' => 'typebot_id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'typebot_id',
+                    ],
+                    [
+                      'lit' => 'results',
                     ],
                   ],
                   'select' => [
@@ -821,6 +984,12 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{typebot_id}',
+                    'results',
                   ],
                 ],
               ],
@@ -842,6 +1011,7 @@ class TypebotConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'createdAt',
               'req' => true,
               'type' => '`$STRING`',
@@ -994,6 +1164,7 @@ class TypebotConfig
               ],
             ],
             [
+              'format' => 'date-time',
               'name' => 'updatedAt',
               'req' => true,
               'type' => '`$STRING`',
@@ -1044,6 +1215,10 @@ class TypebotConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'typebot',
           'op' => [
             'create' => [
@@ -1065,15 +1240,23 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/typebots/{typebotId}/publish',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{id}',
-                    'publish',
-                  ],
                   'rename' => [
                     'param' => [
                       'typebotId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
+                    [
+                      'lit' => 'publish',
                     ],
                   ],
                   'select' => [
@@ -1085,6 +1268,12 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{id}',
+                    'publish',
                   ],
                 ],
                 [
@@ -1102,15 +1291,23 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/typebots/{typebotId}/unpublish',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{id}',
-                    'unpublish',
-                  ],
                   'rename' => [
                     'param' => [
                       'typebotId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
+                    [
+                      'lit' => 'unpublish',
                     ],
                   ],
                   'select' => [
@@ -1123,15 +1320,25 @@ class TypebotConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{id}',
+                    'unpublish',
+                  ],
                 ],
                 [
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/typebots',
-                  'parts' => [
-                    'v1',
-                    'typebots',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
@@ -1140,16 +1347,26 @@ class TypebotConfig
                     ],
                     'res' => '`body.typebot`',
                   ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                  ],
                 ],
                 [
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/typebots/import',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    'import',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'lit' => 'import',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'import',
@@ -1159,6 +1376,11 @@ class TypebotConfig
                       'typebot' => '`reqdata`',
                     ],
                     'res' => '`body.typebot`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    'import',
                   ],
                 ],
               ],
@@ -1188,9 +1410,13 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots',
-                  'parts' => [
-                    'v1',
-                    'typebots',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -1201,6 +1427,10 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.typebots`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
                   ],
                 ],
               ],
@@ -1233,14 +1463,20 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'typebotId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -1252,6 +1488,11 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.typebot`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{id}',
                   ],
                 ],
                 [
@@ -1278,15 +1519,23 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/typebots/{typebotId}/publishedTypebot',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{id}',
-                    'publishedTypebot',
-                  ],
                   'rename' => [
                     'param' => [
                       'typebotId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
+                    [
+                      'lit' => 'publishedTypebot',
                     ],
                   ],
                   'select' => [
@@ -1299,6 +1548,12 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{id}',
+                    'publishedTypebot',
                   ],
                 ],
               ],
@@ -1322,14 +1577,20 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/v1/typebots/{typebotId}',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'typebotId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -1340,6 +1601,11 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{id}',
                   ],
                 ],
               ],
@@ -1363,14 +1629,20 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'PATCH',
                   'orig' => '/v1/typebots/{typebotId}',
-                  'parts' => [
-                    'v1',
-                    'typebots',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'typebotId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'typebots',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -1383,6 +1655,11 @@ class TypebotConfig
                       'typebot' => '`reqdata`',
                     ],
                     'res' => '`body.typebot`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'typebots',
+                    '{id}',
                   ],
                 ],
               ],
@@ -1400,6 +1677,7 @@ class TypebotConfig
               'type' => '`$ANY`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'createdAt',
               'req' => true,
               'type' => '`$STRING`',
@@ -1493,6 +1771,7 @@ class TypebotConfig
               'type' => '`$ANY`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'updatedAt',
               'req' => true,
               'type' => '`$STRING`',
@@ -1513,6 +1792,10 @@ class TypebotConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'workspace',
           'op' => [
             'create' => [
@@ -1524,14 +1807,22 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v1/workspaces',
-                  'parts' => [
-                    'v1',
-                    'workspaces',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'workspaces',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.workspace`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'workspaces',
                   ],
                 ],
               ],
@@ -1555,15 +1846,23 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/workspaces/{workspaceId}/members',
-                  'parts' => [
-                    'v1',
-                    'workspaces',
-                    '{id}',
-                    'members',
-                  ],
                   'rename' => [
                     'param' => [
                       'workspaceId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'workspaces',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
+                    [
+                      'lit' => 'members',
                     ],
                   ],
                   'select' => [
@@ -1576,20 +1875,34 @@ class TypebotConfig
                     'req' => '`reqdata`',
                     'res' => '`body.members`',
                   ],
+                  'parts' => [
+                    'v1',
+                    'workspaces',
+                    '{id}',
+                    'members',
+                  ],
                 ],
                 [
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/workspaces',
-                  'parts' => [
-                    'v1',
-                    'workspaces',
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'workspaces',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.workspaces`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'workspaces',
                   ],
                 ],
               ],
@@ -1613,14 +1926,20 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v1/workspaces/{workspaceId}',
-                  'parts' => [
-                    'v1',
-                    'workspaces',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'workspaceId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'workspaces',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -1631,6 +1950,11 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.workspace`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'workspaces',
+                    '{id}',
                   ],
                 ],
               ],
@@ -1654,14 +1978,20 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/v1/workspaces/{workspaceId}',
-                  'parts' => [
-                    'v1',
-                    'workspaces',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'workspaceId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'workspaces',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -1672,6 +2002,11 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'workspaces',
+                    '{id}',
                   ],
                 ],
               ],
@@ -1695,14 +2030,20 @@ class TypebotConfig
                   'kind' => 'http',
                   'method' => 'PATCH',
                   'orig' => '/v1/workspaces/{workspaceId}',
-                  'parts' => [
-                    'v1',
-                    'workspaces',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'workspaceId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'lit' => 'workspaces',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -1713,6 +2054,11 @@ class TypebotConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.workspace`',
+                  ],
+                  'parts' => [
+                    'v1',
+                    'workspaces',
+                    '{id}',
                   ],
                 ],
               ],

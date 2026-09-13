@@ -16,6 +16,8 @@
 /**
  * @typedef {Object} AnalyticsLoadMatch
  * @property {string} typebot_id
+ * @property {string} [time_filter]
+ * @property {string} [time_zone]
  */
 
 /**
@@ -31,24 +33,12 @@
 
 /**
  * @typedef {Object} BillingLoadMatch
- * @property {number} [amount]
- * @property {string} [currency]
- * @property {*} [date]
- * @property {string} id
- * @property {string} [resetsAt]
- * @property {number} [totalChatsUsed]
- * @property {string} [url]
+ * @property {string} workspace_id
  */
 
 /**
  * @typedef {Object} BillingListMatch
- * @property {number} [amount]
- * @property {string} [currency]
- * @property {*} [date]
- * @property {string} [id]
- * @property {string} [resetsAt]
- * @property {number} [totalChatsUsed]
- * @property {string} [url]
+ * @property {string} workspace_id
  */
 
 /**
@@ -66,18 +56,13 @@
 /**
  * @typedef {Object} FolderLoadMatch
  * @property {string} id
+ * @property {string} workspace_id
  */
 
 /**
  * @typedef {Object} FolderListMatch
- * @property {string} [createdAt]
- * @property {Object} [folder]
- * @property {string} [folderName]
- * @property {string} [id]
- * @property {string} [name]
- * @property {*} [parentFolderId]
- * @property {string} [updatedAt]
- * @property {string} [workspaceId]
+ * @property {string} [parent_folder_id]
+ * @property {string} workspace_id
  */
 
 /**
@@ -136,6 +121,10 @@
 /**
  * @typedef {Object} ResultListMatch
  * @property {string} typebot_id
+ * @property {number} [cursor]
+ * @property {number} [limit]
+ * @property {string} [time_filter]
+ * @property {string} [time_zone]
  */
 
 /**
@@ -182,42 +171,13 @@
 /**
  * @typedef {Object} TypebotLoadMatch
  * @property {string} id
+ * @property {boolean} [migrate_to_latest_version]
  */
 
 /**
  * @typedef {Object} TypebotListMatch
- * @property {string} [accessRight]
- * @property {string} [createdAt]
- * @property {*} [customDomain]
- * @property {Array} [edges]
- * @property {boolean} [enableSafetyFlags]
- * @property {Array} [events]
- * @property {*} [folderId]
- * @property {string} [fromTemplate]
- * @property {Array} [groups]
- * @property {*} [icon]
- * @property {string} [id]
- * @property {boolean} [isArchived]
- * @property {boolean} [isClosed]
- * @property {*} [message]
- * @property {string} [name]
- * @property {boolean} [overwrite]
- * @property {*} [publicId]
- * @property {*} [publishedTypebot]
- * @property {string} [publishedTypebotId]
- * @property {*} [resultsTablePreferences]
- * @property {*} [riskLevel]
- * @property {*} [selectedThemeTemplateId]
- * @property {Object} [settings]
- * @property {*} [spaceId]
- * @property {Object} [theme]
- * @property {Object} [typebot]
- * @property {string} [updatedAt]
- * @property {Array} [variables]
- * @property {*} [version]
- * @property {Array} [warnings]
- * @property {*} [whatsAppCredentialsId]
- * @property {string} [workspaceId]
+ * @property {string} [folder_id]
+ * @property {string} workspace_id
  */
 
 /**

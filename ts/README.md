@@ -497,13 +497,13 @@ Create an instance: `const billing = client.Billing()`
 #### Example: Load
 
 ```ts
-const billing = await client.Billing().load({ id: 'billing_id' })
+const billing = await client.Billing().load({ workspace_id: 'workspace_id' })
 ```
 
 #### Example: List
 
 ```ts
-const billings = await client.Billing().list()
+const billings = await client.Billing().list({ workspace_id: "example" })
 ```
 
 
@@ -537,13 +537,13 @@ Create an instance: `const folder = client.Folder()`
 #### Example: Load
 
 ```ts
-const folder = await client.Folder().load({ id: 'folder_id' })
+const folder = await client.Folder().load({ id: 'folder_id', workspace_id: 'workspace_id' })
 ```
 
 #### Example: List
 
 ```ts
-const folders = await client.Folder().list()
+const folders = await client.Folder().list({ workspace_id: "example" })
 ```
 
 #### Example: Create
@@ -665,7 +665,7 @@ const typebot = await client.Typebot().load({ id: 'typebot_id' })
 #### Example: List
 
 ```ts
-const typebots = await client.Typebot().list()
+const typebots = await client.Typebot().list({ workspace_id: "example" })
 ```
 
 #### Example: Create
@@ -781,6 +781,29 @@ const workspace = await client.Workspace().create({
   workspaceId: 'example_workspaceId',
 })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Open types

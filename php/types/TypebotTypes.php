@@ -24,6 +24,8 @@ class Analytics
 class AnalyticsLoadMatch
 {
     public string $typebot_id;
+    public ?string $time_filter = null;
+    public ?string $time_zone = null;
 }
 
 /** Billing entity data model. */
@@ -41,25 +43,13 @@ class Billing
 /** Request payload for Billing#load. */
 class BillingLoadMatch
 {
-    public ?float $amount = null;
-    public ?string $currency = null;
-    public mixed $date = null;
-    public string $id;
-    public ?string $resetsAt = null;
-    public ?float $totalChatsUsed = null;
-    public ?string $url = null;
+    public string $workspace_id;
 }
 
 /** Request payload for Billing#list. */
 class BillingListMatch
 {
-    public ?float $amount = null;
-    public ?string $currency = null;
-    public mixed $date = null;
-    public ?string $id = null;
-    public ?string $resetsAt = null;
-    public ?float $totalChatsUsed = null;
-    public ?string $url = null;
+    public string $workspace_id;
 }
 
 /** Folder entity data model. */
@@ -79,19 +69,14 @@ class Folder
 class FolderLoadMatch
 {
     public string $id;
+    public string $workspace_id;
 }
 
 /** Request payload for Folder#list. */
 class FolderListMatch
 {
-    public ?string $createdAt = null;
-    public ?array $folder = null;
-    public ?string $folderName = null;
-    public ?string $id = null;
-    public ?string $name = null;
-    public mixed $parentFolderId = null;
-    public ?string $updatedAt = null;
-    public ?string $workspaceId = null;
+    public ?string $parent_folder_id = null;
+    public string $workspace_id;
 }
 
 /** Request payload for Folder#create. */
@@ -156,6 +141,10 @@ class ResultLoadMatch
 class ResultListMatch
 {
     public string $typebot_id;
+    public ?float $cursor = null;
+    public ?float $limit = null;
+    public ?string $time_filter = null;
+    public ?string $time_zone = null;
 }
 
 /** Request payload for Result#remove. */
@@ -205,43 +194,14 @@ class Typebot
 class TypebotLoadMatch
 {
     public string $id;
+    public ?bool $migrate_to_latest_version = null;
 }
 
 /** Request payload for Typebot#list. */
 class TypebotListMatch
 {
-    public ?string $accessRight = null;
-    public ?string $createdAt = null;
-    public mixed $customDomain = null;
-    public ?array $edges = null;
-    public ?bool $enableSafetyFlags = null;
-    public ?array $events = null;
-    public mixed $folderId = null;
-    public ?string $fromTemplate = null;
-    public ?array $groups = null;
-    public mixed $icon = null;
-    public ?string $id = null;
-    public ?bool $isArchived = null;
-    public ?bool $isClosed = null;
-    public mixed $message = null;
-    public ?string $name = null;
-    public ?bool $overwrite = null;
-    public mixed $publicId = null;
-    public mixed $publishedTypebot = null;
-    public ?string $publishedTypebotId = null;
-    public mixed $resultsTablePreferences = null;
-    public mixed $riskLevel = null;
-    public mixed $selectedThemeTemplateId = null;
-    public ?array $settings = null;
-    public mixed $spaceId = null;
-    public ?array $theme = null;
-    public ?array $typebot = null;
-    public ?string $updatedAt = null;
-    public ?array $variables = null;
-    public mixed $version = null;
-    public ?array $warnings = null;
-    public mixed $whatsAppCredentialsId = null;
-    public ?string $workspaceId = null;
+    public ?string $folder_id = null;
+    public string $workspace_id;
 }
 
 /** Request payload for Typebot#create. */

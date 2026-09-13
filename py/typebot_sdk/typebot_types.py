@@ -22,8 +22,13 @@ class Analytics(TypedDict):
     totalViews: float
 
 
-class AnalyticsLoadMatch(TypedDict):
+class AnalyticsLoadMatchRequired(TypedDict):
     typebot_id: str
+
+
+class AnalyticsLoadMatch(AnalyticsLoadMatchRequired, total=False):
+    time_filter: str
+    time_zone: str
 
 
 class Billing(TypedDict):
@@ -36,27 +41,12 @@ class Billing(TypedDict):
     url: str
 
 
-class BillingLoadMatchRequired(TypedDict):
-    id: str
+class BillingLoadMatch(TypedDict):
+    workspace_id: str
 
 
-class BillingLoadMatch(BillingLoadMatchRequired, total=False):
-    amount: float
-    currency: str
-    date: Any
-    resetsAt: str
-    totalChatsUsed: float
-    url: str
-
-
-class BillingListMatch(TypedDict, total=False):
-    amount: float
-    currency: str
-    date: Any
-    id: str
-    resetsAt: str
-    totalChatsUsed: float
-    url: str
+class BillingListMatch(TypedDict):
+    workspace_id: str
 
 
 class FolderRequired(TypedDict):
@@ -75,17 +65,15 @@ class Folder(FolderRequired, total=False):
 
 class FolderLoadMatch(TypedDict):
     id: str
+    workspace_id: str
 
 
-class FolderListMatch(TypedDict, total=False):
-    createdAt: str
-    folder: dict
-    folderName: str
-    id: str
-    name: str
-    parentFolderId: Any
-    updatedAt: str
-    workspaceId: str
+class FolderListMatchRequired(TypedDict):
+    workspace_id: str
+
+
+class FolderListMatch(FolderListMatchRequired, total=False):
+    parent_folder_id: str
 
 
 class FolderCreateDataRequired(TypedDict):
@@ -142,8 +130,15 @@ class ResultLoadMatch(TypedDict):
     typebot_id: str
 
 
-class ResultListMatch(TypedDict):
+class ResultListMatchRequired(TypedDict):
     typebot_id: str
+
+
+class ResultListMatch(ResultListMatchRequired, total=False):
+    cursor: float
+    limit: float
+    time_filter: str
+    time_zone: str
 
 
 class ResultRemoveMatch(TypedDict):
@@ -188,43 +183,20 @@ class Typebot(TypebotRequired, total=False):
     warnings: list
 
 
-class TypebotLoadMatch(TypedDict):
+class TypebotLoadMatchRequired(TypedDict):
     id: str
 
 
-class TypebotListMatch(TypedDict, total=False):
-    accessRight: str
-    createdAt: str
-    customDomain: Any
-    edges: list
-    enableSafetyFlags: bool
-    events: list
-    folderId: Any
-    fromTemplate: str
-    groups: list
-    icon: Any
-    id: str
-    isArchived: bool
-    isClosed: bool
-    message: Any
-    name: str
-    overwrite: bool
-    publicId: Any
-    publishedTypebot: Any
-    publishedTypebotId: str
-    resultsTablePreferences: Any
-    riskLevel: Any
-    selectedThemeTemplateId: Any
-    settings: dict
-    spaceId: Any
-    theme: dict
-    typebot: dict
-    updatedAt: str
-    variables: list
-    version: Any
-    warnings: list
-    whatsAppCredentialsId: Any
-    workspaceId: str
+class TypebotLoadMatch(TypebotLoadMatchRequired, total=False):
+    migrate_to_latest_version: bool
+
+
+class TypebotListMatchRequired(TypedDict):
+    workspace_id: str
+
+
+class TypebotListMatch(TypebotListMatchRequired, total=False):
+    folder_id: str
 
 
 class TypebotCreateDataRequired(TypedDict):

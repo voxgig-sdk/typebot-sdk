@@ -11,6 +11,7 @@ main: kit: entity: typebot: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "createdAt"
       req: true
       type: "`$STRING`"
@@ -167,6 +168,7 @@ main: kit: entity: typebot: {
       }
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: true
       type: "`$STRING`"
@@ -244,17 +246,25 @@ main: kit: entity: typebot: {
           }
           method: "POST"
           orig: "/v1/typebots/{typebotId}/publish"
-          parts: [
-            "v1"
-            "typebots"
-            "{id}"
-            "publish"
-          ]
           rename: {
             param: {
               typebotId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "publish"
+            }
+          ]
           select: {
             "$action": "publish"
             exist: [
@@ -280,17 +290,25 @@ main: kit: entity: typebot: {
           }
           method: "POST"
           orig: "/v1/typebots/{typebotId}/unpublish"
-          parts: [
-            "v1"
-            "typebots"
-            "{id}"
-            "unpublish"
-          ]
           rename: {
             param: {
               typebotId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "unpublish"
+            }
+          ]
           select: {
             "$action": "unpublish"
             exist: [
@@ -305,9 +323,13 @@ main: kit: entity: typebot: {
         {
           method: "POST"
           orig: "/v1/typebots"
-          parts: [
-            "v1"
-            "typebots"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
           ]
           transform: {
             req: {
@@ -319,10 +341,16 @@ main: kit: entity: typebot: {
         {
           method: "POST"
           orig: "/v1/typebots/import"
-          parts: [
-            "v1"
-            "typebots"
-            "import"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              lit: "import"
+            }
           ]
           select: {
             "$action": "import"
@@ -360,9 +388,13 @@ main: kit: entity: typebot: {
           }
           method: "GET"
           orig: "/v1/typebots"
-          parts: [
-            "v1"
-            "typebots"
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
           ]
           select: {
             exist: [
@@ -404,16 +436,22 @@ main: kit: entity: typebot: {
           }
           method: "GET"
           orig: "/v1/typebots/{typebotId}"
-          parts: [
-            "v1"
-            "typebots"
-            "{id}"
-          ]
           rename: {
             param: {
               typebotId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -449,17 +487,25 @@ main: kit: entity: typebot: {
           }
           method: "GET"
           orig: "/v1/typebots/{typebotId}/publishedTypebot"
-          parts: [
-            "v1"
-            "typebots"
-            "{id}"
-            "publishedTypebot"
-          ]
           rename: {
             param: {
               typebotId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "publishedTypebot"
+            }
+          ]
           select: {
             "$action": "published_typebot"
             exist: [
@@ -491,16 +537,22 @@ main: kit: entity: typebot: {
           }
           method: "DELETE"
           orig: "/v1/typebots/{typebotId}"
-          parts: [
-            "v1"
-            "typebots"
-            "{id}"
-          ]
           rename: {
             param: {
               typebotId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -530,16 +582,22 @@ main: kit: entity: typebot: {
           }
           method: "PATCH"
           orig: "/v1/typebots/{typebotId}"
-          parts: [
-            "v1"
-            "typebots"
-            "{id}"
-          ]
           rename: {
             param: {
               typebotId: "id"
             }
           }
+          segments: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

@@ -13,6 +13,8 @@
 
 ---@class AnalyticsLoadMatch
 ---@field typebot_id string
+---@field time_filter? string
+---@field time_zone? string
 
 ---@class Billing
 ---@field amount number
@@ -24,22 +26,10 @@
 ---@field url string
 
 ---@class BillingLoadMatch
----@field amount? number
----@field currency? string
----@field date? any
----@field id string
----@field resetsAt? string
----@field totalChatsUsed? number
----@field url? string
+---@field workspace_id string
 
 ---@class BillingListMatch
----@field amount? number
----@field currency? string
----@field date? any
----@field id? string
----@field resetsAt? string
----@field totalChatsUsed? number
----@field url? string
+---@field workspace_id string
 
 ---@class Folder
 ---@field createdAt string
@@ -53,16 +43,11 @@
 
 ---@class FolderLoadMatch
 ---@field id string
+---@field workspace_id string
 
 ---@class FolderListMatch
----@field createdAt? string
----@field folder? table
----@field folderName? string
----@field id? string
----@field name? string
----@field parentFolderId? any
----@field updatedAt? string
----@field workspaceId? string
+---@field parent_folder_id? string
+---@field workspace_id string
 
 ---@class FolderCreateData
 ---@field createdAt string
@@ -109,6 +94,10 @@
 
 ---@class ResultListMatch
 ---@field typebot_id string
+---@field cursor? number
+---@field limit? number
+---@field time_filter? string
+---@field time_zone? string
 
 ---@class ResultRemoveMatch
 ---@field typebot_id string
@@ -149,40 +138,11 @@
 
 ---@class TypebotLoadMatch
 ---@field id string
+---@field migrate_to_latest_version? boolean
 
 ---@class TypebotListMatch
----@field accessRight? string
----@field createdAt? string
----@field customDomain? any
----@field edges? table
----@field enableSafetyFlags? boolean
----@field events? table
----@field folderId? any
----@field fromTemplate? string
----@field groups? table
----@field icon? any
----@field id? string
----@field isArchived? boolean
----@field isClosed? boolean
----@field message? any
----@field name? string
----@field overwrite? boolean
----@field publicId? any
----@field publishedTypebot? any
----@field publishedTypebotId? string
----@field resultsTablePreferences? any
----@field riskLevel? any
----@field selectedThemeTemplateId? any
----@field settings? table
----@field spaceId? any
----@field theme? table
----@field typebot? table
----@field updatedAt? string
----@field variables? table
----@field version? any
----@field warnings? table
----@field whatsAppCredentialsId? any
----@field workspaceId? string
+---@field folder_id? string
+---@field workspace_id string
 
 ---@class TypebotCreateData
 ---@field accessRight string
