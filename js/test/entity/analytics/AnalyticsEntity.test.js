@@ -1,12 +1,14 @@
 
 const envlocal = __dirname + '/../../../.env.local'
-require('dotenv').config({ quiet: true, path: [envlocal] })
+require('../../utility').loadEnvLocal(envlocal)
 
 const Path = require('node:path')
 const Fs = require('node:fs')
 
 const { test, describe, afterEach } = require('node:test')
 const assert = require('node:assert')
+const { createLiveTransport } = require('../../live-runner')
+const { runLiveEntity } = require('../../live-entity')
 
 
 const { TypebotSDK, BaseFeature, stdutil, config } = require('../../..')
@@ -36,9 +38,13 @@ describe('AnalyticsEntity', async () => {
   })
 
 
-  test('basic', async () => {
+  test('basic', async (t) => {
 
+    
     const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"totalCompleted","req":true,"type":"`$NUMBER`","index$":0},{"active":true,"name":"totalStarts","req":true,"type":"`$NUMBER`","index$":1},{"active":true,"name":"totalViews","req":true,"type":"`$NUMBER`","index$":2}],"name":"analytics","op":{"load":{"input":"data","name":"load","points":[{"active":true,"args":{"params":[{"active":true,"kind":"param","name":"typebot_id","orig":"typebot_id","reqd":true,"type":"`$STRING`","index$":0}],"query":[{"active":true,"example":"last7Days","kind":"query","name":"time_filter","orig":"time_filter","reqd":false,"type":"`$STRING`","index$":0},{"active":true,"kind":"query","name":"time_zone","orig":"time_zone","reqd":false,"type":"`$STRING`","index$":1}]},"contract":{"id":"GET /v1/typebots/{typebotId}/analytics/stats","json":"{\"operationId\":\"analytics-getStats\",\"parameters\":[{\"in\":\"path\",\"name\":\"typebotId\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"allowEmptyValue\":true,\"allowReserved\":true,\"in\":\"query\",\"name\":\"timeFilter\",\"required\":false,\"schema\":{\"default\":\"last7Days\",\"enum\":[\"today\",\"last7Days\",\"last30Days\",\"monthToDate\",\"lastMonth\",\"yearToDate\",\"allTime\"],\"type\":\"string\"}},{\"allowEmptyValue\":true,\"allowReserved\":true,\"in\":\"query\",\"name\":\"timeZone\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"stats\":{\"properties\":{\"totalCompleted\":{\"type\":\"number\"},\"totalStarts\":{\"type\":\"number\"},\"totalViews\":{\"type\":\"number\"}},\"required\":[\"totalViews\",\"totalStarts\",\"totalCompleted\"],\"type\":\"object\"}},\"required\":[\"stats\"],\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"code\":{\"const\":\"BAD_REQUEST\"},\"data\":{},\"defined\":{\"const\":true},\"message\":{\"default\":\"Bad Request\",\"type\":\"string\"},\"status\":{\"const\":400}},\"required\":[\"defined\",\"code\",\"status\",\"message\"],\"type\":\"object\"},{\"properties\":{\"code\":{\"type\":\"string\"},\"data\":{},\"defined\":{\"const\":false},\"message\":{\"type\":\"string\"},\"status\":{\"type\":\"number\"}},\"required\":[\"defined\",\"code\",\"status\",\"message\"],\"type\":\"object\"}]}}},\"description\":\"400\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"code\":{\"const\":\"UNAUTHORIZED\"},\"data\":{},\"defined\":{\"const\":true},\"message\":{\"default\":\"Unauthorized\",\"type\":\"string\"},\"status\":{\"const\":401}},\"required\":[\"defined\",\"code\",\"status\",\"message\"],\"type\":\"object\"},{\"properties\":{\"code\":{\"type\":\"string\"},\"data\":{},\"defined\":{\"const\":false},\"message\":{\"type\":\"string\"},\"status\":{\"type\":\"number\"}},\"required\":[\"defined\",\"code\",\"status\",\"message\"],\"type\":\"object\"}]}}},\"description\":\"401\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"code\":{\"const\":\"FORBIDDEN\"},\"data\":{},\"defined\":{\"const\":true},\"message\":{\"default\":\"Forbidden\",\"type\":\"string\"},\"status\":{\"const\":403}},\"required\":[\"defined\",\"code\",\"status\",\"message\"],\"type\":\"object\"},{\"properties\":{\"code\":{\"type\":\"string\"},\"data\":{},\"defined\":{\"const\":false},\"message\":{\"type\":\"string\"},\"status\":{\"type\":\"number\"}},\"required\":[\"defined\",\"code\",\"status\",\"message\"],\"type\":\"object\"}]}}},\"description\":\"403\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"code\":{\"const\":\"NOT_FOUND\"},\"data\":{},\"defined\":{\"const\":true},\"message\":{\"default\":\"Not Found\",\"type\":\"string\"},\"status\":{\"const\":404}},\"required\":[\"defined\",\"code\",\"status\",\"message\"],\"type\":\"object\"},{\"properties\":{\"code\":{\"type\":\"string\"},\"data\":{},\"defined\":{\"const\":false},\"message\":{\"type\":\"string\"},\"status\":{\"type\":\"number\"}},\"required\":[\"defined\",\"code\",\"status\",\"message\"],\"type\":\"object\"}]}}},\"description\":\"404\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"properties\":{\"code\":{\"const\":\"INTERNAL_SERVER_ERROR\"},\"data\":{},\"defined\":{\"const\":true},\"message\":{\"default\":\"Internal Server Error\",\"type\":\"string\"},\"status\":{\"const\":500}},\"required\":[\"defined\",\"code\",\"status\",\"message\"],\"type\":\"object\"},{\"properties\":{\"code\":{\"type\":\"string\"},\"data\":{},\"defined\":{\"const\":false},\"message\":{\"type\":\"string\"},\"status\":{\"type\":\"number\"}},\"required\":[\"defined\",\"code\",\"status\",\"message\"],\"type\":\"object\"}]}}},\"description\":\"500\"}},\"security\":[{\"Authorization\":[]}],\"securitySchemes\":{\"Authorization\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/v1/typebots/{typebotId}/analytics/stats","rename":{"param":{"typebotId":"typebot_id"}},"segments":[{"lit":"v1"},{"lit":"typebots"},{"var":"typebot_id"},{"lit":"analytics"},{"lit":"stats"}],"select":{"$action":"stat","exist":["time_filter","time_zone","typebot_id"]},"transform":{"req":"`reqdata`","res":"`body.stats`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[["typebot"]]},"key$":"analytics","name__orig":"analytics","Name":"Analytics","name_":"analytics","name-":"analytics","NAME":"ANALYTICS","index$":0}, {"active":true,"entity":"analytics","key$":"BasicAnalyticsFlow","kind":"basic","name":"BasicAnalyticsFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"analytics_ref01","srcdatavar":"analytics_ref01_data","suffix":"_dt0"},"match":{"id":"analytics01"},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-analytics_ref01"}}],"index$":0}]}, 'Analytics')
+    }
     const client = setup.client
     const struct = setup.struct
 
@@ -99,7 +105,14 @@ function basicSetup(extra) {
 
   idmap = env['TYPEBOT_TEST_ANALYTICS_ENTID']
 
-  if ('TRUE' === env.TYPEBOT_TEST_LIVE) {
+  const live = 'TRUE' === env.TYPEBOT_TEST_LIVE
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['TYPEBOT_TEST_ANALYTICS_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new TypebotSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -111,7 +124,8 @@ function basicSetup(extra) {
       // the last entry is undefined, and basicSetup is normally called with no
       // argument at all - so a bare 'extra' silently discarded the apikey and
       // server values above and handed the SDK undefined.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -123,6 +137,8 @@ function basicSetup(extra) {
     struct,
     data: entityData,
     explain: 'TRUE' === env.TYPEBOT_TEST_EXPLAIN,
+    live,
+    transport,
     now: Date.now(),
   }
 

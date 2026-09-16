@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Result | Builder API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Builder API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/typebot-sdk">voxgig-sdk/typebot-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Builder API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/analytics.html">Analytics</a>
+<a href="../api/billing.html">Billing</a>
+<a href="../api/folder.html">Folder</a>
+<a aria-current="page" href="../api/result.html">Result</a><div class="nav-sections"><a class="nav-section" href="#get-v1typebotstypebotidresults">GET /v1/typebots/{typebotId}/results</a>
+<a class="nav-section" href="#get-v1typebotstypebotidresultsresultidlogs">GET /v1/typebots/{typebotId}/results/{resultId}/logs</a>
+<a class="nav-section" href="#get-v1typebotstypebotidresultsresultid">GET /v1/typebots/{typebotId}/results/{resultId}</a>
+<a class="nav-section" href="#delete-v1typebotstypebotidresults">DELETE /v1/typebots/{typebotId}/results</a></div>
+<a href="../api/typebot.html">Typebot</a>
+<a href="../api/workspace.html">Workspace</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="result">Result</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-v1typebotstypebotidresults"><code>/v1/typebots/{typebotId}/results</code></a></td>
+<td><code>list</code></td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-v1typebotstypebotidresultsresultidlogs"><code>/v1/typebots/{typebotId}/results/{resultId}/logs</code></a></td>
+<td><code>list</code></td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-v1typebotstypebotidresultsresultid"><code>/v1/typebots/{typebotId}/results/{resultId}</code></a></td>
+<td><code>load</code></td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><a href="#delete-v1typebotstypebotidresults"><code>/v1/typebots/{typebotId}/results</code></a></td>
+<td><code>remove</code></td>
+<td>OK</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>answers</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td><code>any</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>details</code></td>
+<td><code>any</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>hasStarted</code></td>
+<td><code>any</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>isArchived</code></td>
+<td><code>any</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>isCompleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lastChatSessionId</code></td>
+<td><code>any</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resultId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>typebotId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>variables</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="list">list</h2>
+<h3 id="get-v1typebotstypebotidresults" class="operation" data-method="get"><code>GET</code> /v1/typebots/{typebotId}/results</h3>
+<p>Operation ID: <code>results-getResults</code>.</p>
+<p>Authentication: bearer token (<code>Authorization</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>typebotId</code> | <code>path</code> | <code>string</code> | Yes |  |
+| <code>limit</code> | <code>query</code> | <code>number</code> | No |  |
+| <code>cursor</code> | <code>query</code> | <code>number</code> | No |  |
+| <code>timeFilter</code> | <code>query</code> | <code>enum: today, last7Days, last30Days, monthToDate, lastMonth, yearToDate, ...</code> | No |  |
+| <code>timeZone</code> | <code>query</code> | <code>string</code> | No |  |</p>
+<h4 id="responses">Responses</h4>
+<h5 id="200-ok" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nextCursor</code></td>
+<td><code>number or null</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].answers</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].answers[].attachedFileUrls</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].answers[].blockId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].answers[].content</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].hasStarted</code></td>
+<td><code>boolean or null</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].isArchived</code></td>
+<td><code>boolean or null</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].isCompleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].lastChatSessionId</code></td>
+<td><code>string or null</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].typebotId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].variables</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].variables[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].variables[].isSessionVariable</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].variables[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results[].variables[].value</code></td>
+<td><code>string or array of string or null</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-400" class="status" data-status="4xx">400: 400</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="401-401" class="status" data-status="4xx">401: 401</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="403-403" class="status" data-status="4xx">403: 403</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="404-404" class="status" data-status="4xx">404: 404</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="500-500" class="status" data-status="5xx">500: 500</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h3 id="get-v1typebotstypebotidresultsresultidlogs" class="operation" data-method="get"><code>GET</code> /v1/typebots/{typebotId}/results/{resultId}/logs</h3>
+<p>Operation ID: <code>results-getResultLogs</code>.</p>
+<p>Authentication: bearer token (<code>Authorization</code>).</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>typebotId</code> | <code>path</code> | <code>string</code> | Yes |  |
+| <code>resultId</code> | <code>path</code> | <code>string</code> | Yes |  |</p>
+<h4 id="responses-1">Responses</h4>
+<h5 id="200-ok-1" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>logs</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>logs[].context</code></td>
+<td><code>string or null</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>logs[].createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>logs[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>logs[].details</code></td>
+<td><code>string or null</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>logs[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>logs[].resultId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>logs[].status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-400-1" class="status" data-status="4xx">400: 400</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="401-401-1" class="status" data-status="4xx">401: 401</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="403-403-1" class="status" data-status="4xx">403: 403</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="404-404-1" class="status" data-status="4xx">404: 404</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="500-500-1" class="status" data-status="5xx">500: 500</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h2 id="load">load</h2>
+<h3 id="get-v1typebotstypebotidresultsresultid" class="operation" data-method="get"><code>GET</code> /v1/typebots/{typebotId}/results/{resultId}</h3>
+<p>Operation ID: <code>results-getResult</code>.</p>
+<p>Authentication: bearer token (<code>Authorization</code>).</p>
+<h4 id="parameters-2">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>typebotId</code> | <code>path</code> | <code>string</code> | Yes |  |
+| <code>resultId</code> | <code>path</code> | <code>string</code> | Yes |  |</p>
+<h4 id="responses-2">Responses</h4>
+<h5 id="200-ok-2" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.answers</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.answers[].attachedFileUrls</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.answers[].blockId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.answers[].content</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.hasStarted</code></td>
+<td><code>boolean or null</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.isArchived</code></td>
+<td><code>boolean or null</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.isCompleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.lastChatSessionId</code></td>
+<td><code>string or null</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.typebotId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.variables</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.variables[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.variables[].isSessionVariable</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.variables[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result.variables[].value</code></td>
+<td><code>string or array of string or null</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-400-2" class="status" data-status="4xx">400: 400</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="401-401-2" class="status" data-status="4xx">401: 401</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="403-403-2" class="status" data-status="4xx">403: 403</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="404-404-2" class="status" data-status="4xx">404: 404</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="500-500-2" class="status" data-status="5xx">500: 500</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h2 id="remove">remove</h2>
+<h3 id="delete-v1typebotstypebotidresults" class="operation" data-method="delete"><code>DELETE</code> /v1/typebots/{typebotId}/results</h3>
+<p>Operation ID: <code>results-deleteResults</code>.</p>
+<p>Authentication: bearer token (<code>Authorization</code>).</p>
+<h4 id="parameters-3">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>typebotId</code> | <code>path</code> | <code>string</code> | Yes |  |</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resultIds</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Comma separated list of ids. If not provided, all results will be deleted. ⚠️</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-3">Responses</h4>
+<h5 id="200-ok-3" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>any or any</code>.</p>
+<h5 id="400-400-3" class="status" data-status="4xx">400: 400</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="401-401-3" class="status" data-status="4xx">401: 401</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="403-403-3" class="status" data-status="4xx">403: 403</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="404-404-3" class="status" data-status="4xx">404: 404</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+<h5 id="500-500-3" class="status" data-status="5xx">500: 500</h5>
+<p><code>application/json</code></p>
+<p>The response is <code>object or object</code>.</p>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

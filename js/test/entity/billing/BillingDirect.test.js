@@ -1,6 +1,6 @@
 
 const envlocal = __dirname + '/../../../.env.local'
-require('dotenv').config({ quiet: true, path: [envlocal] })
+require('../../utility').loadEnvLocal(envlocal)
 
 const { test, describe, afterEach } = require('node:test')
 const assert = require('node:assert')
@@ -34,7 +34,8 @@ describe('BillingDirect', async () => {
   })
 
 
-  test('direct-load-billing', async () => {
+  test('direct-load-billing', async (t) => {
+    if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup({ id: 'direct01' })
     const { client, calls } = setup
 
@@ -50,7 +51,7 @@ describe('BillingDirect', async () => {
       assert(listResult.ok === true)
       const listData = listResult.data
       if (!Array.isArray(listData) || listData.length === 0) {
-        return // skip: no entities to load in live mode
+        throw new Error('Live load blocked: discovery returned no usable entities')
       }
       params.id = listData[0].id
 
@@ -65,7 +66,7 @@ describe('BillingDirect', async () => {
     })
 
     assert(result.ok === true)
-    assert(result.status === 200)
+    assert(setup.live ? result.status >= 200 && result.status < 300 : result.status === 200)
     assert(null != result.data)
 
     if (!setup.live) {
@@ -75,7 +76,8 @@ describe('BillingDirect', async () => {
     }
   })
 
-  test('direct-list-billing', async () => {
+  test('direct-list-billing', async (t) => {
+    if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
     const { client, calls } = setup
 
@@ -88,7 +90,7 @@ describe('BillingDirect', async () => {
     })
 
     assert(result.ok === true)
-    assert(result.status === 200)
+    assert(setup.live ? result.status >= 200 && result.status < 300 : result.status === 200)
     assert(Array.isArray(result.data))
 
     if (!setup.live) {
@@ -102,6 +104,7 @@ describe('BillingDirect', async () => {
 
 
 
+function liveScenariosActive() { return false && process.env.TYPEBOT_TEST_LIVE === 'TRUE' }
 function directSetup(mockres) {
   const calls = []
 
