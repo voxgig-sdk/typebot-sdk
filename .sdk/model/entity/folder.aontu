@@ -1,0 +1,321 @@
+# Entity: folder
+
+main: kit: entity: folder: {
+
+  alias: field: {}
+
+  fields: {
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    folder: {
+      h: "Folder"
+      n: "folder"
+      r: true
+      t: "`$OBJECT`"
+    }
+    folderName: {
+      h: "Folder Name"
+      n: "folderName"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    parentFolderId: {
+      h: "Parent Folder Id"
+      n: "parentFolderId"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$ANY`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+    workspaceId: {
+      h: "Workspace Id"
+      n: "workspaceId"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "folder"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/folders"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/v1/folders"
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "folders"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.folder`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/folders"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "parent_folder_id"
+                or: "parent_folder_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "workspace_id"
+                or: "workspace_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/folders"
+          q: {
+            exist: [
+              "parent_folder_id"
+              "workspace_id"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "folders"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.folders`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v1/folders/{folderId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "folder_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "workspace_id"
+                or: "workspace_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/folders/{folderId}"
+          q: {
+            exist: [
+              "id"
+              "workspace_id"
+            ]
+          }
+          r: {
+            param: {
+              folderId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "folders"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.folder`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v1/folders/{folderId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "folder_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v1/folders/{folderId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              folderId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "folders"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.folder`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v1/folders/{folderId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "folder_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v1/folders/{folderId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              folderId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "folders"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: {
+              folder: "`reqdata`"
+            }
+            res: "`body.folder`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

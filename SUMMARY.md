@@ -46,7 +46,6 @@ Key fields to recognise:
 
 - `overwrite`: If true, even if we detect a conflict, we will overwrite push the updates to the typebot
 - `version`: Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`.
-- `workspaceId`: [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)
 
 ### [Workspace](docs/api/workspace.html)
 

@@ -59,8 +59,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    billings = client.Billing().list()
-    print(billings)
+    folders = client.Folder().list()
+    print(folders)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -128,8 +128,8 @@ client = TypebotSDK.test()
 
 # Entity ops return the ENTITY and raises on error;
 # call data_get() for the record.
-billing = client.Billing().list()
-# billing contains the mock response record
+folder = client.Folder().list()
+# folder contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -256,9 +256,6 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `totalCompleted` |  |
-| `totalStarts` |  |
-| `totalViews` |  |
 
 Operations: Load.
 
@@ -268,13 +265,6 @@ API path: `/v1/typebots/{typebotId}/analytics/stats`
 
 | Field | Description |
 | --- | --- |
-| `amount` |  |
-| `currency` |  |
-| `date` |  |
-| `id` |  |
-| `resetsAt` |  |
-| `totalChatsUsed` |  |
-| `url` |  |
 
 Operations: List, Load.
 
@@ -302,17 +292,12 @@ API path: `/v1/folders`
 | Field | Description |
 | --- | --- |
 | `answers` |  |
-| `context` |  |
 | `createdAt` |  |
-| `description` |  |
-| `details` |  |
 | `hasStarted` |  |
 | `id` |  |
 | `isArchived` |  |
 | `isCompleted` |  |
 | `lastChatSessionId` |  |
-| `resultId` |  |
-| `status` |  |
 | `typebotId` |  |
 | `variables` |  |
 
@@ -328,20 +313,16 @@ API path: `/v1/typebots/{typebotId}/results`
 | `createdAt` |  |
 | `customDomain` |  |
 | `edges` |  |
-| `enableSafetyFlags` |  |
 | `events` |  |
 | `folderId` |  |
-| `fromTemplate` |  |
 | `groups` |  |
 | `icon` |  |
 | `id` |  |
 | `isArchived` |  |
 | `isClosed` |  |
-| `message` |  |
 | `name` |  |
 | `overwrite` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` |  |
-| `publishedTypebot` |  |
 | `publishedTypebotId` |  |
 | `resultsTablePreferences` |  |
 | `riskLevel` |  |
@@ -352,10 +333,9 @@ API path: `/v1/typebots/{typebotId}/results`
 | `typebot` |  |
 | `updatedAt` |  |
 | `variables` |  |
-| `version` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
-| `warnings` |  |
+| `version` |  |
 | `whatsAppCredentialsId` |  |
-| `workspaceId` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
+| `workspaceId` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -379,13 +359,9 @@ API path: `/v1/typebots/{typebotId}/publish`
 | `lastActivityAt` |  |
 | `name` |  |
 | `plan` |  |
-| `role` |  |
 | `settings` |  |
 | `stripeId` |  |
 | `updatedAt` |  |
-| `user` |  |
-| `userId` |  |
-| `workspaceId` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -406,14 +382,6 @@ Create an instance: `analytics = client.Analytics()`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `totalCompleted` | `float` |  |
-| `totalStarts` | `float` |  |
-| `totalViews` | `float` |  |
-
 #### Example: Load
 
 ```python
@@ -431,18 +399,6 @@ Create an instance: `billing = client.Billing()`
 | --- | --- |
 | `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `amount` | `float` |  |
-| `currency` | `str` |  |
-| `date` | `Any` |  |
-| `id` | `str` |  |
-| `resetsAt` | `str` |  |
-| `totalChatsUsed` | `float` |  |
-| `url` | `str` |  |
 
 #### Example: Load
 
@@ -528,17 +484,12 @@ Create an instance: `result = client.Result()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `answers` | `list` |  |
-| `context` | `Any` |  |
 | `createdAt` | `str` |  |
-| `description` | `str` |  |
-| `details` | `Any` |  |
 | `hasStarted` | `Any` |  |
 | `id` | `str` |  |
 | `isArchived` | `Any` |  |
 | `isCompleted` | `bool` |  |
 | `lastChatSessionId` | `Any` |  |
-| `resultId` | `str` |  |
-| `status` | `str` |  |
 | `typebotId` | `str` |  |
 | `variables` | `list` |  |
 
@@ -577,20 +528,16 @@ Create an instance: `typebot = client.Typebot()`
 | `createdAt` | `str` |  |
 | `customDomain` | `Any` |  |
 | `edges` | `list` |  |
-| `enableSafetyFlags` | `bool` |  |
 | `events` | `list` |  |
 | `folderId` | `Any` |  |
-| `fromTemplate` | `str` |  |
 | `groups` | `list` |  |
 | `icon` | `Any` |  |
 | `id` | `str` |  |
 | `isArchived` | `bool` |  |
 | `isClosed` | `bool` |  |
-| `message` | `Any` |  |
 | `name` | `str` |  |
 | `overwrite` | `bool` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `Any` |  |
-| `publishedTypebot` | `Any` |  |
 | `publishedTypebotId` | `str` |  |
 | `resultsTablePreferences` | `Any` |  |
 | `riskLevel` | `Any` |  |
@@ -601,10 +548,9 @@ Create an instance: `typebot = client.Typebot()`
 | `typebot` | `dict` |  |
 | `updatedAt` | `str` |  |
 | `variables` | `list` |  |
-| `version` | `Any` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
-| `warnings` | `list` |  |
+| `version` | `str` |  |
 | `whatsAppCredentialsId` | `Any` |  |
-| `workspaceId` | `str` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
+| `workspaceId` | `str` |  |
 
 #### Example: Load
 
@@ -633,10 +579,8 @@ typebot = client.Typebot().create({
     "id": "example_id",  # str
     "isArchived": True,  # bool
     "isClosed": True,  # bool
-    "message": "example_message",  # Any
     "name": "example_name",  # str
     "publicId": "example_publicId",  # Any
-    "publishedTypebot": "example_publishedTypebot",  # Any
     "resultsTablePreferences": "example_resultsTablePreferences",  # Any
     "riskLevel": "example_riskLevel",  # Any
     "selectedThemeTemplateId": "example_selectedThemeTemplateId",  # Any
@@ -646,6 +590,7 @@ typebot = client.Typebot().create({
     "typebot": {},  # dict
     "updatedAt": "example_updatedAt",  # str
     "variables": [],  # list
+    "version": "example_version",  # str
     "whatsAppCredentialsId": "example_whatsAppCredentialsId",  # Any
     "workspaceId": "example_workspaceId",  # str
 })
@@ -684,13 +629,9 @@ Create an instance: `workspace = client.Workspace()`
 | `lastActivityAt` | `Any` |  |
 | `name` | `str` |  |
 | `plan` | `str` |  |
-| `role` | `str` |  |
 | `settings` | `Any` |  |
 | `stripeId` | `Any` |  |
 | `updatedAt` | `str` |  |
-| `user` | `dict` |  |
-| `userId` | `str` |  |
-| `workspaceId` | `str` |  |
 
 #### Example: Load
 
@@ -722,13 +663,9 @@ workspace = client.Workspace().create({
     "lastActivityAt": "example_lastActivityAt",  # Any
     "name": "example_name",  # str
     "plan": "example_plan",  # str
-    "role": "example_role",  # str
     "settings": "example_settings",  # Any
     "stripeId": "example_stripeId",  # Any
     "updatedAt": "example_updatedAt",  # str
-    "user": {},  # dict
-    "userId": "example_userId",  # str
-    "workspaceId": "example_workspaceId",  # str
 })
 ```
 
@@ -743,14 +680,14 @@ above:
 
 | Feature | What it does |
 |---|---|
-| [`debug`](#debug) | Request/response capture ring buffer for debugging |
-| [`idempotency`](#idempotency) | Idempotency keys for safe retries of mutating operations |
-| [`metrics`](#metrics) | Statistics capture: per-operation counters and latency |
-| [`paging`](#paging) | Pagination signals for list operations |
-| [`ratelimit`](#ratelimit) | Client-side rate limiting via a token bucket |
-| [`retry`](#retry) | Automatic retry of transient failures with exponential backoff |
-| [`test`](#test) | In-memory mock transport for testing without a live server |
-| [`timeout`](#timeout) | Per-request timeout with transport abort |
+| [`debug`](#debug) | Debug capture |
+| [`idempotency`](#idempotency) | Idempotency |
+| [`metrics`](#metrics) | Metrics |
+| [`paging`](#paging) | Paging |
+| [`ratelimit`](#ratelimit) | Rate limiting |
+| [`retry`](#retry) | Retry |
+| [`test`](#test) | Test transport |
+| [`timeout`](#timeout) | Timeout |
 
 > **Order matters for `ratelimit`, `retry`, `timeout`.** These wrap the
 > transport, so each one wraps whatever is already installed: the order you
@@ -759,7 +696,7 @@ above:
 
 ### debug
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 | Option | Default |
 |---|---|
@@ -771,7 +708,7 @@ Set `feature.debug.active` to enable it, then override any of the options above.
 
 ### idempotency
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 | Option | Default |
 |---|---|
@@ -784,7 +721,7 @@ Set `feature.idempotency.active` to enable it, then override any of the options 
 
 ### metrics
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 | Option | Default |
 |---|---|
@@ -794,7 +731,7 @@ Set `feature.metrics.active` to enable it, then override any of the options abov
 
 ### paging
 
-Pagination signals for list operations.
+Paging.
 
 | Option | Default |
 |---|---|
@@ -810,7 +747,7 @@ Set `feature.paging.active` to enable it, then override any of the options above
 
 ### ratelimit
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 | Option | Default |
 |---|---|
@@ -826,7 +763,7 @@ activated earlier.
 
 ### retry
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 | Option | Default |
 |---|---|
@@ -845,7 +782,7 @@ activated earlier.
 
 ### test
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 | Option | Default |
 |---|---|
@@ -855,7 +792,7 @@ Set `feature.test.active` to enable it, then override any of the options above.
 
 ### timeout
 
-Per-request timeout with transport abort.
+Timeout.
 
 | Option | Default |
 |---|---|
@@ -871,7 +808,7 @@ activated earlier.
 
 ## Open types
 
-4 fields are carried as open values rather than typed structures.
+3 fields are carried as open values rather than typed structures.
 This follows from the API definition, not from a gap in this SDK: the
 definition describes them with untagged unions —
 `oneOf`/`anyOf` branches with no `discriminator` — so it never states which
@@ -882,7 +819,6 @@ guarantee.
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
 | `typebot` | `groups` | 19 | 14 levels |
-| `typebot` | `publishedTypebot` | 19 | 20 levels |
 | `typebot` | `typebot` | 19 | 24 levels |
 | `typebot` | `events` | 3 | 1 level |
 
@@ -928,14 +864,14 @@ with hook methods named after pipeline stages (e.g. `PrePoint`,
 
 The SDK ships with built-in features:
 
-- **DebugFeature**: Request/response capture ring buffer for debugging
-- **IdempotencyFeature**: Idempotency keys for safe retries of mutating operations
-- **MetricsFeature**: Statistics capture: per-operation counters and latency
-- **PagingFeature**: Pagination signals for list operations
-- **RatelimitFeature**: Client-side rate limiting via a token bucket
-- **RetryFeature**: Automatic retry of transient failures with exponential backoff
-- **TestFeature**: In-memory mock transport for testing without a live server
-- **TimeoutFeature**: Per-request timeout with transport abort
+- **DebugFeature**: Debug capture
+- **IdempotencyFeature**: Idempotency
+- **MetricsFeature**: Metrics
+- **PagingFeature**: Paging
+- **RatelimitFeature**: Rate limiting
+- **RetryFeature**: Retry
+- **TestFeature**: Test transport
+- **TimeoutFeature**: Timeout
 
 Features are initialized in order. Hooks fire in the order features
 were added, so later features can override earlier ones.
@@ -955,6 +891,7 @@ Use `helpers.to_map()` to safely validate that a value is a dict.
 py/
 ├── typebot_sdk.py         -- Main SDK module
 ├── config.py                    -- Configuration
+├── schema.py                    -- Generated option + entity specs
 ├── features.py                  -- Feature factory
 ├── core/                        -- Core types and context
 ├── entity/                      -- Entity implementations
@@ -972,11 +909,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-billing = client.Billing()
-billing.list()
+folder = client.Folder()
+folder.list()
 
-# billing.data_get() now returns the billing data from the last list
-# billing.match_get() returns the last match criteria
+# folder.data_get() now returns the folder data from the last list
+# folder.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

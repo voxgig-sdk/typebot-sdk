@@ -1,16 +1,13 @@
 // Typed models for the Typebot SDK (JSDoc typedefs).
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Annotations only — no runtime effect. Do not
 // edit by hand.
 
 /**
  * @typedef {Object} Analytics
- * @property {number} totalCompleted
- * @property {number} totalStarts
- * @property {number} totalViews
  */
 
 /**
@@ -22,13 +19,6 @@
 
 /**
  * @typedef {Object} Billing
- * @property {number} amount
- * @property {string} currency
- * @property {*} date
- * @property {string} id
- * @property {string} resetsAt
- * @property {number} totalChatsUsed
- * @property {string} url
  */
 
 /**
@@ -97,17 +87,12 @@
 /**
  * @typedef {Object} Result
  * @property {Array} answers
- * @property {*} context
  * @property {string} createdAt
- * @property {string} description
- * @property {*} details
  * @property {*} hasStarted
  * @property {string} id
  * @property {*} isArchived
  * @property {boolean} isCompleted
  * @property {*} lastChatSessionId
- * @property {string} resultId
- * @property {string} status
  * @property {string} typebotId
  * @property {Array} variables
  */
@@ -138,20 +123,16 @@
  * @property {string} createdAt
  * @property {*} customDomain
  * @property {Array} edges
- * @property {boolean} [enableSafetyFlags]
  * @property {Array} events
  * @property {*} folderId
- * @property {string} [fromTemplate]
  * @property {Array} groups
  * @property {*} icon
  * @property {string} id
  * @property {boolean} isArchived
  * @property {boolean} isClosed
- * @property {*} message
  * @property {string} name
  * @property {boolean} [overwrite]
  * @property {*} publicId
- * @property {*} publishedTypebot
  * @property {string} [publishedTypebotId]
  * @property {*} resultsTablePreferences
  * @property {*} riskLevel
@@ -162,8 +143,7 @@
  * @property {Object} typebot
  * @property {string} updatedAt
  * @property {Array} variables
- * @property {*} [version]
- * @property {Array} [warnings]
+ * @property {string} version
  * @property {*} whatsAppCredentialsId
  * @property {string} workspaceId
  */
@@ -186,20 +166,16 @@
  * @property {string} createdAt
  * @property {*} customDomain
  * @property {Array} edges
- * @property {boolean} [enableSafetyFlags]
  * @property {Array} events
  * @property {*} folderId
- * @property {string} [fromTemplate]
  * @property {Array} groups
  * @property {*} icon
  * @property {string} id
  * @property {boolean} isArchived
  * @property {boolean} isClosed
- * @property {*} message
  * @property {string} name
  * @property {boolean} [overwrite]
  * @property {*} publicId
- * @property {*} publishedTypebot
  * @property {string} [publishedTypebotId]
  * @property {*} resultsTablePreferences
  * @property {*} riskLevel
@@ -210,8 +186,7 @@
  * @property {Object} typebot
  * @property {string} updatedAt
  * @property {Array} variables
- * @property {*} [version]
- * @property {Array} [warnings]
+ * @property {string} version
  * @property {*} whatsAppCredentialsId
  * @property {string} workspaceId
  */
@@ -223,19 +198,15 @@
  * @property {string} [createdAt]
  * @property {*} [customDomain]
  * @property {Array} [edges]
- * @property {boolean} [enableSafetyFlags]
  * @property {Array} [events]
  * @property {*} [folderId]
- * @property {string} [fromTemplate]
  * @property {Array} [groups]
  * @property {*} [icon]
  * @property {boolean} [isArchived]
  * @property {boolean} [isClosed]
- * @property {*} [message]
  * @property {string} [name]
  * @property {boolean} [overwrite]
  * @property {*} [publicId]
- * @property {*} [publishedTypebot]
  * @property {string} [publishedTypebotId]
  * @property {*} [resultsTablePreferences]
  * @property {*} [riskLevel]
@@ -246,8 +217,7 @@
  * @property {Object} [typebot]
  * @property {string} [updatedAt]
  * @property {Array} [variables]
- * @property {*} [version]
- * @property {Array} [warnings]
+ * @property {string} [version]
  * @property {*} [whatsAppCredentialsId]
  * @property {string} [workspaceId]
  */
@@ -273,13 +243,9 @@
  * @property {*} lastActivityAt
  * @property {string} name
  * @property {string} plan
- * @property {string} role
  * @property {*} settings
  * @property {*} stripeId
  * @property {string} updatedAt
- * @property {Object} user
- * @property {string} userId
- * @property {string} workspaceId
  */
 
 /**
@@ -303,13 +269,9 @@
  * @property {*} [lastActivityAt]
  * @property {string} [name]
  * @property {string} [plan]
- * @property {string} [role]
  * @property {*} [settings]
  * @property {*} [stripeId]
  * @property {string} [updatedAt]
- * @property {Object} [user]
- * @property {string} [userId]
- * @property {string} [workspaceId]
  */
 
 /**
@@ -328,13 +290,9 @@
  * @property {*} lastActivityAt
  * @property {string} name
  * @property {string} plan
- * @property {string} role
  * @property {*} settings
  * @property {*} stripeId
  * @property {string} updatedAt
- * @property {Object} user
- * @property {string} userId
- * @property {string} workspaceId
  */
 
 /**
@@ -353,13 +311,9 @@
  * @property {*} [lastActivityAt]
  * @property {string} [name]
  * @property {string} [plan]
- * @property {string} [role]
  * @property {*} [settings]
  * @property {*} [stripeId]
  * @property {string} [updatedAt]
- * @property {Object} [user]
- * @property {string} [userId]
- * @property {string} [workspaceId]
  */
 
 /**

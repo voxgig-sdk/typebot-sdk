@@ -173,14 +173,6 @@ Alias for `TypebotSDK.test()`.
 const analytics = client.Analytics()
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `totalCompleted` | `number` | Yes |  |
-| `totalStarts` | `number` | Yes |  |
-| `totalViews` | `number` | Yes |  |
-
 ### Actions
 
 This entity exposes custom API actions in addition to the standard
@@ -244,18 +236,6 @@ Return a copy of the entity options.
 ```ts
 const billing = client.Billing()
 ```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `amount` | `number` | Yes |  |
-| `currency` | `string` | Yes |  |
-| `date` | `any` | Yes |  |
-| `id` | `string` | Yes |  |
-| `resetsAt` | `string` | Yes |  |
-| `totalChatsUsed` | `number` | Yes |  |
-| `url` | `string` | Yes |  |
 
 ### Actions
 
@@ -448,17 +428,12 @@ const result = client.Result()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `answers` | `any[]` | Yes |  |
-| `context` | `any` | Yes |  |
 | `createdAt` | `string` | Yes |  |
-| `description` | `string` | Yes |  |
-| `details` | `any` | Yes |  |
 | `hasStarted` | `any` | Yes |  |
 | `id` | `string` | Yes |  |
 | `isArchived` | `any` | Yes |  |
 | `isCompleted` | `boolean` | Yes |  |
 | `lastChatSessionId` | `any` | Yes |  |
-| `resultId` | `string` | Yes |  |
-| `status` | `string` | Yes |  |
 | `typebotId` | `string` | Yes |  |
 | `variables` | `any[]` | Yes |  |
 
@@ -550,20 +525,16 @@ const typebot = client.Typebot()
 | `createdAt` | `string` | Yes |  |
 | `customDomain` | `any` | Yes |  |
 | `edges` | `any[]` | Yes |  |
-| `enableSafetyFlags` | `boolean` | No |  |
 | `events` | `any[]` | Yes |  |
 | `folderId` | `any` | Yes |  |
-| `fromTemplate` | `string` | No |  |
 | `groups` | `any[]` | Yes |  |
 | `icon` | `any` | Yes |  |
 | `id` | `string` | Yes |  |
 | `isArchived` | `boolean` | Yes |  |
 | `isClosed` | `boolean` | Yes |  |
-| `message` | `any` | Yes |  |
 | `name` | `string` | Yes |  |
 | `overwrite` | `boolean` | No | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `any` | Yes |  |
-| `publishedTypebot` | `any` | Yes |  |
 | `publishedTypebotId` | `string` | No |  |
 | `resultsTablePreferences` | `any` | Yes |  |
 | `riskLevel` | `any` | Yes |  |
@@ -574,47 +545,9 @@ const typebot = client.Typebot()
 | `typebot` | `Record<string, any>` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 | `variables` | `any[]` | Yes |  |
-| `version` | `any` | No | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
-| `warnings` | `any[]` | No |  |
+| `version` | `string` | Yes |  |
 | `whatsAppCredentialsId` | `any` | Yes |  |
-| `workspaceId` | `string` | Yes | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
-
-### Field Usage by Operation
-
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `accessRight` | - | - | - | - | - |
-| `createdAt` | - | - | - | - | - |
-| `customDomain` | - | - | - | - | - |
-| `edges` | - | - | - | - | - |
-| `enableSafetyFlags` | - | - | - | - | - |
-| `events` | - | - | - | - | - |
-| `folderId` | - | - | - | - | - |
-| `fromTemplate` | - | - | - | - | - |
-| `groups` | - | - | - | - | - |
-| `icon` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `isArchived` | - | - | - | - | - |
-| `isClosed` | - | - | - | - | - |
-| `message` | - | - | - | - | - |
-| `name` | - | - | - | - | - |
-| `overwrite` | - | - | - | - | - |
-| `publicId` | - | - | - | - | - |
-| `publishedTypebot` | - | - | - | - | - |
-| `publishedTypebotId` | - | - | - | - | - |
-| `resultsTablePreferences` | - | - | - | - | - |
-| `riskLevel` | - | - | - | - | - |
-| `selectedThemeTemplateId` | - | - | - | - | - |
-| `settings` | - | - | - | - | - |
-| `spaceId` | - | - | - | - | - |
-| `theme` | - | - | - | - | - |
-| `typebot` | - | - | - | - | - |
-| `updatedAt` | - | - | - | - | - |
-| `variables` | - | - | - | - | - |
-| `version` | - | - | Yes | Yes | - |
-| `warnings` | - | - | - | - | - |
-| `whatsAppCredentialsId` | - | - | - | - | - |
-| `workspaceId` | - | - | - | - | - |
+| `workspaceId` | `string` | Yes |  |
 
 ### Actions
 
@@ -658,10 +591,8 @@ const result = await client.Typebot().create({
   id: 'example_id',
   isArchived: true,
   isClosed: true,
-  message: 'example_message',
   name: 'example_name',
   publicId: 'example_publicId',
-  publishedTypebot: 'example_publishedTypebot',
   resultsTablePreferences: 'example_resultsTablePreferences',
   riskLevel: 'example_riskLevel',
   selectedThemeTemplateId: 'example_selectedThemeTemplateId',
@@ -671,6 +602,7 @@ const result = await client.Typebot().create({
   typebot: {},
   updatedAt: 'example_updatedAt',
   variables: [],
+  version: 'example_version',
   whatsAppCredentialsId: 'example_whatsAppCredentialsId',
   workspaceId: 'example_workspaceId',
 })
@@ -763,13 +695,9 @@ const workspace = client.Workspace()
 | `lastActivityAt` | `any` | Yes |  |
 | `name` | `string` | Yes |  |
 | `plan` | `string` | Yes |  |
-| `role` | `string` | Yes |  |
 | `settings` | `any` | Yes |  |
 | `stripeId` | `any` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
-| `user` | `Record<string, any>` | Yes |  |
-| `userId` | `string` | Yes |  |
-| `workspaceId` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -789,13 +717,9 @@ const workspace = client.Workspace()
 | `lastActivityAt` | - | - | - | - | - |
 | `name` | - | - | - | Yes | - |
 | `plan` | - | - | - | - | - |
-| `role` | - | - | - | - | - |
 | `settings` | - | - | - | - | - |
 | `stripeId` | - | - | - | - | - |
 | `updatedAt` | - | - | - | - | - |
-| `user` | - | - | - | - | - |
-| `userId` | - | - | - | - | - |
-| `workspaceId` | - | - | - | - | - |
 
 ### Actions
 
@@ -839,13 +763,9 @@ const result = await client.Workspace().create({
   lastActivityAt: 'example_lastActivityAt',
   name: 'example_name',
   plan: 'example_plan',
-  role: 'example_role',
   settings: 'example_settings',
   stripeId: 'example_stripeId',
   updatedAt: 'example_updatedAt',
-  user: {},
-  userId: 'example_userId',
-  workspaceId: 'example_workspaceId',
 })
 ```
 
@@ -916,14 +836,14 @@ Return a copy of the entity options.
 
 | Feature | Version | Description |
 | --- | --- | --- |
-| `debug` | 0.0.1 | Request/response capture ring buffer for debugging |
-| `idempotency` | 0.0.1 | Idempotency keys for safe retries of mutating operations |
-| `metrics` | 0.0.1 | Statistics capture: per-operation counters and latency |
-| `paging` | 0.0.1 | Pagination signals for list operations |
-| `ratelimit` | 0.0.1 | Client-side rate limiting via a token bucket |
-| `retry` | 0.0.1 | Automatic retry of transient failures with exponential backoff |
-| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
-| `timeout` | 0.0.1 | Per-request timeout with transport abort |
+| `debug` | 0.0.1 | Debug capture |
+| `idempotency` | 0.0.1 | Idempotency |
+| `metrics` | 0.0.1 | Metrics |
+| `paging` | 0.0.1 | Paging |
+| `ratelimit` | 0.0.1 | Rate limiting |
+| `retry` | 0.0.1 | Retry |
+| `test` | 0.0.1 | Test transport |
+| `timeout` | 0.0.1 | Timeout |
 
 
 Features are activated via the `feature` option:
@@ -969,7 +889,7 @@ rather than the transport, so their order does not affect what they observe.
 
 #### `debug`
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 **Configuration**
 
@@ -1000,7 +920,7 @@ its default unless you name it.
 
 #### `idempotency`
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 **Configuration**
 
@@ -1031,7 +951,7 @@ its default unless you name it.
 
 #### `metrics`
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 **Configuration**
 
@@ -1059,7 +979,7 @@ its default unless you name it.
 
 #### `paging`
 
-Pagination signals for list operations.
+Paging.
 
 **Configuration**
 
@@ -1094,7 +1014,7 @@ its default unless you name it.
 
 #### `ratelimit`
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 **Configuration**
 
@@ -1125,7 +1045,7 @@ its default unless you name it.
 
 #### `retry`
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 **Configuration**
 
@@ -1159,7 +1079,7 @@ its default unless you name it.
 
 #### `test`
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 **Configuration**
 
@@ -1190,7 +1110,7 @@ its default unless you name it.
 
 #### `timeout`
 
-Per-request timeout with transport abort.
+Timeout.
 
 **Configuration**
 

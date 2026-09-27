@@ -1,0 +1,108 @@
+# Entity: billing
+
+main: kit: entity: billing: {
+
+  alias: field: {}
+
+  name: "billing"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/billing/invoices"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "workspace_id"
+                or: "workspace_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/billing/invoices"
+          q: {
+            "$action": "invoice"
+            exist: [
+              "workspace_id"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "billing"
+            }
+            {
+              lit: "invoices"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.invoices`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v1/billing/usage"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "workspace_id"
+                or: "workspace_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/billing/usage"
+          q: {
+            "$action": "usage"
+            exist: [
+              "workspace_id"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "billing"
+            }
+            {
+              lit: "usage"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

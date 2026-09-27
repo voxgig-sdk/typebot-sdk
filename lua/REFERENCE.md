@@ -107,14 +107,6 @@ same parameters as `direct()`.
 local analytics = client:Analytics(nil)
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `totalCompleted` | `number` | Yes |  |
-| `totalStarts` | `number` | Yes |  |
-| `totalViews` | `number` | Yes |  |
-
 ### Operations
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -160,18 +152,6 @@ Return the entity name.
 ```lua
 local billing = client:Billing(nil)
 ```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `amount` | `number` | Yes |  |
-| `currency` | `string` | Yes |  |
-| `date` | `any` | Yes |  |
-| `id` | `string` | Yes |  |
-| `resetsAt` | `string` | Yes |  |
-| `totalChatsUsed` | `number` | Yes |  |
-| `url` | `string` | Yes |  |
 
 ### Operations
 
@@ -347,17 +327,12 @@ local result = client:Result(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `answers` | `table` | Yes |  |
-| `context` | `any` | Yes |  |
 | `createdAt` | `string` | Yes |  |
-| `description` | `string` | Yes |  |
-| `details` | `any` | Yes |  |
 | `hasStarted` | `any` | Yes |  |
 | `id` | `string` | Yes |  |
 | `isArchived` | `any` | Yes |  |
 | `isCompleted` | `boolean` | Yes |  |
 | `lastChatSessionId` | `any` | Yes |  |
-| `resultId` | `string` | Yes |  |
-| `status` | `string` | Yes |  |
 | `typebotId` | `string` | Yes |  |
 | `variables` | `table` | Yes |  |
 
@@ -431,20 +406,16 @@ local typebot = client:Typebot(nil)
 | `createdAt` | `string` | Yes |  |
 | `customDomain` | `any` | Yes |  |
 | `edges` | `table` | Yes |  |
-| `enableSafetyFlags` | `boolean` | No |  |
 | `events` | `table` | Yes |  |
 | `folderId` | `any` | Yes |  |
-| `fromTemplate` | `string` | No |  |
 | `groups` | `table` | Yes |  |
 | `icon` | `any` | Yes |  |
 | `id` | `string` | Yes |  |
 | `isArchived` | `boolean` | Yes |  |
 | `isClosed` | `boolean` | Yes |  |
-| `message` | `any` | Yes |  |
 | `name` | `string` | Yes |  |
 | `overwrite` | `boolean` | No | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `any` | Yes |  |
-| `publishedTypebot` | `any` | Yes |  |
 | `publishedTypebotId` | `string` | No |  |
 | `resultsTablePreferences` | `any` | Yes |  |
 | `riskLevel` | `any` | Yes |  |
@@ -455,47 +426,9 @@ local typebot = client:Typebot(nil)
 | `typebot` | `table` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 | `variables` | `table` | Yes |  |
-| `version` | `any` | No | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
-| `warnings` | `table` | No |  |
+| `version` | `string` | Yes |  |
 | `whatsAppCredentialsId` | `any` | Yes |  |
-| `workspaceId` | `string` | Yes | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
-
-### Field Usage by Operation
-
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `accessRight` | - | - | - | - | - |
-| `createdAt` | - | - | - | - | - |
-| `customDomain` | - | - | - | - | - |
-| `edges` | - | - | - | - | - |
-| `enableSafetyFlags` | - | - | - | - | - |
-| `events` | - | - | - | - | - |
-| `folderId` | - | - | - | - | - |
-| `fromTemplate` | - | - | - | - | - |
-| `groups` | - | - | - | - | - |
-| `icon` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `isArchived` | - | - | - | - | - |
-| `isClosed` | - | - | - | - | - |
-| `message` | - | - | - | - | - |
-| `name` | - | - | - | - | - |
-| `overwrite` | - | - | - | - | - |
-| `publicId` | - | - | - | - | - |
-| `publishedTypebot` | - | - | - | - | - |
-| `publishedTypebotId` | - | - | - | - | - |
-| `resultsTablePreferences` | - | - | - | - | - |
-| `riskLevel` | - | - | - | - | - |
-| `selectedThemeTemplateId` | - | - | - | - | - |
-| `settings` | - | - | - | - | - |
-| `spaceId` | - | - | - | - | - |
-| `theme` | - | - | - | - | - |
-| `typebot` | - | - | - | - | - |
-| `updatedAt` | - | - | - | - | - |
-| `variables` | - | - | - | - | - |
-| `version` | - | - | Yes | Yes | - |
-| `warnings` | - | - | - | - | - |
-| `whatsAppCredentialsId` | - | - | - | - | - |
-| `workspaceId` | - | - | - | - | - |
+| `workspaceId` | `string` | Yes |  |
 
 ### Operations
 
@@ -516,10 +449,8 @@ local result, err = client:Typebot():create({
   id = --[[ string ]],
   isArchived = --[[ boolean ]],
   isClosed = --[[ boolean ]],
-  message = --[[ any ]],
   name = --[[ string ]],
   publicId = --[[ any ]],
-  publishedTypebot = --[[ any ]],
   resultsTablePreferences = --[[ any ]],
   riskLevel = --[[ any ]],
   selectedThemeTemplateId = --[[ any ]],
@@ -529,6 +460,7 @@ local result, err = client:Typebot():create({
   typebot = --[[ table ]],
   updatedAt = --[[ string ]],
   variables = --[[ table ]],
+  version = --[[ string ]],
   whatsAppCredentialsId = --[[ any ]],
   workspaceId = --[[ string ]],
 })
@@ -623,13 +555,9 @@ local workspace = client:Workspace(nil)
 | `lastActivityAt` | `any` | Yes |  |
 | `name` | `string` | Yes |  |
 | `plan` | `string` | Yes |  |
-| `role` | `string` | Yes |  |
 | `settings` | `any` | Yes |  |
 | `stripeId` | `any` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
-| `user` | `table` | Yes |  |
-| `userId` | `string` | Yes |  |
-| `workspaceId` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -649,13 +577,9 @@ local workspace = client:Workspace(nil)
 | `lastActivityAt` | - | - | - | - | - |
 | `name` | - | - | - | Yes | - |
 | `plan` | - | - | - | - | - |
-| `role` | - | - | - | - | - |
 | `settings` | - | - | - | - | - |
 | `stripeId` | - | - | - | - | - |
 | `updatedAt` | - | - | - | - | - |
-| `user` | - | - | - | - | - |
-| `userId` | - | - | - | - | - |
-| `workspaceId` | - | - | - | - | - |
 
 ### Operations
 
@@ -679,13 +603,9 @@ local result, err = client:Workspace():create({
   lastActivityAt = --[[ any ]],
   name = --[[ string ]],
   plan = --[[ string ]],
-  role = --[[ string ]],
   settings = --[[ any ]],
   stripeId = --[[ any ]],
   updatedAt = --[[ string ]],
-  user = --[[ table ]],
-  userId = --[[ string ]],
-  workspaceId = --[[ string ]],
 })
 ```
 
@@ -758,14 +678,14 @@ Return the entity name.
 
 | Feature | Version | Description |
 | --- | --- | --- |
-| `debug` | 0.0.1 | Request/response capture ring buffer for debugging |
-| `idempotency` | 0.0.1 | Idempotency keys for safe retries of mutating operations |
-| `metrics` | 0.0.1 | Statistics capture: per-operation counters and latency |
-| `paging` | 0.0.1 | Pagination signals for list operations |
-| `ratelimit` | 0.0.1 | Client-side rate limiting via a token bucket |
-| `retry` | 0.0.1 | Automatic retry of transient failures with exponential backoff |
-| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
-| `timeout` | 0.0.1 | Per-request timeout with transport abort |
+| `debug` | 0.0.1 | Debug capture |
+| `idempotency` | 0.0.1 | Idempotency |
+| `metrics` | 0.0.1 | Metrics |
+| `paging` | 0.0.1 | Paging |
+| `ratelimit` | 0.0.1 | Rate limiting |
+| `retry` | 0.0.1 | Retry |
+| `test` | 0.0.1 | Test transport |
+| `timeout` | 0.0.1 | Timeout |
 
 
 Features are activated via the `feature` option:
@@ -811,7 +731,7 @@ rather than the transport, so their order does not affect what they observe.
 
 #### `debug`
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 **Configuration**
 
@@ -842,7 +762,7 @@ its default unless you name it.
 
 #### `idempotency`
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 **Configuration**
 
@@ -873,7 +793,7 @@ its default unless you name it.
 
 #### `metrics`
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 **Configuration**
 
@@ -901,7 +821,7 @@ its default unless you name it.
 
 #### `paging`
 
-Pagination signals for list operations.
+Paging.
 
 **Configuration**
 
@@ -936,7 +856,7 @@ its default unless you name it.
 
 #### `ratelimit`
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 **Configuration**
 
@@ -967,7 +887,7 @@ its default unless you name it.
 
 #### `retry`
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 **Configuration**
 
@@ -1001,7 +921,7 @@ its default unless you name it.
 
 #### `test`
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 **Configuration**
 
@@ -1032,7 +952,7 @@ its default unless you name it.
 
 #### `timeout`
 
-Per-request timeout with transport abort.
+Timeout.
 
 **Configuration**
 

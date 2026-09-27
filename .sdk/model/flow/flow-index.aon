@@ -1,8 +1,0 @@
-# Flows
-
-@"BasicAnalyticsFlow.aon"
-@"BasicBillingFlow.aon"
-@"BasicFolderFlow.aon"
-@"BasicResultFlow.aon"
-@"BasicTypebotFlow.aon"
-@"BasicWorkspaceFlow.aon"

@@ -1,7 +1,7 @@
 # Typed models for the Typebot SDK.
 #
-# GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-# params (op.<name>.points[].args.params[]). Field/param types come from the
+# GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+# params (op.<name>.points[].g.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
 #
@@ -17,9 +17,7 @@ from typing import TypedDict, Any
 
 
 class Analytics(TypedDict):
-    totalCompleted: float
-    totalStarts: float
-    totalViews: float
+    pass
 
 
 class AnalyticsLoadMatchRequired(TypedDict):
@@ -32,13 +30,7 @@ class AnalyticsLoadMatch(AnalyticsLoadMatchRequired, total=False):
 
 
 class Billing(TypedDict):
-    amount: float
-    currency: str
-    date: Any
-    id: str
-    resetsAt: str
-    totalChatsUsed: float
-    url: str
+    pass
 
 
 class BillingLoadMatch(TypedDict):
@@ -110,17 +102,12 @@ class FolderRemoveMatch(TypedDict):
 
 class Result(TypedDict):
     answers: list
-    context: Any
     createdAt: str
-    description: str
-    details: Any
     hasStarted: Any
     id: str
     isArchived: Any
     isCompleted: bool
     lastChatSessionId: Any
-    resultId: str
-    status: str
     typebotId: str
     variables: list
 
@@ -157,10 +144,8 @@ class TypebotRequired(TypedDict):
     id: str
     isArchived: bool
     isClosed: bool
-    message: Any
     name: str
     publicId: Any
-    publishedTypebot: Any
     resultsTablePreferences: Any
     riskLevel: Any
     selectedThemeTemplateId: Any
@@ -170,17 +155,14 @@ class TypebotRequired(TypedDict):
     typebot: dict
     updatedAt: str
     variables: list
+    version: str
     whatsAppCredentialsId: Any
     workspaceId: str
 
 
 class Typebot(TypebotRequired, total=False):
-    enableSafetyFlags: bool
-    fromTemplate: str
     overwrite: bool
     publishedTypebotId: str
-    version: Any
-    warnings: list
 
 
 class TypebotLoadMatchRequired(TypedDict):
@@ -211,10 +193,8 @@ class TypebotCreateDataRequired(TypedDict):
     id: str
     isArchived: bool
     isClosed: bool
-    message: Any
     name: str
     publicId: Any
-    publishedTypebot: Any
     resultsTablePreferences: Any
     riskLevel: Any
     selectedThemeTemplateId: Any
@@ -224,17 +204,14 @@ class TypebotCreateDataRequired(TypedDict):
     typebot: dict
     updatedAt: str
     variables: list
+    version: str
     whatsAppCredentialsId: Any
     workspaceId: str
 
 
 class TypebotCreateData(TypebotCreateDataRequired, total=False):
-    enableSafetyFlags: bool
-    fromTemplate: str
     overwrite: bool
     publishedTypebotId: str
-    version: Any
-    warnings: list
 
 
 class TypebotUpdateDataRequired(TypedDict):
@@ -246,19 +223,15 @@ class TypebotUpdateData(TypebotUpdateDataRequired, total=False):
     createdAt: str
     customDomain: Any
     edges: list
-    enableSafetyFlags: bool
     events: list
     folderId: Any
-    fromTemplate: str
     groups: list
     icon: Any
     isArchived: bool
     isClosed: bool
-    message: Any
     name: str
     overwrite: bool
     publicId: Any
-    publishedTypebot: Any
     publishedTypebotId: str
     resultsTablePreferences: Any
     riskLevel: Any
@@ -269,8 +242,7 @@ class TypebotUpdateData(TypebotUpdateDataRequired, total=False):
     typebot: dict
     updatedAt: str
     variables: list
-    version: Any
-    warnings: list
+    version: str
     whatsAppCredentialsId: Any
     workspaceId: str
 
@@ -294,13 +266,9 @@ class Workspace(TypedDict):
     lastActivityAt: Any
     name: str
     plan: str
-    role: str
     settings: Any
     stripeId: Any
     updatedAt: str
-    user: dict
-    userId: str
-    workspaceId: str
 
 
 class WorkspaceLoadMatch(TypedDict):
@@ -322,13 +290,9 @@ class WorkspaceListMatch(TypedDict, total=False):
     lastActivityAt: Any
     name: str
     plan: str
-    role: str
     settings: Any
     stripeId: Any
     updatedAt: str
-    user: dict
-    userId: str
-    workspaceId: str
 
 
 class WorkspaceCreateData(TypedDict):
@@ -346,13 +310,9 @@ class WorkspaceCreateData(TypedDict):
     lastActivityAt: Any
     name: str
     plan: str
-    role: str
     settings: Any
     stripeId: Any
     updatedAt: str
-    user: dict
-    userId: str
-    workspaceId: str
 
 
 class WorkspaceUpdateDataRequired(TypedDict):
@@ -373,13 +333,9 @@ class WorkspaceUpdateData(WorkspaceUpdateDataRequired, total=False):
     lastActivityAt: Any
     name: str
     plan: str
-    role: str
     settings: Any
     stripeId: Any
     updatedAt: str
-    user: dict
-    userId: str
-    workspaceId: str
 
 
 class WorkspaceRemoveMatch(TypedDict):

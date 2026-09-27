@@ -166,23 +166,7 @@ func MakeConfig() map[string]any {
 		},
 		"entity": map[string]any{
 			"analytics": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "totalCompleted",
-						"req": true,
-						"type": "`$NUMBER`",
-					},
-					map[string]any{
-						"name": "totalStarts",
-						"req": true,
-						"type": "`$NUMBER`",
-					},
-					map[string]any{
-						"name": "totalViews",
-						"req": true,
-						"type": "`$NUMBER`",
-					},
-				},
+				"fields": []any{},
 				"name": "analytics",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -190,40 +174,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "typebot_id",
-											"orig": "typebot_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"example": "last7Days",
-											"kind": "query",
-											"name": "time_filter",
-											"orig": "time_filter",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "time_zone",
-											"orig": "time_zone",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}/analytics/stats",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"typebotId": "typebot_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -241,6 +194,48 @@ func MakeConfig() map[string]any {
 										"lit": "stats",
 									},
 								},
+								"parts": []any{
+									"v1",
+									"typebots",
+									"{typebot_id}",
+									"analytics",
+									"stats",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"typebotId": "typebot_id",
+									},
+								},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.stats`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "typebot_id",
+											"orig": "typebot_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "time_filter",
+											"orig": "time_filter",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "last7Days",
+										},
+										map[string]any{
+											"name": "time_zone",
+											"orig": "time_zone",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
 								"select": map[string]any{
 									"$action": "stat",
 									"exist": []any{
@@ -249,17 +244,6 @@ func MakeConfig() map[string]any {
 										"typebot_id",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.stats`",
-								},
-								"parts": []any{
-									"v1",
-									"typebots",
-									"{typebot_id}",
-									"analytics",
-									"stats",
-								},
 							},
 						},
 					},
@@ -267,54 +251,13 @@ func MakeConfig() map[string]any {
 				"relations": map[string]any{
 					"ancestors": []any{
 						[]any{
-							"typebot",
+							"$.main.kit.entity.typebot",
 						},
 					},
 				},
 			},
 			"billing": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "amount",
-						"req": true,
-						"type": "`$NUMBER`",
-					},
-					map[string]any{
-						"name": "currency",
-						"req": true,
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "date",
-						"req": true,
-						"type": "`$ANY`",
-					},
-					map[string]any{
-						"name": "id",
-						"req": true,
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"format": "date-time",
-						"name": "resetsAt",
-						"req": true,
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "totalChatsUsed",
-						"req": true,
-						"type": "`$NUMBER`",
-					},
-					map[string]any{
-						"name": "url",
-						"req": true,
-						"type": "`$STRING`",
-					},
-				},
-				"id": map[string]any{
-					"field": "id",
-					"name": "id",
-				},
+				"fields": []any{},
 				"name": "billing",
 				"op": map[string]any{
 					"list": map[string]any{
@@ -322,17 +265,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "workspace_id",
-											"orig": "workspace_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/billing/invoices",
@@ -347,20 +279,32 @@ func MakeConfig() map[string]any {
 										"lit": "invoices",
 									},
 								},
+								"parts": []any{
+									"v1",
+									"billing",
+									"invoices",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.invoices`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "workspace_id",
+											"orig": "workspace_id",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"$action": "invoice",
 									"exist": []any{
 										"workspace_id",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.invoices`",
-								},
-								"parts": []any{
-									"v1",
-									"billing",
-									"invoices",
 								},
 							},
 						},
@@ -370,17 +314,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "workspace_id",
-											"orig": "workspace_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/billing/usage",
@@ -395,20 +328,32 @@ func MakeConfig() map[string]any {
 										"lit": "usage",
 									},
 								},
+								"parts": []any{
+									"v1",
+									"billing",
+									"usage",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "workspace_id",
+											"orig": "workspace_id",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"$action": "usage",
 									"exist": []any{
 										"workspace_id",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"v1",
-									"billing",
-									"usage",
 								},
 							},
 						},
@@ -421,55 +366,63 @@ func MakeConfig() map[string]any {
 			"folder": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"format": "date-time",
 						"name": "createdAt",
-						"req": true,
+						"title": "Created At",
 						"type": "`$STRING`",
+						"req": true,
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "folder",
-						"req": true,
+						"title": "Folder",
 						"type": "`$OBJECT`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "folderName",
+						"title": "Folder Name",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
+						"type": "`$STRING`",
+						"req": true,
 						"op": map[string]any{
 							"create": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
-						"req": true,
+						"title": "Name",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "parentFolderId",
+						"title": "Parent Folder Id",
+						"type": "`$ANY`",
+						"req": true,
 						"op": map[string]any{
 							"create": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
-						"type": "`$ANY`",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "updatedAt",
-						"req": true,
+						"title": "Updated At",
 						"type": "`$STRING`",
+						"req": true,
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "workspaceId",
-						"req": true,
+						"title": "Workspace Id",
 						"type": "`$STRING`",
+						"req": true,
 					},
 				},
 				"id": map[string]any{
@@ -483,7 +436,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/folders",
@@ -495,15 +447,17 @@ func MakeConfig() map[string]any {
 										"lit": "folders",
 									},
 								},
-								"select": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.folder`",
-								},
 								"parts": []any{
 									"v1",
 									"folders",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.folder`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -512,23 +466,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "parent_folder_id",
-											"orig": "parent_folder_id",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "workspace_id",
-											"orig": "workspace_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/folders",
@@ -540,19 +477,37 @@ func MakeConfig() map[string]any {
 										"lit": "folders",
 									},
 								},
+								"parts": []any{
+									"v1",
+									"folders",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.folders`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "parent_folder_id",
+											"orig": "parent_folder_id",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "workspace_id",
+											"orig": "workspace_id",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"parent_folder_id",
 										"workspace_id",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.folders`",
-								},
-								"parts": []any{
-									"v1",
-									"folders",
 								},
 							},
 						},
@@ -562,34 +517,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "folder_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "workspace_id",
-											"orig": "workspace_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/folders/{folderId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"folderId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -601,20 +531,45 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
-										"workspace_id",
+								"parts": []any{
+									"v1",
+									"folders",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"folderId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.folder`",
 								},
-								"parts": []any{
-									"v1",
-									"folders",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "folder_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "workspace_id",
+											"orig": "workspace_id",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+										"workspace_id",
+									},
 								},
 							},
 						},
@@ -624,25 +579,9 @@ func MakeConfig() map[string]any {
 						"name": "remove",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "folder_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/v1/folders/{folderId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"folderId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -654,19 +593,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"v1",
+									"folders",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"folderId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.folder`",
 								},
-								"parts": []any{
-									"v1",
-									"folders",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "folder_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -676,25 +631,9 @@ func MakeConfig() map[string]any {
 						"name": "update",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "folder_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "PATCH",
 								"orig": "/v1/folders/{folderId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"folderId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -706,9 +645,14 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"v1",
+									"folders",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"folderId": "id",
 									},
 								},
 								"transform": map[string]any{
@@ -717,10 +661,21 @@ func MakeConfig() map[string]any {
 									},
 									"res": "`body.folder`",
 								},
-								"parts": []any{
-									"v1",
-									"folders",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "folder_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -734,79 +689,58 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "answers",
-						"req": true,
+						"title": "Answers",
 						"type": "`$ARRAY`",
-					},
-					map[string]any{
-						"name": "context",
 						"req": true,
-						"type": "`$ANY`",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "createdAt",
-						"req": true,
+						"title": "Created At",
 						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "description",
 						"req": true,
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "details",
-						"req": true,
-						"type": "`$ANY`",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "hasStarted",
-						"req": true,
+						"title": "Has Started",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "id",
-						"req": true,
+						"title": "Id",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "isArchived",
-						"req": true,
+						"title": "Is Archived",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "isCompleted",
-						"req": true,
+						"title": "Is Completed",
 						"type": "`$BOOLEAN`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "lastChatSessionId",
-						"req": true,
+						"title": "Last Chat Session Id",
 						"type": "`$ANY`",
-					},
-					map[string]any{
-						"name": "resultId",
 						"req": true,
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "status",
-						"req": true,
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "typebotId",
-						"req": true,
+						"title": "Typebot Id",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "variables",
-						"req": true,
+						"title": "Variables",
 						"type": "`$ARRAY`",
-						"union": map[string]any{
-							"branches": 2,
-							"count": 1,
-							"depth": 3,
-						},
+						"req": true,
 					},
 				},
 				"id": map[string]any{
@@ -820,53 +754,9 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "typebot_id",
-											"orig": "typebot_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "cursor",
-											"orig": "cursor",
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"example": 50,
-											"kind": "query",
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"example": "last7Days",
-											"kind": "query",
-											"name": "time_filter",
-											"orig": "time_filter",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "time_zone",
-											"orig": "time_zone",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}/results",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"typebotId": "typebot_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -881,6 +771,60 @@ func MakeConfig() map[string]any {
 										"lit": "results",
 									},
 								},
+								"parts": []any{
+									"v1",
+									"typebots",
+									"{typebot_id}",
+									"results",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"typebotId": "typebot_id",
+									},
+								},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "typebot_id",
+											"orig": "typebot_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "cursor",
+											"orig": "cursor",
+											"type": "`$NUMBER`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 50,
+										},
+										map[string]any{
+											"name": "time_filter",
+											"orig": "time_filter",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "last7Days",
+										},
+										map[string]any{
+											"name": "time_zone",
+											"orig": "time_zone",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"cursor",
@@ -890,45 +834,11 @@ func MakeConfig() map[string]any {
 										"typebot_id",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"v1",
-									"typebots",
-									"{typebot_id}",
-									"results",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "result_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "param",
-											"name": "typebot_id",
-											"orig": "typebot_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}/results/{resultId}/logs",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"resultId": "id",
-										"typebotId": "typebot_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -949,17 +859,6 @@ func MakeConfig() map[string]any {
 										"lit": "logs",
 									},
 								},
-								"select": map[string]any{
-									"$action": "log",
-									"exist": []any{
-										"id",
-										"typebot_id",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.logs`",
-								},
 								"parts": []any{
 									"v1",
 									"typebots",
@@ -967,6 +866,41 @@ func MakeConfig() map[string]any {
 									"results",
 									"{id}",
 									"logs",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"resultId": "id",
+										"typebotId": "typebot_id",
+									},
+								},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.logs`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "result_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "typebot_id",
+											"orig": "typebot_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"$action": "log",
+									"exist": []any{
+										"id",
+										"typebot_id",
+									},
 								},
 							},
 						},
@@ -976,33 +910,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "result_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "param",
-											"name": "typebot_id",
-											"orig": "typebot_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}/results/{resultId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"resultId": "id",
-										"typebotId": "typebot_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -1020,22 +930,46 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
-										"typebot_id",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.result`",
-								},
 								"parts": []any{
 									"v1",
 									"typebots",
 									"{typebot_id}",
 									"results",
 									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"resultId": "id",
+										"typebotId": "typebot_id",
+									},
+								},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.result`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "result_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "typebot_id",
+											"orig": "typebot_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+										"typebot_id",
+									},
 								},
 							},
 						},
@@ -1045,25 +979,9 @@ func MakeConfig() map[string]any {
 						"name": "remove",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "typebot_id",
-											"orig": "typebot_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/v1/typebots/{typebotId}/results",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"typebotId": "typebot_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -1078,20 +996,36 @@ func MakeConfig() map[string]any {
 										"lit": "results",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"typebot_id",
+								"parts": []any{
+									"v1",
+									"typebots",
+									"{typebot_id}",
+									"results",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"typebotId": "typebot_id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"v1",
-									"typebots",
-									"{typebot_id}",
-									"results",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "typebot_id",
+											"orig": "typebot_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"typebot_id",
+									},
 								},
 							},
 						},
@@ -1100,7 +1034,7 @@ func MakeConfig() map[string]any {
 				"relations": map[string]any{
 					"ancestors": []any{
 						[]any{
-							"typebot",
+							"$.main.kit.entity.typebot",
 						},
 					},
 				},
@@ -1109,212 +1043,166 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "accessRight",
-						"req": true,
+						"title": "Access Right",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "createdAt",
-						"req": true,
+						"title": "Created At",
 						"type": "`$STRING`",
+						"req": true,
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "customDomain",
-						"req": true,
+						"title": "Custom Domain",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "edges",
-						"req": true,
+						"title": "Edges",
 						"type": "`$ARRAY`",
-						"union": map[string]any{
-							"branches": 2,
-							"count": 1,
-							"depth": 3,
-						},
-					},
-					map[string]any{
-						"name": "enableSafetyFlags",
-						"type": "`$BOOLEAN`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "events",
-						"req": true,
+						"title": "Events",
 						"type": "`$ARRAY`",
-						"union": map[string]any{
-							"branches": 3,
-							"count": 1,
-							"depth": 1,
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "folderId",
-						"req": true,
+						"title": "Folder Id",
 						"type": "`$ANY`",
-					},
-					map[string]any{
-						"name": "fromTemplate",
-						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "groups",
-						"req": true,
+						"title": "Groups",
 						"type": "`$ARRAY`",
-						"union": map[string]any{
-							"branches": 19,
-							"count": 31,
-							"depth": 14,
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "icon",
-						"req": true,
+						"title": "Icon",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "id",
-						"req": true,
+						"title": "Id",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "isArchived",
-						"req": true,
+						"title": "Is Archived",
 						"type": "`$BOOLEAN`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "isClosed",
-						"req": true,
+						"title": "Is Closed",
 						"type": "`$BOOLEAN`",
-					},
-					map[string]any{
-						"name": "message",
 						"req": true,
-						"type": "`$ANY`",
 					},
 					map[string]any{
 						"name": "name",
-						"req": true,
+						"title": "Name",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "overwrite",
-						"short": "If true, even if we detect a conflict, we will overwrite push the updates to the typebot",
+						"title": "Overwrite",
 						"type": "`$BOOLEAN`",
+						"short": "If true, even if we detect a conflict, we will overwrite push the updates to the typebot",
 					},
 					map[string]any{
 						"name": "publicId",
-						"req": true,
+						"title": "Public Id",
 						"type": "`$ANY`",
-					},
-					map[string]any{
-						"name": "publishedTypebot",
 						"req": true,
-						"type": "`$ANY`",
-						"union": map[string]any{
-							"branches": 19,
-							"count": 51,
-							"depth": 20,
-						},
 					},
 					map[string]any{
 						"name": "publishedTypebotId",
+						"title": "Published Typebot Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "resultsTablePreferences",
-						"req": true,
+						"title": "Results Table Preferences",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "riskLevel",
-						"req": true,
+						"title": "Risk Level",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "selectedThemeTemplateId",
-						"req": true,
+						"title": "Selected Theme Template Id",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "settings",
-						"req": true,
+						"title": "Settings",
 						"type": "`$OBJECT`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "spaceId",
-						"req": true,
+						"title": "Space Id",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "theme",
-						"req": true,
+						"title": "Theme",
 						"type": "`$OBJECT`",
-						"union": map[string]any{
-							"branches": 2,
-							"count": 2,
-							"depth": 6,
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "typebot",
-						"req": true,
+						"title": "Typebot",
 						"type": "`$OBJECT`",
-						"union": map[string]any{
-							"branches": 19,
-							"count": 88,
-							"depth": 24,
-						},
+						"req": true,
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "updatedAt",
-						"req": true,
+						"title": "Updated At",
 						"type": "`$STRING`",
+						"req": true,
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "variables",
-						"req": true,
+						"title": "Variables",
 						"type": "`$ARRAY`",
-						"union": map[string]any{
-							"branches": 2,
-							"count": 1,
-							"depth": 5,
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "version",
-						"op": map[string]any{
-							"create": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-							"update": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
-						"short": "Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`.",
-						"type": "`$ANY`",
-						"union": map[string]any{
-							"branches": 2,
-							"count": 1,
-							"depth": 0,
-						},
-					},
-					map[string]any{
-						"name": "warnings",
-						"type": "`$ARRAY`",
+						"title": "Version",
+						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "whatsAppCredentialsId",
-						"req": true,
+						"title": "Whats App Credentials Id",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "workspaceId",
-						"req": true,
-						"short": "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)",
+						"title": "Workspace Id",
 						"type": "`$STRING`",
+						"req": true,
 					},
 				},
 				"id": map[string]any{
@@ -1328,25 +1216,9 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "typebot_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/typebots/{typebotId}/publish",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"typebotId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -1361,43 +1233,43 @@ func MakeConfig() map[string]any {
 										"lit": "publish",
 									},
 								},
-								"select": map[string]any{
-									"$action": "publish",
-									"exist": []any{
-										"id",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"v1",
 									"typebots",
 									"{id}",
 									"publish",
 								},
-							},
-							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "typebot_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
-								"kind": "http",
-								"method": "POST",
-								"orig": "/v1/typebots/{typebotId}/unpublish",
 								"rename": map[string]any{
 									"param": map[string]any{
 										"typebotId": "id",
 									},
 								},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "typebot_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"$action": "publish",
+									"exist": []any{
+										"id",
+									},
+								},
+							},
+							map[string]any{
+								"kind": "http",
+								"method": "POST",
+								"orig": "/v1/typebots/{typebotId}/unpublish",
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -1412,25 +1284,40 @@ func MakeConfig() map[string]any {
 										"lit": "unpublish",
 									},
 								},
-								"select": map[string]any{
-									"$action": "unpublish",
-									"exist": []any{
-										"id",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"v1",
 									"typebots",
 									"{id}",
 									"unpublish",
 								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"typebotId": "id",
+									},
+								},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "typebot_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"$action": "unpublish",
+									"exist": []any{
+										"id",
+									},
+								},
 							},
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/typebots",
@@ -1442,20 +1329,21 @@ func MakeConfig() map[string]any {
 										"lit": "typebots",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"v1",
+									"typebots",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": map[string]any{
 										"typebot": "`reqdata`",
 									},
 									"res": "`body.typebot`",
 								},
-								"parts": []any{
-									"v1",
-									"typebots",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/typebots/import",
@@ -1470,19 +1358,21 @@ func MakeConfig() map[string]any {
 										"lit": "import",
 									},
 								},
-								"select": map[string]any{
-									"$action": "import",
+								"parts": []any{
+									"v1",
+									"typebots",
+									"import",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": map[string]any{
 										"typebot": "`reqdata`",
 									},
 									"res": "`body.typebot`",
 								},
-								"parts": []any{
-									"v1",
-									"typebots",
-									"import",
+								"args": map[string]any{},
+								"select": map[string]any{
+									"$action": "import",
 								},
 							},
 						},
@@ -1492,23 +1382,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "folder_id",
-											"orig": "folder_id",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "workspace_id",
-											"orig": "workspace_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots",
@@ -1520,19 +1393,37 @@ func MakeConfig() map[string]any {
 										"lit": "typebots",
 									},
 								},
+								"parts": []any{
+									"v1",
+									"typebots",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.typebots`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "folder_id",
+											"orig": "folder_id",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "workspace_id",
+											"orig": "workspace_id",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"folder_id",
 										"workspace_id",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.typebots`",
-								},
-								"parts": []any{
-									"v1",
-									"typebots",
 								},
 							},
 						},
@@ -1542,34 +1433,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "typebot_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"example": false,
-											"kind": "query",
-											"name": "migrate_to_latest_version",
-											"orig": "migrate_to_latest_version",
-											"type": "`$BOOLEAN`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"typebotId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -1581,51 +1447,51 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
-										"migrate_to_latest_version",
+								"parts": []any{
+									"v1",
+									"typebots",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"typebotId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.typebot`",
 								},
-								"parts": []any{
-									"v1",
-									"typebots",
-									"{id}",
-								},
-							},
-							map[string]any{
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"kind": "param",
 											"name": "id",
 											"orig": "typebot_id",
-											"reqd": true,
 											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
 										},
 									},
 									"query": []any{
 										map[string]any{
-											"example": false,
-											"kind": "query",
 											"name": "migrate_to_latest_version",
 											"orig": "migrate_to_latest_version",
 											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": false,
 										},
 									},
 								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+										"migrate_to_latest_version",
+									},
+								},
+							},
+							map[string]any{
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/typebots/{typebotId}/publishedTypebot",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"typebotId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -1640,22 +1506,47 @@ func MakeConfig() map[string]any {
 										"lit": "publishedTypebot",
 									},
 								},
-								"select": map[string]any{
-									"$action": "published_typebot",
-									"exist": []any{
-										"id",
-										"migrate_to_latest_version",
+								"parts": []any{
+									"v1",
+									"typebots",
+									"{id}",
+									"publishedTypebot",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"typebotId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"v1",
-									"typebots",
-									"{id}",
-									"publishedTypebot",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "typebot_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "migrate_to_latest_version",
+											"orig": "migrate_to_latest_version",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": false,
+										},
+									},
+								},
+								"select": map[string]any{
+									"$action": "published_typebot",
+									"exist": []any{
+										"id",
+										"migrate_to_latest_version",
+									},
 								},
 							},
 						},
@@ -1665,25 +1556,9 @@ func MakeConfig() map[string]any {
 						"name": "remove",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "typebot_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/v1/typebots/{typebotId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"typebotId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -1695,19 +1570,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"v1",
+									"typebots",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"typebotId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"v1",
-									"typebots",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "typebot_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -1717,25 +1608,9 @@ func MakeConfig() map[string]any {
 						"name": "update",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "typebot_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "PATCH",
 								"orig": "/v1/typebots/{typebotId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"typebotId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -1747,9 +1622,14 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"v1",
+									"typebots",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"typebotId": "id",
 									},
 								},
 								"transform": map[string]any{
@@ -1758,10 +1638,21 @@ func MakeConfig() map[string]any {
 									},
 									"res": "`body.typebot`",
 								},
-								"parts": []any{
-									"v1",
-									"typebots",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "typebot_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -1775,27 +1666,34 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "chatsHardLimit",
-						"req": true,
+						"title": "Chats Hard Limit",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "createdAt",
-						"req": true,
+						"title": "Created At",
 						"type": "`$STRING`",
+						"req": true,
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "customChatsLimit",
-						"req": true,
+						"title": "Custom Chats Limit",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "customSeatsLimit",
-						"req": true,
+						"title": "Custom Seats Limit",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "icon",
+						"title": "Icon",
+						"type": "`$ANY`",
+						"req": true,
 						"op": map[string]any{
 							"create": map[string]any{
 								"type": "`$STRING`",
@@ -1804,94 +1702,84 @@ func MakeConfig() map[string]any {
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
-						"type": "`$ANY`",
 					},
 					map[string]any{
 						"name": "id",
-						"req": true,
+						"title": "Id",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "inactiveFirstEmailSentAt",
-						"req": true,
+						"title": "Inactive First Email Sent At",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "inactiveSecondEmailSentAt",
-						"req": true,
+						"title": "Inactive Second Email Sent At",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "isPastDue",
-						"req": true,
+						"title": "Is Past Due",
 						"type": "`$BOOLEAN`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "isSuspended",
-						"req": true,
+						"title": "Is Suspended",
 						"type": "`$BOOLEAN`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "isVerified",
-						"req": true,
+						"title": "Is Verified",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "lastActivityAt",
-						"req": true,
+						"title": "Last Activity At",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "name",
+						"title": "Name",
+						"type": "`$STRING`",
+						"req": true,
 						"op": map[string]any{
 							"update": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "plan",
-						"req": true,
+						"title": "Plan",
 						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "role",
 						"req": true,
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "settings",
-						"req": true,
+						"title": "Settings",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "stripeId",
-						"req": true,
+						"title": "Stripe Id",
 						"type": "`$ANY`",
+						"req": true,
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "updatedAt",
-						"req": true,
+						"title": "Updated At",
 						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "user",
 						"req": true,
-						"type": "`$OBJECT`",
-					},
-					map[string]any{
-						"name": "userId",
-						"req": true,
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "workspaceId",
-						"req": true,
-						"type": "`$STRING`",
+						"format": "date-time",
 					},
 				},
 				"id": map[string]any{
@@ -1905,7 +1793,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/v1/workspaces",
@@ -1917,15 +1804,17 @@ func MakeConfig() map[string]any {
 										"lit": "workspaces",
 									},
 								},
-								"select": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.workspace`",
-								},
 								"parts": []any{
 									"v1",
 									"workspaces",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.workspace`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -1934,25 +1823,9 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "workspace_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/workspaces/{workspaceId}/members",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"workspaceId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -1967,25 +1840,40 @@ func MakeConfig() map[string]any {
 										"lit": "members",
 									},
 								},
-								"select": map[string]any{
-									"$action": "member",
-									"exist": []any{
-										"id",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.members`",
-								},
 								"parts": []any{
 									"v1",
 									"workspaces",
 									"{id}",
 									"members",
 								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"workspaceId": "id",
+									},
+								},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.members`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "workspace_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"$action": "member",
+									"exist": []any{
+										"id",
+									},
+								},
 							},
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/workspaces",
@@ -1997,15 +1885,17 @@ func MakeConfig() map[string]any {
 										"lit": "workspaces",
 									},
 								},
-								"select": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.workspaces`",
-								},
 								"parts": []any{
 									"v1",
 									"workspaces",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.workspaces`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -2014,25 +1904,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "workspace_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/v1/workspaces/{workspaceId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"workspaceId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -2044,19 +1918,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"v1",
+									"workspaces",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"workspaceId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.workspace`",
 								},
-								"parts": []any{
-									"v1",
-									"workspaces",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "workspace_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -2066,25 +1956,9 @@ func MakeConfig() map[string]any {
 						"name": "remove",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "workspace_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/v1/workspaces/{workspaceId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"workspaceId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -2096,19 +1970,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"v1",
+									"workspaces",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"workspaceId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"v1",
-									"workspaces",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "workspace_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -2118,25 +2008,9 @@ func MakeConfig() map[string]any {
 						"name": "update",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "workspace_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "PATCH",
 								"orig": "/v1/workspaces/{workspaceId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"workspaceId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "v1",
@@ -2148,19 +2022,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"v1",
+									"workspaces",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"workspaceId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.workspace`",
 								},
-								"parts": []any{
-									"v1",
-									"workspaces",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "workspace_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},

@@ -1,7 +1,4 @@
 export interface Analytics {
-    totalCompleted: number;
-    totalStarts: number;
-    totalViews: number;
 }
 export interface AnalyticsLoadMatch {
     typebot_id: string;
@@ -11,13 +8,6 @@ export interface AnalyticsLoadMatch {
     [action: string]: any;
 }
 export interface Billing {
-    amount: number;
-    currency: string;
-    date: any;
-    id: string;
-    resetsAt: string;
-    totalChatsUsed: number;
-    url: string;
 }
 export interface BillingLoadMatch {
     workspace_id: string;
@@ -72,17 +62,12 @@ export interface FolderRemoveMatch {
 }
 export interface Result {
     answers: any[];
-    context: any;
     createdAt: string;
-    description: string;
-    details: any;
     hasStarted: any;
     id: string;
     isArchived: any;
     isCompleted: boolean;
     lastChatSessionId: any;
-    resultId: string;
-    status: string;
     typebotId: string;
     variables: any[];
 }
@@ -107,20 +92,16 @@ export interface Typebot {
     createdAt: string;
     customDomain: any;
     edges: any[];
-    enableSafetyFlags?: boolean;
     events: any[];
     folderId: any;
-    fromTemplate?: string;
     groups: any[];
     icon: any;
     id: string;
     isArchived: boolean;
     isClosed: boolean;
-    message: any;
     name: string;
     overwrite?: boolean;
     publicId: any;
-    publishedTypebot: any;
     publishedTypebotId?: string;
     resultsTablePreferences: any;
     riskLevel: any;
@@ -131,8 +112,7 @@ export interface Typebot {
     typebot: Record<string, any>;
     updatedAt: string;
     variables: any[];
-    version?: any;
-    warnings?: any[];
+    version: string;
     whatsAppCredentialsId: any;
     workspaceId: string;
 }
@@ -151,20 +131,16 @@ export interface TypebotCreateData {
     createdAt: string;
     customDomain: any;
     edges: any[];
-    enableSafetyFlags?: boolean;
     events: any[];
     folderId: any;
-    fromTemplate?: string;
     groups: any[];
     icon: any;
     id: string;
     isArchived: boolean;
     isClosed: boolean;
-    message: any;
     name: string;
     overwrite?: boolean;
     publicId: any;
-    publishedTypebot: any;
     publishedTypebotId?: string;
     resultsTablePreferences: any;
     riskLevel: any;
@@ -175,8 +151,7 @@ export interface TypebotCreateData {
     typebot: Record<string, any>;
     updatedAt: string;
     variables: any[];
-    version?: any;
-    warnings?: any[];
+    version: string;
     whatsAppCredentialsId: any;
     workspaceId: string;
     $action?: string;
@@ -188,19 +163,15 @@ export interface TypebotUpdateData {
     createdAt?: string;
     customDomain?: any;
     edges?: any[];
-    enableSafetyFlags?: boolean;
     events?: any[];
     folderId?: any;
-    fromTemplate?: string;
     groups?: any[];
     icon?: any;
     isArchived?: boolean;
     isClosed?: boolean;
-    message?: any;
     name?: string;
     overwrite?: boolean;
     publicId?: any;
-    publishedTypebot?: any;
     publishedTypebotId?: string;
     resultsTablePreferences?: any;
     riskLevel?: any;
@@ -211,8 +182,7 @@ export interface TypebotUpdateData {
     typebot?: Record<string, any>;
     updatedAt?: string;
     variables?: any[];
-    version?: any;
-    warnings?: any[];
+    version?: string;
     whatsAppCredentialsId?: any;
     workspaceId?: string;
 }
@@ -234,13 +204,9 @@ export interface Workspace {
     lastActivityAt: any;
     name: string;
     plan: string;
-    role: string;
     settings: any;
     stripeId: any;
     updatedAt: string;
-    user: Record<string, any>;
-    userId: string;
-    workspaceId: string;
 }
 export interface WorkspaceLoadMatch {
     id: string;
@@ -260,13 +226,9 @@ export interface WorkspaceListMatch {
     lastActivityAt?: any;
     name?: string;
     plan?: string;
-    role?: string;
     settings?: any;
     stripeId?: any;
     updatedAt?: string;
-    user?: Record<string, any>;
-    userId?: string;
-    workspaceId?: string;
     $action?: string;
     [action: string]: any;
 }
@@ -285,13 +247,9 @@ export interface WorkspaceCreateData {
     lastActivityAt: any;
     name: string;
     plan: string;
-    role: string;
     settings: any;
     stripeId: any;
     updatedAt: string;
-    user: Record<string, any>;
-    userId: string;
-    workspaceId: string;
 }
 export interface WorkspaceUpdateData {
     id: string;
@@ -308,13 +266,9 @@ export interface WorkspaceUpdateData {
     lastActivityAt?: any;
     name?: string;
     plan?: string;
-    role?: string;
     settings?: any;
     stripeId?: any;
     updatedAt?: string;
-    user?: Record<string, any>;
-    userId?: string;
-    workspaceId?: string;
 }
 export interface WorkspaceRemoveMatch {
     id: string;

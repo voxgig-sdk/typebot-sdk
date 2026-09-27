@@ -32,14 +32,14 @@
 <a href="../sdks/ts.html">TypeScript</a></details>
 <details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
 <a href="../tools/go-mcp.html">Go MCP server</a></details>
-<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
-<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
-<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
-<a href="../features/paging.html">Pagination signals for list operations</a>
-<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
-<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
-<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
-<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="typebot">Typebot</h1>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="typebot">Typebot</h1>
 <h2 id="operations">Operations</h2>
 <p>Every route this entity exposes. Each route links to its own reference on this page.</p>
 <table>
@@ -108,6 +108,76 @@
 </tr>
 </tbody>
 </table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">typebots, err := client.Typebot(nil).List(map[string]any{&quot;workspace_id&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(typebots)
+typebot, err := client.Typebot(nil).Load(map[string]any{&quot;id&quot;: &quot;example_id&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(typebot)
+created, err := client.Typebot(nil).Create(map[string]any{&quot;accessRight&quot;: &quot;example&quot;, &quot;createdAt&quot;: &quot;example&quot;, &quot;customDomain&quot;: &quot;example&quot;, &quot;edges&quot;: []any{}, &quot;events&quot;: []any{}, &quot;folderId&quot;: &quot;example&quot;, &quot;groups&quot;: []any{}, &quot;icon&quot;: &quot;example&quot;, &quot;id&quot;: &quot;example&quot;, &quot;isArchived&quot;: true, &quot;isClosed&quot;: true, &quot;name&quot;: &quot;example&quot;, &quot;publicId&quot;: &quot;example&quot;, &quot;resultsTablePreferences&quot;: &quot;example&quot;, &quot;riskLevel&quot;: &quot;example&quot;, &quot;selectedThemeTemplateId&quot;: &quot;example&quot;, &quot;settings&quot;: map[string]any{}, &quot;spaceId&quot;: &quot;example&quot;, &quot;theme&quot;: map[string]any{}, &quot;typebot&quot;: map[string]any{}, &quot;updatedAt&quot;: &quot;example&quot;, &quot;variables&quot;: []any{}, &quot;version&quot;: &quot;example&quot;, &quot;whatsAppCredentialsId&quot;: &quot;example&quot;, &quot;workspaceId&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(created)
+updated, err := client.Typebot(nil).Update(map[string]any{&quot;id&quot;: &quot;example_id&quot;, &quot;accessRight&quot;: &quot;example&quot;, &quot;createdAt&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(updated)
+removed, err := client.Typebot(nil).Remove(map[string]any{&quot;id&quot;: &quot;example_id&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(removed)
+</code></pre>
+<h3 id="javascript">JavaScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/js.html#set-up-the-client">JavaScript setup</a>, then call the operations:</p>
+<pre><code class="language-js">const typebots = await client.Typebot().list({ workspace_id: &quot;example&quot; })
+const typebot = await client.Typebot().load({ id: &quot;example_id&quot; })
+const created = await client.Typebot().create({ accessRight: &quot;example&quot;, createdAt: &quot;example&quot;, customDomain: &quot;example&quot;, edges: [], events: [], folderId: &quot;example&quot;, groups: [], icon: &quot;example&quot;, id: &quot;example&quot;, isArchived: true, isClosed: true, name: &quot;example&quot;, publicId: &quot;example&quot;, resultsTablePreferences: &quot;example&quot;, riskLevel: &quot;example&quot;, selectedThemeTemplateId: &quot;example&quot;, settings: {}, spaceId: &quot;example&quot;, theme: {}, typebot: {}, updatedAt: &quot;example&quot;, variables: [], version: &quot;example&quot;, whatsAppCredentialsId: &quot;example&quot;, workspaceId: &quot;example&quot; })
+const updated = await client.Typebot().update({ id: &quot;example_id&quot;, accessRight: &quot;example&quot;, createdAt: &quot;example&quot; })
+await client.Typebot().remove({ id: &quot;example_id&quot; })
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local typebots, err = client:Typebot():list({ workspace_id = &quot;example&quot; })
+local typebot, err = client:Typebot():load({ id = &quot;example_id&quot; })
+local created, err = client:Typebot():create({ accessRight = &quot;example&quot;, createdAt = &quot;example&quot;, customDomain = &quot;example&quot;, edges = {}, events = {}, folderId = &quot;example&quot;, groups = {}, icon = &quot;example&quot;, id = &quot;example&quot;, isArchived = true, isClosed = true, name = &quot;example&quot;, publicId = &quot;example&quot;, resultsTablePreferences = &quot;example&quot;, riskLevel = &quot;example&quot;, selectedThemeTemplateId = &quot;example&quot;, settings = {}, spaceId = &quot;example&quot;, theme = {}, typebot = {}, updatedAt = &quot;example&quot;, variables = {}, version = &quot;example&quot;, whatsAppCredentialsId = &quot;example&quot;, workspaceId = &quot;example&quot; })
+local updated, err = client:Typebot():update({ id = &quot;example_id&quot;, accessRight = &quot;example&quot;, createdAt = &quot;example&quot; })
+local removed, err = client:Typebot():remove({ id = &quot;example_id&quot; })
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$typebots = $client-&gt;Typebot()-&gt;list([&quot;workspace_id&quot; =&gt; &quot;example&quot;]);
+$typebot = $client-&gt;Typebot()-&gt;load([&quot;id&quot; =&gt; &quot;example_id&quot;]);
+$created = $client-&gt;Typebot()-&gt;create([&quot;accessRight&quot; =&gt; &quot;example&quot;, &quot;createdAt&quot; =&gt; &quot;example&quot;, &quot;customDomain&quot; =&gt; &quot;example&quot;, &quot;edges&quot; =&gt; [], &quot;events&quot; =&gt; [], &quot;folderId&quot; =&gt; &quot;example&quot;, &quot;groups&quot; =&gt; [], &quot;icon&quot; =&gt; &quot;example&quot;, &quot;id&quot; =&gt; &quot;example&quot;, &quot;isArchived&quot; =&gt; true, &quot;isClosed&quot; =&gt; true, &quot;name&quot; =&gt; &quot;example&quot;, &quot;publicId&quot; =&gt; &quot;example&quot;, &quot;resultsTablePreferences&quot; =&gt; &quot;example&quot;, &quot;riskLevel&quot; =&gt; &quot;example&quot;, &quot;selectedThemeTemplateId&quot; =&gt; &quot;example&quot;, &quot;settings&quot; =&gt; [], &quot;spaceId&quot; =&gt; &quot;example&quot;, &quot;theme&quot; =&gt; [], &quot;typebot&quot; =&gt; [], &quot;updatedAt&quot; =&gt; &quot;example&quot;, &quot;variables&quot; =&gt; [], &quot;version&quot; =&gt; &quot;example&quot;, &quot;whatsAppCredentialsId&quot; =&gt; &quot;example&quot;, &quot;workspaceId&quot; =&gt; &quot;example&quot;]);
+$updated = $client-&gt;Typebot()-&gt;update([&quot;id&quot; =&gt; &quot;example_id&quot;, &quot;accessRight&quot; =&gt; &quot;example&quot;, &quot;createdAt&quot; =&gt; &quot;example&quot;]);
+$client-&gt;Typebot()-&gt;remove([&quot;id&quot; =&gt; &quot;example_id&quot;]);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">typebots = client.Typebot().list({&quot;workspace_id&quot;: &quot;example&quot;})
+typebot = client.Typebot().load({&quot;id&quot;: &quot;example_id&quot;})
+created = client.Typebot().create({ &quot;accessRight&quot;: &quot;example&quot;, &quot;createdAt&quot;: &quot;example&quot;, &quot;customDomain&quot;: &quot;example&quot;, &quot;edges&quot;: [], &quot;events&quot;: [], &quot;folderId&quot;: &quot;example&quot;, &quot;groups&quot;: [], &quot;icon&quot;: &quot;example&quot;, &quot;id&quot;: &quot;example&quot;, &quot;isArchived&quot;: True, &quot;isClosed&quot;: True, &quot;name&quot;: &quot;example&quot;, &quot;publicId&quot;: &quot;example&quot;, &quot;resultsTablePreferences&quot;: &quot;example&quot;, &quot;riskLevel&quot;: &quot;example&quot;, &quot;selectedThemeTemplateId&quot;: &quot;example&quot;, &quot;settings&quot;: {}, &quot;spaceId&quot;: &quot;example&quot;, &quot;theme&quot;: {}, &quot;typebot&quot;: {}, &quot;updatedAt&quot;: &quot;example&quot;, &quot;variables&quot;: [], &quot;version&quot;: &quot;example&quot;, &quot;whatsAppCredentialsId&quot;: &quot;example&quot;, &quot;workspaceId&quot;: &quot;example&quot; })
+updated = client.Typebot().update({&quot;id&quot;: &quot;example_id&quot;, &quot;accessRight&quot;: &quot;example&quot;, &quot;createdAt&quot;: &quot;example&quot;})
+client.Typebot().remove({&quot;id&quot;: &quot;example_id&quot;})
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const typebots = await client.Typebot().list({ workspace_id: &quot;example&quot; })
+const typebot = await client.Typebot().load({ id: &quot;example_id&quot; })
+const created = await client.Typebot().create({ accessRight: &quot;example&quot;, createdAt: &quot;example&quot;, customDomain: &quot;example&quot;, edges: [], events: [], folderId: &quot;example&quot;, groups: [], icon: &quot;example&quot;, id: &quot;example&quot;, isArchived: true, isClosed: true, name: &quot;example&quot;, publicId: &quot;example&quot;, resultsTablePreferences: &quot;example&quot;, riskLevel: &quot;example&quot;, selectedThemeTemplateId: &quot;example&quot;, settings: {}, spaceId: &quot;example&quot;, theme: {}, typebot: {}, updatedAt: &quot;example&quot;, variables: [], version: &quot;example&quot;, whatsAppCredentialsId: &quot;example&quot;, workspaceId: &quot;example&quot; })
+const updated = await client.Typebot().update({ id: &quot;example_id&quot;, accessRight: &quot;example&quot;, createdAt: &quot;example&quot; })
+await client.Typebot().remove({ id: &quot;example_id&quot; })
+</code></pre>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -123,91 +193,73 @@
 <td><code>accessRight</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Access Right</td>
 </tr>
 <tr>
 <td><code>createdAt</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Created At</td>
 </tr>
 <tr>
 <td><code>customDomain</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Custom Domain</td>
 </tr>
 <tr>
 <td><code>edges</code></td>
 <td><code>array</code></td>
 <td>Yes</td>
-<td></td>
-</tr>
-<tr>
-<td><code>enableSafetyFlags</code></td>
-<td><code>boolean</code></td>
-<td>No</td>
-<td></td>
+<td>Edges</td>
 </tr>
 <tr>
 <td><code>events</code></td>
 <td><code>array</code></td>
 <td>Yes</td>
-<td></td>
+<td>Events</td>
 </tr>
 <tr>
 <td><code>folderId</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
-</tr>
-<tr>
-<td><code>fromTemplate</code></td>
-<td><code>string</code></td>
-<td>No</td>
-<td></td>
+<td>Folder Id</td>
 </tr>
 <tr>
 <td><code>groups</code></td>
 <td><code>array</code></td>
 <td>Yes</td>
-<td></td>
+<td>Groups</td>
 </tr>
 <tr>
 <td><code>icon</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Icon</td>
 </tr>
 <tr>
 <td><code>id</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Id</td>
 </tr>
 <tr>
 <td><code>isArchived</code></td>
 <td><code>boolean</code></td>
 <td>Yes</td>
-<td></td>
+<td>Is Archived</td>
 </tr>
 <tr>
 <td><code>isClosed</code></td>
 <td><code>boolean</code></td>
 <td>Yes</td>
-<td></td>
-</tr>
-<tr>
-<td><code>message</code></td>
-<td><code>any</code></td>
-<td>Yes</td>
-<td></td>
+<td>Is Closed</td>
 </tr>
 <tr>
 <td><code>name</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Name</td>
 </tr>
 <tr>
 <td><code>overwrite</code></td>
@@ -219,97 +271,85 @@
 <td><code>publicId</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
-</tr>
-<tr>
-<td><code>publishedTypebot</code></td>
-<td><code>any</code></td>
-<td>Yes</td>
-<td></td>
+<td>Public Id</td>
 </tr>
 <tr>
 <td><code>publishedTypebotId</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Published Typebot Id</td>
 </tr>
 <tr>
 <td><code>resultsTablePreferences</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Results Table Preferences</td>
 </tr>
 <tr>
 <td><code>riskLevel</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Risk Level</td>
 </tr>
 <tr>
 <td><code>selectedThemeTemplateId</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Selected Theme Template Id</td>
 </tr>
 <tr>
 <td><code>settings</code></td>
 <td><code>object</code></td>
 <td>Yes</td>
-<td></td>
+<td>Settings</td>
 </tr>
 <tr>
 <td><code>spaceId</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Space Id</td>
 </tr>
 <tr>
 <td><code>theme</code></td>
 <td><code>object</code></td>
 <td>Yes</td>
-<td></td>
+<td>Theme</td>
 </tr>
 <tr>
 <td><code>typebot</code></td>
 <td><code>object</code></td>
 <td>Yes</td>
-<td></td>
+<td>Typebot</td>
 </tr>
 <tr>
 <td><code>updatedAt</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Updated At</td>
 </tr>
 <tr>
 <td><code>variables</code></td>
 <td><code>array</code></td>
 <td>Yes</td>
-<td></td>
+<td>Variables</td>
 </tr>
 <tr>
 <td><code>version</code></td>
-<td><code>any</code></td>
-<td>No</td>
-<td>Provides the version the published bot was migrated from if <code>migrateToLatestVersion</code> is set to <code>true</code>.</td>
-</tr>
-<tr>
-<td><code>warnings</code></td>
-<td><code>array</code></td>
-<td>No</td>
-<td></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Version</td>
 </tr>
 <tr>
 <td><code>whatsAppCredentialsId</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Whats App Credentials Id</td>
 </tr>
 <tr>
 <td><code>workspaceId</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td><a href="../how-to#how-to-find-my-workspaceid">Where to find my workspace ID?</a></td>
+<td>Workspace Id</td>
 </tr>
 </tbody>
 </table>

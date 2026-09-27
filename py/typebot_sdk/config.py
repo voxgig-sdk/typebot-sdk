@@ -191,23 +191,7 @@ def make_config():
         },
         "entity": {
       "analytics": {
-        "fields": [
-          {
-            "name": "totalCompleted",
-            "req": True,
-            "type": "`$NUMBER`",
-          },
-          {
-            "name": "totalStarts",
-            "req": True,
-            "type": "`$NUMBER`",
-          },
-          {
-            "name": "totalViews",
-            "req": True,
-            "type": "`$NUMBER`",
-          },
-        ],
+        "fields": [],
         "name": "analytics",
         "op": {
           "load": {
@@ -215,40 +199,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "typebot_id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "query": [
-                    {
-                      "example": "last7Days",
-                      "kind": "query",
-                      "name": "time_filter",
-                      "orig": "time_filter",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "time_zone",
-                      "orig": "time_zone",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}/analytics/stats",
-                "rename": {
-                  "param": {
-                    "typebotId": "typebot_id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -266,6 +219,48 @@ def make_config():
                     "lit": "stats",
                   },
                 ],
+                "parts": [
+                  "v1",
+                  "typebots",
+                  "{typebot_id}",
+                  "analytics",
+                  "stats",
+                ],
+                "rename": {
+                  "param": {
+                    "typebotId": "typebot_id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.stats`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "typebot_id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                  "query": [
+                    {
+                      "name": "time_filter",
+                      "orig": "time_filter",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "last7Days",
+                    },
+                    {
+                      "name": "time_zone",
+                      "orig": "time_zone",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                  ],
+                },
                 "select": {
                   "$action": "stat",
                   "exist": [
@@ -274,17 +269,6 @@ def make_config():
                     "typebot_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.stats`",
-                },
-                "parts": [
-                  "v1",
-                  "typebots",
-                  "{typebot_id}",
-                  "analytics",
-                  "stats",
-                ],
               },
             ],
           },
@@ -292,54 +276,13 @@ def make_config():
         "relations": {
           "ancestors": [
             [
-              "typebot",
+              "$.main.kit.entity.typebot",
             ],
           ],
         },
       },
       "billing": {
-        "fields": [
-          {
-            "name": "amount",
-            "req": True,
-            "type": "`$NUMBER`",
-          },
-          {
-            "name": "currency",
-            "req": True,
-            "type": "`$STRING`",
-          },
-          {
-            "name": "date",
-            "req": True,
-            "type": "`$ANY`",
-          },
-          {
-            "name": "id",
-            "req": True,
-            "type": "`$STRING`",
-          },
-          {
-            "format": "date-time",
-            "name": "resetsAt",
-            "req": True,
-            "type": "`$STRING`",
-          },
-          {
-            "name": "totalChatsUsed",
-            "req": True,
-            "type": "`$NUMBER`",
-          },
-          {
-            "name": "url",
-            "req": True,
-            "type": "`$STRING`",
-          },
-        ],
-        "id": {
-          "field": "id",
-          "name": "id",
-        },
+        "fields": [],
         "name": "billing",
         "op": {
           "list": {
@@ -347,17 +290,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "workspace_id",
-                      "orig": "workspace_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/billing/invoices",
@@ -372,21 +304,33 @@ def make_config():
                     "lit": "invoices",
                   },
                 ],
+                "parts": [
+                  "v1",
+                  "billing",
+                  "invoices",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.invoices`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "workspace_id",
+                      "orig": "workspace_id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "$action": "invoice",
                   "exist": [
                     "workspace_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.invoices`",
-                },
-                "parts": [
-                  "v1",
-                  "billing",
-                  "invoices",
-                ],
               },
             ],
           },
@@ -395,17 +339,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "workspace_id",
-                      "orig": "workspace_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/billing/usage",
@@ -420,21 +353,33 @@ def make_config():
                     "lit": "usage",
                   },
                 ],
+                "parts": [
+                  "v1",
+                  "billing",
+                  "usage",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "workspace_id",
+                      "orig": "workspace_id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "$action": "usage",
                   "exist": [
                     "workspace_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "v1",
-                  "billing",
-                  "usage",
-                ],
               },
             ],
           },
@@ -446,55 +391,63 @@ def make_config():
       "folder": {
         "fields": [
           {
-            "format": "date-time",
             "name": "createdAt",
-            "req": True,
+            "title": "Created At",
             "type": "`$STRING`",
+            "req": True,
+            "format": "date-time",
           },
           {
             "name": "folder",
-            "req": True,
+            "title": "Folder",
             "type": "`$OBJECT`",
+            "req": True,
           },
           {
             "name": "folderName",
+            "title": "Folder Name",
             "type": "`$STRING`",
           },
           {
             "name": "id",
+            "title": "Id",
+            "type": "`$STRING`",
+            "req": True,
             "op": {
               "create": {
                 "type": "`$STRING`",
               },
             },
-            "req": True,
-            "type": "`$STRING`",
           },
           {
             "name": "name",
-            "req": True,
+            "title": "Name",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "parentFolderId",
+            "title": "Parent Folder Id",
+            "type": "`$ANY`",
+            "req": True,
             "op": {
               "create": {
                 "type": "`$STRING`",
               },
             },
-            "req": True,
-            "type": "`$ANY`",
           },
           {
-            "format": "date-time",
             "name": "updatedAt",
-            "req": True,
+            "title": "Updated At",
             "type": "`$STRING`",
+            "req": True,
+            "format": "date-time",
           },
           {
             "name": "workspaceId",
-            "req": True,
+            "title": "Workspace Id",
             "type": "`$STRING`",
+            "req": True,
           },
         ],
         "id": {
@@ -508,7 +461,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/v1/folders",
@@ -520,15 +472,17 @@ def make_config():
                     "lit": "folders",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.folder`",
-                },
                 "parts": [
                   "v1",
                   "folders",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.folder`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -537,23 +491,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "parent_folder_id",
-                      "orig": "parent_folder_id",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "workspace_id",
-                      "orig": "workspace_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/folders",
@@ -565,20 +502,38 @@ def make_config():
                     "lit": "folders",
                   },
                 ],
+                "parts": [
+                  "v1",
+                  "folders",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.folders`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "parent_folder_id",
+                      "orig": "parent_folder_id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "workspace_id",
+                      "orig": "workspace_id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "parent_folder_id",
                     "workspace_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.folders`",
-                },
-                "parts": [
-                  "v1",
-                  "folders",
-                ],
               },
             ],
           },
@@ -587,34 +542,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "folder_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "workspace_id",
-                      "orig": "workspace_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/folders/{folderId}",
-                "rename": {
-                  "param": {
-                    "folderId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -626,21 +556,46 @@ def make_config():
                     "var": "id",
                   },
                 ],
+                "parts": [
+                  "v1",
+                  "folders",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "folderId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.folder`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "folder_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                  "query": [
+                    {
+                      "name": "workspace_id",
+                      "orig": "workspace_id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "id",
                     "workspace_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.folder`",
-                },
-                "parts": [
-                  "v1",
-                  "folders",
-                  "{id}",
-                ],
               },
             ],
           },
@@ -649,25 +604,9 @@ def make_config():
             "name": "remove",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "folder_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/v1/folders/{folderId}",
-                "rename": {
-                  "param": {
-                    "folderId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -679,20 +618,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.folder`",
-                },
                 "parts": [
                   "v1",
                   "folders",
                   "{id}",
                 ],
+                "rename": {
+                  "param": {
+                    "folderId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.folder`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "folder_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -701,25 +656,9 @@ def make_config():
             "name": "update",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "folder_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "PATCH",
                 "orig": "/v1/folders/{folderId}",
-                "rename": {
-                  "param": {
-                    "folderId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -731,10 +670,15 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
+                "parts": [
+                  "v1",
+                  "folders",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "folderId": "id",
+                  },
                 },
                 "transform": {
                   "req": {
@@ -742,11 +686,22 @@ def make_config():
                   },
                   "res": "`body.folder`",
                 },
-                "parts": [
-                  "v1",
-                  "folders",
-                  "{id}",
-                ],
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "folder_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -759,79 +714,58 @@ def make_config():
         "fields": [
           {
             "name": "answers",
-            "req": True,
+            "title": "Answers",
             "type": "`$ARRAY`",
-          },
-          {
-            "name": "context",
             "req": True,
-            "type": "`$ANY`",
           },
           {
-            "format": "date-time",
             "name": "createdAt",
-            "req": True,
+            "title": "Created At",
             "type": "`$STRING`",
-          },
-          {
-            "name": "description",
             "req": True,
-            "type": "`$STRING`",
-          },
-          {
-            "name": "details",
-            "req": True,
-            "type": "`$ANY`",
+            "format": "date-time",
           },
           {
             "name": "hasStarted",
-            "req": True,
+            "title": "Has Started",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "id",
-            "req": True,
+            "title": "Id",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "isArchived",
-            "req": True,
+            "title": "Is Archived",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "isCompleted",
-            "req": True,
+            "title": "Is Completed",
             "type": "`$BOOLEAN`",
+            "req": True,
           },
           {
             "name": "lastChatSessionId",
-            "req": True,
+            "title": "Last Chat Session Id",
             "type": "`$ANY`",
-          },
-          {
-            "name": "resultId",
             "req": True,
-            "type": "`$STRING`",
-          },
-          {
-            "name": "status",
-            "req": True,
-            "type": "`$STRING`",
           },
           {
             "name": "typebotId",
-            "req": True,
+            "title": "Typebot Id",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "variables",
-            "req": True,
+            "title": "Variables",
             "type": "`$ARRAY`",
-            "union": {
-              "branches": 2,
-              "count": 1,
-              "depth": 3,
-            },
+            "req": True,
           },
         ],
         "id": {
@@ -845,53 +779,9 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "typebot_id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "cursor",
-                      "orig": "cursor",
-                      "type": "`$NUMBER`",
-                    },
-                    {
-                      "example": 50,
-                      "kind": "query",
-                      "name": "limit",
-                      "orig": "limit",
-                      "type": "`$NUMBER`",
-                    },
-                    {
-                      "example": "last7Days",
-                      "kind": "query",
-                      "name": "time_filter",
-                      "orig": "time_filter",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "time_zone",
-                      "orig": "time_zone",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}/results",
-                "rename": {
-                  "param": {
-                    "typebotId": "typebot_id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -906,6 +796,60 @@ def make_config():
                     "lit": "results",
                   },
                 ],
+                "parts": [
+                  "v1",
+                  "typebots",
+                  "{typebot_id}",
+                  "results",
+                ],
+                "rename": {
+                  "param": {
+                    "typebotId": "typebot_id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "typebot_id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                  "query": [
+                    {
+                      "name": "cursor",
+                      "orig": "cursor",
+                      "type": "`$NUMBER`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "limit",
+                      "orig": "limit",
+                      "type": "`$NUMBER`",
+                      "kind": "query",
+                      "example": 50,
+                    },
+                    {
+                      "name": "time_filter",
+                      "orig": "time_filter",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "last7Days",
+                    },
+                    {
+                      "name": "time_zone",
+                      "orig": "time_zone",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "cursor",
@@ -915,45 +859,11 @@ def make_config():
                     "typebot_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "v1",
-                  "typebots",
-                  "{typebot_id}",
-                  "results",
-                ],
               },
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "result_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "param",
-                      "name": "typebot_id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}/results/{resultId}/logs",
-                "rename": {
-                  "param": {
-                    "resultId": "id",
-                    "typebotId": "typebot_id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -974,17 +884,6 @@ def make_config():
                     "lit": "logs",
                   },
                 ],
-                "select": {
-                  "$action": "log",
-                  "exist": [
-                    "id",
-                    "typebot_id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.logs`",
-                },
                 "parts": [
                   "v1",
                   "typebots",
@@ -993,6 +892,41 @@ def make_config():
                   "{id}",
                   "logs",
                 ],
+                "rename": {
+                  "param": {
+                    "resultId": "id",
+                    "typebotId": "typebot_id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.logs`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "result_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "typebot_id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "$action": "log",
+                  "exist": [
+                    "id",
+                    "typebot_id",
+                  ],
+                },
               },
             ],
           },
@@ -1001,33 +935,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "result_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "param",
-                      "name": "typebot_id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}/results/{resultId}",
-                "rename": {
-                  "param": {
-                    "resultId": "id",
-                    "typebotId": "typebot_id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -1045,16 +955,6 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                    "typebot_id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.result`",
-                },
                 "parts": [
                   "v1",
                   "typebots",
@@ -1062,6 +962,40 @@ def make_config():
                   "results",
                   "{id}",
                 ],
+                "rename": {
+                  "param": {
+                    "resultId": "id",
+                    "typebotId": "typebot_id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.result`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "result_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "typebot_id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                    "typebot_id",
+                  ],
+                },
               },
             ],
           },
@@ -1070,25 +1004,9 @@ def make_config():
             "name": "remove",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "typebot_id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/v1/typebots/{typebotId}/results",
-                "rename": {
-                  "param": {
-                    "typebotId": "typebot_id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -1103,21 +1021,37 @@ def make_config():
                     "lit": "results",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "typebot_id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "v1",
                   "typebots",
                   "{typebot_id}",
                   "results",
                 ],
+                "rename": {
+                  "param": {
+                    "typebotId": "typebot_id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "typebot_id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "typebot_id",
+                  ],
+                },
               },
             ],
           },
@@ -1125,7 +1059,7 @@ def make_config():
         "relations": {
           "ancestors": [
             [
-              "typebot",
+              "$.main.kit.entity.typebot",
             ],
           ],
         },
@@ -1134,212 +1068,166 @@ def make_config():
         "fields": [
           {
             "name": "accessRight",
-            "req": True,
+            "title": "Access Right",
             "type": "`$STRING`",
+            "req": True,
           },
           {
-            "format": "date-time",
             "name": "createdAt",
-            "req": True,
+            "title": "Created At",
             "type": "`$STRING`",
+            "req": True,
+            "format": "date-time",
           },
           {
             "name": "customDomain",
-            "req": True,
+            "title": "Custom Domain",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "edges",
-            "req": True,
+            "title": "Edges",
             "type": "`$ARRAY`",
-            "union": {
-              "branches": 2,
-              "count": 1,
-              "depth": 3,
-            },
-          },
-          {
-            "name": "enableSafetyFlags",
-            "type": "`$BOOLEAN`",
+            "req": True,
           },
           {
             "name": "events",
-            "req": True,
+            "title": "Events",
             "type": "`$ARRAY`",
-            "union": {
-              "branches": 3,
-              "count": 1,
-              "depth": 1,
-            },
+            "req": True,
           },
           {
             "name": "folderId",
-            "req": True,
+            "title": "Folder Id",
             "type": "`$ANY`",
-          },
-          {
-            "name": "fromTemplate",
-            "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "groups",
-            "req": True,
+            "title": "Groups",
             "type": "`$ARRAY`",
-            "union": {
-              "branches": 19,
-              "count": 31,
-              "depth": 14,
-            },
+            "req": True,
           },
           {
             "name": "icon",
-            "req": True,
+            "title": "Icon",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "id",
-            "req": True,
+            "title": "Id",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "isArchived",
-            "req": True,
+            "title": "Is Archived",
             "type": "`$BOOLEAN`",
+            "req": True,
           },
           {
             "name": "isClosed",
-            "req": True,
+            "title": "Is Closed",
             "type": "`$BOOLEAN`",
-          },
-          {
-            "name": "message",
             "req": True,
-            "type": "`$ANY`",
           },
           {
             "name": "name",
-            "req": True,
+            "title": "Name",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "overwrite",
-            "short": "If true, even if we detect a conflict, we will overwrite push the updates to the typebot",
+            "title": "Overwrite",
             "type": "`$BOOLEAN`",
+            "short": "If true, even if we detect a conflict, we will overwrite push the updates to the typebot",
           },
           {
             "name": "publicId",
-            "req": True,
+            "title": "Public Id",
             "type": "`$ANY`",
-          },
-          {
-            "name": "publishedTypebot",
             "req": True,
-            "type": "`$ANY`",
-            "union": {
-              "branches": 19,
-              "count": 51,
-              "depth": 20,
-            },
           },
           {
             "name": "publishedTypebotId",
+            "title": "Published Typebot Id",
             "type": "`$STRING`",
           },
           {
             "name": "resultsTablePreferences",
-            "req": True,
+            "title": "Results Table Preferences",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "riskLevel",
-            "req": True,
+            "title": "Risk Level",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "selectedThemeTemplateId",
-            "req": True,
+            "title": "Selected Theme Template Id",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "settings",
-            "req": True,
+            "title": "Settings",
             "type": "`$OBJECT`",
+            "req": True,
           },
           {
             "name": "spaceId",
-            "req": True,
+            "title": "Space Id",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "theme",
-            "req": True,
+            "title": "Theme",
             "type": "`$OBJECT`",
-            "union": {
-              "branches": 2,
-              "count": 2,
-              "depth": 6,
-            },
+            "req": True,
           },
           {
             "name": "typebot",
-            "req": True,
+            "title": "Typebot",
             "type": "`$OBJECT`",
-            "union": {
-              "branches": 19,
-              "count": 88,
-              "depth": 24,
-            },
+            "req": True,
           },
           {
-            "format": "date-time",
             "name": "updatedAt",
-            "req": True,
+            "title": "Updated At",
             "type": "`$STRING`",
+            "req": True,
+            "format": "date-time",
           },
           {
             "name": "variables",
-            "req": True,
+            "title": "Variables",
             "type": "`$ARRAY`",
-            "union": {
-              "branches": 2,
-              "count": 1,
-              "depth": 5,
-            },
+            "req": True,
           },
           {
             "name": "version",
-            "op": {
-              "create": {
-                "req": True,
-                "type": "`$STRING`",
-              },
-              "update": {
-                "req": True,
-                "type": "`$STRING`",
-              },
-            },
-            "short": "Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`.",
-            "type": "`$ANY`",
-            "union": {
-              "branches": 2,
-              "count": 1,
-              "depth": 0,
-            },
-          },
-          {
-            "name": "warnings",
-            "type": "`$ARRAY`",
+            "title": "Version",
+            "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "whatsAppCredentialsId",
-            "req": True,
+            "title": "Whats App Credentials Id",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "workspaceId",
-            "req": True,
-            "short": "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)",
+            "title": "Workspace Id",
             "type": "`$STRING`",
+            "req": True,
           },
         ],
         "id": {
@@ -1353,25 +1241,9 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "POST",
                 "orig": "/v1/typebots/{typebotId}/publish",
-                "rename": {
-                  "param": {
-                    "typebotId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -1386,43 +1258,43 @@ def make_config():
                     "lit": "publish",
                   },
                 ],
-                "select": {
-                  "$action": "publish",
-                  "exist": [
-                    "id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "v1",
                   "typebots",
                   "{id}",
                   "publish",
                 ],
-              },
-              {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
-                "kind": "http",
-                "method": "POST",
-                "orig": "/v1/typebots/{typebotId}/unpublish",
                 "rename": {
                   "param": {
                     "typebotId": "id",
                   },
                 },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "$action": "publish",
+                  "exist": [
+                    "id",
+                  ],
+                },
+              },
+              {
+                "kind": "http",
+                "method": "POST",
+                "orig": "/v1/typebots/{typebotId}/unpublish",
                 "segments": [
                   {
                     "lit": "v1",
@@ -1437,25 +1309,40 @@ def make_config():
                     "lit": "unpublish",
                   },
                 ],
-                "select": {
-                  "$action": "unpublish",
-                  "exist": [
-                    "id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "v1",
                   "typebots",
                   "{id}",
                   "unpublish",
                 ],
+                "rename": {
+                  "param": {
+                    "typebotId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "$action": "unpublish",
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/v1/typebots",
@@ -1467,20 +1354,21 @@ def make_config():
                     "lit": "typebots",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "v1",
+                  "typebots",
+                ],
+                "rename": {},
                 "transform": {
                   "req": {
                     "typebot": "`reqdata`",
                   },
                   "res": "`body.typebot`",
                 },
-                "parts": [
-                  "v1",
-                  "typebots",
-                ],
+                "args": {},
+                "select": {},
               },
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/v1/typebots/import",
@@ -1495,20 +1383,22 @@ def make_config():
                     "lit": "import",
                   },
                 ],
-                "select": {
-                  "$action": "import",
-                },
+                "parts": [
+                  "v1",
+                  "typebots",
+                  "import",
+                ],
+                "rename": {},
                 "transform": {
                   "req": {
                     "typebot": "`reqdata`",
                   },
                   "res": "`body.typebot`",
                 },
-                "parts": [
-                  "v1",
-                  "typebots",
-                  "import",
-                ],
+                "args": {},
+                "select": {
+                  "$action": "import",
+                },
               },
             ],
           },
@@ -1517,23 +1407,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "folder_id",
-                      "orig": "folder_id",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "workspace_id",
-                      "orig": "workspace_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots",
@@ -1545,20 +1418,38 @@ def make_config():
                     "lit": "typebots",
                   },
                 ],
+                "parts": [
+                  "v1",
+                  "typebots",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.typebots`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "folder_id",
+                      "orig": "folder_id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "workspace_id",
+                      "orig": "workspace_id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "folder_id",
                     "workspace_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.typebots`",
-                },
-                "parts": [
-                  "v1",
-                  "typebots",
-                ],
               },
             ],
           },
@@ -1567,34 +1458,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "query": [
-                    {
-                      "example": False,
-                      "kind": "query",
-                      "name": "migrate_to_latest_version",
-                      "orig": "migrate_to_latest_version",
-                      "type": "`$BOOLEAN`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}",
-                "rename": {
-                  "param": {
-                    "typebotId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -1606,51 +1472,51 @@ def make_config():
                     "var": "id",
                   },
                 ],
+                "parts": [
+                  "v1",
+                  "typebots",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "typebotId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.typebot`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                  "query": [
+                    {
+                      "name": "migrate_to_latest_version",
+                      "orig": "migrate_to_latest_version",
+                      "type": "`$BOOLEAN`",
+                      "kind": "query",
+                      "example": False,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "id",
                     "migrate_to_latest_version",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.typebot`",
-                },
-                "parts": [
-                  "v1",
-                  "typebots",
-                  "{id}",
-                ],
               },
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "query": [
-                    {
-                      "example": False,
-                      "kind": "query",
-                      "name": "migrate_to_latest_version",
-                      "orig": "migrate_to_latest_version",
-                      "type": "`$BOOLEAN`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/typebots/{typebotId}/publishedTypebot",
-                "rename": {
-                  "param": {
-                    "typebotId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -1665,6 +1531,41 @@ def make_config():
                     "lit": "publishedTypebot",
                   },
                 ],
+                "parts": [
+                  "v1",
+                  "typebots",
+                  "{id}",
+                  "publishedTypebot",
+                ],
+                "rename": {
+                  "param": {
+                    "typebotId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                  "query": [
+                    {
+                      "name": "migrate_to_latest_version",
+                      "orig": "migrate_to_latest_version",
+                      "type": "`$BOOLEAN`",
+                      "kind": "query",
+                      "example": False,
+                    },
+                  ],
+                },
                 "select": {
                   "$action": "published_typebot",
                   "exist": [
@@ -1672,16 +1573,6 @@ def make_config():
                     "migrate_to_latest_version",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "v1",
-                  "typebots",
-                  "{id}",
-                  "publishedTypebot",
-                ],
               },
             ],
           },
@@ -1690,25 +1581,9 @@ def make_config():
             "name": "remove",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/v1/typebots/{typebotId}",
-                "rename": {
-                  "param": {
-                    "typebotId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -1720,20 +1595,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "v1",
                   "typebots",
                   "{id}",
                 ],
+                "rename": {
+                  "param": {
+                    "typebotId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -1742,25 +1633,9 @@ def make_config():
             "name": "update",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "typebot_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "PATCH",
                 "orig": "/v1/typebots/{typebotId}",
-                "rename": {
-                  "param": {
-                    "typebotId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -1772,10 +1647,15 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
+                "parts": [
+                  "v1",
+                  "typebots",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "typebotId": "id",
+                  },
                 },
                 "transform": {
                   "req": {
@@ -1783,11 +1663,22 @@ def make_config():
                   },
                   "res": "`body.typebot`",
                 },
-                "parts": [
-                  "v1",
-                  "typebots",
-                  "{id}",
-                ],
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "typebot_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -1800,27 +1691,34 @@ def make_config():
         "fields": [
           {
             "name": "chatsHardLimit",
-            "req": True,
+            "title": "Chats Hard Limit",
             "type": "`$ANY`",
+            "req": True,
           },
           {
-            "format": "date-time",
             "name": "createdAt",
-            "req": True,
+            "title": "Created At",
             "type": "`$STRING`",
+            "req": True,
+            "format": "date-time",
           },
           {
             "name": "customChatsLimit",
-            "req": True,
+            "title": "Custom Chats Limit",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "customSeatsLimit",
-            "req": True,
+            "title": "Custom Seats Limit",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "icon",
+            "title": "Icon",
+            "type": "`$ANY`",
+            "req": True,
             "op": {
               "create": {
                 "type": "`$STRING`",
@@ -1829,94 +1727,84 @@ def make_config():
                 "type": "`$STRING`",
               },
             },
-            "req": True,
-            "type": "`$ANY`",
           },
           {
             "name": "id",
-            "req": True,
+            "title": "Id",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "inactiveFirstEmailSentAt",
-            "req": True,
+            "title": "Inactive First Email Sent At",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "inactiveSecondEmailSentAt",
-            "req": True,
+            "title": "Inactive Second Email Sent At",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "isPastDue",
-            "req": True,
+            "title": "Is Past Due",
             "type": "`$BOOLEAN`",
+            "req": True,
           },
           {
             "name": "isSuspended",
-            "req": True,
+            "title": "Is Suspended",
             "type": "`$BOOLEAN`",
+            "req": True,
           },
           {
             "name": "isVerified",
-            "req": True,
+            "title": "Is Verified",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "lastActivityAt",
-            "req": True,
+            "title": "Last Activity At",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "name",
+            "title": "Name",
+            "type": "`$STRING`",
+            "req": True,
             "op": {
               "update": {
                 "type": "`$STRING`",
               },
             },
-            "req": True,
-            "type": "`$STRING`",
           },
           {
             "name": "plan",
-            "req": True,
+            "title": "Plan",
             "type": "`$STRING`",
-          },
-          {
-            "name": "role",
             "req": True,
-            "type": "`$STRING`",
           },
           {
             "name": "settings",
-            "req": True,
+            "title": "Settings",
             "type": "`$ANY`",
+            "req": True,
           },
           {
             "name": "stripeId",
-            "req": True,
+            "title": "Stripe Id",
             "type": "`$ANY`",
+            "req": True,
           },
           {
-            "format": "date-time",
             "name": "updatedAt",
-            "req": True,
+            "title": "Updated At",
             "type": "`$STRING`",
-          },
-          {
-            "name": "user",
             "req": True,
-            "type": "`$OBJECT`",
-          },
-          {
-            "name": "userId",
-            "req": True,
-            "type": "`$STRING`",
-          },
-          {
-            "name": "workspaceId",
-            "req": True,
-            "type": "`$STRING`",
+            "format": "date-time",
           },
         ],
         "id": {
@@ -1930,7 +1818,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/v1/workspaces",
@@ -1942,15 +1829,17 @@ def make_config():
                     "lit": "workspaces",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.workspace`",
-                },
                 "parts": [
                   "v1",
                   "workspaces",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.workspace`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -1959,25 +1848,9 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "workspace_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/workspaces/{workspaceId}/members",
-                "rename": {
-                  "param": {
-                    "workspaceId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -1992,25 +1865,40 @@ def make_config():
                     "lit": "members",
                   },
                 ],
-                "select": {
-                  "$action": "member",
-                  "exist": [
-                    "id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.members`",
-                },
                 "parts": [
                   "v1",
                   "workspaces",
                   "{id}",
                   "members",
                 ],
+                "rename": {
+                  "param": {
+                    "workspaceId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.members`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "workspace_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "$action": "member",
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/workspaces",
@@ -2022,15 +1910,17 @@ def make_config():
                     "lit": "workspaces",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.workspaces`",
-                },
                 "parts": [
                   "v1",
                   "workspaces",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.workspaces`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -2039,25 +1929,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "workspace_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/v1/workspaces/{workspaceId}",
-                "rename": {
-                  "param": {
-                    "workspaceId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -2069,20 +1943,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.workspace`",
-                },
                 "parts": [
                   "v1",
                   "workspaces",
                   "{id}",
                 ],
+                "rename": {
+                  "param": {
+                    "workspaceId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.workspace`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "workspace_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -2091,25 +1981,9 @@ def make_config():
             "name": "remove",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "workspace_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/v1/workspaces/{workspaceId}",
-                "rename": {
-                  "param": {
-                    "workspaceId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -2121,20 +1995,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "v1",
                   "workspaces",
                   "{id}",
                 ],
+                "rename": {
+                  "param": {
+                    "workspaceId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "workspace_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -2143,25 +2033,9 @@ def make_config():
             "name": "update",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "workspace_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "PATCH",
                 "orig": "/v1/workspaces/{workspaceId}",
-                "rename": {
-                  "param": {
-                    "workspaceId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "v1",
@@ -2173,20 +2047,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.workspace`",
-                },
                 "parts": [
                   "v1",
                   "workspaces",
                   "{id}",
                 ],
+                "rename": {
+                  "param": {
+                    "workspaceId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.workspace`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "workspace_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },

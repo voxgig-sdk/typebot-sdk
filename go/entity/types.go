@@ -1,7 +1,7 @@
 // Typed models for the Typebot SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,9 +14,6 @@ import (
 
 // Analytics is the typed data model for the analytics entity.
 type Analytics struct {
-	TotalCompleted float64 `json:"totalCompleted"`
-	TotalStarts float64 `json:"totalStarts"`
-	TotalViews float64 `json:"totalViews"`
 }
 
 // AnalyticsLoadMatch is the typed request payload for Analytics.LoadTyped.
@@ -28,13 +25,6 @@ type AnalyticsLoadMatch struct {
 
 // Billing is the typed data model for the billing entity.
 type Billing struct {
-	Amount float64 `json:"amount"`
-	Currency string `json:"currency"`
-	Date any `json:"date"`
-	Id string `json:"id"`
-	ResetsAt string `json:"resetsAt"`
-	TotalChatsUsed float64 `json:"totalChatsUsed"`
-	Url string `json:"url"`
 }
 
 // BillingLoadMatch is the typed request payload for Billing.LoadTyped.
@@ -49,14 +39,6 @@ type BillingListMatch struct {
 
 // Folder is the typed data model for the folder entity.
 type Folder struct {
-	CreatedAt string `json:"createdAt"`
-	Folder map[string]any `json:"folder"`
-	FolderName *string `json:"folderName,omitempty"`
-	Id string `json:"id"`
-	Name string `json:"name"`
-	ParentFolderId any `json:"parentFolderId"`
-	UpdatedAt string `json:"updatedAt"`
-	WorkspaceId string `json:"workspaceId"`
 }
 
 // FolderLoadMatch is the typed request payload for Folder.LoadTyped.
@@ -102,20 +84,6 @@ type FolderRemoveMatch struct {
 
 // Result is the typed data model for the result entity.
 type Result struct {
-	Answers []any `json:"answers"`
-	Context any `json:"context"`
-	CreatedAt string `json:"createdAt"`
-	Description string `json:"description"`
-	Details any `json:"details"`
-	HasStarted any `json:"hasStarted"`
-	Id string `json:"id"`
-	IsArchived any `json:"isArchived"`
-	IsCompleted bool `json:"isCompleted"`
-	LastChatSessionId any `json:"lastChatSessionId"`
-	ResultId string `json:"resultId"`
-	Status string `json:"status"`
-	TypebotId string `json:"typebotId"`
-	Variables []any `json:"variables"`
 }
 
 // ResultLoadMatch is the typed request payload for Result.LoadTyped.
@@ -140,38 +108,6 @@ type ResultRemoveMatch struct {
 
 // Typebot is the typed data model for the typebot entity.
 type Typebot struct {
-	AccessRight string `json:"accessRight"`
-	CreatedAt string `json:"createdAt"`
-	CustomDomain any `json:"customDomain"`
-	Edges []any `json:"edges"`
-	EnableSafetyFlags *bool `json:"enableSafetyFlags,omitempty"`
-	Events []any `json:"events"`
-	FolderId any `json:"folderId"`
-	FromTemplate *string `json:"fromTemplate,omitempty"`
-	Groups []any `json:"groups"`
-	Icon any `json:"icon"`
-	Id string `json:"id"`
-	IsArchived bool `json:"isArchived"`
-	IsClosed bool `json:"isClosed"`
-	Message any `json:"message"`
-	Name string `json:"name"`
-	Overwrite *bool `json:"overwrite,omitempty"`
-	PublicId any `json:"publicId"`
-	PublishedTypebot any `json:"publishedTypebot"`
-	PublishedTypebotId *string `json:"publishedTypebotId,omitempty"`
-	ResultsTablePreferences any `json:"resultsTablePreferences"`
-	RiskLevel any `json:"riskLevel"`
-	SelectedThemeTemplateId any `json:"selectedThemeTemplateId"`
-	Settings map[string]any `json:"settings"`
-	SpaceId any `json:"spaceId"`
-	Theme map[string]any `json:"theme"`
-	Typebot map[string]any `json:"typebot"`
-	UpdatedAt string `json:"updatedAt"`
-	Variables []any `json:"variables"`
-	Version *any `json:"version,omitempty"`
-	Warnings *[]any `json:"warnings,omitempty"`
-	WhatsAppCredentialsId any `json:"whatsAppCredentialsId"`
-	WorkspaceId string `json:"workspaceId"`
 }
 
 // TypebotLoadMatch is the typed request payload for Typebot.LoadTyped.
@@ -192,20 +128,16 @@ type TypebotCreateData struct {
 	CreatedAt string `json:"createdAt"`
 	CustomDomain any `json:"customDomain"`
 	Edges []any `json:"edges"`
-	EnableSafetyFlags *bool `json:"enableSafetyFlags,omitempty"`
 	Events []any `json:"events"`
 	FolderId any `json:"folderId"`
-	FromTemplate *string `json:"fromTemplate,omitempty"`
 	Groups []any `json:"groups"`
 	Icon any `json:"icon"`
 	Id string `json:"id"`
 	IsArchived bool `json:"isArchived"`
 	IsClosed bool `json:"isClosed"`
-	Message any `json:"message"`
 	Name string `json:"name"`
 	Overwrite *bool `json:"overwrite,omitempty"`
 	PublicId any `json:"publicId"`
-	PublishedTypebot any `json:"publishedTypebot"`
 	PublishedTypebotId *string `json:"publishedTypebotId,omitempty"`
 	ResultsTablePreferences any `json:"resultsTablePreferences"`
 	RiskLevel any `json:"riskLevel"`
@@ -216,8 +148,7 @@ type TypebotCreateData struct {
 	Typebot map[string]any `json:"typebot"`
 	UpdatedAt string `json:"updatedAt"`
 	Variables []any `json:"variables"`
-	Version *any `json:"version,omitempty"`
-	Warnings *[]any `json:"warnings,omitempty"`
+	Version string `json:"version"`
 	WhatsAppCredentialsId any `json:"whatsAppCredentialsId"`
 	WorkspaceId string `json:"workspaceId"`
 }
@@ -229,19 +160,15 @@ type TypebotUpdateData struct {
 	CreatedAt *string `json:"createdAt,omitempty"`
 	CustomDomain *any `json:"customDomain,omitempty"`
 	Edges *[]any `json:"edges,omitempty"`
-	EnableSafetyFlags *bool `json:"enableSafetyFlags,omitempty"`
 	Events *[]any `json:"events,omitempty"`
 	FolderId *any `json:"folderId,omitempty"`
-	FromTemplate *string `json:"fromTemplate,omitempty"`
 	Groups *[]any `json:"groups,omitempty"`
 	Icon *any `json:"icon,omitempty"`
 	IsArchived *bool `json:"isArchived,omitempty"`
 	IsClosed *bool `json:"isClosed,omitempty"`
-	Message *any `json:"message,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Overwrite *bool `json:"overwrite,omitempty"`
 	PublicId *any `json:"publicId,omitempty"`
-	PublishedTypebot *any `json:"publishedTypebot,omitempty"`
 	PublishedTypebotId *string `json:"publishedTypebotId,omitempty"`
 	ResultsTablePreferences *any `json:"resultsTablePreferences,omitempty"`
 	RiskLevel *any `json:"riskLevel,omitempty"`
@@ -252,8 +179,7 @@ type TypebotUpdateData struct {
 	Typebot *map[string]any `json:"typebot,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	Variables *[]any `json:"variables,omitempty"`
-	Version *any `json:"version,omitempty"`
-	Warnings *[]any `json:"warnings,omitempty"`
+	Version *string `json:"version,omitempty"`
 	WhatsAppCredentialsId *any `json:"whatsAppCredentialsId,omitempty"`
 	WorkspaceId *string `json:"workspaceId,omitempty"`
 }
@@ -265,27 +191,6 @@ type TypebotRemoveMatch struct {
 
 // Workspace is the typed data model for the workspace entity.
 type Workspace struct {
-	ChatsHardLimit any `json:"chatsHardLimit"`
-	CreatedAt string `json:"createdAt"`
-	CustomChatsLimit any `json:"customChatsLimit"`
-	CustomSeatsLimit any `json:"customSeatsLimit"`
-	Icon any `json:"icon"`
-	Id string `json:"id"`
-	InactiveFirstEmailSentAt any `json:"inactiveFirstEmailSentAt"`
-	InactiveSecondEmailSentAt any `json:"inactiveSecondEmailSentAt"`
-	IsPastDue bool `json:"isPastDue"`
-	IsSuspended bool `json:"isSuspended"`
-	IsVerified any `json:"isVerified"`
-	LastActivityAt any `json:"lastActivityAt"`
-	Name string `json:"name"`
-	Plan string `json:"plan"`
-	Role string `json:"role"`
-	Settings any `json:"settings"`
-	StripeId any `json:"stripeId"`
-	UpdatedAt string `json:"updatedAt"`
-	User map[string]any `json:"user"`
-	UserId string `json:"userId"`
-	WorkspaceId string `json:"workspaceId"`
 }
 
 // WorkspaceLoadMatch is the typed request payload for Workspace.LoadTyped.
@@ -309,13 +214,9 @@ type WorkspaceListMatch struct {
 	LastActivityAt *any `json:"lastActivityAt,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Plan *string `json:"plan,omitempty"`
-	Role *string `json:"role,omitempty"`
 	Settings *any `json:"settings,omitempty"`
 	StripeId *any `json:"stripeId,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
-	User *map[string]any `json:"user,omitempty"`
-	UserId *string `json:"userId,omitempty"`
-	WorkspaceId *string `json:"workspaceId,omitempty"`
 }
 
 // WorkspaceCreateData is the typed request payload for Workspace.CreateTyped.
@@ -334,13 +235,9 @@ type WorkspaceCreateData struct {
 	LastActivityAt any `json:"lastActivityAt"`
 	Name string `json:"name"`
 	Plan string `json:"plan"`
-	Role string `json:"role"`
 	Settings any `json:"settings"`
 	StripeId any `json:"stripeId"`
 	UpdatedAt string `json:"updatedAt"`
-	User map[string]any `json:"user"`
-	UserId string `json:"userId"`
-	WorkspaceId string `json:"workspaceId"`
 }
 
 // WorkspaceUpdateData is the typed request payload for Workspace.UpdateTyped.
@@ -359,13 +256,9 @@ type WorkspaceUpdateData struct {
 	LastActivityAt *any `json:"lastActivityAt,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Plan *string `json:"plan,omitempty"`
-	Role *string `json:"role,omitempty"`
 	Settings *any `json:"settings,omitempty"`
 	StripeId *any `json:"stripeId,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
-	User *map[string]any `json:"user,omitempty"`
-	UserId *string `json:"userId,omitempty"`
-	WorkspaceId *string `json:"workspaceId,omitempty"`
 }
 
 // WorkspaceRemoveMatch is the typed request payload for Workspace.RemoveTyped.

@@ -88,13 +88,9 @@ class TestBillingEntity:
         assert isinstance(billing_ref01_list_result, list)
 
         # LOAD
-        billing_ref01_match_dt0 = {
-            "id": billing_ref01_data["id"],
-        }
+        billing_ref01_match_dt0 = {}
         billing_ref01_data_dt0_loaded = billing_ref01_ent.load(billing_ref01_match_dt0, None)
-        billing_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(billing_ref01_data_dt0_loaded))
-        assert billing_ref01_data_dt0_load_result is not None
-        assert billing_ref01_data_dt0_load_result["id"] == billing_ref01_data["id"]
+        assert billing_ref01_data_dt0_loaded is not None
 
 
 

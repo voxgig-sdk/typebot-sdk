@@ -29,14 +29,14 @@
 <a href="../sdks/ts.html">TypeScript</a></details>
 <details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
 <a href="../tools/go-mcp.html">Go MCP server</a></details>
-<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
-<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
-<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
-<a href="../features/paging.html">Pagination signals for list operations</a>
-<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
-<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
-<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
-<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="workspace">Workspace</h1>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="workspace">Workspace</h1>
 <h2 id="operations">Operations</h2>
 <p>Every route this entity exposes. Each route links to its own reference on this page.</p>
 <table>
@@ -87,6 +87,76 @@
 </tr>
 </tbody>
 </table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">workspaces, err := client.Workspace(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(workspaces)
+workspace, err := client.Workspace(nil).Load(map[string]any{&quot;id&quot;: &quot;example_id&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(workspace)
+created, err := client.Workspace(nil).Create(map[string]any{&quot;chatsHardLimit&quot;: &quot;example&quot;, &quot;createdAt&quot;: &quot;example&quot;, &quot;customChatsLimit&quot;: &quot;example&quot;, &quot;customSeatsLimit&quot;: &quot;example&quot;, &quot;icon&quot;: &quot;example&quot;, &quot;id&quot;: &quot;example&quot;, &quot;inactiveFirstEmailSentAt&quot;: &quot;example&quot;, &quot;inactiveSecondEmailSentAt&quot;: &quot;example&quot;, &quot;isPastDue&quot;: true, &quot;isSuspended&quot;: true, &quot;isVerified&quot;: &quot;example&quot;, &quot;lastActivityAt&quot;: &quot;example&quot;, &quot;name&quot;: &quot;example&quot;, &quot;plan&quot;: &quot;example&quot;, &quot;settings&quot;: &quot;example&quot;, &quot;stripeId&quot;: &quot;example&quot;, &quot;updatedAt&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(created)
+updated, err := client.Workspace(nil).Update(map[string]any{&quot;id&quot;: &quot;example_id&quot;, &quot;chatsHardLimit&quot;: &quot;example&quot;, &quot;createdAt&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(updated)
+removed, err := client.Workspace(nil).Remove(map[string]any{&quot;id&quot;: &quot;example_id&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(removed)
+</code></pre>
+<h3 id="javascript">JavaScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/js.html#set-up-the-client">JavaScript setup</a>, then call the operations:</p>
+<pre><code class="language-js">const workspaces = await client.Workspace().list()
+const workspace = await client.Workspace().load({ id: &quot;example_id&quot; })
+const created = await client.Workspace().create({ chatsHardLimit: &quot;example&quot;, createdAt: &quot;example&quot;, customChatsLimit: &quot;example&quot;, customSeatsLimit: &quot;example&quot;, icon: &quot;example&quot;, id: &quot;example&quot;, inactiveFirstEmailSentAt: &quot;example&quot;, inactiveSecondEmailSentAt: &quot;example&quot;, isPastDue: true, isSuspended: true, isVerified: &quot;example&quot;, lastActivityAt: &quot;example&quot;, name: &quot;example&quot;, plan: &quot;example&quot;, settings: &quot;example&quot;, stripeId: &quot;example&quot;, updatedAt: &quot;example&quot; })
+const updated = await client.Workspace().update({ id: &quot;example_id&quot;, chatsHardLimit: &quot;example&quot;, createdAt: &quot;example&quot; })
+await client.Workspace().remove({ id: &quot;example_id&quot; })
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local workspaces, err = client:Workspace():list()
+local workspace, err = client:Workspace():load({ id = &quot;example_id&quot; })
+local created, err = client:Workspace():create({ chatsHardLimit = &quot;example&quot;, createdAt = &quot;example&quot;, customChatsLimit = &quot;example&quot;, customSeatsLimit = &quot;example&quot;, icon = &quot;example&quot;, id = &quot;example&quot;, inactiveFirstEmailSentAt = &quot;example&quot;, inactiveSecondEmailSentAt = &quot;example&quot;, isPastDue = true, isSuspended = true, isVerified = &quot;example&quot;, lastActivityAt = &quot;example&quot;, name = &quot;example&quot;, plan = &quot;example&quot;, settings = &quot;example&quot;, stripeId = &quot;example&quot;, updatedAt = &quot;example&quot; })
+local updated, err = client:Workspace():update({ id = &quot;example_id&quot;, chatsHardLimit = &quot;example&quot;, createdAt = &quot;example&quot; })
+local removed, err = client:Workspace():remove({ id = &quot;example_id&quot; })
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$workspaces = $client-&gt;Workspace()-&gt;list();
+$workspace = $client-&gt;Workspace()-&gt;load([&quot;id&quot; =&gt; &quot;example_id&quot;]);
+$created = $client-&gt;Workspace()-&gt;create([&quot;chatsHardLimit&quot; =&gt; &quot;example&quot;, &quot;createdAt&quot; =&gt; &quot;example&quot;, &quot;customChatsLimit&quot; =&gt; &quot;example&quot;, &quot;customSeatsLimit&quot; =&gt; &quot;example&quot;, &quot;icon&quot; =&gt; &quot;example&quot;, &quot;id&quot; =&gt; &quot;example&quot;, &quot;inactiveFirstEmailSentAt&quot; =&gt; &quot;example&quot;, &quot;inactiveSecondEmailSentAt&quot; =&gt; &quot;example&quot;, &quot;isPastDue&quot; =&gt; true, &quot;isSuspended&quot; =&gt; true, &quot;isVerified&quot; =&gt; &quot;example&quot;, &quot;lastActivityAt&quot; =&gt; &quot;example&quot;, &quot;name&quot; =&gt; &quot;example&quot;, &quot;plan&quot; =&gt; &quot;example&quot;, &quot;settings&quot; =&gt; &quot;example&quot;, &quot;stripeId&quot; =&gt; &quot;example&quot;, &quot;updatedAt&quot; =&gt; &quot;example&quot;]);
+$updated = $client-&gt;Workspace()-&gt;update([&quot;id&quot; =&gt; &quot;example_id&quot;, &quot;chatsHardLimit&quot; =&gt; &quot;example&quot;, &quot;createdAt&quot; =&gt; &quot;example&quot;]);
+$client-&gt;Workspace()-&gt;remove([&quot;id&quot; =&gt; &quot;example_id&quot;]);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">workspaces = client.Workspace().list()
+workspace = client.Workspace().load({&quot;id&quot;: &quot;example_id&quot;})
+created = client.Workspace().create({ &quot;chatsHardLimit&quot;: &quot;example&quot;, &quot;createdAt&quot;: &quot;example&quot;, &quot;customChatsLimit&quot;: &quot;example&quot;, &quot;customSeatsLimit&quot;: &quot;example&quot;, &quot;icon&quot;: &quot;example&quot;, &quot;id&quot;: &quot;example&quot;, &quot;inactiveFirstEmailSentAt&quot;: &quot;example&quot;, &quot;inactiveSecondEmailSentAt&quot;: &quot;example&quot;, &quot;isPastDue&quot;: True, &quot;isSuspended&quot;: True, &quot;isVerified&quot;: &quot;example&quot;, &quot;lastActivityAt&quot;: &quot;example&quot;, &quot;name&quot;: &quot;example&quot;, &quot;plan&quot;: &quot;example&quot;, &quot;settings&quot;: &quot;example&quot;, &quot;stripeId&quot;: &quot;example&quot;, &quot;updatedAt&quot;: &quot;example&quot; })
+updated = client.Workspace().update({&quot;id&quot;: &quot;example_id&quot;, &quot;chatsHardLimit&quot;: &quot;example&quot;, &quot;createdAt&quot;: &quot;example&quot;})
+client.Workspace().remove({&quot;id&quot;: &quot;example_id&quot;})
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const workspaces = await client.Workspace().list()
+const workspace = await client.Workspace().load({ id: &quot;example_id&quot; })
+const created = await client.Workspace().create({ chatsHardLimit: &quot;example&quot;, createdAt: &quot;example&quot;, customChatsLimit: &quot;example&quot;, customSeatsLimit: &quot;example&quot;, icon: &quot;example&quot;, id: &quot;example&quot;, inactiveFirstEmailSentAt: &quot;example&quot;, inactiveSecondEmailSentAt: &quot;example&quot;, isPastDue: true, isSuspended: true, isVerified: &quot;example&quot;, lastActivityAt: &quot;example&quot;, name: &quot;example&quot;, plan: &quot;example&quot;, settings: &quot;example&quot;, stripeId: &quot;example&quot;, updatedAt: &quot;example&quot; })
+const updated = await client.Workspace().update({ id: &quot;example_id&quot;, chatsHardLimit: &quot;example&quot;, createdAt: &quot;example&quot; })
+await client.Workspace().remove({ id: &quot;example_id&quot; })
+</code></pre>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -102,127 +172,103 @@
 <td><code>chatsHardLimit</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Chats Hard Limit</td>
 </tr>
 <tr>
 <td><code>createdAt</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Created At</td>
 </tr>
 <tr>
 <td><code>customChatsLimit</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Custom Chats Limit</td>
 </tr>
 <tr>
 <td><code>customSeatsLimit</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Custom Seats Limit</td>
 </tr>
 <tr>
 <td><code>icon</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Icon</td>
 </tr>
 <tr>
 <td><code>id</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Id</td>
 </tr>
 <tr>
 <td><code>inactiveFirstEmailSentAt</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Inactive First Email Sent At</td>
 </tr>
 <tr>
 <td><code>inactiveSecondEmailSentAt</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Inactive Second Email Sent At</td>
 </tr>
 <tr>
 <td><code>isPastDue</code></td>
 <td><code>boolean</code></td>
 <td>Yes</td>
-<td></td>
+<td>Is Past Due</td>
 </tr>
 <tr>
 <td><code>isSuspended</code></td>
 <td><code>boolean</code></td>
 <td>Yes</td>
-<td></td>
+<td>Is Suspended</td>
 </tr>
 <tr>
 <td><code>isVerified</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Is Verified</td>
 </tr>
 <tr>
 <td><code>lastActivityAt</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Last Activity At</td>
 </tr>
 <tr>
 <td><code>name</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
+<td>Name</td>
 </tr>
 <tr>
 <td><code>plan</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
-</tr>
-<tr>
-<td><code>role</code></td>
-<td><code>string</code></td>
-<td>Yes</td>
-<td></td>
+<td>Plan</td>
 </tr>
 <tr>
 <td><code>settings</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Settings</td>
 </tr>
 <tr>
 <td><code>stripeId</code></td>
 <td><code>any</code></td>
 <td>Yes</td>
-<td></td>
+<td>Stripe Id</td>
 </tr>
 <tr>
 <td><code>updatedAt</code></td>
 <td><code>string</code></td>
 <td>Yes</td>
-<td></td>
-</tr>
-<tr>
-<td><code>user</code></td>
-<td><code>object</code></td>
-<td>Yes</td>
-<td></td>
-</tr>
-<tr>
-<td><code>userId</code></td>
-<td><code>string</code></td>
-<td>Yes</td>
-<td></td>
-</tr>
-<tr>
-<td><code>workspaceId</code></td>
-<td><code>string</code></td>
-<td>Yes</td>
-<td></td>
+<td>Updated At</td>
 </tr>
 </tbody>
 </table>

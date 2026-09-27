@@ -1,15 +1,12 @@
 -- Typed models for the Typebot SDK (LuaLS annotations).
 --
--- GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
--- params (op.<name>.points[].args.params[]). Field/param types come from the
+-- GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+-- params (op.<name>.points[].g.params[]). Field/param types come from the
 -- canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 -- @voxgig/apidef VALID_CANON). Annotations only — no runtime effect. Do not
 -- edit by hand.
 
 ---@class Analytics
----@field totalCompleted number
----@field totalStarts number
----@field totalViews number
 
 ---@class AnalyticsLoadMatch
 ---@field typebot_id string
@@ -17,13 +14,6 @@
 ---@field time_zone? string
 
 ---@class Billing
----@field amount number
----@field currency string
----@field date any
----@field id string
----@field resetsAt string
----@field totalChatsUsed number
----@field url string
 
 ---@class BillingLoadMatch
 ---@field workspace_id string
@@ -74,17 +64,12 @@
 
 ---@class Result
 ---@field answers table
----@field context any
 ---@field createdAt string
----@field description string
----@field details any
 ---@field hasStarted any
 ---@field id string
 ---@field isArchived any
 ---@field isCompleted boolean
 ---@field lastChatSessionId any
----@field resultId string
----@field status string
 ---@field typebotId string
 ---@field variables table
 
@@ -107,20 +92,16 @@
 ---@field createdAt string
 ---@field customDomain any
 ---@field edges table
----@field enableSafetyFlags? boolean
 ---@field events table
 ---@field folderId any
----@field fromTemplate? string
 ---@field groups table
 ---@field icon any
 ---@field id string
 ---@field isArchived boolean
 ---@field isClosed boolean
----@field message any
 ---@field name string
 ---@field overwrite? boolean
 ---@field publicId any
----@field publishedTypebot any
 ---@field publishedTypebotId? string
 ---@field resultsTablePreferences any
 ---@field riskLevel any
@@ -131,8 +112,7 @@
 ---@field typebot table
 ---@field updatedAt string
 ---@field variables table
----@field version? any
----@field warnings? table
+---@field version string
 ---@field whatsAppCredentialsId any
 ---@field workspaceId string
 
@@ -149,20 +129,16 @@
 ---@field createdAt string
 ---@field customDomain any
 ---@field edges table
----@field enableSafetyFlags? boolean
 ---@field events table
 ---@field folderId any
----@field fromTemplate? string
 ---@field groups table
 ---@field icon any
 ---@field id string
 ---@field isArchived boolean
 ---@field isClosed boolean
----@field message any
 ---@field name string
 ---@field overwrite? boolean
 ---@field publicId any
----@field publishedTypebot any
 ---@field publishedTypebotId? string
 ---@field resultsTablePreferences any
 ---@field riskLevel any
@@ -173,8 +149,7 @@
 ---@field typebot table
 ---@field updatedAt string
 ---@field variables table
----@field version? any
----@field warnings? table
+---@field version string
 ---@field whatsAppCredentialsId any
 ---@field workspaceId string
 
@@ -184,19 +159,15 @@
 ---@field createdAt? string
 ---@field customDomain? any
 ---@field edges? table
----@field enableSafetyFlags? boolean
 ---@field events? table
 ---@field folderId? any
----@field fromTemplate? string
 ---@field groups? table
 ---@field icon? any
 ---@field isArchived? boolean
 ---@field isClosed? boolean
----@field message? any
 ---@field name? string
 ---@field overwrite? boolean
 ---@field publicId? any
----@field publishedTypebot? any
 ---@field publishedTypebotId? string
 ---@field resultsTablePreferences? any
 ---@field riskLevel? any
@@ -207,8 +178,7 @@
 ---@field typebot? table
 ---@field updatedAt? string
 ---@field variables? table
----@field version? any
----@field warnings? table
+---@field version? string
 ---@field whatsAppCredentialsId? any
 ---@field workspaceId? string
 
@@ -230,13 +200,9 @@
 ---@field lastActivityAt any
 ---@field name string
 ---@field plan string
----@field role string
 ---@field settings any
 ---@field stripeId any
 ---@field updatedAt string
----@field user table
----@field userId string
----@field workspaceId string
 
 ---@class WorkspaceLoadMatch
 ---@field id string
@@ -256,13 +222,9 @@
 ---@field lastActivityAt? any
 ---@field name? string
 ---@field plan? string
----@field role? string
 ---@field settings? any
 ---@field stripeId? any
 ---@field updatedAt? string
----@field user? table
----@field userId? string
----@field workspaceId? string
 
 ---@class WorkspaceCreateData
 ---@field chatsHardLimit any
@@ -279,13 +241,9 @@
 ---@field lastActivityAt any
 ---@field name string
 ---@field plan string
----@field role string
 ---@field settings any
 ---@field stripeId any
 ---@field updatedAt string
----@field user table
----@field userId string
----@field workspaceId string
 
 ---@class WorkspaceUpdateData
 ---@field id string
@@ -302,13 +260,9 @@
 ---@field lastActivityAt? any
 ---@field name? string
 ---@field plan? string
----@field role? string
 ---@field settings? any
 ---@field stripeId? any
 ---@field updatedAt? string
----@field user? table
----@field userId? string
----@field workspaceId? string
 
 ---@class WorkspaceRemoveMatch
 ---@field id string

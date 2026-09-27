@@ -121,19 +121,13 @@ func TestBillingEntity(t *testing.T) {
 		}
 
 		// LOAD
-		billingRef01MatchDt0 := map[string]any{
-			"id": billingRef01Data["id"],
-		}
+		billingRef01MatchDt0 := map[string]any{}
 		billingRef01DataDt0Loaded, err := billingRef01Ent.Load(billingRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		billingRef01DataDt0LoadResult := core.ToMapAny(entityData(billingRef01DataDt0Loaded))
-		if billingRef01DataDt0LoadResult == nil {
-			t.Fatal("expected load result to be a map")
-		}
-		if billingRef01DataDt0LoadResult["id"] != billingRef01Data["id"] {
-			t.Fatal("expected load result id to match")
+		if billingRef01DataDt0Loaded == nil {
+			t.Fatal("expected load result to be non-nil")
 		}
 
 	})

@@ -1,0 +1,392 @@
+# Entity: workspace
+
+main: kit: entity: workspace: {
+
+  alias: field: {}
+
+  fields: {
+    chatsHardLimit: {
+      h: "Chats Hard Limit"
+      n: "chatsHardLimit"
+      r: true
+      t: "`$ANY`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    customChatsLimit: {
+      h: "Custom Chats Limit"
+      n: "customChatsLimit"
+      r: true
+      t: "`$ANY`"
+    }
+    customSeatsLimit: {
+      h: "Custom Seats Limit"
+      n: "customSeatsLimit"
+      r: true
+      t: "`$ANY`"
+    }
+    icon: {
+      h: "Icon"
+      n: "icon"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$ANY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    inactiveFirstEmailSentAt: {
+      h: "Inactive First Email Sent At"
+      n: "inactiveFirstEmailSentAt"
+      r: true
+      t: "`$ANY`"
+    }
+    inactiveSecondEmailSentAt: {
+      h: "Inactive Second Email Sent At"
+      n: "inactiveSecondEmailSentAt"
+      r: true
+      t: "`$ANY`"
+    }
+    isPastDue: {
+      h: "Is Past Due"
+      n: "isPastDue"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    isSuspended: {
+      h: "Is Suspended"
+      n: "isSuspended"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    isVerified: {
+      h: "Is Verified"
+      n: "isVerified"
+      r: true
+      t: "`$ANY`"
+    }
+    lastActivityAt: {
+      h: "Last Activity At"
+      n: "lastActivityAt"
+      r: true
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    plan: {
+      h: "Plan"
+      n: "plan"
+      r: true
+      t: "`$STRING`"
+    }
+    settings: {
+      h: "Settings"
+      n: "settings"
+      r: true
+      t: "`$ANY`"
+    }
+    stripeId: {
+      h: "Stripe Id"
+      n: "stripeId"
+      r: true
+      t: "`$ANY`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "workspace"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/workspaces"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/v1/workspaces"
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.workspace`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/workspaces/{workspaceId}/members"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "workspace_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/workspaces/{workspaceId}/members"
+          q: {
+            "$action": "member"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              workspaceId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "members"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.members`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v1/workspaces"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/v1/workspaces"
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.workspaces`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v1/workspaces/{workspaceId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "workspace_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/workspaces/{workspaceId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              workspaceId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.workspace`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v1/workspaces/{workspaceId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "workspace_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v1/workspaces/{workspaceId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              workspaceId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v1/workspaces/{workspaceId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "workspace_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v1/workspaces/{workspaceId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              workspaceId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "workspaces"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.workspace`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

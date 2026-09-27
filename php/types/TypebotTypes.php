@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 // Typed models for the Typebot SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 //
@@ -15,9 +15,6 @@ declare(strict_types=1);
 /** Analytics entity data model. */
 class Analytics
 {
-    public float $totalCompleted;
-    public float $totalStarts;
-    public float $totalViews;
 }
 
 /** Request payload for Analytics#load. */
@@ -31,13 +28,6 @@ class AnalyticsLoadMatch
 /** Billing entity data model. */
 class Billing
 {
-    public float $amount;
-    public string $currency;
-    public mixed $date;
-    public string $id;
-    public string $resetsAt;
-    public float $totalChatsUsed;
-    public string $url;
 }
 
 /** Request payload for Billing#load. */
@@ -115,17 +105,12 @@ class FolderRemoveMatch
 class Result
 {
     public array $answers;
-    public mixed $context;
     public string $createdAt;
-    public string $description;
-    public mixed $details;
     public mixed $hasStarted;
     public string $id;
     public mixed $isArchived;
     public bool $isCompleted;
     public mixed $lastChatSessionId;
-    public string $resultId;
-    public string $status;
     public string $typebotId;
     public array $variables;
 }
@@ -160,20 +145,16 @@ class Typebot
     public string $createdAt;
     public mixed $customDomain;
     public array $edges;
-    public ?bool $enableSafetyFlags = null;
     public array $events;
     public mixed $folderId;
-    public ?string $fromTemplate = null;
     public array $groups;
     public mixed $icon;
     public string $id;
     public bool $isArchived;
     public bool $isClosed;
-    public mixed $message;
     public string $name;
     public ?bool $overwrite = null;
     public mixed $publicId;
-    public mixed $publishedTypebot;
     public ?string $publishedTypebotId = null;
     public mixed $resultsTablePreferences;
     public mixed $riskLevel;
@@ -184,8 +165,7 @@ class Typebot
     public array $typebot;
     public string $updatedAt;
     public array $variables;
-    public mixed $version = null;
-    public ?array $warnings = null;
+    public string $version;
     public mixed $whatsAppCredentialsId;
     public string $workspaceId;
 }
@@ -211,20 +191,16 @@ class TypebotCreateData
     public string $createdAt;
     public mixed $customDomain;
     public array $edges;
-    public ?bool $enableSafetyFlags = null;
     public array $events;
     public mixed $folderId;
-    public ?string $fromTemplate = null;
     public array $groups;
     public mixed $icon;
     public string $id;
     public bool $isArchived;
     public bool $isClosed;
-    public mixed $message;
     public string $name;
     public ?bool $overwrite = null;
     public mixed $publicId;
-    public mixed $publishedTypebot;
     public ?string $publishedTypebotId = null;
     public mixed $resultsTablePreferences;
     public mixed $riskLevel;
@@ -235,8 +211,7 @@ class TypebotCreateData
     public array $typebot;
     public string $updatedAt;
     public array $variables;
-    public mixed $version = null;
-    public ?array $warnings = null;
+    public string $version;
     public mixed $whatsAppCredentialsId;
     public string $workspaceId;
 }
@@ -249,19 +224,15 @@ class TypebotUpdateData
     public ?string $createdAt = null;
     public mixed $customDomain = null;
     public ?array $edges = null;
-    public ?bool $enableSafetyFlags = null;
     public ?array $events = null;
     public mixed $folderId = null;
-    public ?string $fromTemplate = null;
     public ?array $groups = null;
     public mixed $icon = null;
     public ?bool $isArchived = null;
     public ?bool $isClosed = null;
-    public mixed $message = null;
     public ?string $name = null;
     public ?bool $overwrite = null;
     public mixed $publicId = null;
-    public mixed $publishedTypebot = null;
     public ?string $publishedTypebotId = null;
     public mixed $resultsTablePreferences = null;
     public mixed $riskLevel = null;
@@ -272,8 +243,7 @@ class TypebotUpdateData
     public ?array $typebot = null;
     public ?string $updatedAt = null;
     public ?array $variables = null;
-    public mixed $version = null;
-    public ?array $warnings = null;
+    public ?string $version = null;
     public mixed $whatsAppCredentialsId = null;
     public ?string $workspaceId = null;
 }
@@ -301,13 +271,9 @@ class Workspace
     public mixed $lastActivityAt;
     public string $name;
     public string $plan;
-    public string $role;
     public mixed $settings;
     public mixed $stripeId;
     public string $updatedAt;
-    public array $user;
-    public string $userId;
-    public string $workspaceId;
 }
 
 /** Request payload for Workspace#load. */
@@ -333,13 +299,9 @@ class WorkspaceListMatch
     public mixed $lastActivityAt = null;
     public ?string $name = null;
     public ?string $plan = null;
-    public ?string $role = null;
     public mixed $settings = null;
     public mixed $stripeId = null;
     public ?string $updatedAt = null;
-    public ?array $user = null;
-    public ?string $userId = null;
-    public ?string $workspaceId = null;
 }
 
 /** Request payload for Workspace#create. */
@@ -359,13 +321,9 @@ class WorkspaceCreateData
     public mixed $lastActivityAt;
     public string $name;
     public string $plan;
-    public string $role;
     public mixed $settings;
     public mixed $stripeId;
     public string $updatedAt;
-    public array $user;
-    public string $userId;
-    public string $workspaceId;
 }
 
 /** Request payload for Workspace#update. */
@@ -385,13 +343,9 @@ class WorkspaceUpdateData
     public mixed $lastActivityAt = null;
     public ?string $name = null;
     public ?string $plan = null;
-    public ?string $role = null;
     public mixed $settings = null;
     public mixed $stripeId = null;
     public ?string $updatedAt = null;
-    public ?array $user = null;
-    public ?string $userId = null;
-    public ?string $workspaceId = null;
 }
 
 /** Request payload for Workspace#remove. */

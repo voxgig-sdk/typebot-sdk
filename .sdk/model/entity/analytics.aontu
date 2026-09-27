@@ -1,0 +1,95 @@
+# Entity: analytics
+
+main: kit: entity: analytics: {
+
+  alias: field: {}
+
+  name: "analytics"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v1/typebots/{typebotId}/analytics/stats"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "typebot_id"
+                or: "typebot_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "last7Days"
+                k: "query"
+                n: "time_filter"
+                or: "time_filter"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "time_zone"
+                or: "time_zone"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/typebots/{typebotId}/analytics/stats"
+          q: {
+            "$action": "stat"
+            exist: [
+              "time_filter"
+              "time_zone"
+              "typebot_id"
+            ]
+          }
+          r: {
+            param: {
+              typebotId: "typebot_id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "typebot_id"
+            }
+            {
+              lit: "analytics"
+            }
+            {
+              lit: "stats"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.stats`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.typebot")]
+  ]
+
+}

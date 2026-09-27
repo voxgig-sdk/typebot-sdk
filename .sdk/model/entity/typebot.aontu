@@ -1,0 +1,644 @@
+# Entity: typebot
+
+main: kit: entity: typebot: {
+
+  alias: field: {}
+
+  fields: {
+    accessRight: {
+      h: "Access Right"
+      n: "accessRight"
+      r: true
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    customDomain: {
+      h: "Custom Domain"
+      n: "customDomain"
+      r: true
+      t: "`$ANY`"
+    }
+    edges: {
+      h: "Edges"
+      n: "edges"
+      r: true
+      t: "`$ARRAY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 3
+      }
+    }
+    events: {
+      h: "Events"
+      n: "events"
+      r: true
+      t: "`$ARRAY`"
+      union: {
+        branches: 3
+        count: 1
+        depth: 1
+      }
+    }
+    folderId: {
+      h: "Folder Id"
+      n: "folderId"
+      r: true
+      t: "`$ANY`"
+    }
+    groups: {
+      h: "Groups"
+      n: "groups"
+      r: true
+      t: "`$ARRAY`"
+      union: {
+        branches: 19
+        count: 31
+        depth: 14
+      }
+    }
+    icon: {
+      h: "Icon"
+      n: "icon"
+      r: true
+      t: "`$ANY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    isArchived: {
+      h: "Is Archived"
+      n: "isArchived"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    isClosed: {
+      h: "Is Closed"
+      n: "isClosed"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    overwrite: {
+      h: "Overwrite"
+      n: "overwrite"
+      r: false
+      sh: "If true, even if we detect a conflict, we will overwrite push the updates to the typebot"
+      t: "`$BOOLEAN`"
+    }
+    publicId: {
+      h: "Public Id"
+      n: "publicId"
+      r: true
+      t: "`$ANY`"
+    }
+    publishedTypebotId: {
+      h: "Published Typebot Id"
+      n: "publishedTypebotId"
+      r: false
+      t: "`$STRING`"
+    }
+    resultsTablePreferences: {
+      h: "Results Table Preferences"
+      n: "resultsTablePreferences"
+      r: true
+      t: "`$ANY`"
+    }
+    riskLevel: {
+      h: "Risk Level"
+      n: "riskLevel"
+      r: true
+      t: "`$ANY`"
+    }
+    selectedThemeTemplateId: {
+      h: "Selected Theme Template Id"
+      n: "selectedThemeTemplateId"
+      r: true
+      t: "`$ANY`"
+    }
+    settings: {
+      h: "Settings"
+      n: "settings"
+      r: true
+      t: "`$OBJECT`"
+    }
+    spaceId: {
+      h: "Space Id"
+      n: "spaceId"
+      r: true
+      t: "`$ANY`"
+    }
+    theme: {
+      h: "Theme"
+      n: "theme"
+      r: true
+      t: "`$OBJECT`"
+      union: {
+        branches: 2
+        count: 2
+        depth: 6
+      }
+    }
+    typebot: {
+      h: "Typebot"
+      n: "typebot"
+      r: true
+      t: "`$OBJECT`"
+      union: {
+        branches: 19
+        count: 88
+        depth: 24
+      }
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+    variables: {
+      h: "Variables"
+      n: "variables"
+      r: true
+      t: "`$ARRAY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 5
+      }
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: true
+      t: "`$STRING`"
+    }
+    whatsAppCredentialsId: {
+      h: "Whats App Credentials Id"
+      n: "whatsAppCredentialsId"
+      r: true
+      t: "`$ANY`"
+    }
+    workspaceId: {
+      h: "Workspace Id"
+      n: "workspaceId"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "typebot"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /v1/typebots/{typebotId}/publish"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "typebot_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/typebots/{typebotId}/publish"
+          q: {
+            "$action": "publish"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "publish"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v1/typebots/{typebotId}/unpublish"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "typebot_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/v1/typebots/{typebotId}/unpublish"
+          q: {
+            "$action": "unpublish"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "unpublish"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v1/typebots"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/v1/typebots"
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+          ]
+          t: {
+            req: {
+              typebot: "`reqdata`"
+            }
+            res: "`body.typebot`"
+          }
+        }
+        {
+          co: {
+            id: "POST /v1/typebots/import"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/v1/typebots/import"
+          q: {
+            "$action": "import"
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              lit: "import"
+            }
+          ]
+          t: {
+            req: {
+              typebot: "`reqdata`"
+            }
+            res: "`body.typebot`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v1/typebots"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "folder_id"
+                or: "folder_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "workspace_id"
+                or: "workspace_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/typebots"
+          q: {
+            exist: [
+              "folder_id"
+              "workspace_id"
+            ]
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.typebots`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v1/typebots/{typebotId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "typebot_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "migrate_to_latest_version"
+                or: "migrate_to_latest_version"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/typebots/{typebotId}"
+          q: {
+            exist: [
+              "id"
+              "migrate_to_latest_version"
+            ]
+          }
+          r: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.typebot`"
+          }
+        }
+        {
+          co: {
+            id: "GET /v1/typebots/{typebotId}/publishedTypebot"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "typebot_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "migrate_to_latest_version"
+                or: "migrate_to_latest_version"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/typebots/{typebotId}/publishedTypebot"
+          q: {
+            "$action": "published_typebot"
+            exist: [
+              "id"
+              "migrate_to_latest_version"
+            ]
+          }
+          r: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "publishedTypebot"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /v1/typebots/{typebotId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "typebot_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/v1/typebots/{typebotId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /v1/typebots/{typebotId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "typebot_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/v1/typebots/{typebotId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              typebotId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: {
+              typebot: "`reqdata`"
+            }
+            res: "`body.typebot`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

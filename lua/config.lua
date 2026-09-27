@@ -162,23 +162,7 @@ local function make_config()
     },
     entity = {
       ["analytics"] = {
-        ["fields"] = {
-          {
-            ["name"] = "totalCompleted",
-            ["req"] = true,
-            ["type"] = "`$NUMBER`",
-          },
-          {
-            ["name"] = "totalStarts",
-            ["req"] = true,
-            ["type"] = "`$NUMBER`",
-          },
-          {
-            ["name"] = "totalViews",
-            ["req"] = true,
-            ["type"] = "`$NUMBER`",
-          },
-        },
+        ["fields"] = {},
         ["name"] = "analytics",
         ["op"] = {
           ["load"] = {
@@ -186,40 +170,9 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "typebot_id",
-                      ["orig"] = "typebot_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                  ["query"] = {
-                    {
-                      ["example"] = "last7Days",
-                      ["kind"] = "query",
-                      ["name"] = "time_filter",
-                      ["orig"] = "time_filter",
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "time_zone",
-                      ["orig"] = "time_zone",
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}/analytics/stats",
-                ["rename"] = {
-                  ["param"] = {
-                    ["typebotId"] = "typebot_id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -237,6 +190,48 @@ local function make_config()
                     ["lit"] = "stats",
                   },
                 },
+                ["parts"] = {
+                  "v1",
+                  "typebots",
+                  "{typebot_id}",
+                  "analytics",
+                  "stats",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["typebotId"] = "typebot_id",
+                  },
+                },
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.stats`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "typebot_id",
+                      ["orig"] = "typebot_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                  ["query"] = {
+                    {
+                      ["name"] = "time_filter",
+                      ["orig"] = "time_filter",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["example"] = "last7Days",
+                    },
+                    {
+                      ["name"] = "time_zone",
+                      ["orig"] = "time_zone",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                  },
+                },
                 ["select"] = {
                   ["$action"] = "stat",
                   ["exist"] = {
@@ -245,17 +240,6 @@ local function make_config()
                     "typebot_id",
                   },
                 },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.stats`",
-                },
-                ["parts"] = {
-                  "v1",
-                  "typebots",
-                  "{typebot_id}",
-                  "analytics",
-                  "stats",
-                },
               },
             },
           },
@@ -263,54 +247,13 @@ local function make_config()
         ["relations"] = {
           ["ancestors"] = {
             {
-              "typebot",
+              "$.main.kit.entity.typebot",
             },
           },
         },
       },
       ["billing"] = {
-        ["fields"] = {
-          {
-            ["name"] = "amount",
-            ["req"] = true,
-            ["type"] = "`$NUMBER`",
-          },
-          {
-            ["name"] = "currency",
-            ["req"] = true,
-            ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "date",
-            ["req"] = true,
-            ["type"] = "`$ANY`",
-          },
-          {
-            ["name"] = "id",
-            ["req"] = true,
-            ["type"] = "`$STRING`",
-          },
-          {
-            ["format"] = "date-time",
-            ["name"] = "resetsAt",
-            ["req"] = true,
-            ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "totalChatsUsed",
-            ["req"] = true,
-            ["type"] = "`$NUMBER`",
-          },
-          {
-            ["name"] = "url",
-            ["req"] = true,
-            ["type"] = "`$STRING`",
-          },
-        },
-        ["id"] = {
-          ["field"] = "id",
-          ["name"] = "id",
-        },
+        ["fields"] = {},
         ["name"] = "billing",
         ["op"] = {
           ["list"] = {
@@ -318,17 +261,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "workspace_id",
-                      ["orig"] = "workspace_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/billing/invoices",
@@ -343,20 +275,32 @@ local function make_config()
                     ["lit"] = "invoices",
                   },
                 },
+                ["parts"] = {
+                  "v1",
+                  "billing",
+                  "invoices",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.invoices`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "workspace_id",
+                      ["orig"] = "workspace_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
                 ["select"] = {
                   ["$action"] = "invoice",
                   ["exist"] = {
                     "workspace_id",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.invoices`",
-                },
-                ["parts"] = {
-                  "v1",
-                  "billing",
-                  "invoices",
                 },
               },
             },
@@ -366,17 +310,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "workspace_id",
-                      ["orig"] = "workspace_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/billing/usage",
@@ -391,20 +324,32 @@ local function make_config()
                     ["lit"] = "usage",
                   },
                 },
+                ["parts"] = {
+                  "v1",
+                  "billing",
+                  "usage",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "workspace_id",
+                      ["orig"] = "workspace_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
                 ["select"] = {
                   ["$action"] = "usage",
                   ["exist"] = {
                     "workspace_id",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
-                ["parts"] = {
-                  "v1",
-                  "billing",
-                  "usage",
                 },
               },
             },
@@ -417,55 +362,63 @@ local function make_config()
       ["folder"] = {
         ["fields"] = {
           {
-            ["format"] = "date-time",
             ["name"] = "createdAt",
-            ["req"] = true,
+            ["title"] = "Created At",
             ["type"] = "`$STRING`",
+            ["req"] = true,
+            ["format"] = "date-time",
           },
           {
             ["name"] = "folder",
-            ["req"] = true,
+            ["title"] = "Folder",
             ["type"] = "`$OBJECT`",
+            ["req"] = true,
           },
           {
             ["name"] = "folderName",
+            ["title"] = "Folder Name",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "id",
+            ["title"] = "Id",
+            ["type"] = "`$STRING`",
+            ["req"] = true,
             ["op"] = {
               ["create"] = {
                 ["type"] = "`$STRING`",
               },
             },
-            ["req"] = true,
-            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "name",
-            ["req"] = true,
+            ["title"] = "Name",
             ["type"] = "`$STRING`",
+            ["req"] = true,
           },
           {
             ["name"] = "parentFolderId",
+            ["title"] = "Parent Folder Id",
+            ["type"] = "`$ANY`",
+            ["req"] = true,
             ["op"] = {
               ["create"] = {
                 ["type"] = "`$STRING`",
               },
             },
-            ["req"] = true,
-            ["type"] = "`$ANY`",
           },
           {
-            ["format"] = "date-time",
             ["name"] = "updatedAt",
-            ["req"] = true,
+            ["title"] = "Updated At",
             ["type"] = "`$STRING`",
+            ["req"] = true,
+            ["format"] = "date-time",
           },
           {
             ["name"] = "workspaceId",
-            ["req"] = true,
+            ["title"] = "Workspace Id",
             ["type"] = "`$STRING`",
+            ["req"] = true,
           },
         },
         ["id"] = {
@@ -479,7 +432,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/folders",
@@ -491,15 +443,17 @@ local function make_config()
                     ["lit"] = "folders",
                   },
                 },
-                ["select"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.folder`",
-                },
                 ["parts"] = {
                   "v1",
                   "folders",
                 },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.folder`",
+                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -508,23 +462,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "parent_folder_id",
-                      ["orig"] = "parent_folder_id",
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "workspace_id",
-                      ["orig"] = "workspace_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/folders",
@@ -536,19 +473,37 @@ local function make_config()
                     ["lit"] = "folders",
                   },
                 },
+                ["parts"] = {
+                  "v1",
+                  "folders",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.folders`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "parent_folder_id",
+                      ["orig"] = "parent_folder_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                    {
+                      ["name"] = "workspace_id",
+                      ["orig"] = "workspace_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
                 ["select"] = {
                   ["exist"] = {
                     "parent_folder_id",
                     "workspace_id",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.folders`",
-                },
-                ["parts"] = {
-                  "v1",
-                  "folders",
                 },
               },
             },
@@ -558,34 +513,9 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "folder_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "workspace_id",
-                      ["orig"] = "workspace_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/folders/{folderId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["folderId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -597,20 +527,45 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
-                    "workspace_id",
+                ["parts"] = {
+                  "v1",
+                  "folders",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["folderId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.folder`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "folders",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "folder_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                  ["query"] = {
+                    {
+                      ["name"] = "workspace_id",
+                      ["orig"] = "workspace_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                    "workspace_id",
+                  },
                 },
               },
             },
@@ -620,25 +575,9 @@ local function make_config()
             ["name"] = "remove",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "folder_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/v1/folders/{folderId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["folderId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -650,19 +589,35 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "v1",
+                  "folders",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["folderId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.folder`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "folders",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "folder_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -672,25 +627,9 @@ local function make_config()
             ["name"] = "update",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "folder_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "PATCH",
                 ["orig"] = "/v1/folders/{folderId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["folderId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -702,9 +641,14 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "v1",
+                  "folders",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["folderId"] = "id",
                   },
                 },
                 ["transform"] = {
@@ -713,10 +657,21 @@ local function make_config()
                   },
                   ["res"] = "`body.folder`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "folders",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "folder_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -730,79 +685,58 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "answers",
-            ["req"] = true,
+            ["title"] = "Answers",
             ["type"] = "`$ARRAY`",
-          },
-          {
-            ["name"] = "context",
             ["req"] = true,
-            ["type"] = "`$ANY`",
           },
           {
-            ["format"] = "date-time",
             ["name"] = "createdAt",
-            ["req"] = true,
+            ["title"] = "Created At",
             ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "description",
             ["req"] = true,
-            ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "details",
-            ["req"] = true,
-            ["type"] = "`$ANY`",
+            ["format"] = "date-time",
           },
           {
             ["name"] = "hasStarted",
-            ["req"] = true,
+            ["title"] = "Has Started",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "id",
-            ["req"] = true,
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
+            ["req"] = true,
           },
           {
             ["name"] = "isArchived",
-            ["req"] = true,
+            ["title"] = "Is Archived",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "isCompleted",
-            ["req"] = true,
+            ["title"] = "Is Completed",
             ["type"] = "`$BOOLEAN`",
+            ["req"] = true,
           },
           {
             ["name"] = "lastChatSessionId",
-            ["req"] = true,
+            ["title"] = "Last Chat Session Id",
             ["type"] = "`$ANY`",
-          },
-          {
-            ["name"] = "resultId",
             ["req"] = true,
-            ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "status",
-            ["req"] = true,
-            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "typebotId",
-            ["req"] = true,
+            ["title"] = "Typebot Id",
             ["type"] = "`$STRING`",
+            ["req"] = true,
           },
           {
             ["name"] = "variables",
-            ["req"] = true,
+            ["title"] = "Variables",
             ["type"] = "`$ARRAY`",
-            ["union"] = {
-              ["branches"] = 2,
-              ["count"] = 1,
-              ["depth"] = 3,
-            },
+            ["req"] = true,
           },
         },
         ["id"] = {
@@ -816,53 +750,9 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "typebot_id",
-                      ["orig"] = "typebot_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "cursor",
-                      ["orig"] = "cursor",
-                      ["type"] = "`$NUMBER`",
-                    },
-                    {
-                      ["example"] = 50,
-                      ["kind"] = "query",
-                      ["name"] = "limit",
-                      ["orig"] = "limit",
-                      ["type"] = "`$NUMBER`",
-                    },
-                    {
-                      ["example"] = "last7Days",
-                      ["kind"] = "query",
-                      ["name"] = "time_filter",
-                      ["orig"] = "time_filter",
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "time_zone",
-                      ["orig"] = "time_zone",
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}/results",
-                ["rename"] = {
-                  ["param"] = {
-                    ["typebotId"] = "typebot_id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -877,6 +767,60 @@ local function make_config()
                     ["lit"] = "results",
                   },
                 },
+                ["parts"] = {
+                  "v1",
+                  "typebots",
+                  "{typebot_id}",
+                  "results",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["typebotId"] = "typebot_id",
+                  },
+                },
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "typebot_id",
+                      ["orig"] = "typebot_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                  ["query"] = {
+                    {
+                      ["name"] = "cursor",
+                      ["orig"] = "cursor",
+                      ["type"] = "`$NUMBER`",
+                      ["kind"] = "query",
+                    },
+                    {
+                      ["name"] = "limit",
+                      ["orig"] = "limit",
+                      ["type"] = "`$NUMBER`",
+                      ["kind"] = "query",
+                      ["example"] = 50,
+                    },
+                    {
+                      ["name"] = "time_filter",
+                      ["orig"] = "time_filter",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["example"] = "last7Days",
+                    },
+                    {
+                      ["name"] = "time_zone",
+                      ["orig"] = "time_zone",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                  },
+                },
                 ["select"] = {
                   ["exist"] = {
                     "cursor",
@@ -886,45 +830,11 @@ local function make_config()
                     "typebot_id",
                   },
                 },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
-                ["parts"] = {
-                  "v1",
-                  "typebots",
-                  "{typebot_id}",
-                  "results",
-                },
               },
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "result_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "typebot_id",
-                      ["orig"] = "typebot_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}/results/{resultId}/logs",
-                ["rename"] = {
-                  ["param"] = {
-                    ["resultId"] = "id",
-                    ["typebotId"] = "typebot_id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -945,17 +855,6 @@ local function make_config()
                     ["lit"] = "logs",
                   },
                 },
-                ["select"] = {
-                  ["$action"] = "log",
-                  ["exist"] = {
-                    "id",
-                    "typebot_id",
-                  },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.logs`",
-                },
                 ["parts"] = {
                   "v1",
                   "typebots",
@@ -963,6 +862,41 @@ local function make_config()
                   "results",
                   "{id}",
                   "logs",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["resultId"] = "id",
+                    ["typebotId"] = "typebot_id",
+                  },
+                },
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.logs`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "result_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                    {
+                      ["name"] = "typebot_id",
+                      ["orig"] = "typebot_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["$action"] = "log",
+                  ["exist"] = {
+                    "id",
+                    "typebot_id",
+                  },
                 },
               },
             },
@@ -972,33 +906,9 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "result_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "typebot_id",
-                      ["orig"] = "typebot_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}/results/{resultId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["resultId"] = "id",
-                    ["typebotId"] = "typebot_id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -1016,22 +926,46 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
-                    "typebot_id",
-                  },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.result`",
-                },
                 ["parts"] = {
                   "v1",
                   "typebots",
                   "{typebot_id}",
                   "results",
                   "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["resultId"] = "id",
+                    ["typebotId"] = "typebot_id",
+                  },
+                },
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.result`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "result_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                    {
+                      ["name"] = "typebot_id",
+                      ["orig"] = "typebot_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                    "typebot_id",
+                  },
                 },
               },
             },
@@ -1041,25 +975,9 @@ local function make_config()
             ["name"] = "remove",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "typebot_id",
-                      ["orig"] = "typebot_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/v1/typebots/{typebotId}/results",
-                ["rename"] = {
-                  ["param"] = {
-                    ["typebotId"] = "typebot_id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -1074,20 +992,36 @@ local function make_config()
                     ["lit"] = "results",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "typebot_id",
+                ["parts"] = {
+                  "v1",
+                  "typebots",
+                  "{typebot_id}",
+                  "results",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["typebotId"] = "typebot_id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "typebots",
-                  "{typebot_id}",
-                  "results",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "typebot_id",
+                      ["orig"] = "typebot_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "typebot_id",
+                  },
                 },
               },
             },
@@ -1096,7 +1030,7 @@ local function make_config()
         ["relations"] = {
           ["ancestors"] = {
             {
-              "typebot",
+              "$.main.kit.entity.typebot",
             },
           },
         },
@@ -1105,212 +1039,166 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "accessRight",
-            ["req"] = true,
+            ["title"] = "Access Right",
             ["type"] = "`$STRING`",
+            ["req"] = true,
           },
           {
-            ["format"] = "date-time",
             ["name"] = "createdAt",
-            ["req"] = true,
+            ["title"] = "Created At",
             ["type"] = "`$STRING`",
+            ["req"] = true,
+            ["format"] = "date-time",
           },
           {
             ["name"] = "customDomain",
-            ["req"] = true,
+            ["title"] = "Custom Domain",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "edges",
-            ["req"] = true,
+            ["title"] = "Edges",
             ["type"] = "`$ARRAY`",
-            ["union"] = {
-              ["branches"] = 2,
-              ["count"] = 1,
-              ["depth"] = 3,
-            },
-          },
-          {
-            ["name"] = "enableSafetyFlags",
-            ["type"] = "`$BOOLEAN`",
+            ["req"] = true,
           },
           {
             ["name"] = "events",
-            ["req"] = true,
+            ["title"] = "Events",
             ["type"] = "`$ARRAY`",
-            ["union"] = {
-              ["branches"] = 3,
-              ["count"] = 1,
-              ["depth"] = 1,
-            },
+            ["req"] = true,
           },
           {
             ["name"] = "folderId",
-            ["req"] = true,
+            ["title"] = "Folder Id",
             ["type"] = "`$ANY`",
-          },
-          {
-            ["name"] = "fromTemplate",
-            ["type"] = "`$STRING`",
+            ["req"] = true,
           },
           {
             ["name"] = "groups",
-            ["req"] = true,
+            ["title"] = "Groups",
             ["type"] = "`$ARRAY`",
-            ["union"] = {
-              ["branches"] = 19,
-              ["count"] = 31,
-              ["depth"] = 14,
-            },
+            ["req"] = true,
           },
           {
             ["name"] = "icon",
-            ["req"] = true,
+            ["title"] = "Icon",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "id",
-            ["req"] = true,
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
+            ["req"] = true,
           },
           {
             ["name"] = "isArchived",
-            ["req"] = true,
+            ["title"] = "Is Archived",
             ["type"] = "`$BOOLEAN`",
+            ["req"] = true,
           },
           {
             ["name"] = "isClosed",
-            ["req"] = true,
+            ["title"] = "Is Closed",
             ["type"] = "`$BOOLEAN`",
-          },
-          {
-            ["name"] = "message",
             ["req"] = true,
-            ["type"] = "`$ANY`",
           },
           {
             ["name"] = "name",
-            ["req"] = true,
+            ["title"] = "Name",
             ["type"] = "`$STRING`",
+            ["req"] = true,
           },
           {
             ["name"] = "overwrite",
-            ["short"] = "If true, even if we detect a conflict, we will overwrite push the updates to the typebot",
+            ["title"] = "Overwrite",
             ["type"] = "`$BOOLEAN`",
+            ["short"] = "If true, even if we detect a conflict, we will overwrite push the updates to the typebot",
           },
           {
             ["name"] = "publicId",
-            ["req"] = true,
+            ["title"] = "Public Id",
             ["type"] = "`$ANY`",
-          },
-          {
-            ["name"] = "publishedTypebot",
             ["req"] = true,
-            ["type"] = "`$ANY`",
-            ["union"] = {
-              ["branches"] = 19,
-              ["count"] = 51,
-              ["depth"] = 20,
-            },
           },
           {
             ["name"] = "publishedTypebotId",
+            ["title"] = "Published Typebot Id",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "resultsTablePreferences",
-            ["req"] = true,
+            ["title"] = "Results Table Preferences",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "riskLevel",
-            ["req"] = true,
+            ["title"] = "Risk Level",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "selectedThemeTemplateId",
-            ["req"] = true,
+            ["title"] = "Selected Theme Template Id",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "settings",
-            ["req"] = true,
+            ["title"] = "Settings",
             ["type"] = "`$OBJECT`",
+            ["req"] = true,
           },
           {
             ["name"] = "spaceId",
-            ["req"] = true,
+            ["title"] = "Space Id",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "theme",
-            ["req"] = true,
+            ["title"] = "Theme",
             ["type"] = "`$OBJECT`",
-            ["union"] = {
-              ["branches"] = 2,
-              ["count"] = 2,
-              ["depth"] = 6,
-            },
+            ["req"] = true,
           },
           {
             ["name"] = "typebot",
-            ["req"] = true,
+            ["title"] = "Typebot",
             ["type"] = "`$OBJECT`",
-            ["union"] = {
-              ["branches"] = 19,
-              ["count"] = 88,
-              ["depth"] = 24,
-            },
+            ["req"] = true,
           },
           {
-            ["format"] = "date-time",
             ["name"] = "updatedAt",
-            ["req"] = true,
+            ["title"] = "Updated At",
             ["type"] = "`$STRING`",
+            ["req"] = true,
+            ["format"] = "date-time",
           },
           {
             ["name"] = "variables",
-            ["req"] = true,
+            ["title"] = "Variables",
             ["type"] = "`$ARRAY`",
-            ["union"] = {
-              ["branches"] = 2,
-              ["count"] = 1,
-              ["depth"] = 5,
-            },
+            ["req"] = true,
           },
           {
             ["name"] = "version",
-            ["op"] = {
-              ["create"] = {
-                ["req"] = true,
-                ["type"] = "`$STRING`",
-              },
-              ["update"] = {
-                ["req"] = true,
-                ["type"] = "`$STRING`",
-              },
-            },
-            ["short"] = "Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`.",
-            ["type"] = "`$ANY`",
-            ["union"] = {
-              ["branches"] = 2,
-              ["count"] = 1,
-              ["depth"] = 0,
-            },
-          },
-          {
-            ["name"] = "warnings",
-            ["type"] = "`$ARRAY`",
+            ["title"] = "Version",
+            ["type"] = "`$STRING`",
+            ["req"] = true,
           },
           {
             ["name"] = "whatsAppCredentialsId",
-            ["req"] = true,
+            ["title"] = "Whats App Credentials Id",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "workspaceId",
-            ["req"] = true,
-            ["short"] = "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)",
+            ["title"] = "Workspace Id",
             ["type"] = "`$STRING`",
+            ["req"] = true,
           },
         },
         ["id"] = {
@@ -1324,25 +1212,9 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "typebot_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/typebots/{typebotId}/publish",
-                ["rename"] = {
-                  ["param"] = {
-                    ["typebotId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -1357,43 +1229,43 @@ local function make_config()
                     ["lit"] = "publish",
                   },
                 },
-                ["select"] = {
-                  ["$action"] = "publish",
-                  ["exist"] = {
-                    "id",
-                  },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "v1",
                   "typebots",
                   "{id}",
                   "publish",
                 },
-              },
-              {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "typebot_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
-                ["kind"] = "http",
-                ["method"] = "POST",
-                ["orig"] = "/v1/typebots/{typebotId}/unpublish",
                 ["rename"] = {
                   ["param"] = {
                     ["typebotId"] = "id",
                   },
                 },
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "typebot_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["$action"] = "publish",
+                  ["exist"] = {
+                    "id",
+                  },
+                },
+              },
+              {
+                ["kind"] = "http",
+                ["method"] = "POST",
+                ["orig"] = "/v1/typebots/{typebotId}/unpublish",
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -1408,25 +1280,40 @@ local function make_config()
                     ["lit"] = "unpublish",
                   },
                 },
-                ["select"] = {
-                  ["$action"] = "unpublish",
-                  ["exist"] = {
-                    "id",
-                  },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "v1",
                   "typebots",
                   "{id}",
                   "unpublish",
                 },
+                ["rename"] = {
+                  ["param"] = {
+                    ["typebotId"] = "id",
+                  },
+                },
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "typebot_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["$action"] = "unpublish",
+                  ["exist"] = {
+                    "id",
+                  },
+                },
               },
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/typebots",
@@ -1438,20 +1325,21 @@ local function make_config()
                     ["lit"] = "typebots",
                   },
                 },
-                ["select"] = {},
+                ["parts"] = {
+                  "v1",
+                  "typebots",
+                },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = {
                     ["typebot"] = "`reqdata`",
                   },
                   ["res"] = "`body.typebot`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "typebots",
-                },
+                ["args"] = {},
+                ["select"] = {},
               },
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/typebots/import",
@@ -1466,19 +1354,21 @@ local function make_config()
                     ["lit"] = "import",
                   },
                 },
-                ["select"] = {
-                  ["$action"] = "import",
+                ["parts"] = {
+                  "v1",
+                  "typebots",
+                  "import",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = {
                     ["typebot"] = "`reqdata`",
                   },
                   ["res"] = "`body.typebot`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "typebots",
-                  "import",
+                ["args"] = {},
+                ["select"] = {
+                  ["$action"] = "import",
                 },
               },
             },
@@ -1488,23 +1378,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "folder_id",
-                      ["orig"] = "folder_id",
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "workspace_id",
-                      ["orig"] = "workspace_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots",
@@ -1516,19 +1389,37 @@ local function make_config()
                     ["lit"] = "typebots",
                   },
                 },
+                ["parts"] = {
+                  "v1",
+                  "typebots",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.typebots`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "folder_id",
+                      ["orig"] = "folder_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                    {
+                      ["name"] = "workspace_id",
+                      ["orig"] = "workspace_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
                 ["select"] = {
                   ["exist"] = {
                     "folder_id",
                     "workspace_id",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.typebots`",
-                },
-                ["parts"] = {
-                  "v1",
-                  "typebots",
                 },
               },
             },
@@ -1538,34 +1429,9 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "typebot_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                  ["query"] = {
-                    {
-                      ["example"] = false,
-                      ["kind"] = "query",
-                      ["name"] = "migrate_to_latest_version",
-                      ["orig"] = "migrate_to_latest_version",
-                      ["type"] = "`$BOOLEAN`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["typebotId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -1577,51 +1443,51 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
-                    "migrate_to_latest_version",
+                ["parts"] = {
+                  "v1",
+                  "typebots",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["typebotId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.typebot`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "typebots",
-                  "{id}",
-                },
-              },
-              {
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "typebot_id",
-                      ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
                     },
                   },
                   ["query"] = {
                     {
-                      ["example"] = false,
-                      ["kind"] = "query",
                       ["name"] = "migrate_to_latest_version",
                       ["orig"] = "migrate_to_latest_version",
                       ["type"] = "`$BOOLEAN`",
+                      ["kind"] = "query",
+                      ["example"] = false,
                     },
                   },
                 },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                    "migrate_to_latest_version",
+                  },
+                },
+              },
+              {
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/typebots/{typebotId}/publishedTypebot",
-                ["rename"] = {
-                  ["param"] = {
-                    ["typebotId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -1636,22 +1502,47 @@ local function make_config()
                     ["lit"] = "publishedTypebot",
                   },
                 },
-                ["select"] = {
-                  ["$action"] = "published_typebot",
-                  ["exist"] = {
-                    "id",
-                    "migrate_to_latest_version",
+                ["parts"] = {
+                  "v1",
+                  "typebots",
+                  "{id}",
+                  "publishedTypebot",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["typebotId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "typebots",
-                  "{id}",
-                  "publishedTypebot",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "typebot_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                  ["query"] = {
+                    {
+                      ["name"] = "migrate_to_latest_version",
+                      ["orig"] = "migrate_to_latest_version",
+                      ["type"] = "`$BOOLEAN`",
+                      ["kind"] = "query",
+                      ["example"] = false,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["$action"] = "published_typebot",
+                  ["exist"] = {
+                    "id",
+                    "migrate_to_latest_version",
+                  },
                 },
               },
             },
@@ -1661,25 +1552,9 @@ local function make_config()
             ["name"] = "remove",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "typebot_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/v1/typebots/{typebotId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["typebotId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -1691,19 +1566,35 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "v1",
+                  "typebots",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["typebotId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "typebots",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "typebot_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -1713,25 +1604,9 @@ local function make_config()
             ["name"] = "update",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "typebot_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "PATCH",
                 ["orig"] = "/v1/typebots/{typebotId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["typebotId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -1743,9 +1618,14 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "v1",
+                  "typebots",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["typebotId"] = "id",
                   },
                 },
                 ["transform"] = {
@@ -1754,10 +1634,21 @@ local function make_config()
                   },
                   ["res"] = "`body.typebot`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "typebots",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "typebot_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -1771,27 +1662,34 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "chatsHardLimit",
-            ["req"] = true,
+            ["title"] = "Chats Hard Limit",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
-            ["format"] = "date-time",
             ["name"] = "createdAt",
-            ["req"] = true,
+            ["title"] = "Created At",
             ["type"] = "`$STRING`",
+            ["req"] = true,
+            ["format"] = "date-time",
           },
           {
             ["name"] = "customChatsLimit",
-            ["req"] = true,
+            ["title"] = "Custom Chats Limit",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "customSeatsLimit",
-            ["req"] = true,
+            ["title"] = "Custom Seats Limit",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "icon",
+            ["title"] = "Icon",
+            ["type"] = "`$ANY`",
+            ["req"] = true,
             ["op"] = {
               ["create"] = {
                 ["type"] = "`$STRING`",
@@ -1800,94 +1698,84 @@ local function make_config()
                 ["type"] = "`$STRING`",
               },
             },
-            ["req"] = true,
-            ["type"] = "`$ANY`",
           },
           {
             ["name"] = "id",
-            ["req"] = true,
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
+            ["req"] = true,
           },
           {
             ["name"] = "inactiveFirstEmailSentAt",
-            ["req"] = true,
+            ["title"] = "Inactive First Email Sent At",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "inactiveSecondEmailSentAt",
-            ["req"] = true,
+            ["title"] = "Inactive Second Email Sent At",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "isPastDue",
-            ["req"] = true,
+            ["title"] = "Is Past Due",
             ["type"] = "`$BOOLEAN`",
+            ["req"] = true,
           },
           {
             ["name"] = "isSuspended",
-            ["req"] = true,
+            ["title"] = "Is Suspended",
             ["type"] = "`$BOOLEAN`",
+            ["req"] = true,
           },
           {
             ["name"] = "isVerified",
-            ["req"] = true,
+            ["title"] = "Is Verified",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "lastActivityAt",
-            ["req"] = true,
+            ["title"] = "Last Activity At",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "name",
+            ["title"] = "Name",
+            ["type"] = "`$STRING`",
+            ["req"] = true,
             ["op"] = {
               ["update"] = {
                 ["type"] = "`$STRING`",
               },
             },
-            ["req"] = true,
-            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "plan",
-            ["req"] = true,
+            ["title"] = "Plan",
             ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "role",
             ["req"] = true,
-            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "settings",
-            ["req"] = true,
+            ["title"] = "Settings",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
             ["name"] = "stripeId",
-            ["req"] = true,
+            ["title"] = "Stripe Id",
             ["type"] = "`$ANY`",
+            ["req"] = true,
           },
           {
-            ["format"] = "date-time",
             ["name"] = "updatedAt",
-            ["req"] = true,
+            ["title"] = "Updated At",
             ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "user",
             ["req"] = true,
-            ["type"] = "`$OBJECT`",
-          },
-          {
-            ["name"] = "userId",
-            ["req"] = true,
-            ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "workspaceId",
-            ["req"] = true,
-            ["type"] = "`$STRING`",
+            ["format"] = "date-time",
           },
         },
         ["id"] = {
@@ -1901,7 +1789,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/v1/workspaces",
@@ -1913,15 +1800,17 @@ local function make_config()
                     ["lit"] = "workspaces",
                   },
                 },
-                ["select"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.workspace`",
-                },
                 ["parts"] = {
                   "v1",
                   "workspaces",
                 },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.workspace`",
+                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -1930,25 +1819,9 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "workspace_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/workspaces/{workspaceId}/members",
-                ["rename"] = {
-                  ["param"] = {
-                    ["workspaceId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -1963,25 +1836,40 @@ local function make_config()
                     ["lit"] = "members",
                   },
                 },
-                ["select"] = {
-                  ["$action"] = "member",
-                  ["exist"] = {
-                    "id",
-                  },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.members`",
-                },
                 ["parts"] = {
                   "v1",
                   "workspaces",
                   "{id}",
                   "members",
                 },
+                ["rename"] = {
+                  ["param"] = {
+                    ["workspaceId"] = "id",
+                  },
+                },
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.members`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "workspace_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["$action"] = "member",
+                  ["exist"] = {
+                    "id",
+                  },
+                },
               },
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/workspaces",
@@ -1993,15 +1881,17 @@ local function make_config()
                     ["lit"] = "workspaces",
                   },
                 },
-                ["select"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.workspaces`",
-                },
                 ["parts"] = {
                   "v1",
                   "workspaces",
                 },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.workspaces`",
+                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -2010,25 +1900,9 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "workspace_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/v1/workspaces/{workspaceId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["workspaceId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -2040,19 +1914,35 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "v1",
+                  "workspaces",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["workspaceId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.workspace`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "workspaces",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "workspace_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -2062,25 +1952,9 @@ local function make_config()
             ["name"] = "remove",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "workspace_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/v1/workspaces/{workspaceId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["workspaceId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -2092,19 +1966,35 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "v1",
+                  "workspaces",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["workspaceId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "workspaces",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "workspace_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -2114,25 +2004,9 @@ local function make_config()
             ["name"] = "update",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "workspace_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "PATCH",
                 ["orig"] = "/v1/workspaces/{workspaceId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["workspaceId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "v1",
@@ -2144,19 +2018,35 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "v1",
+                  "workspaces",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["workspaceId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.workspace`",
                 },
-                ["parts"] = {
-                  "v1",
-                  "workspaces",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "workspace_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },

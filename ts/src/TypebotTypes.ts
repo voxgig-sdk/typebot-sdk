@@ -1,14 +1,11 @@
 // Typed models for the Typebot SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Analytics {
-  totalCompleted: number
-  totalStarts: number
-  totalViews: number
 }
 
 export interface AnalyticsLoadMatch {
@@ -24,13 +21,6 @@ export interface AnalyticsLoadMatch {
 }
 
 export interface Billing {
-  amount: number
-  currency: string
-  date: any
-  id: string
-  resetsAt: string
-  totalChatsUsed: number
-  url: string
 }
 
 export interface BillingLoadMatch {
@@ -102,17 +92,12 @@ export interface FolderRemoveMatch {
 
 export interface Result {
   answers: any[]
-  context: any
   createdAt: string
-  description: string
-  details: any
   hasStarted: any
   id: string
   isArchived: any
   isCompleted: boolean
   lastChatSessionId: any
-  resultId: string
-  status: string
   typebotId: string
   variables: any[]
 }
@@ -145,20 +130,16 @@ export interface Typebot {
   createdAt: string
   customDomain: any
   edges: any[]
-  enableSafetyFlags?: boolean
   events: any[]
   folderId: any
-  fromTemplate?: string
   groups: any[]
   icon: any
   id: string
   isArchived: boolean
   isClosed: boolean
-  message: any
   name: string
   overwrite?: boolean
   publicId: any
-  publishedTypebot: any
   publishedTypebotId?: string
   resultsTablePreferences: any
   riskLevel: any
@@ -169,8 +150,7 @@ export interface Typebot {
   typebot: Record<string, any>
   updatedAt: string
   variables: any[]
-  version?: any
-  warnings?: any[]
+  version: string
   whatsAppCredentialsId: any
   workspaceId: string
 }
@@ -196,20 +176,16 @@ export interface TypebotCreateData {
   createdAt: string
   customDomain: any
   edges: any[]
-  enableSafetyFlags?: boolean
   events: any[]
   folderId: any
-  fromTemplate?: string
   groups: any[]
   icon: any
   id: string
   isArchived: boolean
   isClosed: boolean
-  message: any
   name: string
   overwrite?: boolean
   publicId: any
-  publishedTypebot: any
   publishedTypebotId?: string
   resultsTablePreferences: any
   riskLevel: any
@@ -220,8 +196,7 @@ export interface TypebotCreateData {
   typebot: Record<string, any>
   updatedAt: string
   variables: any[]
-  version?: any
-  warnings?: any[]
+  version: string
   whatsAppCredentialsId: any
   workspaceId: string
 
@@ -238,19 +213,15 @@ export interface TypebotUpdateData {
   createdAt?: string
   customDomain?: any
   edges?: any[]
-  enableSafetyFlags?: boolean
   events?: any[]
   folderId?: any
-  fromTemplate?: string
   groups?: any[]
   icon?: any
   isArchived?: boolean
   isClosed?: boolean
-  message?: any
   name?: string
   overwrite?: boolean
   publicId?: any
-  publishedTypebot?: any
   publishedTypebotId?: string
   resultsTablePreferences?: any
   riskLevel?: any
@@ -261,8 +232,7 @@ export interface TypebotUpdateData {
   typebot?: Record<string, any>
   updatedAt?: string
   variables?: any[]
-  version?: any
-  warnings?: any[]
+  version?: string
   whatsAppCredentialsId?: any
   workspaceId?: string
 }
@@ -286,13 +256,9 @@ export interface Workspace {
   lastActivityAt: any
   name: string
   plan: string
-  role: string
   settings: any
   stripeId: any
   updatedAt: string
-  user: Record<string, any>
-  userId: string
-  workspaceId: string
 }
 
 export interface WorkspaceLoadMatch {
@@ -314,13 +280,9 @@ export interface WorkspaceListMatch {
   lastActivityAt?: any
   name?: string
   plan?: string
-  role?: string
   settings?: any
   stripeId?: any
   updatedAt?: string
-  user?: Record<string, any>
-  userId?: string
-  workspaceId?: string
 
   // Selects a custom action instead of the plain list:
   //   'member'
@@ -344,13 +306,9 @@ export interface WorkspaceCreateData {
   lastActivityAt: any
   name: string
   plan: string
-  role: string
   settings: any
   stripeId: any
   updatedAt: string
-  user: Record<string, any>
-  userId: string
-  workspaceId: string
 }
 
 export interface WorkspaceUpdateData {
@@ -368,13 +326,9 @@ export interface WorkspaceUpdateData {
   lastActivityAt?: any
   name?: string
   plan?: string
-  role?: string
   settings?: any
   stripeId?: any
   updatedAt?: string
-  user?: Record<string, any>
-  userId?: string
-  workspaceId?: string
 }
 
 export interface WorkspaceRemoveMatch {

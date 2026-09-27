@@ -104,14 +104,6 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 analytics = client.Analytics()
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `totalCompleted` | `float` | Yes |  |
-| `totalStarts` | `float` | Yes |  |
-| `totalViews` | `float` | Yes |  |
-
 ### Operations
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -156,18 +148,6 @@ Return the entity name.
 ```python
 billing = client.Billing()
 ```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `amount` | `float` | Yes |  |
-| `currency` | `str` | Yes |  |
-| `date` | `Any` | Yes |  |
-| `id` | `str` | Yes |  |
-| `resetsAt` | `str` | Yes |  |
-| `totalChatsUsed` | `float` | Yes |  |
-| `url` | `str` | Yes |  |
 
 ### Operations
 
@@ -345,17 +325,12 @@ result = client.Result()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `answers` | `list` | Yes |  |
-| `context` | `Any` | Yes |  |
 | `createdAt` | `str` | Yes |  |
-| `description` | `str` | Yes |  |
-| `details` | `Any` | Yes |  |
 | `hasStarted` | `Any` | Yes |  |
 | `id` | `str` | Yes |  |
 | `isArchived` | `Any` | Yes |  |
 | `isCompleted` | `bool` | Yes |  |
 | `lastChatSessionId` | `Any` | Yes |  |
-| `resultId` | `str` | Yes |  |
-| `status` | `str` | Yes |  |
 | `typebotId` | `str` | Yes |  |
 | `variables` | `list` | Yes |  |
 
@@ -430,20 +405,16 @@ typebot = client.Typebot()
 | `createdAt` | `str` | Yes |  |
 | `customDomain` | `Any` | Yes |  |
 | `edges` | `list` | Yes |  |
-| `enableSafetyFlags` | `bool` | No |  |
 | `events` | `list` | Yes |  |
 | `folderId` | `Any` | Yes |  |
-| `fromTemplate` | `str` | No |  |
 | `groups` | `list` | Yes |  |
 | `icon` | `Any` | Yes |  |
 | `id` | `str` | Yes |  |
 | `isArchived` | `bool` | Yes |  |
 | `isClosed` | `bool` | Yes |  |
-| `message` | `Any` | Yes |  |
 | `name` | `str` | Yes |  |
 | `overwrite` | `bool` | No | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `Any` | Yes |  |
-| `publishedTypebot` | `Any` | Yes |  |
 | `publishedTypebotId` | `str` | No |  |
 | `resultsTablePreferences` | `Any` | Yes |  |
 | `riskLevel` | `Any` | Yes |  |
@@ -454,47 +425,9 @@ typebot = client.Typebot()
 | `typebot` | `dict` | Yes |  |
 | `updatedAt` | `str` | Yes |  |
 | `variables` | `list` | Yes |  |
-| `version` | `Any` | No | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
-| `warnings` | `list` | No |  |
+| `version` | `str` | Yes |  |
 | `whatsAppCredentialsId` | `Any` | Yes |  |
-| `workspaceId` | `str` | Yes | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
-
-### Field Usage by Operation
-
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `accessRight` | - | - | - | - | - |
-| `createdAt` | - | - | - | - | - |
-| `customDomain` | - | - | - | - | - |
-| `edges` | - | - | - | - | - |
-| `enableSafetyFlags` | - | - | - | - | - |
-| `events` | - | - | - | - | - |
-| `folderId` | - | - | - | - | - |
-| `fromTemplate` | - | - | - | - | - |
-| `groups` | - | - | - | - | - |
-| `icon` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `isArchived` | - | - | - | - | - |
-| `isClosed` | - | - | - | - | - |
-| `message` | - | - | - | - | - |
-| `name` | - | - | - | - | - |
-| `overwrite` | - | - | - | - | - |
-| `publicId` | - | - | - | - | - |
-| `publishedTypebot` | - | - | - | - | - |
-| `publishedTypebotId` | - | - | - | - | - |
-| `resultsTablePreferences` | - | - | - | - | - |
-| `riskLevel` | - | - | - | - | - |
-| `selectedThemeTemplateId` | - | - | - | - | - |
-| `settings` | - | - | - | - | - |
-| `spaceId` | - | - | - | - | - |
-| `theme` | - | - | - | - | - |
-| `typebot` | - | - | - | - | - |
-| `updatedAt` | - | - | - | - | - |
-| `variables` | - | - | - | - | - |
-| `version` | - | - | Yes | Yes | - |
-| `warnings` | - | - | - | - | - |
-| `whatsAppCredentialsId` | - | - | - | - | - |
-| `workspaceId` | - | - | - | - | - |
+| `workspaceId` | `str` | Yes |  |
 
 ### Operations
 
@@ -515,10 +448,8 @@ result = client.Typebot().create({
     "id": "example_id",  # str
     "isArchived": True,  # bool
     "isClosed": True,  # bool
-    "message": "example_message",  # Any
     "name": "example_name",  # str
     "publicId": "example_publicId",  # Any
-    "publishedTypebot": "example_publishedTypebot",  # Any
     "resultsTablePreferences": "example_resultsTablePreferences",  # Any
     "riskLevel": "example_riskLevel",  # Any
     "selectedThemeTemplateId": "example_selectedThemeTemplateId",  # Any
@@ -528,6 +459,7 @@ result = client.Typebot().create({
     "typebot": {},  # dict
     "updatedAt": "example_updatedAt",  # str
     "variables": [],  # list
+    "version": "example_version",  # str
     "whatsAppCredentialsId": "example_whatsAppCredentialsId",  # Any
     "workspaceId": "example_workspaceId",  # str
 })
@@ -623,13 +555,9 @@ workspace = client.Workspace()
 | `lastActivityAt` | `Any` | Yes |  |
 | `name` | `str` | Yes |  |
 | `plan` | `str` | Yes |  |
-| `role` | `str` | Yes |  |
 | `settings` | `Any` | Yes |  |
 | `stripeId` | `Any` | Yes |  |
 | `updatedAt` | `str` | Yes |  |
-| `user` | `dict` | Yes |  |
-| `userId` | `str` | Yes |  |
-| `workspaceId` | `str` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -649,13 +577,9 @@ workspace = client.Workspace()
 | `lastActivityAt` | - | - | - | - | - |
 | `name` | - | - | - | Yes | - |
 | `plan` | - | - | - | - | - |
-| `role` | - | - | - | - | - |
 | `settings` | - | - | - | - | - |
 | `stripeId` | - | - | - | - | - |
 | `updatedAt` | - | - | - | - | - |
-| `user` | - | - | - | - | - |
-| `userId` | - | - | - | - | - |
-| `workspaceId` | - | - | - | - | - |
 
 ### Operations
 
@@ -679,13 +603,9 @@ result = client.Workspace().create({
     "lastActivityAt": "example_lastActivityAt",  # Any
     "name": "example_name",  # str
     "plan": "example_plan",  # str
-    "role": "example_role",  # str
     "settings": "example_settings",  # Any
     "stripeId": "example_stripeId",  # Any
     "updatedAt": "example_updatedAt",  # str
-    "user": {},  # dict
-    "userId": "example_userId",  # str
-    "workspaceId": "example_workspaceId",  # str
 })
 ```
 
@@ -759,14 +679,14 @@ Return the entity name.
 
 | Feature | Version | Description |
 | --- | --- | --- |
-| `debug` | 0.0.1 | Request/response capture ring buffer for debugging |
-| `idempotency` | 0.0.1 | Idempotency keys for safe retries of mutating operations |
-| `metrics` | 0.0.1 | Statistics capture: per-operation counters and latency |
-| `paging` | 0.0.1 | Pagination signals for list operations |
-| `ratelimit` | 0.0.1 | Client-side rate limiting via a token bucket |
-| `retry` | 0.0.1 | Automatic retry of transient failures with exponential backoff |
-| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
-| `timeout` | 0.0.1 | Per-request timeout with transport abort |
+| `debug` | 0.0.1 | Debug capture |
+| `idempotency` | 0.0.1 | Idempotency |
+| `metrics` | 0.0.1 | Metrics |
+| `paging` | 0.0.1 | Paging |
+| `ratelimit` | 0.0.1 | Rate limiting |
+| `retry` | 0.0.1 | Retry |
+| `test` | 0.0.1 | Test transport |
+| `timeout` | 0.0.1 | Timeout |
 
 
 Features are activated via the `feature` option:
@@ -812,7 +732,7 @@ rather than the transport, so their order does not affect what they observe.
 
 #### `debug`
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 **Configuration**
 
@@ -843,7 +763,7 @@ its default unless you name it.
 
 #### `idempotency`
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 **Configuration**
 
@@ -874,7 +794,7 @@ its default unless you name it.
 
 #### `metrics`
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 **Configuration**
 
@@ -902,7 +822,7 @@ its default unless you name it.
 
 #### `paging`
 
-Pagination signals for list operations.
+Paging.
 
 **Configuration**
 
@@ -937,7 +857,7 @@ its default unless you name it.
 
 #### `ratelimit`
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 **Configuration**
 
@@ -968,7 +888,7 @@ its default unless you name it.
 
 #### `retry`
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 **Configuration**
 
@@ -1002,7 +922,7 @@ its default unless you name it.
 
 #### `test`
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 **Configuration**
 
@@ -1033,7 +953,7 @@ its default unless you name it.
 
 #### `timeout`
 
-Per-request timeout with transport abort.
+Timeout.
 
 **Configuration**
 

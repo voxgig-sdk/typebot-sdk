@@ -109,14 +109,6 @@ Prepare a fetch definition without sending the request. Returns the
 $analytics = $client->Analytics();
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `totalCompleted` | `float` | Yes |  |
-| `totalStarts` | `float` | Yes |  |
-| `totalViews` | `float` | Yes |  |
-
 ### Operations
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -162,18 +154,6 @@ Return the entity name.
 ```php
 $billing = $client->Billing();
 ```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `amount` | `float` | Yes |  |
-| `currency` | `string` | Yes |  |
-| `date` | `mixed` | Yes |  |
-| `id` | `string` | Yes |  |
-| `resetsAt` | `string` | Yes |  |
-| `totalChatsUsed` | `float` | Yes |  |
-| `url` | `string` | Yes |  |
 
 ### Operations
 
@@ -349,17 +329,12 @@ $result = $client->Result();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `answers` | `array` | Yes |  |
-| `context` | `mixed` | Yes |  |
 | `createdAt` | `string` | Yes |  |
-| `description` | `string` | Yes |  |
-| `details` | `mixed` | Yes |  |
 | `hasStarted` | `mixed` | Yes |  |
 | `id` | `string` | Yes |  |
 | `isArchived` | `mixed` | Yes |  |
 | `isCompleted` | `bool` | Yes |  |
 | `lastChatSessionId` | `mixed` | Yes |  |
-| `resultId` | `string` | Yes |  |
-| `status` | `string` | Yes |  |
 | `typebotId` | `string` | Yes |  |
 | `variables` | `array` | Yes |  |
 
@@ -433,20 +408,16 @@ $typebot = $client->Typebot();
 | `createdAt` | `string` | Yes |  |
 | `customDomain` | `mixed` | Yes |  |
 | `edges` | `array` | Yes |  |
-| `enableSafetyFlags` | `bool` | No |  |
 | `events` | `array` | Yes |  |
 | `folderId` | `mixed` | Yes |  |
-| `fromTemplate` | `string` | No |  |
 | `groups` | `array` | Yes |  |
 | `icon` | `mixed` | Yes |  |
 | `id` | `string` | Yes |  |
 | `isArchived` | `bool` | Yes |  |
 | `isClosed` | `bool` | Yes |  |
-| `message` | `mixed` | Yes |  |
 | `name` | `string` | Yes |  |
 | `overwrite` | `bool` | No | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `mixed` | Yes |  |
-| `publishedTypebot` | `mixed` | Yes |  |
 | `publishedTypebotId` | `string` | No |  |
 | `resultsTablePreferences` | `mixed` | Yes |  |
 | `riskLevel` | `mixed` | Yes |  |
@@ -457,47 +428,9 @@ $typebot = $client->Typebot();
 | `typebot` | `array` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 | `variables` | `array` | Yes |  |
-| `version` | `mixed` | No | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
-| `warnings` | `array` | No |  |
+| `version` | `string` | Yes |  |
 | `whatsAppCredentialsId` | `mixed` | Yes |  |
-| `workspaceId` | `string` | Yes | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
-
-### Field Usage by Operation
-
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `accessRight` | - | - | - | - | - |
-| `createdAt` | - | - | - | - | - |
-| `customDomain` | - | - | - | - | - |
-| `edges` | - | - | - | - | - |
-| `enableSafetyFlags` | - | - | - | - | - |
-| `events` | - | - | - | - | - |
-| `folderId` | - | - | - | - | - |
-| `fromTemplate` | - | - | - | - | - |
-| `groups` | - | - | - | - | - |
-| `icon` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `isArchived` | - | - | - | - | - |
-| `isClosed` | - | - | - | - | - |
-| `message` | - | - | - | - | - |
-| `name` | - | - | - | - | - |
-| `overwrite` | - | - | - | - | - |
-| `publicId` | - | - | - | - | - |
-| `publishedTypebot` | - | - | - | - | - |
-| `publishedTypebotId` | - | - | - | - | - |
-| `resultsTablePreferences` | - | - | - | - | - |
-| `riskLevel` | - | - | - | - | - |
-| `selectedThemeTemplateId` | - | - | - | - | - |
-| `settings` | - | - | - | - | - |
-| `spaceId` | - | - | - | - | - |
-| `theme` | - | - | - | - | - |
-| `typebot` | - | - | - | - | - |
-| `updatedAt` | - | - | - | - | - |
-| `variables` | - | - | - | - | - |
-| `version` | - | - | Yes | Yes | - |
-| `warnings` | - | - | - | - | - |
-| `whatsAppCredentialsId` | - | - | - | - | - |
-| `workspaceId` | - | - | - | - | - |
+| `workspaceId` | `string` | Yes |  |
 
 ### Operations
 
@@ -518,10 +451,8 @@ $result = $client->Typebot()->create([
   "id" => null, // string
   "isArchived" => null, // bool
   "isClosed" => null, // bool
-  "message" => null, // mixed
   "name" => null, // string
   "publicId" => null, // mixed
-  "publishedTypebot" => null, // mixed
   "resultsTablePreferences" => null, // mixed
   "riskLevel" => null, // mixed
   "selectedThemeTemplateId" => null, // mixed
@@ -531,6 +462,7 @@ $result = $client->Typebot()->create([
   "typebot" => null, // array
   "updatedAt" => null, // string
   "variables" => null, // array
+  "version" => null, // string
   "whatsAppCredentialsId" => null, // mixed
   "workspaceId" => null, // string
 ]);
@@ -625,13 +557,9 @@ $workspace = $client->Workspace();
 | `lastActivityAt` | `mixed` | Yes |  |
 | `name` | `string` | Yes |  |
 | `plan` | `string` | Yes |  |
-| `role` | `string` | Yes |  |
 | `settings` | `mixed` | Yes |  |
 | `stripeId` | `mixed` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
-| `user` | `array` | Yes |  |
-| `userId` | `string` | Yes |  |
-| `workspaceId` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -651,13 +579,9 @@ $workspace = $client->Workspace();
 | `lastActivityAt` | - | - | - | - | - |
 | `name` | - | - | - | Yes | - |
 | `plan` | - | - | - | - | - |
-| `role` | - | - | - | - | - |
 | `settings` | - | - | - | - | - |
 | `stripeId` | - | - | - | - | - |
 | `updatedAt` | - | - | - | - | - |
-| `user` | - | - | - | - | - |
-| `userId` | - | - | - | - | - |
-| `workspaceId` | - | - | - | - | - |
 
 ### Operations
 
@@ -681,13 +605,9 @@ $result = $client->Workspace()->create([
   "lastActivityAt" => null, // mixed
   "name" => null, // string
   "plan" => null, // string
-  "role" => null, // string
   "settings" => null, // mixed
   "stripeId" => null, // mixed
   "updatedAt" => null, // string
-  "user" => null, // array
-  "userId" => null, // string
-  "workspaceId" => null, // string
 ]);
 ```
 
@@ -760,14 +680,14 @@ Return the entity name.
 
 | Feature | Version | Description |
 | --- | --- | --- |
-| `debug` | 0.0.1 | Request/response capture ring buffer for debugging |
-| `idempotency` | 0.0.1 | Idempotency keys for safe retries of mutating operations |
-| `metrics` | 0.0.1 | Statistics capture: per-operation counters and latency |
-| `paging` | 0.0.1 | Pagination signals for list operations |
-| `ratelimit` | 0.0.1 | Client-side rate limiting via a token bucket |
-| `retry` | 0.0.1 | Automatic retry of transient failures with exponential backoff |
-| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
-| `timeout` | 0.0.1 | Per-request timeout with transport abort |
+| `debug` | 0.0.1 | Debug capture |
+| `idempotency` | 0.0.1 | Idempotency |
+| `metrics` | 0.0.1 | Metrics |
+| `paging` | 0.0.1 | Paging |
+| `ratelimit` | 0.0.1 | Rate limiting |
+| `retry` | 0.0.1 | Retry |
+| `test` | 0.0.1 | Test transport |
+| `timeout` | 0.0.1 | Timeout |
 
 
 Features are activated via the `feature` option:
@@ -813,7 +733,7 @@ rather than the transport, so their order does not affect what they observe.
 
 #### `debug`
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 **Configuration**
 
@@ -844,7 +764,7 @@ its default unless you name it.
 
 #### `idempotency`
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 **Configuration**
 
@@ -875,7 +795,7 @@ its default unless you name it.
 
 #### `metrics`
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 **Configuration**
 
@@ -903,7 +823,7 @@ its default unless you name it.
 
 #### `paging`
 
-Pagination signals for list operations.
+Paging.
 
 **Configuration**
 
@@ -938,7 +858,7 @@ its default unless you name it.
 
 #### `ratelimit`
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 **Configuration**
 
@@ -969,7 +889,7 @@ its default unless you name it.
 
 #### `retry`
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 **Configuration**
 
@@ -1003,7 +923,7 @@ its default unless you name it.
 
 #### `test`
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 **Configuration**
 
@@ -1034,7 +954,7 @@ its default unless you name it.
 
 #### `timeout`
 
-Per-request timeout with transport abort.
+Timeout.
 
 **Configuration**
 

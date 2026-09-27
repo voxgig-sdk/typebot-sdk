@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { TypebotSDK } from '@voxgig-sdk/typebot'
+import { TypebotSDK } from '@voxgig-sdk/typebot-sdk'
 
 const client = new TypebotSDK({
   apikey: process.env.TYPEBOT_APIKEY,
@@ -58,8 +58,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const billings = await client.Billing().list()
-  console.log(billings)
+  const folders = await client.Folder().list()
+  console.log(folders)
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -125,10 +125,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = TypebotSDK.test()
 
-const billing = await client.Billing().list()
-// billing is the entity, populated with mock response data
-// — call billing.data() for the record itself
-console.log(billing)
+const folder = await client.Folder().list()
+// folder is the entity, populated with mock response data
+// — call folder.data() for the record itself
+console.log(folder)
 ```
 
 You can also use the instance method:
@@ -143,7 +143,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Billing()
+const entity = client.Folder()
 
 // First call runs the operation and stores its result
 await entity.list()
@@ -311,9 +311,6 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `totalCompleted` |  |
-| `totalStarts` |  |
-| `totalViews` |  |
 
 Operations: load.
 
@@ -323,13 +320,6 @@ API path: `/v1/typebots/{typebotId}/analytics/stats`
 
 | Field | Description |
 | --- | --- |
-| `amount` |  |
-| `currency` |  |
-| `date` |  |
-| `id` |  |
-| `resetsAt` |  |
-| `totalChatsUsed` |  |
-| `url` |  |
 
 Operations: list, load.
 
@@ -357,17 +347,12 @@ API path: `/v1/folders`
 | Field | Description |
 | --- | --- |
 | `answers` |  |
-| `context` |  |
 | `createdAt` |  |
-| `description` |  |
-| `details` |  |
 | `hasStarted` |  |
 | `id` |  |
 | `isArchived` |  |
 | `isCompleted` |  |
 | `lastChatSessionId` |  |
-| `resultId` |  |
-| `status` |  |
 | `typebotId` |  |
 | `variables` |  |
 
@@ -383,20 +368,16 @@ API path: `/v1/typebots/{typebotId}/results`
 | `createdAt` |  |
 | `customDomain` |  |
 | `edges` |  |
-| `enableSafetyFlags` |  |
 | `events` |  |
 | `folderId` |  |
-| `fromTemplate` |  |
 | `groups` |  |
 | `icon` |  |
 | `id` |  |
 | `isArchived` |  |
 | `isClosed` |  |
-| `message` |  |
 | `name` |  |
 | `overwrite` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` |  |
-| `publishedTypebot` |  |
 | `publishedTypebotId` |  |
 | `resultsTablePreferences` |  |
 | `riskLevel` |  |
@@ -407,10 +388,9 @@ API path: `/v1/typebots/{typebotId}/results`
 | `typebot` |  |
 | `updatedAt` |  |
 | `variables` |  |
-| `version` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
-| `warnings` |  |
+| `version` |  |
 | `whatsAppCredentialsId` |  |
-| `workspaceId` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
+| `workspaceId` |  |
 
 Operations: create, list, load, remove, update.
 
@@ -434,13 +414,9 @@ API path: `/v1/typebots/{typebotId}/publish`
 | `lastActivityAt` |  |
 | `name` |  |
 | `plan` |  |
-| `role` |  |
 | `settings` |  |
 | `stripeId` |  |
 | `updatedAt` |  |
-| `user` |  |
-| `userId` |  |
-| `workspaceId` |  |
 
 Operations: create, list, load, remove, update.
 
@@ -461,14 +437,6 @@ Create an instance: `const analytics = client.Analytics()`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `totalCompleted` | `number` |  |
-| `totalStarts` | `number` |  |
-| `totalViews` | `number` |  |
-
 #### Example: Load
 
 ```ts
@@ -486,18 +454,6 @@ Create an instance: `const billing = client.Billing()`
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `amount` | `number` |  |
-| `currency` | `string` |  |
-| `date` | `any` |  |
-| `id` | `string` |  |
-| `resetsAt` | `string` |  |
-| `totalChatsUsed` | `number` |  |
-| `url` | `string` |  |
 
 #### Example: Load
 
@@ -583,17 +539,12 @@ Create an instance: `const result = client.Result()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `answers` | `any[]` |  |
-| `context` | `any` |  |
 | `createdAt` | `string` |  |
-| `description` | `string` |  |
-| `details` | `any` |  |
 | `hasStarted` | `any` |  |
 | `id` | `string` |  |
 | `isArchived` | `any` |  |
 | `isCompleted` | `boolean` |  |
 | `lastChatSessionId` | `any` |  |
-| `resultId` | `string` |  |
-| `status` | `string` |  |
 | `typebotId` | `string` |  |
 | `variables` | `any[]` |  |
 
@@ -632,20 +583,16 @@ Create an instance: `const typebot = client.Typebot()`
 | `createdAt` | `string` |  |
 | `customDomain` | `any` |  |
 | `edges` | `any[]` |  |
-| `enableSafetyFlags` | `boolean` |  |
 | `events` | `any[]` |  |
 | `folderId` | `any` |  |
-| `fromTemplate` | `string` |  |
 | `groups` | `any[]` |  |
 | `icon` | `any` |  |
 | `id` | `string` |  |
 | `isArchived` | `boolean` |  |
 | `isClosed` | `boolean` |  |
-| `message` | `any` |  |
 | `name` | `string` |  |
 | `overwrite` | `boolean` | If true, even if we detect a conflict, we will overwrite push the updates to the typebot |
 | `publicId` | `any` |  |
-| `publishedTypebot` | `any` |  |
 | `publishedTypebotId` | `string` |  |
 | `resultsTablePreferences` | `any` |  |
 | `riskLevel` | `any` |  |
@@ -656,10 +603,9 @@ Create an instance: `const typebot = client.Typebot()`
 | `typebot` | `Record<string, any>` |  |
 | `updatedAt` | `string` |  |
 | `variables` | `any[]` |  |
-| `version` | `any` | Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`. |
-| `warnings` | `any[]` |  |
+| `version` | `string` |  |
 | `whatsAppCredentialsId` | `any` |  |
-| `workspaceId` | `string` | [Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid) |
+| `workspaceId` | `string` |  |
 
 #### Example: Load
 
@@ -688,10 +634,8 @@ const typebot = await client.Typebot().create({
   id: 'example_id',
   isArchived: true,
   isClosed: true,
-  message: 'example_message',
   name: 'example_name',
   publicId: 'example_publicId',
-  publishedTypebot: 'example_publishedTypebot',
   resultsTablePreferences: 'example_resultsTablePreferences',
   riskLevel: 'example_riskLevel',
   selectedThemeTemplateId: 'example_selectedThemeTemplateId',
@@ -701,6 +645,7 @@ const typebot = await client.Typebot().create({
   typebot: {},
   updatedAt: 'example_updatedAt',
   variables: [],
+  version: 'example_version',
   whatsAppCredentialsId: 'example_whatsAppCredentialsId',
   workspaceId: 'example_workspaceId',
 })
@@ -739,13 +684,9 @@ Create an instance: `const workspace = client.Workspace()`
 | `lastActivityAt` | `any` |  |
 | `name` | `string` |  |
 | `plan` | `string` |  |
-| `role` | `string` |  |
 | `settings` | `any` |  |
 | `stripeId` | `any` |  |
 | `updatedAt` | `string` |  |
-| `user` | `Record<string, any>` |  |
-| `userId` | `string` |  |
-| `workspaceId` | `string` |  |
 
 #### Example: Load
 
@@ -777,13 +718,9 @@ const workspace = await client.Workspace().create({
   lastActivityAt: 'example_lastActivityAt',
   name: 'example_name',
   plan: 'example_plan',
-  role: 'example_role',
   settings: 'example_settings',
   stripeId: 'example_stripeId',
   updatedAt: 'example_updatedAt',
-  user: {},
-  userId: 'example_userId',
-  workspaceId: 'example_workspaceId',
 })
 ```
 
@@ -798,14 +735,14 @@ above:
 
 | Feature | What it does |
 |---|---|
-| [`debug`](#debug) | Request/response capture ring buffer for debugging |
-| [`idempotency`](#idempotency) | Idempotency keys for safe retries of mutating operations |
-| [`metrics`](#metrics) | Statistics capture: per-operation counters and latency |
-| [`paging`](#paging) | Pagination signals for list operations |
-| [`ratelimit`](#ratelimit) | Client-side rate limiting via a token bucket |
-| [`retry`](#retry) | Automatic retry of transient failures with exponential backoff |
-| [`test`](#test) | In-memory mock transport for testing without a live server |
-| [`timeout`](#timeout) | Per-request timeout with transport abort |
+| [`debug`](#debug) | Debug capture |
+| [`idempotency`](#idempotency) | Idempotency |
+| [`metrics`](#metrics) | Metrics |
+| [`paging`](#paging) | Paging |
+| [`ratelimit`](#ratelimit) | Rate limiting |
+| [`retry`](#retry) | Retry |
+| [`test`](#test) | Test transport |
+| [`timeout`](#timeout) | Timeout |
 
 > **Order matters for `ratelimit`, `retry`, `timeout`.** These wrap the
 > transport, so each one wraps whatever is already installed: the order you
@@ -814,7 +751,7 @@ above:
 
 ### debug
 
-Request/response capture ring buffer for debugging.
+Debug capture.
 
 | Option | Default |
 |---|---|
@@ -826,7 +763,7 @@ Set `feature.debug.active` to enable it, then override any of the options above.
 
 ### idempotency
 
-Idempotency keys for safe retries of mutating operations.
+Idempotency.
 
 | Option | Default |
 |---|---|
@@ -839,7 +776,7 @@ Set `feature.idempotency.active` to enable it, then override any of the options 
 
 ### metrics
 
-Statistics capture: per-operation counters and latency.
+Metrics.
 
 | Option | Default |
 |---|---|
@@ -849,7 +786,7 @@ Set `feature.metrics.active` to enable it, then override any of the options abov
 
 ### paging
 
-Pagination signals for list operations.
+Paging.
 
 | Option | Default |
 |---|---|
@@ -865,7 +802,7 @@ Set `feature.paging.active` to enable it, then override any of the options above
 
 ### ratelimit
 
-Client-side rate limiting via a token bucket.
+Rate limiting.
 
 | Option | Default |
 |---|---|
@@ -881,7 +818,7 @@ activated earlier.
 
 ### retry
 
-Automatic retry of transient failures with exponential backoff.
+Retry.
 
 | Option | Default |
 |---|---|
@@ -900,7 +837,7 @@ activated earlier.
 
 ### test
 
-In-memory mock transport for testing without a live server.
+Test transport.
 
 | Option | Default |
 |---|---|
@@ -910,7 +847,7 @@ Set `feature.test.active` to enable it, then override any of the options above.
 
 ### timeout
 
-Per-request timeout with transport abort.
+Timeout.
 
 | Option | Default |
 |---|---|
@@ -926,7 +863,7 @@ activated earlier.
 
 ## Open types
 
-4 fields are carried as open values rather than typed structures.
+3 fields are carried as open values rather than typed structures.
 This follows from the API definition, not from a gap in this SDK: the
 definition describes them with untagged unions —
 `oneOf`/`anyOf` branches with no `discriminator` — so it never states which
@@ -937,7 +874,6 @@ guarantee.
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
 | `typebot` | `groups` | 19 | 14 levels |
-| `typebot` | `publishedTypebot` | 19 | 20 levels |
 | `typebot` | `typebot` | 19 | 24 levels |
 | `typebot` | `events` | 3 | 1 level |
 
@@ -983,14 +919,14 @@ a function that receives the context.
 
 The SDK ships with built-in features:
 
-- **DebugFeature**: Request/response capture ring buffer for debugging
-- **IdempotencyFeature**: Idempotency keys for safe retries of mutating operations
-- **MetricsFeature**: Statistics capture: per-operation counters and latency
-- **PagingFeature**: Pagination signals for list operations
-- **RatelimitFeature**: Client-side rate limiting via a token bucket
-- **RetryFeature**: Automatic retry of transient failures with exponential backoff
-- **TestFeature**: In-memory mock transport for testing without a live server
-- **TimeoutFeature**: Per-request timeout with transport abort
+- **DebugFeature**: Debug capture
+- **IdempotencyFeature**: Idempotency
+- **MetricsFeature**: Metrics
+- **PagingFeature**: Paging
+- **RatelimitFeature**: Rate limiting
+- **RetryFeature**: Retry
+- **TestFeature**: Test transport
+- **TimeoutFeature**: Timeout
 
 Features are initialized in order. Hooks fire in the order features
 were added, so later features can override earlier ones.
@@ -1011,7 +947,7 @@ typebot/
 Import the SDK from the package root:
 
 ```ts
-import { TypebotSDK } from '@voxgig-sdk/typebot'
+import { TypebotSDK } from '@voxgig-sdk/typebot-sdk'
 ```
 
 ### Entity state
@@ -1021,11 +957,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const billing = client.Billing()
-await billing.list()
+const folder = client.Folder()
+await folder.list()
 
-// billing.data() now returns the billing data from the last `list`
-// billing.match() returns the last match criteria
+// folder.data() now returns the folder data from the last `list`
+// folder.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
