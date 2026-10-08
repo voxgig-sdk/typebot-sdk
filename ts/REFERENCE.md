@@ -148,8 +148,10 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs.headers` | `object` | Request headers (merged with defaults). |
 | `fetchargs.body` | `any` | Request body (objects are JSON-serialized). |
 | `fetchargs.ctrl` | `object` | Control options (e.g. `{ explain: true }`). |
+| `fetchargs.ctrl.signal` | `AbortSignal` | Aborts the request in flight: `ok` is then `false` and `err.code` is `request_aborted`. |
 
-**Returns:** `Promise<{ ok, status, headers, data } | Error>`
+**Returns:** `Promise<{ ok, status, headers, data }>`. On a failure
+`ok` is `false` and `err` holds the error.
 
 #### `prepare(fetchargs?: object)`
 
@@ -163,6 +165,15 @@ same parameters as `direct()`.
 Alias for `TypebotSDK.test()`.
 
 **Returns:** `TypebotSDK` instance in test mode.
+
+#### Cancelling a call
+
+Every entity operation takes an optional `ctrl` object after its match or
+data, and an `AbortSignal` in `ctrl.signal` cancels the request in flight.
+The operation then rejects with an error whose `code` is
+`request_aborted` and whose `cause` is the signal's reason. A request
+whose signal has already aborted is not sent. `stream()` takes the signal
+as `callopts.signal`, and ends when it aborts.
 
 
 ---
@@ -197,7 +208,7 @@ const result = await client.Analytics().load({
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Analytics().load({ typebot_id: 'typebot_id' })
@@ -262,7 +273,7 @@ const result = await client.Billing().list({
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Billing().list({ workspace_id: "example" })
@@ -270,7 +281,7 @@ const results = await client.Billing().list({ workspace_id: "example" })
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Billing().load({ workspace_id: 'workspace_id' })
@@ -340,7 +351,7 @@ const folder = client.Folder()
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.Folder().create({
@@ -356,7 +367,7 @@ const result = await client.Folder().create({
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Folder().list({ workspace_id: "example" })
@@ -364,7 +375,7 @@ const results = await client.Folder().list({ workspace_id: "example" })
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Folder().load({ id: 'folder_id', workspace_id: 'workspace_id' })
@@ -372,7 +383,7 @@ const result = await client.Folder().load({ id: 'folder_id', workspace_id: 'work
 
 #### `remove(match: object, ctrl?: object)`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Resolves to the entity, marked as deleted.
 
 ```ts
 const result = await client.Folder().remove({ id: 'folder_id' })
@@ -380,7 +391,7 @@ const result = await client.Folder().remove({ id: 'folder_id' })
 
 #### `update(data: object, ctrl?: object)`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Resolves to the updated entity.
 
 ```ts
 const result = await client.Folder().update({
@@ -461,7 +472,7 @@ const result = await client.Result().list({
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Result().list({ typebot_id: "example" })
@@ -469,7 +480,7 @@ const results = await client.Result().list({ typebot_id: "example" })
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Result().load({ id: 'result_id', typebot_id: 'typebot_id' })
@@ -477,7 +488,7 @@ const result = await client.Result().load({ id: 'result_id', typebot_id: 'typebo
 
 #### `remove(match: object, ctrl?: object)`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Resolves to the entity, marked as deleted.
 
 ```ts
 const result = await client.Result().remove({ typebot_id: 'typebot_id' })
@@ -523,6 +534,7 @@ const typebot = client.Typebot()
 | --- | --- | --- | --- |
 | `accessRight` | `string` | Yes |  |
 | `createdAt` | `string` | Yes |  |
+| `currentUserMode` | `string` | Yes |  |
 | `customDomain` | `any` | Yes |  |
 | `edges` | `any[]` | Yes |  |
 | `events` | `any[]` | Yes |  |
@@ -542,7 +554,7 @@ const typebot = client.Typebot()
 | `settings` | `Record<string, any>` | Yes |  |
 | `spaceId` | `any` | Yes |  |
 | `theme` | `Record<string, any>` | Yes |  |
-| `typebot` | `Record<string, any>` | Yes |  |
+| `typebot` | `any` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 | `variables` | `any[]` | Yes |  |
 | `version` | `string` | Yes |  |
@@ -576,12 +588,13 @@ const result = await client.Typebot().create({
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.Typebot().create({
   accessRight: 'example_accessRight',
   createdAt: 'example_createdAt',
+  currentUserMode: 'example_currentUserMode',
   customDomain: 'example_customDomain',
   edges: [],
   events: [],
@@ -599,7 +612,7 @@ const result = await client.Typebot().create({
   settings: {},
   spaceId: 'example_spaceId',
   theme: {},
-  typebot: {},
+  typebot: 'example_typebot',
   updatedAt: 'example_updatedAt',
   variables: [],
   version: 'example_version',
@@ -610,7 +623,7 @@ const result = await client.Typebot().create({
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Typebot().list({ workspace_id: "example" })
@@ -618,7 +631,7 @@ const results = await client.Typebot().list({ workspace_id: "example" })
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Typebot().load({ id: 'typebot_id' })
@@ -626,7 +639,7 @@ const result = await client.Typebot().load({ id: 'typebot_id' })
 
 #### `remove(match: object, ctrl?: object)`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Resolves to the entity, marked as deleted.
 
 ```ts
 const result = await client.Typebot().remove({ id: 'typebot_id' })
@@ -634,7 +647,7 @@ const result = await client.Typebot().remove({ id: 'typebot_id' })
 
 #### `update(data: object, ctrl?: object)`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Resolves to the updated entity.
 
 ```ts
 const result = await client.Typebot().update({
@@ -683,8 +696,7 @@ const workspace = client.Workspace()
 | --- | --- | --- | --- |
 | `chatsHardLimit` | `any` | Yes |  |
 | `createdAt` | `string` | Yes |  |
-| `customChatsLimit` | `any` | Yes |  |
-| `customSeatsLimit` | `any` | Yes |  |
+| `currentUserMode` | `string` | Yes |  |
 | `icon` | `any` | Yes |  |
 | `id` | `string` | Yes |  |
 | `inactiveFirstEmailSentAt` | `any` | Yes |  |
@@ -698,6 +710,7 @@ const workspace = client.Workspace()
 | `settings` | `any` | Yes |  |
 | `stripeId` | `any` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
+| `workspace` | `Record<string, any>` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -705,8 +718,7 @@ const workspace = client.Workspace()
 | --- | --- | --- | --- | --- | --- |
 | `chatsHardLimit` | - | - | - | - | - |
 | `createdAt` | - | - | - | - | - |
-| `customChatsLimit` | - | - | - | - | - |
-| `customSeatsLimit` | - | - | - | - | - |
+| `currentUserMode` | - | - | - | - | - |
 | `icon` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
 | `inactiveFirstEmailSentAt` | - | - | - | - | - |
@@ -720,6 +732,7 @@ const workspace = client.Workspace()
 | `settings` | - | - | - | - | - |
 | `stripeId` | - | - | - | - | - |
 | `updatedAt` | - | - | - | - | - |
+| `workspace` | - | - | - | - | - |
 
 ### Actions
 
@@ -745,14 +758,13 @@ const result = await client.Workspace().list({
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.Workspace().create({
   chatsHardLimit: 'example_chatsHardLimit',
   createdAt: 'example_createdAt',
-  customChatsLimit: 'example_customChatsLimit',
-  customSeatsLimit: 'example_customSeatsLimit',
+  currentUserMode: 'example_currentUserMode',
   icon: 'example_icon',
   id: 'example_id',
   inactiveFirstEmailSentAt: 'example_inactiveFirstEmailSentAt',
@@ -766,12 +778,13 @@ const result = await client.Workspace().create({
   settings: 'example_settings',
   stripeId: 'example_stripeId',
   updatedAt: 'example_updatedAt',
+  workspace: {},
 })
 ```
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Workspace().list()
@@ -779,7 +792,7 @@ const results = await client.Workspace().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Workspace().load({ id: 'workspace_id' })
@@ -787,7 +800,7 @@ const result = await client.Workspace().load({ id: 'workspace_id' })
 
 #### `remove(match: object, ctrl?: object)`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Resolves to the entity, marked as deleted.
 
 ```ts
 const result = await client.Workspace().remove({ id: 'workspace_id' })
@@ -795,7 +808,7 @@ const result = await client.Workspace().remove({ id: 'workspace_id' })
 
 #### `update(data: object, ctrl?: object)`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Resolves to the updated entity.
 
 ```ts
 const result = await client.Workspace().update({
@@ -1122,6 +1135,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

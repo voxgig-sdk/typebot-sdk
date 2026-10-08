@@ -79,90 +79,6 @@ main: kit: entity: result: {
       points: [
         {
           co: {
-            id: "GET /v1/typebots/{typebotId}/results"
-            source: "openapi3"
-            version: 2
-          }
-          g: {
-            params: [
-              {
-                k: "param"
-                n: "typebot_id"
-                or: "typebot_id"
-                r: true
-                t: "`$STRING`"
-              }
-            ]
-            query: [
-              {
-                k: "query"
-                n: "cursor"
-                or: "cursor"
-                r: false
-                t: "`$NUMBER`"
-              }
-              {
-                ex: 50
-                k: "query"
-                n: "limit"
-                or: "limit"
-                r: false
-                t: "`$NUMBER`"
-              }
-              {
-                ex: "last7Days"
-                k: "query"
-                n: "time_filter"
-                or: "time_filter"
-                r: false
-                t: "`$STRING`"
-              }
-              {
-                k: "query"
-                n: "time_zone"
-                or: "time_zone"
-                r: false
-                t: "`$STRING`"
-              }
-            ]
-          }
-          m: "GET"
-          o: "/v1/typebots/{typebotId}/results"
-          q: {
-            exist: [
-              "cursor"
-              "limit"
-              "time_filter"
-              "time_zone"
-              "typebot_id"
-            ]
-          }
-          r: {
-            param: {
-              typebotId: "typebot_id"
-            }
-          }
-          s: [
-            {
-              lit: "v1"
-            }
-            {
-              lit: "typebots"
-            }
-            {
-              var: "typebot_id"
-            }
-            {
-              lit: "results"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
-          }
-        }
-        {
-          co: {
             id: "GET /v1/typebots/{typebotId}/results/{resultId}/logs"
             source: "openapi3"
             version: 2
@@ -172,14 +88,14 @@ main: kit: entity: result: {
               {
                 k: "param"
                 n: "id"
-                or: "result_id"
+                or: "resultId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "typebot_id"
-                or: "typebot_id"
+                or: "typebotId"
                 r: true
                 t: "`$STRING`"
               }
@@ -199,6 +115,10 @@ main: kit: entity: result: {
               resultId: "id"
               typebotId: "typebot_id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -225,6 +145,90 @@ main: kit: entity: result: {
             res: "`body.logs`"
           }
         }
+        {
+          co: {
+            id: "GET /v1/typebots/{typebotId}/results"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "typebot_id"
+                or: "typebotId"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "cursor"
+                or: "cursor"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 50
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: "last7Days"
+                k: "query"
+                n: "time_filter"
+                or: "timeFilter"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "time_zone"
+                or: "timeZone"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v1/typebots/{typebotId}/results"
+          q: {
+            exist: [
+              "typebot_id"
+            ]
+          }
+          r: {
+            param: {
+              typebotId: "typebot_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "v1"
+            }
+            {
+              lit: "typebots"
+            }
+            {
+              var: "typebot_id"
+            }
+            {
+              lit: "results"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
       ]
     }
     load: {
@@ -241,14 +245,14 @@ main: kit: entity: result: {
               {
                 k: "param"
                 n: "id"
-                or: "result_id"
+                or: "resultId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "typebot_id"
-                or: "typebot_id"
+                or: "typebotId"
                 r: true
                 t: "`$STRING`"
               }
@@ -267,6 +271,10 @@ main: kit: entity: result: {
               resultId: "id"
               typebotId: "typebot_id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -296,6 +304,9 @@ main: kit: entity: result: {
       name: "remove"
       points: [
         {
+          bf: [
+            "resultIds"
+          ]
           co: {
             id: "DELETE /v1/typebots/{typebotId}/results"
             source: "openapi3"
@@ -306,7 +317,7 @@ main: kit: entity: result: {
               {
                 k: "param"
                 n: "typebot_id"
-                or: "typebot_id"
+                or: "typebotId"
                 r: true
                 t: "`$STRING`"
               }
@@ -323,6 +334,10 @@ main: kit: entity: result: {
             param: {
               typebotId: "typebot_id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

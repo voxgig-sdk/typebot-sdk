@@ -21,6 +21,7 @@ export TYPEBOT_APIKEY=sk_live_xxx
 # 4. Each command line is ONE boru expression, run against the API:
 ./typebot-cli load 1 analytics            # {id:1} shorthand
 ./typebot-cli load '{id:1}' analytics       # explicit match map
+./typebot-cli list billing
 
 # 5. Override the API base URL for a single call
 TYPEBOT_BASE=https://api.example.com ./typebot-cli load 1 analytics

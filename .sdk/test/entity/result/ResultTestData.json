@@ -54,12 +54,12 @@
     }
   },
   "requests": {
-    "GET /v1/typebots/{typebotId}/results": {
+    "GET /v1/typebots/{typebotId}/results/{resultId}/logs": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"
     },
-    "GET /v1/typebots/{typebotId}/results/{resultId}/logs": {
+    "GET /v1/typebots/{typebotId}/results": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

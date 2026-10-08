@@ -10,7 +10,7 @@ Learn more about Voxgig SDKs at [voxgig.com/sdk](https://voxgig.com/sdk/).
 
 > TypeScript, Python, PHP, Golang, Lua, JavaScript SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
+> **Features:** `debug`, `idempotency`, `metrics`, `paging`, `ratelimit`, `retry`, `test`, `timeout` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
@@ -43,22 +43,21 @@ network, and no credentials:
 const client = TypebotSDK.test({
   entity: {
     folder: {
-      test01: { id: 'test01', createdAt: 'example_createdAt', folder: {} },
+      test01: { id: 'test01', createdAt: 'example_createdAt', folder: {}, workspace_id: 'example_workspace_id' },
     },
   },
 })
-const folders = await client.Folder().list()
-// folders is an array of Folder entities, populated with mock data
-// — call folders[0].data() for the record itself
-console.log(folders)
+const folders = await client.Folder().list({ workspace_id: 'example_workspace_id' })
+// folders is an array of Folder entities, one per mock record
+console.log(folders.map((folder) => folder.data()))
 ```
 
 ### Python
 
 ```python
 client = TypebotSDK.test()
-folders = client.Folder().list()
-print(folders)
+folders = client.Folder().list({"workspace_id": "example"})
+print([item.data_get() for item in folders])
 ```
 
 ### PHP
@@ -66,9 +65,9 @@ print(folders)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = TypebotSDK::test([
-    "entity" => ["folder" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["folder" => ["test01" => ["id" => "test01", "workspace_id" => "example"]]],
 ]);
-$folders = $client->Folder()->list();
+$folders = $client->Folder()->list(["workspace_id" => "example"]);
 ```
 
 ### Golang
@@ -76,7 +75,7 @@ $folders = $client->Folder()->list();
 ```go
 client := sdk.Test()
 result, err := client.Folder(nil).List(
-    nil, nil,
+    map[string]any{"workspace_id": "example"}, nil,
 )
 ```
 
@@ -84,31 +83,30 @@ result, err := client.Folder(nil).List(
 
 ```lua
 local client = sdk.test()
-local results, err = client:Folder():list()
+local results, err = client:Folder():list({ workspace_id = "example" })
 ```
 
 ### JavaScript
 
 ```js
 const client = TypebotSDK.test()
-const folders = await client.Folder().list()
-// folders is an array of entities, populated with mock data
-// — call folders[0].data() for the record itself
-console.log(folders)
+const folders = await client.Folder().list({ workspace_id: 'example_workspace_id' })
+// folders is an array of Folder entities, one per mock record
+console.log(folders.map((folder) => folder.data()))
 ```
 
 ## Packages
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/typebot-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/typebot-sdk/tags) |
-| Python | `voxgig-sdk-typebot-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/typebot-sdk/tags) |
-| PHP | `voxgig-sdk/typebot-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/typebot-sdk/tags) |
+| TypeScript | `@voxgig-sdk/typebot-sdk` | publish pending — [install from source](ts/README.md#install) |
+| Python | `voxgig-sdk-typebot-sdk` | publish pending — [install from source](py/README.md#install) |
+| PHP | `voxgig-sdk/typebot-sdk` | publish pending — [install from source](php/README.md#install) |
 | Golang | `github.com/voxgig-sdk/typebot-sdk/go` | `go get github.com/voxgig-sdk/typebot-sdk/go@latest` |
-| Lua | `voxgig-sdk-typebot-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/typebot-sdk/tags) |
-| JavaScript | `@voxgig-sdk/typebot-sdk-js` | publish pending — [install from git tag](https://github.com/voxgig-sdk/typebot-sdk/tags) |
-| Go CLI | `github.com/voxgig-sdk/typebot-sdk/go-cli` | `go install github.com/voxgig-sdk/typebot-sdk/go-cli/cmd/typebot@latest` |
-| Go MCP server | `github.com/voxgig-sdk/typebot-sdk/go-mcp` | `go get github.com/voxgig-sdk/typebot-sdk/go-mcp@latest` |
+| Lua | `voxgig-sdk-typebot-sdk` | publish pending — [install from source](lua/README.md#install) |
+| JavaScript | `@voxgig-sdk/typebot-sdk-js` | publish pending — [install from source](js/README.md#install) |
+| Go CLI | `github.com/voxgig-sdk/typebot-sdk/go-cli` | build from source — [go-cli/README.md](go-cli/README.md) |
+| Go MCP server | `github.com/voxgig-sdk/typebot-sdk/go-mcp` | build from source — [go-mcp/README.md](go-mcp/README.md) |
 
 ## Quickstart
 
@@ -122,11 +120,11 @@ const client = new TypebotSDK({
 })
 
 
-// Load a specific analytics (returns a Analytics)
+// Load a specific analytics (returns the entity, an AnalyticsEntity)
 const analytics = await client.Analytics().load({
   typebot_id: 'example_typebot_id',
 })
-console.log(analytics)
+console.log(analytics.data())
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -141,9 +139,10 @@ See the [TypeScript README](ts/README.md) for the full guide.
 
 ## Use it from an AI agent (MCP)
 
-The generated MCP server exposes every operation in this SDK as an
-[MCP](https://modelcontextprotocol.io) tool that Claude, Cursor or Cline
-can call directly. Build and register it:
+The generated MCP server exposes this SDK's list and load operations as
+[MCP](https://modelcontextprotocol.io) tools that Claude, Cursor or Cline
+can call directly. It only reads: create, update, patch and remove become tools when the SDK's model sets
+`main: kit: target: 'go-mcp': tool: write: true`. Build and register it:
 
 ```bash
 cd go-mcp && go build -o typebot-mcp .
@@ -190,9 +189,9 @@ client = TypebotSDK({
 })
 
 
-# Load a specific analytics (returns the record, raises on error)
+# Load a specific analytics (returns the entity, raises on error)
 analytics = client.Analytics().load({"typebot_id": "example_typebot_id"})
-print(analytics)
+print(analytics.data_get())
 ```
 
 ### PHP
@@ -206,7 +205,7 @@ $client = new TypebotSDK([
 ]);
 
 
-// Load a specific analytics (returns the ENTITY; call data_get() for the record; throws on error)
+// Load a specific analytics (returns the entity; data_get() reads its record; throws on error)
 $analytics = $client->Analytics()->load(["typebot_id" => "example_typebot_id"]);
 print_r($analytics->data_get());
 ```
@@ -221,29 +220,31 @@ client := sdk.NewTypebotSDK(map[string]any{
 })
 
 
-// Load a specific analytics
+// Load a specific analytics (returns the entity; err is non-nil on failure)
 analytics, err := client.Analytics(nil).Load(
     map[string]any{"typebot_id": "example_typebot_id"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(analytics)
+fmt.Println(analytics.(sdk.Entity).Data())
 ```
 
 ### Lua
 
 ```lua
 local sdk = require("typebot_sdk")
+local json = require("dkjson")
 
 local client = sdk.new({
   apikey = os.getenv("TYPEBOT_APIKEY"),
 })
 
 
--- Load a specific analytics
+-- Load a specific analytics (returns the entity; err on failure)
 local analytics, err = client:Analytics():load({ typebot_id = "example_typebot_id" })
-print(analytics)
+if err then error(err) end
+print(json.encode(analytics:data_get()))
 ```
 
 ### JavaScript
@@ -260,7 +261,7 @@ const client = new TypebotSDK({
 const analytics = await client.Analytics().load({
   typebot_id: 'example_typebot_id',
 })
-console.log(analytics)
+console.log(analytics.data())
 ```
 
 ## Direct and prepare
@@ -286,10 +287,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
-if (result instanceof Error) {
-  throw result
+if (result.ok) {
+  console.log(result.data)
 }
-console.log(result.data)
 ```
 
 **Python:**
@@ -339,10 +339,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
-if (result instanceof Error) {
-  throw result
+if (result.ok) {
+  console.log(result.data)
 }
-console.log(result.data)
 ```
 
 ## Advanced
@@ -391,10 +390,12 @@ customizable without forking any upstream tool:
 - **Templates** (`.sdk/tm/`) and **components** (`.sdk/src/cmp/`) are
   the two layers of generation, copied into this repo: templates are the
   literal per-language source, components generate the API-shaped parts.
-- **Regeneration merges.** By default, newly generated content is
-  three-way merged into existing files, so generator updates and local
-  edits usually converge without manual conflict handling. A project can
-  opt for plain overwrite instead.
+- **Regeneration overwrites.** Each run rewrites every generated file from
+  the model, the templates and the components, so an edit made to
+  generated output is lost. Say what this project needs in its own model
+  (`.sdk/model/sdk.aontu`), or extend a target with a component of its
+  own in `.sdk/src/cmp/<target>/`, registered with `registerComponent`,
+  which `voxgig-sdkgen doctor` reports as an addition rather than drift.
 - **Custom features and entire custom targets** arrive through sdkgen
   packages (`voxgig-sdkgen package add`), on the same rails as the
   bundled languages, and `voxgig-sdkgen doctor` reports any drift from

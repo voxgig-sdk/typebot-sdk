@@ -24,7 +24,7 @@ class BillingEntity extends TypebotEntityBase {
   /**
    * @param {BillingLoadMatch} [reqmatch]
    * @param {Object} [ctrl]
-   * @returns {Promise<Billing>}
+   * @returns {Promise<BillingEntity>}
    */
   async load(reqmatch, ctrl) {
 
@@ -129,9 +129,15 @@ class BillingEntity extends TypebotEntityBase {
       return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 
@@ -149,7 +155,7 @@ class BillingEntity extends TypebotEntityBase {
   /**
    * @param {BillingListMatch} [reqmatch]
    * @param {Object} [ctrl]
-   * @returns {Promise<Billing[]>}
+   * @returns {Promise<BillingEntity[]>}
    */
   async list(reqmatch, ctrl) {
 
@@ -242,9 +248,15 @@ class BillingEntity extends TypebotEntityBase {
       return done(ctx)
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 
@@ -256,6 +268,7 @@ class BillingEntity extends TypebotEntityBase {
       }
     }
   }
+
 
 
 

@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 TypebotUtility::setRegistrar(function (TypebotUtility $u): void {
     $u->clean = [TypebotClean::class, 'call'];
+    $u->clean_add = [TypebotClean::class, 'add'];
+    $u->clean_explain = [TypebotDone::class, 'clean_explain'];
     $u->done = [TypebotDone::class, 'call'];
     $u->make_error = [TypebotMakeError::class, 'call'];
     $u->feature_add = [TypebotFeatureAdd::class, 'call'];

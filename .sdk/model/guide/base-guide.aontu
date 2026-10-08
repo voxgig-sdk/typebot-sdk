@@ -42,7 +42,6 @@ guide: {
       op: load: transform: res: *("`body.folder`")|top
       op: patch: method: *PATCH
       op: patch: transform: res: *("`body.folder`")|top
-      op: patch: transform: req: "folder": *("`reqdata`")|top
       op: remove: method: *DELETE
       op: remove: transform: res: *("`body.folder`")|top
     }
@@ -52,6 +51,7 @@ guide: {
     path: "/v1/typebots/{typebotId}/results": {
       rename: param: "typebotId": *"typebot_id"
       op: list: method: *GET
+      op: list: transform: res: *("`body.results`")|top
       op: remove: method: *DELETE
     }
     path: "/v1/typebots/{typebotId}/results/{resultId}": {
@@ -73,7 +73,6 @@ guide: {
     path: "/v1/typebots": {
       op: create: method: *POST
       op: create: transform: res: *("`body.typebot`")|top
-      op: create: transform: req: "typebot": *("`reqdata`")|top
       op: list: method: *GET
       op: list: transform: res: *("`body.typebots`")|top
     }
@@ -81,7 +80,6 @@ guide: {
       action: "import": {}
       op: create: method: *POST
       op: create: transform: res: *("`body.typebot`")|top
-      op: create: transform: req: "typebot": *("`reqdata`")|top
     }
     path: "/v1/typebots/{typebotId}": {
       rename: param: "typebotId": *"id"
@@ -89,7 +87,6 @@ guide: {
       op: load: transform: res: *("`body.typebot`")|top
       op: patch: method: *PATCH
       op: patch: transform: res: *("`body.typebot`")|top
-      op: patch: transform: req: "typebot": *("`reqdata`")|top
       op: remove: method: *DELETE
     }
     path: "/v1/typebots/{typebotId}/publish": {
@@ -101,6 +98,7 @@ guide: {
       action: "published_typebot": {}
       rename: param: "typebotId": *"id"
       op: load: method: *GET
+      op: load: transform: res: *("`body.publishedTypebot`")|top
     }
     path: "/v1/typebots/{typebotId}/unpublish": {
       action: "unpublish": {}

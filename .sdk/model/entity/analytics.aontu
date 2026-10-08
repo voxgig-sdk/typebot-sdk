@@ -20,7 +20,7 @@ main: kit: entity: analytics: {
               {
                 k: "param"
                 n: "typebot_id"
-                or: "typebot_id"
+                or: "typebotId"
                 r: true
                 t: "`$STRING`"
               }
@@ -30,14 +30,14 @@ main: kit: entity: analytics: {
                 ex: "last7Days"
                 k: "query"
                 n: "time_filter"
-                or: "time_filter"
+                or: "timeFilter"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "time_zone"
-                or: "time_zone"
+                or: "timeZone"
                 r: false
                 t: "`$STRING`"
               }
@@ -48,8 +48,6 @@ main: kit: entity: analytics: {
           q: {
             "$action": "stat"
             exist: [
-              "time_filter"
-              "time_zone"
               "typebot_id"
             ]
           }
@@ -57,6 +55,10 @@ main: kit: entity: analytics: {
             param: {
               typebotId: "typebot_id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

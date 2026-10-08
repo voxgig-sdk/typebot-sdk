@@ -53,7 +53,7 @@
         },
         "edition": {
           "github-pages": {
-            "active": true,
+            "active": false,
             "base": "node_modules/@voxgig/docgen/project/.sdk",
             "brand": {},
             "filter": {
@@ -148,7 +148,7 @@
                         "a": true,
                         "k": "param",
                         "n": "typebot_id",
-                        "or": "typebot_id",
+                        "or": "typebotId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -159,7 +159,7 @@
                         "ex": "last7Days",
                         "k": "query",
                         "n": "time_filter",
-                        "or": "time_filter",
+                        "or": "timeFilter",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -167,7 +167,7 @@
                         "a": true,
                         "k": "query",
                         "n": "time_zone",
-                        "or": "time_zone",
+                        "or": "timeZone",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -179,8 +179,6 @@
                   "q": {
                     "$action": "stat",
                     "exist": [
-                      "time_filter",
-                      "time_zone",
                       "typebot_id"
                     ]
                   },
@@ -188,6 +186,10 @@
                     "param": {
                       "typebotId": "typebot_id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -247,7 +249,7 @@
                         "a": true,
                         "k": "query",
                         "n": "workspace_id",
-                        "or": "workspace_id",
+                        "or": "workspaceId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -263,6 +265,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -298,7 +304,7 @@
                         "a": true,
                         "k": "query",
                         "n": "workspace_id",
-                        "or": "workspace_id",
+                        "or": "workspaceId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -314,6 +320,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -426,6 +436,12 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "folderName",
+                    "id",
+                    "parentFolderId",
+                    "workspaceId"
+                  ],
                   "co": {
                     "id": "POST /v1/folders",
                     "source": "openapi3",
@@ -437,6 +453,10 @@
                   "o": "/v1/folders",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -469,7 +489,7 @@
                         "a": true,
                         "k": "query",
                         "n": "parent_folder_id",
-                        "or": "parent_folder_id",
+                        "or": "parentFolderId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -477,7 +497,7 @@
                         "a": true,
                         "k": "query",
                         "n": "workspace_id",
-                        "or": "workspace_id",
+                        "or": "workspaceId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -488,11 +508,14 @@
                   "o": "/v1/folders",
                   "q": {
                     "exist": [
-                      "parent_folder_id",
                       "workspace_id"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -525,7 +548,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "folder_id",
+                        "or": "folderId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -535,7 +558,7 @@
                         "a": true,
                         "k": "query",
                         "n": "workspace_id",
-                        "or": "workspace_id",
+                        "or": "workspaceId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -554,6 +577,10 @@
                     "param": {
                       "folderId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -579,6 +606,9 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "workspaceId"
+                  ],
                   "co": {
                     "id": "DELETE /v1/folders/{folderId}",
                     "source": "openapi3",
@@ -590,7 +620,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "folder_id",
+                        "or": "folderId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -608,6 +638,10 @@
                     "param": {
                       "folderId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -633,6 +667,10 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "folder",
+                    "workspaceId"
+                  ],
                   "co": {
                     "id": "PATCH /v1/folders/{folderId}",
                     "source": "openapi3",
@@ -644,7 +682,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "folder_id",
+                        "or": "folderId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -663,6 +701,10 @@
                       "folderId": "id"
                     }
                   },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -675,9 +717,7 @@
                     }
                   ],
                   "t": {
-                    "req": {
-                      "folder": "`reqdata`"
-                    },
+                    "req": "`reqdata`",
                     "res": "`body.folder`"
                   }
                 }
@@ -777,6 +817,78 @@
                 {
                   "a": true,
                   "co": {
+                    "id": "GET /v1/typebots/{typebotId}/results/{resultId}/logs",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "resultId",
+                        "r": true,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "k": "param",
+                        "n": "typebot_id",
+                        "or": "typebotId",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v1/typebots/{typebotId}/results/{resultId}/logs",
+                  "q": {
+                    "$action": "log",
+                    "exist": [
+                      "id",
+                      "typebot_id"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "resultId": "id",
+                      "typebotId": "typebot_id"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "v1"
+                    },
+                    {
+                      "lit": "typebots"
+                    },
+                    {
+                      "var": "typebot_id"
+                    },
+                    {
+                      "lit": "results"
+                    },
+                    {
+                      "var": "id"
+                    },
+                    {
+                      "lit": "logs"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body.logs`"
+                  }
+                },
+                {
+                  "a": true,
+                  "co": {
                     "id": "GET /v1/typebots/{typebotId}/results",
                     "source": "openapi3",
                     "version": 2
@@ -787,7 +899,7 @@
                         "a": true,
                         "k": "param",
                         "n": "typebot_id",
-                        "or": "typebot_id",
+                        "or": "typebotId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -815,7 +927,7 @@
                         "ex": "last7Days",
                         "k": "query",
                         "n": "time_filter",
-                        "or": "time_filter",
+                        "or": "timeFilter",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -823,7 +935,7 @@
                         "a": true,
                         "k": "query",
                         "n": "time_zone",
-                        "or": "time_zone",
+                        "or": "timeZone",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -834,10 +946,6 @@
                   "o": "/v1/typebots/{typebotId}/results",
                   "q": {
                     "exist": [
-                      "cursor",
-                      "limit",
-                      "time_filter",
-                      "time_zone",
                       "typebot_id"
                     ]
                   },
@@ -845,6 +953,10 @@
                     "param": {
                       "typebotId": "typebot_id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -862,75 +974,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body`"
-                  }
-                },
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /v1/typebots/{typebotId}/results/{resultId}/logs",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "params": [
-                      {
-                        "a": true,
-                        "k": "param",
-                        "n": "id",
-                        "or": "result_id",
-                        "r": true,
-                        "t": "`$STRING`"
-                      },
-                      {
-                        "a": true,
-                        "k": "param",
-                        "n": "typebot_id",
-                        "or": "typebot_id",
-                        "r": true,
-                        "t": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/v1/typebots/{typebotId}/results/{resultId}/logs",
-                  "q": {
-                    "$action": "log",
-                    "exist": [
-                      "id",
-                      "typebot_id"
-                    ]
-                  },
-                  "r": {
-                    "param": {
-                      "resultId": "id",
-                      "typebotId": "typebot_id"
-                    }
-                  },
-                  "s": [
-                    {
-                      "lit": "v1"
-                    },
-                    {
-                      "lit": "typebots"
-                    },
-                    {
-                      "var": "typebot_id"
-                    },
-                    {
-                      "lit": "results"
-                    },
-                    {
-                      "var": "id"
-                    },
-                    {
-                      "lit": "logs"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body.logs`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -952,7 +996,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "result_id",
+                        "or": "resultId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -960,7 +1004,7 @@
                         "a": true,
                         "k": "param",
                         "n": "typebot_id",
-                        "or": "typebot_id",
+                        "or": "typebotId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -980,6 +1024,10 @@
                       "resultId": "id",
                       "typebotId": "typebot_id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -1011,6 +1059,9 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "resultIds"
+                  ],
                   "co": {
                     "id": "DELETE /v1/typebots/{typebotId}/results",
                     "source": "openapi3",
@@ -1022,7 +1073,7 @@
                         "a": true,
                         "k": "param",
                         "n": "typebot_id",
-                        "or": "typebot_id",
+                        "or": "typebotId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1040,6 +1091,10 @@
                     "param": {
                       "typebotId": "typebot_id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -1089,6 +1144,13 @@
               "fo": "date-time",
               "h": "Created At",
               "n": "createdAt",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "currentUserMode": {
+              "a": true,
+              "h": "Current User Mode",
+              "n": "currentUserMode",
               "r": true,
               "t": "`$STRING`"
             },
@@ -1251,11 +1313,11 @@
               "h": "Typebot",
               "n": "typebot",
               "r": true,
-              "t": "`$OBJECT`",
+              "t": "`$ANY`",
               "union": {
                 "branches": 19,
-                "count": 88,
-                "depth": 24
+                "count": 49,
+                "depth": 18
               }
             },
             "updatedAt": {
@@ -1312,6 +1374,7 @@
               "points": [
                 {
                   "a": true,
+                  "bf": false,
                   "co": {
                     "id": "POST /v1/typebots/{typebotId}/publish",
                     "source": "openapi3",
@@ -1323,7 +1386,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "typebot_id",
+                        "or": "typebotId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1342,6 +1405,10 @@
                     "param": {
                       "typebotId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -1364,6 +1431,7 @@
                 },
                 {
                   "a": true,
+                  "bf": false,
                   "co": {
                     "id": "POST /v1/typebots/{typebotId}/unpublish",
                     "source": "openapi3",
@@ -1375,7 +1443,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "typebot_id",
+                        "or": "typebotId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1394,6 +1462,10 @@
                     "param": {
                       "typebotId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -1416,6 +1488,10 @@
                 },
                 {
                   "a": true,
+                  "bf": [
+                    "typebot",
+                    "workspaceId"
+                  ],
                   "co": {
                     "id": "POST /v1/typebots",
                     "source": "openapi3",
@@ -1427,6 +1503,10 @@
                   "o": "/v1/typebots",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -1436,14 +1516,18 @@
                     }
                   ],
                   "t": {
-                    "req": {
-                      "typebot": "`reqdata`"
-                    },
+                    "req": "`reqdata`",
                     "res": "`body.typebot`"
                   }
                 },
                 {
                   "a": true,
+                  "bf": [
+                    "enableSafetyFlags",
+                    "fromTemplate",
+                    "typebot",
+                    "workspaceId"
+                  ],
                   "co": {
                     "id": "POST /v1/typebots/import",
                     "source": "openapi3",
@@ -1457,6 +1541,10 @@
                     "$action": "import"
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -1469,9 +1557,7 @@
                     }
                   ],
                   "t": {
-                    "req": {
-                      "typebot": "`reqdata`"
-                    },
+                    "req": "`reqdata`",
                     "res": "`body.typebot`"
                   }
                 }
@@ -1494,7 +1580,7 @@
                         "a": true,
                         "k": "query",
                         "n": "folder_id",
-                        "or": "folder_id",
+                        "or": "folderId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1502,7 +1588,7 @@
                         "a": true,
                         "k": "query",
                         "n": "workspace_id",
-                        "or": "workspace_id",
+                        "or": "workspaceId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1513,11 +1599,14 @@
                   "o": "/v1/typebots",
                   "q": {
                     "exist": [
-                      "folder_id",
                       "workspace_id"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -1550,7 +1639,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "typebot_id",
+                        "or": "typebotId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1561,7 +1650,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "migrate_to_latest_version",
-                        "or": "migrate_to_latest_version",
+                        "or": "migrateToLatestVersion",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -1572,14 +1661,17 @@
                   "o": "/v1/typebots/{typebotId}",
                   "q": {
                     "exist": [
-                      "id",
-                      "migrate_to_latest_version"
+                      "id"
                     ]
                   },
                   "r": {
                     "param": {
                       "typebotId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -1610,7 +1702,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "typebot_id",
+                        "or": "typebotId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1621,7 +1713,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "migrate_to_latest_version",
-                        "or": "migrate_to_latest_version",
+                        "or": "migrateToLatestVersion",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -1633,14 +1725,17 @@
                   "q": {
                     "$action": "published_typebot",
                     "exist": [
-                      "id",
-                      "migrate_to_latest_version"
+                      "id"
                     ]
                   },
                   "r": {
                     "param": {
                       "typebotId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -1658,7 +1753,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.publishedTypebot`"
                   }
                 }
               ]
@@ -1669,6 +1764,7 @@
               "points": [
                 {
                   "a": true,
+                  "bf": false,
                   "co": {
                     "id": "DELETE /v1/typebots/{typebotId}",
                     "source": "openapi3",
@@ -1680,7 +1776,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "typebot_id",
+                        "or": "typebotId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1698,6 +1794,10 @@
                     "param": {
                       "typebotId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -1723,6 +1823,10 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "overwrite",
+                    "typebot"
+                  ],
                   "co": {
                     "id": "PATCH /v1/typebots/{typebotId}",
                     "source": "openapi3",
@@ -1734,7 +1838,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "typebot_id",
+                        "or": "typebotId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1753,6 +1857,10 @@
                       "typebotId": "id"
                     }
                   },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -1765,9 +1873,7 @@
                     }
                   ],
                   "t": {
-                    "req": {
-                      "typebot": "`reqdata`"
-                    },
+                    "req": "`reqdata`",
                     "res": "`body.typebot`"
                   }
                 }
@@ -1799,19 +1905,12 @@
               "r": true,
               "t": "`$STRING`"
             },
-            "customChatsLimit": {
+            "currentUserMode": {
               "a": true,
-              "h": "Custom Chats Limit",
-              "n": "customChatsLimit",
+              "h": "Current User Mode",
+              "n": "currentUserMode",
               "r": true,
-              "t": "`$ANY`"
-            },
-            "customSeatsLimit": {
-              "a": true,
-              "h": "Custom Seats Limit",
-              "n": "customSeatsLimit",
-              "r": true,
-              "t": "`$ANY`"
+              "t": "`$STRING`"
             },
             "icon": {
               "a": true,
@@ -1920,6 +2019,13 @@
               "n": "updatedAt",
               "r": true,
               "t": "`$STRING`"
+            },
+            "workspace": {
+              "a": true,
+              "h": "Workspace",
+              "n": "workspace",
+              "r": true,
+              "t": "`$OBJECT`"
             }
           },
           "id": {
@@ -1934,6 +2040,10 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "icon",
+                    "name"
+                  ],
                   "co": {
                     "id": "POST /v1/workspaces",
                     "source": "openapi3",
@@ -1945,6 +2055,10 @@
                   "o": "/v1/workspaces",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -1977,7 +2091,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "workspace_id",
+                        "or": "workspaceId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1996,6 +2110,10 @@
                     "param": {
                       "workspaceId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -2029,6 +2147,10 @@
                   "o": "/v1/workspaces",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v1"
@@ -2061,7 +2183,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "workspace_id",
+                        "or": "workspaceId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -2079,6 +2201,10 @@
                     "param": {
                       "workspaceId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -2104,6 +2230,7 @@
               "points": [
                 {
                   "a": true,
+                  "bf": false,
                   "co": {
                     "id": "DELETE /v1/workspaces/{workspaceId}",
                     "source": "openapi3",
@@ -2115,7 +2242,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "workspace_id",
+                        "or": "workspaceId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -2133,6 +2260,10 @@
                     "param": {
                       "workspaceId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -2158,6 +2289,10 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "icon",
+                    "name"
+                  ],
                   "co": {
                     "id": "PATCH /v1/workspaces/{workspaceId}",
                     "source": "openapi3",
@@ -2169,7 +2304,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "workspace_id",
+                        "or": "workspaceId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -2187,6 +2322,10 @@
                     "param": {
                       "workspaceId": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -2964,6 +3103,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -3256,7 +3396,6 @@
               "d": {},
               "i": {},
               "m": {
-                "result_id": "result01",
                 "typebot_id": "typebot01"
               },
               "o": "list",
@@ -3542,7 +3681,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -3553,7 +3692,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {
@@ -3590,6 +3734,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -3820,7 +3969,10 @@
             "version": "0.1.1"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "js": {
           "active": true,
@@ -4196,6 +4348,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

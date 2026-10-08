@@ -15,7 +15,7 @@ keeps the cognitive load low.
 
 ## Install
 This package is not yet published to PyPI. Install it from the GitHub
-release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/typebot-sdk/releases)) or
+release tag (`py/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/typebot-sdk/tags)) or
 from a source checkout:
 
 ```bash
@@ -47,7 +47,7 @@ Analytics is nested under typebot, so provide the `typebot_id`.
 ```python
 try:
     analytics = client.Analytics().load({"typebot_id": "example_typebot_id"})
-    print(analytics)
+    print(analytics.data_get())
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -59,8 +59,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    folders = client.Folder().list()
-    print(folders)
+    folders = client.Folder().list({"workspace_id": "example"})
+    print([item.data_get() for item in folders])
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -126,10 +126,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = TypebotSDK.test()
 
-# Entity ops return the ENTITY and raises on error;
-# call data_get() for the record.
-folder = client.Folder().list()
-# folder contains the mock response record
+# Entity ops return the entity, and list one per record; they raise on error.
+folder = client.Folder().list({"workspace_id": "example"})
+# data_get() on an entity reads its mock response record
 ```
 
 ### Use a custom fetch function
@@ -220,11 +219,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria, one per record. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity, and return it. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity, and return it. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity, and return it marked as deleted. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -234,9 +233,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
-ops, a `list` for `list`) and raise on error. Wrap calls in
-`try`/`except` to handle failures.
+Entity operations return the entity, and `list` a `list` of entities, one
+per record; an entity's `data_get()` reads its record (a `dict`). They raise
+on error, so wrap calls in `try`/`except` to handle failures.
 
 The `direct()` escape hatch never raises — it returns a result `dict`
 you branch on via `result["ok"]`:
@@ -303,7 +302,7 @@ API path: `/v1/folders`
 
 Operations: List, Load, Remove.
 
-API path: `/v1/typebots/{typebotId}/results`
+API path: `/v1/typebots/{typebotId}/results/{resultId}/logs`
 
 #### Typebot
 
@@ -311,6 +310,7 @@ API path: `/v1/typebots/{typebotId}/results`
 | --- | --- |
 | `accessRight` |  |
 | `createdAt` |  |
+| `currentUserMode` |  |
 | `customDomain` |  |
 | `edges` |  |
 | `events` |  |
@@ -347,8 +347,7 @@ API path: `/v1/typebots/{typebotId}/publish`
 | --- | --- |
 | `chatsHardLimit` |  |
 | `createdAt` |  |
-| `customChatsLimit` |  |
-| `customSeatsLimit` |  |
+| `currentUserMode` |  |
 | `icon` |  |
 | `id` |  |
 | `inactiveFirstEmailSentAt` |  |
@@ -362,6 +361,7 @@ API path: `/v1/typebots/{typebotId}/publish`
 | `settings` |  |
 | `stripeId` |  |
 | `updatedAt` |  |
+| `workspace` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -526,6 +526,7 @@ Create an instance: `typebot = client.Typebot()`
 | --- | --- | --- |
 | `accessRight` | `str` |  |
 | `createdAt` | `str` |  |
+| `currentUserMode` | `str` |  |
 | `customDomain` | `Any` |  |
 | `edges` | `list` |  |
 | `events` | `list` |  |
@@ -545,7 +546,7 @@ Create an instance: `typebot = client.Typebot()`
 | `settings` | `dict` |  |
 | `spaceId` | `Any` |  |
 | `theme` | `dict` |  |
-| `typebot` | `dict` |  |
+| `typebot` | `Any` |  |
 | `updatedAt` | `str` |  |
 | `variables` | `list` |  |
 | `version` | `str` |  |
@@ -570,6 +571,7 @@ typebots = client.Typebot().list({"workspace_id": "example"})
 typebot = client.Typebot().create({
     "accessRight": "example_accessRight",  # str
     "createdAt": "example_createdAt",  # str
+    "currentUserMode": "example_currentUserMode",  # str
     "customDomain": "example_customDomain",  # Any
     "edges": [],  # list
     "events": [],  # list
@@ -587,7 +589,7 @@ typebot = client.Typebot().create({
     "settings": {},  # dict
     "spaceId": "example_spaceId",  # Any
     "theme": {},  # dict
-    "typebot": {},  # dict
+    "typebot": "example_typebot",  # Any
     "updatedAt": "example_updatedAt",  # str
     "variables": [],  # list
     "version": "example_version",  # str
@@ -617,8 +619,7 @@ Create an instance: `workspace = client.Workspace()`
 | --- | --- | --- |
 | `chatsHardLimit` | `Any` |  |
 | `createdAt` | `str` |  |
-| `customChatsLimit` | `Any` |  |
-| `customSeatsLimit` | `Any` |  |
+| `currentUserMode` | `str` |  |
 | `icon` | `Any` |  |
 | `id` | `str` |  |
 | `inactiveFirstEmailSentAt` | `Any` |  |
@@ -632,6 +633,7 @@ Create an instance: `workspace = client.Workspace()`
 | `settings` | `Any` |  |
 | `stripeId` | `Any` |  |
 | `updatedAt` | `str` |  |
+| `workspace` | `dict` |  |
 
 #### Example: Load
 
@@ -651,8 +653,7 @@ workspaces = client.Workspace().list()
 workspace = client.Workspace().create({
     "chatsHardLimit": "example_chatsHardLimit",  # Any
     "createdAt": "example_createdAt",  # str
-    "customChatsLimit": "example_customChatsLimit",  # Any
-    "customSeatsLimit": "example_customSeatsLimit",  # Any
+    "currentUserMode": "example_currentUserMode",  # str
     "icon": "example_icon",  # Any
     "id": "example_id",  # str
     "inactiveFirstEmailSentAt": "example_inactiveFirstEmailSentAt",  # Any
@@ -666,6 +667,7 @@ workspace = client.Workspace().create({
     "settings": "example_settings",  # Any
     "stripeId": "example_stripeId",  # Any
     "updatedAt": "example_updatedAt",  # str
+    "workspace": {},  # dict
 })
 ```
 
@@ -819,7 +821,7 @@ guarantee.
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
 | `typebot` | `groups` | 19 | 14 levels |
-| `typebot` | `typebot` | 19 | 24 levels |
+| `typebot` | `typebot` | 19 | 18 levels |
 | `typebot` | `events` | 3 | 1 level |
 
 These values round-trip unchanged — read them, modify them, send them back. If
@@ -910,7 +912,7 @@ stores the returned data and match criteria internally.
 
 ```python
 folder = client.Folder()
-folder.list()
+folder.list({"workspace_id": "example"})
 
 # folder.data_get() now returns the folder data from the last list
 # folder.match_get() returns the last match criteria

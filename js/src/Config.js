@@ -192,6 +192,7 @@ class Config {
       },
       "optspec": {
         "clearTimer": "`$FUNCTION`",
+        "now": "`$FUNCTION`",
         "setTimer": "`$FUNCTION`"
       },
       "strict": false,
@@ -286,7 +287,7 @@ class Config {
                 "params": [
                   {
                     "name": "typebot_id",
-                    "orig": "typebot_id",
+                    "orig": "typebotId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -295,14 +296,14 @@ class Config {
                 "query": [
                   {
                     "name": "time_filter",
-                    "orig": "time_filter",
+                    "orig": "timeFilter",
                     "type": "`$STRING`",
                     "kind": "query",
                     "example": "last7Days"
                   },
                   {
                     "name": "time_zone",
-                    "orig": "time_zone",
+                    "orig": "timeZone",
                     "type": "`$STRING`",
                     "kind": "query"
                   }
@@ -311,10 +312,12 @@ class Config {
               "select": {
                 "$action": "stat",
                 "exist": [
-                  "time_filter",
-                  "time_zone",
                   "typebot_id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -365,7 +368,7 @@ class Config {
                 "query": [
                   {
                     "name": "workspace_id",
-                    "orig": "workspace_id",
+                    "orig": "workspaceId",
                     "type": "`$STRING`",
                     "kind": "query",
                     "reqd": true
@@ -377,6 +380,10 @@ class Config {
                 "exist": [
                   "workspace_id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -414,7 +421,7 @@ class Config {
                 "query": [
                   {
                     "name": "workspace_id",
-                    "orig": "workspace_id",
+                    "orig": "workspaceId",
                     "type": "`$STRING`",
                     "kind": "query",
                     "reqd": true
@@ -426,6 +433,10 @@ class Config {
                 "exist": [
                   "workspace_id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -529,7 +540,11 @@ class Config {
                 "res": "`body.folder`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             }
           ]
         },
@@ -562,13 +577,13 @@ class Config {
                 "query": [
                   {
                     "name": "parent_folder_id",
-                    "orig": "parent_folder_id",
+                    "orig": "parentFolderId",
                     "type": "`$STRING`",
                     "kind": "query"
                   },
                   {
                     "name": "workspace_id",
-                    "orig": "workspace_id",
+                    "orig": "workspaceId",
                     "type": "`$STRING`",
                     "kind": "query",
                     "reqd": true
@@ -577,9 +592,12 @@ class Config {
               },
               "select": {
                 "exist": [
-                  "parent_folder_id",
                   "workspace_id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -621,7 +639,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "folder_id",
+                    "orig": "folderId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -630,7 +648,7 @@ class Config {
                 "query": [
                   {
                     "name": "workspace_id",
-                    "orig": "workspace_id",
+                    "orig": "workspaceId",
                     "type": "`$STRING`",
                     "kind": "query",
                     "reqd": true
@@ -642,6 +660,10 @@ class Config {
                   "id",
                   "workspace_id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -683,7 +705,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "folder_id",
+                    "orig": "folderId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -694,6 +716,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -728,16 +754,14 @@ class Config {
                 }
               },
               "transform": {
-                "req": {
-                  "folder": "`reqdata`"
-                },
+                "req": "`reqdata`",
                 "res": "`body.folder`"
               },
               "args": {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "folder_id",
+                    "orig": "folderId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -748,6 +772,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -828,88 +856,6 @@ class Config {
             {
               "kind": "http",
               "method": "GET",
-              "orig": "/v1/typebots/{typebotId}/results",
-              "segments": [
-                {
-                  "lit": "v1"
-                },
-                {
-                  "lit": "typebots"
-                },
-                {
-                  "var": "typebot_id"
-                },
-                {
-                  "lit": "results"
-                }
-              ],
-              "parts": [
-                "v1",
-                "typebots",
-                "{typebot_id}",
-                "results"
-              ],
-              "rename": {
-                "param": {
-                  "typebotId": "typebot_id"
-                }
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "args": {
-                "params": [
-                  {
-                    "name": "typebot_id",
-                    "orig": "typebot_id",
-                    "type": "`$STRING`",
-                    "kind": "param",
-                    "reqd": true
-                  }
-                ],
-                "query": [
-                  {
-                    "name": "cursor",
-                    "orig": "cursor",
-                    "type": "`$NUMBER`",
-                    "kind": "query"
-                  },
-                  {
-                    "name": "limit",
-                    "orig": "limit",
-                    "type": "`$NUMBER`",
-                    "kind": "query",
-                    "example": 50
-                  },
-                  {
-                    "name": "time_filter",
-                    "orig": "time_filter",
-                    "type": "`$STRING`",
-                    "kind": "query",
-                    "example": "last7Days"
-                  },
-                  {
-                    "name": "time_zone",
-                    "orig": "time_zone",
-                    "type": "`$STRING`",
-                    "kind": "query"
-                  }
-                ]
-              },
-              "select": {
-                "exist": [
-                  "cursor",
-                  "limit",
-                  "time_filter",
-                  "time_zone",
-                  "typebot_id"
-                ]
-              }
-            },
-            {
-              "kind": "http",
-              "method": "GET",
               "orig": "/v1/typebots/{typebotId}/results/{resultId}/logs",
               "segments": [
                 {
@@ -953,14 +899,14 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "result_id",
+                    "orig": "resultId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
                   },
                   {
                     "name": "typebot_id",
-                    "orig": "typebot_id",
+                    "orig": "typebotId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -973,6 +919,92 @@ class Config {
                   "id",
                   "typebot_id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
+            },
+            {
+              "kind": "http",
+              "method": "GET",
+              "orig": "/v1/typebots/{typebotId}/results",
+              "segments": [
+                {
+                  "lit": "v1"
+                },
+                {
+                  "lit": "typebots"
+                },
+                {
+                  "var": "typebot_id"
+                },
+                {
+                  "lit": "results"
+                }
+              ],
+              "parts": [
+                "v1",
+                "typebots",
+                "{typebot_id}",
+                "results"
+              ],
+              "rename": {
+                "param": {
+                  "typebotId": "typebot_id"
+                }
+              },
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.results`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "typebot_id",
+                    "orig": "typebotId",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ],
+                "query": [
+                  {
+                    "name": "cursor",
+                    "orig": "cursor",
+                    "type": "`$NUMBER`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "limit",
+                    "orig": "limit",
+                    "type": "`$NUMBER`",
+                    "kind": "query",
+                    "example": 50
+                  },
+                  {
+                    "name": "time_filter",
+                    "orig": "timeFilter",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "example": "last7Days"
+                  },
+                  {
+                    "name": "time_zone",
+                    "orig": "timeZone",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "typebot_id"
+                ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1023,14 +1055,14 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "result_id",
+                    "orig": "resultId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
                   },
                   {
                     "name": "typebot_id",
-                    "orig": "typebot_id",
+                    "orig": "typebotId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -1042,6 +1074,10 @@ class Config {
                   "id",
                   "typebot_id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1087,7 +1123,7 @@ class Config {
                 "params": [
                   {
                     "name": "typebot_id",
-                    "orig": "typebot_id",
+                    "orig": "typebotId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -1098,6 +1134,10 @@ class Config {
                 "exist": [
                   "typebot_id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1125,6 +1165,12 @@ class Config {
           "type": "`$STRING`",
           "req": true,
           "format": "date-time"
+        },
+        {
+          "name": "currentUserMode",
+          "title": "Current User Mode",
+          "type": "`$STRING`",
+          "req": true
         },
         {
           "name": "customDomain",
@@ -1242,7 +1288,7 @@ class Config {
         {
           "name": "typebot",
           "title": "Typebot",
-          "type": "`$OBJECT`",
+          "type": "`$ANY`",
           "req": true
         },
         {
@@ -1324,7 +1370,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "typebot_id",
+                    "orig": "typebotId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -1336,6 +1382,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             },
             {
@@ -1375,7 +1425,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "typebot_id",
+                    "orig": "typebotId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -1387,6 +1437,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             },
             {
@@ -1407,13 +1461,15 @@ class Config {
               ],
               "rename": {},
               "transform": {
-                "req": {
-                  "typebot": "`reqdata`"
-                },
+                "req": "`reqdata`",
                 "res": "`body.typebot`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             },
             {
               "kind": "http",
@@ -1437,14 +1493,16 @@ class Config {
               ],
               "rename": {},
               "transform": {
-                "req": {
-                  "typebot": "`reqdata`"
-                },
+                "req": "`reqdata`",
                 "res": "`body.typebot`"
               },
               "args": {},
               "select": {
                 "$action": "import"
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1478,13 +1536,13 @@ class Config {
                 "query": [
                   {
                     "name": "folder_id",
-                    "orig": "folder_id",
+                    "orig": "folderId",
                     "type": "`$STRING`",
                     "kind": "query"
                   },
                   {
                     "name": "workspace_id",
-                    "orig": "workspace_id",
+                    "orig": "workspaceId",
                     "type": "`$STRING`",
                     "kind": "query",
                     "reqd": true
@@ -1493,9 +1551,12 @@ class Config {
               },
               "select": {
                 "exist": [
-                  "folder_id",
                   "workspace_id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1537,7 +1598,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "typebot_id",
+                    "orig": "typebotId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -1546,7 +1607,7 @@ class Config {
                 "query": [
                   {
                     "name": "migrate_to_latest_version",
-                    "orig": "migrate_to_latest_version",
+                    "orig": "migrateToLatestVersion",
                     "type": "`$BOOLEAN`",
                     "kind": "query",
                     "example": false
@@ -1555,9 +1616,12 @@ class Config {
               },
               "select": {
                 "exist": [
-                  "id",
-                  "migrate_to_latest_version"
+                  "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             },
             {
@@ -1591,13 +1655,13 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.publishedTypebot`"
               },
               "args": {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "typebot_id",
+                    "orig": "typebotId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -1606,7 +1670,7 @@ class Config {
                 "query": [
                   {
                     "name": "migrate_to_latest_version",
-                    "orig": "migrate_to_latest_version",
+                    "orig": "migrateToLatestVersion",
                     "type": "`$BOOLEAN`",
                     "kind": "query",
                     "example": false
@@ -1616,9 +1680,12 @@ class Config {
               "select": {
                 "$action": "published_typebot",
                 "exist": [
-                  "id",
-                  "migrate_to_latest_version"
+                  "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1660,7 +1727,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "typebot_id",
+                    "orig": "typebotId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -1671,6 +1738,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1705,16 +1776,14 @@ class Config {
                 }
               },
               "transform": {
-                "req": {
-                  "typebot": "`reqdata`"
-                },
+                "req": "`reqdata`",
                 "res": "`body.typebot`"
               },
               "args": {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "typebot_id",
+                    "orig": "typebotId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -1725,6 +1794,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1750,15 +1823,9 @@ class Config {
           "format": "date-time"
         },
         {
-          "name": "customChatsLimit",
-          "title": "Custom Chats Limit",
-          "type": "`$ANY`",
-          "req": true
-        },
-        {
-          "name": "customSeatsLimit",
-          "title": "Custom Seats Limit",
-          "type": "`$ANY`",
+          "name": "currentUserMode",
+          "title": "Current User Mode",
+          "type": "`$STRING`",
           "req": true
         },
         {
@@ -1852,6 +1919,12 @@ class Config {
           "type": "`$STRING`",
           "req": true,
           "format": "date-time"
+        },
+        {
+          "name": "workspace",
+          "title": "Workspace",
+          "type": "`$OBJECT`",
+          "req": true
         }
       ],
       "id": {
@@ -1886,7 +1959,11 @@ class Config {
                 "res": "`body.workspace`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             }
           ]
         },
@@ -1931,7 +2008,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "workspace_id",
+                    "orig": "workspaceId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -1943,6 +2020,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             },
             {
@@ -1967,7 +2048,11 @@ class Config {
                 "res": "`body.workspaces`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             }
           ]
         },
@@ -2008,7 +2093,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "workspace_id",
+                    "orig": "workspaceId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -2019,6 +2104,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -2060,7 +2149,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "workspace_id",
+                    "orig": "workspaceId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -2071,6 +2160,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -2112,7 +2205,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "workspace_id",
+                    "orig": "workspaceId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -2123,6 +2216,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]

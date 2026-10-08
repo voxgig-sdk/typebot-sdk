@@ -38,12 +38,24 @@ describe('AnalyticsEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == config.feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = TypebotSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Analytics().load({"typebot_id":1}),
+      (err) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"analytics","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /v1/typebots/{typebotId}/analytics/stats","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"typebot_id","or":"typebot_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"ex":"last7Days","k":"query","n":"time_filter","or":"time_filter","r":false,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"time_zone","or":"time_zone","r":false,"t":"`$STRING`","index$":1}]},"k":"http","m":"GET","o":"/v1/typebots/{typebotId}/analytics/stats","q":{"$action":"stat","exist":["time_filter","time_zone","typebot_id"]},"r":{"param":{"typebotId":"typebot_id"}},"s":[{"lit":"v1"},{"lit":"typebots"},{"var":"typebot_id"},{"lit":"analytics"},{"lit":"stats"}],"t":{"req":"`reqdata`","res":"`body.stats`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[["$.main.kit.entity.typebot"]]},"key$":"analytics","name__orig":"analytics","Name":"Analytics","name_":"analytics","name-":"analytics","NAME":"ANALYTICS","index$":0}, {"active":true,"entity":"analytics","key$":"BasicAnalyticsFlow","kind":"basic","name":"BasicAnalyticsFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"analytics_ref01","srcdatavar":"analytics_ref01_data","suffix":"_dt0"},"m":{"id":"analytics01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-analytics_ref01"}}],"index$":0}]}, 'Analytics', {"GET /v1/typebots/{typebotId}/analytics/stats":{"protocol":"http","parameters":[{"name":"typebotId","in":"path","required":true,"schema":{"type":"string"},"index$":0},{"name":"timeFilter","in":"query","required":false,"schema":{"enum":["today","last7Days","last30Days","monthToDate","lastMonth","yearToDate","allTime"],"type":"string","default":"last7Days"},"allowEmptyValue":true,"allowReserved":true,"index$":1},{"name":"timeZone","in":"query","required":false,"schema":{"type":"string"},"allowEmptyValue":true,"allowReserved":true,"index$":2}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"analytics","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /v1/typebots/{typebotId}/analytics/stats","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"typebot_id","or":"typebotId","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"ex":"last7Days","k":"query","n":"time_filter","or":"timeFilter","r":false,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"time_zone","or":"timeZone","r":false,"t":"`$STRING`","index$":1}]},"k":"http","m":"GET","o":"/v1/typebots/{typebotId}/analytics/stats","q":{"$action":"stat","exist":["typebot_id"]},"r":{"param":{"typebotId":"typebot_id"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"v1"},{"lit":"typebots"},{"var":"typebot_id"},{"lit":"analytics"},{"lit":"stats"}],"t":{"req":"`reqdata`","res":"`body.stats`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[["$.main.kit.entity.typebot"]]},"key$":"analytics","name__orig":"analytics","Name":"Analytics","name_":"analytics","name-":"analytics","NAME":"ANALYTICS","index$":0}, {"active":true,"entity":"analytics","key$":"BasicAnalyticsFlow","kind":"basic","name":"BasicAnalyticsFlow","param":{},"step":[{"a":false,"d":{},"i":{"ref":"analytics_ref01","srcdatavar":"analytics_ref01_data","suffix":"_dt0"},"m":{"id":"analytics01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-analytics_ref01"}}],"unreachable":true}]}, 'Analytics', {"GET /v1/typebots/{typebotId}/analytics/stats":{"protocol":"http","parameters":[{"name":"typebotId","in":"path","required":true,"schema":{"type":"string"},"index$":0},{"name":"timeFilter","in":"query","required":false,"schema":{"enum":["today","last7Days","last30Days","monthToDate","lastMonth","yearToDate","allTime"],"type":"string","default":"last7Days"},"allowEmptyValue":true,"allowReserved":true,"index$":1},{"name":"timeZone","in":"query","required":false,"schema":{"type":"string"},"allowEmptyValue":true,"allowReserved":true,"index$":2}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -53,17 +65,16 @@ describe('AnalyticsEntity', async () => {
 
     let analytics_ref01_data = Object.values(setup.data.existing.analytics)[0]
 
-    // LOAD
-    const analytics_ref01_ent = client.Analytics()
-    const analytics_ref01_match_dt0 = {}
-    const analytics_ref01_data_dt0 = (await analytics_ref01_ent.load(analytics_ref01_match_dt0)).data()
-    assert(null != analytics_ref01_data_dt0)
-
-
   })
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra) {
   // TODO: fix test def options

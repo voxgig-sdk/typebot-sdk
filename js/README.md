@@ -14,9 +14,16 @@ predictable and low-friction for both humans and AI agents.
 
 
 ## Install
-```js
-npm install typebot
+This package is not yet published to npm. Install it from the GitHub
+release tag (`js/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/typebot-sdk/tags)), or from a
+clone:
+
+```bash
+git clone https://github.com/voxgig-sdk/typebot-sdk
+npm install ./typebot-sdk/js
 ```
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -37,7 +44,7 @@ const client = new TypebotSDK({
 
 ```js
 const analytics = await client.Analytics().load({ typebot_id: 'example_typebot_id' })
-console.log(analytics)
+console.log(analytics.data())
 ```
 
 ### Direct API Access
@@ -63,15 +70,16 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const folders = await client.Folder().list()
-  console.log(folders)
+  const folders = await client.Folder().list({ workspace_id: "example" })
+  console.log(folders.map((item) => item.data()))
 } catch (err) {
   console.error('list failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -80,8 +88,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -99,9 +107,6 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
-if (result instanceof Error) {
-  throw result
-}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -130,10 +135,9 @@ Create a mock client for unit testing — no server required:
 ```js
 const client = TypebotSDK.test()
 
-const folder = await client.Folder().list()
-// folder is the entity, populated with mock response data
-// — call folder.data() for the record itself
-console.log(folder)
+const folders = await client.Folder().list({ workspace_id: 'example_workspace_id' })
+// folders is an array of Folder entities, one per mock record
+console.log(folders.map((folder) => folder.data()))
 ```
 
 You can also use the instance method:
@@ -151,7 +155,7 @@ Entity instances remember their last match and data:
 const entity = client.Folder()
 
 // First call runs the operation and stores its result
-await entity.list()
+await entity.list({ workspace_id: 'example_workspace_id' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -245,11 +249,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria, and return it. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria, one per record. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity, and return it. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity, and return it. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<Entity>` | Remove an entity, and return it marked as deleted. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
@@ -258,13 +262,13 @@ All entities share the same interface.
 
 #### Return values
 
-Entity operations resolve to the entity data directly — there is no
-result envelope:
+Entity operations resolve to the entity itself — there is no result
+envelope, and an entity's `data()` reads its record:
 
 - `load`, `create` and `update` resolve to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
-- `remove` resolves to `undefined`.
+- `remove` resolves to the entity, marked as deleted.
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -351,7 +355,7 @@ API path: `/v1/folders`
 
 Operations: list, load, remove.
 
-API path: `/v1/typebots/{typebotId}/results`
+API path: `/v1/typebots/{typebotId}/results/{resultId}/logs`
 
 #### Typebot
 
@@ -359,6 +363,7 @@ API path: `/v1/typebots/{typebotId}/results`
 | --- | --- |
 | `accessRight` |  |
 | `createdAt` |  |
+| `currentUserMode` |  |
 | `customDomain` |  |
 | `edges` |  |
 | `events` |  |
@@ -395,8 +400,7 @@ API path: `/v1/typebots/{typebotId}/publish`
 | --- | --- |
 | `chatsHardLimit` |  |
 | `createdAt` |  |
-| `customChatsLimit` |  |
-| `customSeatsLimit` |  |
+| `currentUserMode` |  |
 | `icon` |  |
 | `id` |  |
 | `inactiveFirstEmailSentAt` |  |
@@ -410,6 +414,7 @@ API path: `/v1/typebots/{typebotId}/publish`
 | `settings` |  |
 | `stripeId` |  |
 | `updatedAt` |  |
+| `workspace` |  |
 
 Operations: create, list, load, remove, update.
 
@@ -574,6 +579,7 @@ Create an instance: `const typebot = client.Typebot()`
 | --- | --- | --- |
 | `accessRight` | `string` |  |
 | `createdAt` | `string` |  |
+| `currentUserMode` | `string` |  |
 | `customDomain` | `*` |  |
 | `edges` | `Array` |  |
 | `events` | `Array` |  |
@@ -593,7 +599,7 @@ Create an instance: `const typebot = client.Typebot()`
 | `settings` | `Object` |  |
 | `spaceId` | `*` |  |
 | `theme` | `Object` |  |
-| `typebot` | `Object` |  |
+| `typebot` | `*` |  |
 | `updatedAt` | `string` |  |
 | `variables` | `Array` |  |
 | `version` | `string` |  |
@@ -618,6 +624,7 @@ const typebots = await client.Typebot().list({ workspace_id: "example" })
 const typebot = await client.Typebot().create({
   accessRight: 'example_accessRight',
   createdAt: 'example_createdAt',
+  currentUserMode: 'example_currentUserMode',
   customDomain: 'example_customDomain',
   edges: [],
   events: [],
@@ -635,7 +642,7 @@ const typebot = await client.Typebot().create({
   settings: {},
   spaceId: 'example_spaceId',
   theme: {},
-  typebot: {},
+  typebot: 'example_typebot',
   updatedAt: 'example_updatedAt',
   variables: [],
   version: 'example_version',
@@ -665,8 +672,7 @@ Create an instance: `const workspace = client.Workspace()`
 | --- | --- | --- |
 | `chatsHardLimit` | `*` |  |
 | `createdAt` | `string` |  |
-| `customChatsLimit` | `*` |  |
-| `customSeatsLimit` | `*` |  |
+| `currentUserMode` | `string` |  |
 | `icon` | `*` |  |
 | `id` | `string` |  |
 | `inactiveFirstEmailSentAt` | `*` |  |
@@ -680,6 +686,7 @@ Create an instance: `const workspace = client.Workspace()`
 | `settings` | `*` |  |
 | `stripeId` | `*` |  |
 | `updatedAt` | `string` |  |
+| `workspace` | `Object` |  |
 
 #### Example: Load
 
@@ -699,8 +706,7 @@ const workspaces = await client.Workspace().list()
 const workspace = await client.Workspace().create({
   chatsHardLimit: 'example_chatsHardLimit',
   createdAt: 'example_createdAt',
-  customChatsLimit: 'example_customChatsLimit',
-  customSeatsLimit: 'example_customSeatsLimit',
+  currentUserMode: 'example_currentUserMode',
   icon: 'example_icon',
   id: 'example_id',
   inactiveFirstEmailSentAt: 'example_inactiveFirstEmailSentAt',
@@ -714,6 +720,7 @@ const workspace = await client.Workspace().create({
   settings: 'example_settings',
   stripeId: 'example_stripeId',
   updatedAt: 'example_updatedAt',
+  workspace: {},
 })
 ```
 
@@ -867,7 +874,7 @@ guarantee.
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
 | `typebot` | `groups` | 19 | 14 levels |
-| `typebot` | `typebot` | 19 | 24 levels |
+| `typebot` | `typebot` | 19 | 18 levels |
 | `typebot` | `events` | 3 | 1 level |
 
 These values round-trip unchanged — read them, modify them, send them back. If
@@ -950,7 +957,7 @@ calls on the same instance can rely on this state.
 
 ```ts
 const folder = client.Folder()
-await folder.list()
+await folder.list({ workspace_id: "example" })
 
 // folder.data() now returns the folder data from the last `list`
 // folder.match() returns the last match criteria

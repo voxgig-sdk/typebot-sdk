@@ -111,7 +111,7 @@ local analytics = client:Analytics(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Analytics():load({ typebot_id = "typebot_id" })
@@ -157,15 +157,15 @@ local billing = client:Billing(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Billing():list()
+local results, err = client:Billing():list({ workspace_id = "example" })
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Billing():load({ workspace_id = "workspace_id" })
@@ -237,7 +237,7 @@ local folder = client:Folder(nil)
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Folder():create({
@@ -253,15 +253,15 @@ local result, err = client:Folder():create({
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Folder():list()
+local results, err = client:Folder():list({ workspace_id = "example" })
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Folder():load({ id = "folder_id", workspace_id = "workspace_id" })
@@ -269,7 +269,7 @@ local result, err = client:Folder():load({ id = "folder_id", workspace_id = "wor
 
 #### `remove(reqmatch, ctrl) -> any, err`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Folder():remove({ id = "folder_id" })
@@ -277,7 +277,7 @@ local result, err = client:Folder():remove({ id = "folder_id" })
 
 #### `update(reqdata, ctrl) -> any, err`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Folder():update({
@@ -340,15 +340,15 @@ local result = client:Result(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Result():list()
+local results, err = client:Result():list({ typebot_id = "example" })
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Result():load({ id = "result_id", typebot_id = "typebot_id" })
@@ -356,7 +356,7 @@ local result, err = client:Result():load({ id = "result_id", typebot_id = "typeb
 
 #### `remove(reqmatch, ctrl) -> any, err`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Result():remove({ typebot_id = "typebot_id" })
@@ -404,6 +404,7 @@ local typebot = client:Typebot(nil)
 | --- | --- | --- | --- |
 | `accessRight` | `string` | Yes |  |
 | `createdAt` | `string` | Yes |  |
+| `currentUserMode` | `string` | Yes |  |
 | `customDomain` | `any` | Yes |  |
 | `edges` | `table` | Yes |  |
 | `events` | `table` | Yes |  |
@@ -423,7 +424,7 @@ local typebot = client:Typebot(nil)
 | `settings` | `table` | Yes |  |
 | `spaceId` | `any` | Yes |  |
 | `theme` | `table` | Yes |  |
-| `typebot` | `table` | Yes |  |
+| `typebot` | `any` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 | `variables` | `table` | Yes |  |
 | `version` | `string` | Yes |  |
@@ -434,12 +435,13 @@ local typebot = client:Typebot(nil)
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Typebot():create({
   accessRight = --[[ string ]],
   createdAt = --[[ string ]],
+  currentUserMode = --[[ string ]],
   customDomain = --[[ any ]],
   edges = --[[ table ]],
   events = --[[ table ]],
@@ -457,7 +459,7 @@ local result, err = client:Typebot():create({
   settings = --[[ table ]],
   spaceId = --[[ any ]],
   theme = --[[ table ]],
-  typebot = --[[ table ]],
+  typebot = --[[ any ]],
   updatedAt = --[[ string ]],
   variables = --[[ table ]],
   version = --[[ string ]],
@@ -468,15 +470,15 @@ local result, err = client:Typebot():create({
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Typebot():list()
+local results, err = client:Typebot():list({ workspace_id = "example" })
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Typebot():load({ id = "typebot_id" })
@@ -484,7 +486,7 @@ local result, err = client:Typebot():load({ id = "typebot_id" })
 
 #### `remove(reqmatch, ctrl) -> any, err`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Typebot():remove({ id = "typebot_id" })
@@ -492,7 +494,7 @@ local result, err = client:Typebot():remove({ id = "typebot_id" })
 
 #### `update(reqdata, ctrl) -> any, err`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Typebot():update({
@@ -543,8 +545,7 @@ local workspace = client:Workspace(nil)
 | --- | --- | --- | --- |
 | `chatsHardLimit` | `any` | Yes |  |
 | `createdAt` | `string` | Yes |  |
-| `customChatsLimit` | `any` | Yes |  |
-| `customSeatsLimit` | `any` | Yes |  |
+| `currentUserMode` | `string` | Yes |  |
 | `icon` | `any` | Yes |  |
 | `id` | `string` | Yes |  |
 | `inactiveFirstEmailSentAt` | `any` | Yes |  |
@@ -558,6 +559,7 @@ local workspace = client:Workspace(nil)
 | `settings` | `any` | Yes |  |
 | `stripeId` | `any` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
+| `workspace` | `table` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -565,8 +567,7 @@ local workspace = client:Workspace(nil)
 | --- | --- | --- | --- | --- | --- |
 | `chatsHardLimit` | - | - | - | - | - |
 | `createdAt` | - | - | - | - | - |
-| `customChatsLimit` | - | - | - | - | - |
-| `customSeatsLimit` | - | - | - | - | - |
+| `currentUserMode` | - | - | - | - | - |
 | `icon` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
 | `inactiveFirstEmailSentAt` | - | - | - | - | - |
@@ -580,19 +581,19 @@ local workspace = client:Workspace(nil)
 | `settings` | - | - | - | - | - |
 | `stripeId` | - | - | - | - | - |
 | `updatedAt` | - | - | - | - | - |
+| `workspace` | - | - | - | - | - |
 
 ### Operations
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Workspace():create({
   chatsHardLimit = --[[ any ]],
   createdAt = --[[ string ]],
-  customChatsLimit = --[[ any ]],
-  customSeatsLimit = --[[ any ]],
+  currentUserMode = --[[ string ]],
   icon = --[[ any ]],
   id = --[[ string ]],
   inactiveFirstEmailSentAt = --[[ any ]],
@@ -606,12 +607,13 @@ local result, err = client:Workspace():create({
   settings = --[[ any ]],
   stripeId = --[[ any ]],
   updatedAt = --[[ string ]],
+  workspace = --[[ table ]],
 })
 ```
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
 local results, err = client:Workspace():list()
@@ -619,7 +621,7 @@ local results, err = client:Workspace():list()
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Workspace():load({ id = "workspace_id" })
@@ -627,7 +629,7 @@ local result, err = client:Workspace():load({ id = "workspace_id" })
 
 #### `remove(reqmatch, ctrl) -> any, err`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Workspace():remove({ id = "workspace_id" })
@@ -635,7 +637,7 @@ local result, err = client:Workspace():remove({ id = "workspace_id" })
 
 #### `update(reqdata, ctrl) -> any, err`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Workspace():update({
@@ -964,6 +966,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

@@ -121,6 +121,7 @@
  * @typedef {Object} Typebot
  * @property {string} accessRight
  * @property {string} createdAt
+ * @property {string} currentUserMode
  * @property {*} customDomain
  * @property {Array} edges
  * @property {Array} events
@@ -140,7 +141,7 @@
  * @property {Object} settings
  * @property {*} spaceId
  * @property {Object} theme
- * @property {Object} typebot
+ * @property {*} typebot
  * @property {string} updatedAt
  * @property {Array} variables
  * @property {string} version
@@ -164,6 +165,7 @@
  * @typedef {Object} TypebotCreateData
  * @property {string} accessRight
  * @property {string} createdAt
+ * @property {string} currentUserMode
  * @property {*} customDomain
  * @property {Array} edges
  * @property {Array} events
@@ -183,7 +185,7 @@
  * @property {Object} settings
  * @property {*} spaceId
  * @property {Object} theme
- * @property {Object} typebot
+ * @property {*} typebot
  * @property {string} updatedAt
  * @property {Array} variables
  * @property {string} version
@@ -196,6 +198,7 @@
  * @property {string} id
  * @property {string} [accessRight]
  * @property {string} [createdAt]
+ * @property {string} [currentUserMode]
  * @property {*} [customDomain]
  * @property {Array} [edges]
  * @property {Array} [events]
@@ -214,7 +217,7 @@
  * @property {Object} [settings]
  * @property {*} [spaceId]
  * @property {Object} [theme]
- * @property {Object} [typebot]
+ * @property {*} [typebot]
  * @property {string} [updatedAt]
  * @property {Array} [variables]
  * @property {string} [version]
@@ -231,8 +234,7 @@
  * @typedef {Object} Workspace
  * @property {*} chatsHardLimit
  * @property {string} createdAt
- * @property {*} customChatsLimit
- * @property {*} customSeatsLimit
+ * @property {string} currentUserMode
  * @property {*} icon
  * @property {string} id
  * @property {*} inactiveFirstEmailSentAt
@@ -246,6 +248,7 @@
  * @property {*} settings
  * @property {*} stripeId
  * @property {string} updatedAt
+ * @property {Object} workspace
  */
 
 /**
@@ -257,8 +260,7 @@
  * @typedef {Object} WorkspaceListMatch
  * @property {*} [chatsHardLimit]
  * @property {string} [createdAt]
- * @property {*} [customChatsLimit]
- * @property {*} [customSeatsLimit]
+ * @property {string} [currentUserMode]
  * @property {*} [icon]
  * @property {string} [id]
  * @property {*} [inactiveFirstEmailSentAt]
@@ -272,14 +274,14 @@
  * @property {*} [settings]
  * @property {*} [stripeId]
  * @property {string} [updatedAt]
+ * @property {Object} [workspace]
  */
 
 /**
  * @typedef {Object} WorkspaceCreateData
  * @property {*} chatsHardLimit
  * @property {string} createdAt
- * @property {*} customChatsLimit
- * @property {*} customSeatsLimit
+ * @property {string} currentUserMode
  * @property {*} icon
  * @property {string} id
  * @property {*} inactiveFirstEmailSentAt
@@ -293,6 +295,7 @@
  * @property {*} settings
  * @property {*} stripeId
  * @property {string} updatedAt
+ * @property {Object} workspace
  */
 
 /**
@@ -300,8 +303,7 @@
  * @property {string} id
  * @property {*} [chatsHardLimit]
  * @property {string} [createdAt]
- * @property {*} [customChatsLimit]
- * @property {*} [customSeatsLimit]
+ * @property {string} [currentUserMode]
  * @property {*} [icon]
  * @property {*} [inactiveFirstEmailSentAt]
  * @property {*} [inactiveSecondEmailSentAt]
@@ -314,6 +316,7 @@
  * @property {*} [settings]
  * @property {*} [stripeId]
  * @property {string} [updatedAt]
+ * @property {Object} [workspace]
  */
 
 /**

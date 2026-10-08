@@ -80,6 +80,12 @@ main: kit: entity: folder: {
       name: "create"
       points: [
         {
+          bf: [
+            "folderName"
+            "id"
+            "parentFolderId"
+            "workspaceId"
+          ]
           co: {
             id: "POST /v1/folders"
             source: "openapi3"
@@ -87,6 +93,10 @@ main: kit: entity: folder: {
           }
           m: "POST"
           o: "/v1/folders"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "v1"
@@ -116,14 +126,14 @@ main: kit: entity: folder: {
               {
                 k: "query"
                 n: "parent_folder_id"
-                or: "parent_folder_id"
+                or: "parentFolderId"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "workspace_id"
-                or: "workspace_id"
+                or: "workspaceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -133,9 +143,12 @@ main: kit: entity: folder: {
           o: "/v1/folders"
           q: {
             exist: [
-              "parent_folder_id"
               "workspace_id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -166,7 +179,7 @@ main: kit: entity: folder: {
               {
                 k: "param"
                 n: "id"
-                or: "folder_id"
+                or: "folderId"
                 r: true
                 t: "`$STRING`"
               }
@@ -175,7 +188,7 @@ main: kit: entity: folder: {
               {
                 k: "query"
                 n: "workspace_id"
-                or: "workspace_id"
+                or: "workspaceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -193,6 +206,10 @@ main: kit: entity: folder: {
             param: {
               folderId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -216,6 +233,9 @@ main: kit: entity: folder: {
       name: "remove"
       points: [
         {
+          bf: [
+            "workspaceId"
+          ]
           co: {
             id: "DELETE /v1/folders/{folderId}"
             source: "openapi3"
@@ -226,7 +246,7 @@ main: kit: entity: folder: {
               {
                 k: "param"
                 n: "id"
-                or: "folder_id"
+                or: "folderId"
                 r: true
                 t: "`$STRING`"
               }
@@ -243,6 +263,10 @@ main: kit: entity: folder: {
             param: {
               folderId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -266,6 +290,10 @@ main: kit: entity: folder: {
       name: "update"
       points: [
         {
+          bf: [
+            "folder"
+            "workspaceId"
+          ]
           co: {
             id: "PATCH /v1/folders/{folderId}"
             source: "openapi3"
@@ -276,7 +304,7 @@ main: kit: entity: folder: {
               {
                 k: "param"
                 n: "id"
-                or: "folder_id"
+                or: "folderId"
                 r: true
                 t: "`$STRING`"
               }
@@ -294,6 +322,10 @@ main: kit: entity: folder: {
               folderId: "id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "v1"
@@ -306,9 +338,7 @@ main: kit: entity: folder: {
             }
           ]
           t: {
-            req: {
-              folder: "`reqdata`"
-            }
+            req: "`reqdata`"
             res: "`body.folder`"
           }
         }

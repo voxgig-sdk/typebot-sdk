@@ -106,9 +106,9 @@ analytics = client.Analytics()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> AnalyticsEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Analytics().load({"typebot_id": "typebot_id"})
@@ -151,19 +151,19 @@ billing = client.Billing()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[BillingEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.Billing().list({"workspace_id": "example"})
 for billing in results:
-    print(billing)
+    print(billing.data_get())
 ```
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> BillingEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Billing().load({"workspace_id": "workspace_id"})
@@ -232,9 +232,9 @@ folder = client.Folder()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> dict`
+#### `create(reqdata, ctrl=None) -> FolderEntity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```python
 result = client.Folder().create({
@@ -248,35 +248,35 @@ result = client.Folder().create({
 })
 ```
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[FolderEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.Folder().list({"workspace_id": "example"})
 for folder in results:
-    print(folder)
+    print(folder.data_get())
 ```
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> FolderEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Folder().load({"id": "folder_id", "workspace_id": "workspace_id"})
 ```
 
-#### `remove(reqmatch, ctrl=None) -> dict`
+#### `remove(reqmatch, ctrl=None) -> FolderEntity`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```python
 result = client.Folder().remove({"id": "folder_id"})
 ```
 
-#### `update(reqdata, ctrl=None) -> dict`
+#### `update(reqdata, ctrl=None) -> FolderEntity`
 
-Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
 
 ```python
 result = client.Folder().update({
@@ -336,27 +336,27 @@ result = client.Result()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[ResultEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.Result().list({"typebot_id": "example"})
 for result in results:
-    print(result)
+    print(result.data_get())
 ```
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> ResultEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Result().load({"id": "result_id", "typebot_id": "typebot_id"})
 ```
 
-#### `remove(reqmatch, ctrl=None) -> dict`
+#### `remove(reqmatch, ctrl=None) -> ResultEntity`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```python
 result = client.Result().remove({"typebot_id": "typebot_id"})
@@ -403,6 +403,7 @@ typebot = client.Typebot()
 | --- | --- | --- | --- |
 | `accessRight` | `str` | Yes |  |
 | `createdAt` | `str` | Yes |  |
+| `currentUserMode` | `str` | Yes |  |
 | `customDomain` | `Any` | Yes |  |
 | `edges` | `list` | Yes |  |
 | `events` | `list` | Yes |  |
@@ -422,7 +423,7 @@ typebot = client.Typebot()
 | `settings` | `dict` | Yes |  |
 | `spaceId` | `Any` | Yes |  |
 | `theme` | `dict` | Yes |  |
-| `typebot` | `dict` | Yes |  |
+| `typebot` | `Any` | Yes |  |
 | `updatedAt` | `str` | Yes |  |
 | `variables` | `list` | Yes |  |
 | `version` | `str` | Yes |  |
@@ -431,14 +432,15 @@ typebot = client.Typebot()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> dict`
+#### `create(reqdata, ctrl=None) -> TypebotEntity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```python
 result = client.Typebot().create({
     "accessRight": "example_accessRight",  # str
     "createdAt": "example_createdAt",  # str
+    "currentUserMode": "example_currentUserMode",  # str
     "customDomain": "example_customDomain",  # Any
     "edges": [],  # list
     "events": [],  # list
@@ -456,7 +458,7 @@ result = client.Typebot().create({
     "settings": {},  # dict
     "spaceId": "example_spaceId",  # Any
     "theme": {},  # dict
-    "typebot": {},  # dict
+    "typebot": "example_typebot",  # Any
     "updatedAt": "example_updatedAt",  # str
     "variables": [],  # list
     "version": "example_version",  # str
@@ -465,35 +467,35 @@ result = client.Typebot().create({
 })
 ```
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[TypebotEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.Typebot().list({"workspace_id": "example"})
 for typebot in results:
-    print(typebot)
+    print(typebot.data_get())
 ```
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> TypebotEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Typebot().load({"id": "typebot_id"})
 ```
 
-#### `remove(reqmatch, ctrl=None) -> dict`
+#### `remove(reqmatch, ctrl=None) -> TypebotEntity`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```python
 result = client.Typebot().remove({"id": "typebot_id"})
 ```
 
-#### `update(reqdata, ctrl=None) -> dict`
+#### `update(reqdata, ctrl=None) -> TypebotEntity`
 
-Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
 
 ```python
 result = client.Typebot().update({
@@ -543,8 +545,7 @@ workspace = client.Workspace()
 | --- | --- | --- | --- |
 | `chatsHardLimit` | `Any` | Yes |  |
 | `createdAt` | `str` | Yes |  |
-| `customChatsLimit` | `Any` | Yes |  |
-| `customSeatsLimit` | `Any` | Yes |  |
+| `currentUserMode` | `str` | Yes |  |
 | `icon` | `Any` | Yes |  |
 | `id` | `str` | Yes |  |
 | `inactiveFirstEmailSentAt` | `Any` | Yes |  |
@@ -558,6 +559,7 @@ workspace = client.Workspace()
 | `settings` | `Any` | Yes |  |
 | `stripeId` | `Any` | Yes |  |
 | `updatedAt` | `str` | Yes |  |
+| `workspace` | `dict` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -565,8 +567,7 @@ workspace = client.Workspace()
 | --- | --- | --- | --- | --- | --- |
 | `chatsHardLimit` | - | - | - | - | - |
 | `createdAt` | - | - | - | - | - |
-| `customChatsLimit` | - | - | - | - | - |
-| `customSeatsLimit` | - | - | - | - | - |
+| `currentUserMode` | - | - | - | - | - |
 | `icon` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
 | `inactiveFirstEmailSentAt` | - | - | - | - | - |
@@ -580,19 +581,19 @@ workspace = client.Workspace()
 | `settings` | - | - | - | - | - |
 | `stripeId` | - | - | - | - | - |
 | `updatedAt` | - | - | - | - | - |
+| `workspace` | - | - | - | - | - |
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> dict`
+#### `create(reqdata, ctrl=None) -> WorkspaceEntity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```python
 result = client.Workspace().create({
     "chatsHardLimit": "example_chatsHardLimit",  # Any
     "createdAt": "example_createdAt",  # str
-    "customChatsLimit": "example_customChatsLimit",  # Any
-    "customSeatsLimit": "example_customSeatsLimit",  # Any
+    "currentUserMode": "example_currentUserMode",  # str
     "icon": "example_icon",  # Any
     "id": "example_id",  # str
     "inactiveFirstEmailSentAt": "example_inactiveFirstEmailSentAt",  # Any
@@ -606,38 +607,39 @@ result = client.Workspace().create({
     "settings": "example_settings",  # Any
     "stripeId": "example_stripeId",  # Any
     "updatedAt": "example_updatedAt",  # str
+    "workspace": {},  # dict
 })
 ```
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[WorkspaceEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.Workspace().list()
 for workspace in results:
-    print(workspace)
+    print(workspace.data_get())
 ```
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> WorkspaceEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Workspace().load({"id": "workspace_id"})
 ```
 
-#### `remove(reqmatch, ctrl=None) -> dict`
+#### `remove(reqmatch, ctrl=None) -> WorkspaceEntity`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```python
 result = client.Workspace().remove({"id": "workspace_id"})
 ```
 
-#### `update(reqdata, ctrl=None) -> dict`
+#### `update(reqdata, ctrl=None) -> WorkspaceEntity`
 
-Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
 
 ```python
 result = client.Workspace().update({
@@ -965,6 +967,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

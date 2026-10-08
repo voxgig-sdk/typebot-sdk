@@ -143,6 +143,7 @@ class Typebot
 {
     public string $accessRight;
     public string $createdAt;
+    public string $currentUserMode;
     public mixed $customDomain;
     public array $edges;
     public array $events;
@@ -162,7 +163,7 @@ class Typebot
     public array $settings;
     public mixed $spaceId;
     public array $theme;
-    public array $typebot;
+    public mixed $typebot;
     public string $updatedAt;
     public array $variables;
     public string $version;
@@ -189,6 +190,7 @@ class TypebotCreateData
 {
     public string $accessRight;
     public string $createdAt;
+    public string $currentUserMode;
     public mixed $customDomain;
     public array $edges;
     public array $events;
@@ -208,7 +210,7 @@ class TypebotCreateData
     public array $settings;
     public mixed $spaceId;
     public array $theme;
-    public array $typebot;
+    public mixed $typebot;
     public string $updatedAt;
     public array $variables;
     public string $version;
@@ -222,6 +224,7 @@ class TypebotUpdateData
     public string $id;
     public ?string $accessRight = null;
     public ?string $createdAt = null;
+    public ?string $currentUserMode = null;
     public mixed $customDomain = null;
     public ?array $edges = null;
     public ?array $events = null;
@@ -240,7 +243,7 @@ class TypebotUpdateData
     public ?array $settings = null;
     public mixed $spaceId = null;
     public ?array $theme = null;
-    public ?array $typebot = null;
+    public mixed $typebot = null;
     public ?string $updatedAt = null;
     public ?array $variables = null;
     public ?string $version = null;
@@ -259,8 +262,7 @@ class Workspace
 {
     public mixed $chatsHardLimit;
     public string $createdAt;
-    public mixed $customChatsLimit;
-    public mixed $customSeatsLimit;
+    public string $currentUserMode;
     public mixed $icon;
     public string $id;
     public mixed $inactiveFirstEmailSentAt;
@@ -274,6 +276,7 @@ class Workspace
     public mixed $settings;
     public mixed $stripeId;
     public string $updatedAt;
+    public array $workspace;
 }
 
 /** Request payload for Workspace#load. */
@@ -287,8 +290,7 @@ class WorkspaceListMatch
 {
     public mixed $chatsHardLimit = null;
     public ?string $createdAt = null;
-    public mixed $customChatsLimit = null;
-    public mixed $customSeatsLimit = null;
+    public ?string $currentUserMode = null;
     public mixed $icon = null;
     public ?string $id = null;
     public mixed $inactiveFirstEmailSentAt = null;
@@ -302,6 +304,7 @@ class WorkspaceListMatch
     public mixed $settings = null;
     public mixed $stripeId = null;
     public ?string $updatedAt = null;
+    public ?array $workspace = null;
 }
 
 /** Request payload for Workspace#create. */
@@ -309,8 +312,7 @@ class WorkspaceCreateData
 {
     public mixed $chatsHardLimit;
     public string $createdAt;
-    public mixed $customChatsLimit;
-    public mixed $customSeatsLimit;
+    public string $currentUserMode;
     public mixed $icon;
     public string $id;
     public mixed $inactiveFirstEmailSentAt;
@@ -324,6 +326,7 @@ class WorkspaceCreateData
     public mixed $settings;
     public mixed $stripeId;
     public string $updatedAt;
+    public array $workspace;
 }
 
 /** Request payload for Workspace#update. */
@@ -332,8 +335,7 @@ class WorkspaceUpdateData
     public string $id;
     public mixed $chatsHardLimit = null;
     public ?string $createdAt = null;
-    public mixed $customChatsLimit = null;
-    public mixed $customSeatsLimit = null;
+    public ?string $currentUserMode = null;
     public mixed $icon = null;
     public mixed $inactiveFirstEmailSentAt = null;
     public mixed $inactiveSecondEmailSentAt = null;
@@ -346,6 +348,7 @@ class WorkspaceUpdateData
     public mixed $settings = null;
     public mixed $stripeId = null;
     public ?string $updatedAt = null;
+    public ?array $workspace = null;
 }
 
 /** Request payload for Workspace#remove. */

@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Billing();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('billing hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.TypebotSDK.test(offline).Billing().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.TypebotSDK.test(offline).Billing()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.TypebotSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Billing().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.TypebotSDK.test().Billing().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.TypebotSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Billing().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Billing().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.TypebotSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Billing().list({ "workspace_id": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.TYPEBOT_TEST_LIVE;
         for (const op of ['list', 'load']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": {}, "name": "billing", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /v1/billing/invoices", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "workspace_id", "or": "workspace_id", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/v1/billing/invoices", "q": { "$action": "invoice", "exist": ["workspace_id"] }, "r": {}, "s": [{ "lit": "v1" }, { "lit": "billing" }, { "lit": "invoices" }], "t": { "req": "`reqdata`", "res": "`body.invoices`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /v1/billing/usage", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "workspace_id", "or": "workspace_id", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/v1/billing/usage", "q": { "$action": "usage", "exist": ["workspace_id"] }, "r": {}, "s": [{ "lit": "v1" }, { "lit": "billing" }, { "lit": "usage" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "billing", "name__orig": "billing", "Name": "Billing", "name_": "billing", "name-": "billing", "NAME": "BILLING", "index$": 1 }, { "active": true, "entity": "billing", "key$": "BasicBillingFlow", "kind": "basic", "name": "BasicBillingFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "billing_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "billing_ref01", "srcdatavar": "billing_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-billing_ref01" } }], "index$": 1 }] }, 'Billing', { "GET /v1/billing/invoices": { "protocol": "http", "parameters": [{ "name": "workspaceId", "in": "query", "required": true, "schema": { "type": "string", "description": "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)" }, "allowEmptyValue": true, "allowReserved": true, "index$": 0 }] }, "GET /v1/billing/usage": { "protocol": "http", "parameters": [{ "name": "workspaceId", "in": "query", "required": true, "schema": { "type": "string", "description": "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)" }, "allowEmptyValue": true, "allowReserved": true, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": {}, "name": "billing", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /v1/billing/invoices", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "workspace_id", "or": "workspaceId", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/v1/billing/invoices", "q": { "$action": "invoice", "exist": ["workspace_id"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "v1" }, { "lit": "billing" }, { "lit": "invoices" }], "t": { "req": "`reqdata`", "res": "`body.invoices`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /v1/billing/usage", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "workspace_id", "or": "workspaceId", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/v1/billing/usage", "q": { "$action": "usage", "exist": ["workspace_id"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "v1" }, { "lit": "billing" }, { "lit": "usage" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "billing", "name__orig": "billing", "Name": "Billing", "name_": "billing", "name-": "billing", "NAME": "BILLING", "index$": 1 }, { "active": true, "entity": "billing", "key$": "BasicBillingFlow", "kind": "basic", "name": "BasicBillingFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "billing_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "billing_ref01", "srcdatavar": "billing_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-billing_ref01" } }], "index$": 1 }] }, 'Billing', { "GET /v1/billing/invoices": { "protocol": "http", "parameters": [{ "name": "workspaceId", "in": "query", "required": true, "schema": { "type": "string", "description": "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)" }, "allowEmptyValue": true, "allowReserved": true, "index$": 0 }] }, "GET /v1/billing/usage": { "protocol": "http", "parameters": [{ "name": "workspaceId", "in": "query", "required": true, "schema": { "type": "string", "description": "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)" }, "allowEmptyValue": true, "allowReserved": true, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -79,6 +126,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(null != billing_ref01_data_dt0);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

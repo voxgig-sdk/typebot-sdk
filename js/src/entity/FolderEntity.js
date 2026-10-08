@@ -24,7 +24,7 @@ class FolderEntity extends TypebotEntityBase {
   /**
    * @param {FolderLoadMatch} [reqmatch]
    * @param {Object} [ctrl]
-   * @returns {Promise<Folder>}
+   * @returns {Promise<FolderEntity>}
    */
   async load(reqmatch, ctrl) {
 
@@ -129,9 +129,15 @@ class FolderEntity extends TypebotEntityBase {
       return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 
@@ -149,7 +155,7 @@ class FolderEntity extends TypebotEntityBase {
   /**
    * @param {FolderListMatch} [reqmatch]
    * @param {Object} [ctrl]
-   * @returns {Promise<Folder[]>}
+   * @returns {Promise<FolderEntity[]>}
    */
   async list(reqmatch, ctrl) {
 
@@ -242,9 +248,15 @@ class FolderEntity extends TypebotEntityBase {
       return done(ctx)
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 
@@ -262,7 +274,7 @@ class FolderEntity extends TypebotEntityBase {
   /**
    * @param {FolderCreateData} [reqdata]
    * @param {Object} [ctrl]
-   * @returns {Promise<Folder>}
+   * @returns {Promise<FolderEntity>}
    */
   async create(reqdata, ctrl) {
 
@@ -362,9 +374,15 @@ class FolderEntity extends TypebotEntityBase {
       return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 
@@ -382,7 +400,7 @@ class FolderEntity extends TypebotEntityBase {
   /**
    * @param {FolderUpdateData} [reqdata]
    * @param {Object} [ctrl]
-   * @returns {Promise<Folder>}
+   * @returns {Promise<FolderEntity>}
    */
   async update(reqdata, ctrl) {
 
@@ -488,9 +506,15 @@ class FolderEntity extends TypebotEntityBase {
       return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 
@@ -505,10 +529,11 @@ class FolderEntity extends TypebotEntityBase {
 
 
 
+
   /**
    * @param {FolderRemoveMatch} [reqmatch]
    * @param {Object} [ctrl]
-   * @returns {Promise<Folder>}
+   * @returns {Promise<FolderEntity>}
    */
   async remove(reqmatch, ctrl) {
 
@@ -620,9 +645,15 @@ class FolderEntity extends TypebotEntityBase {
       return out
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 

@@ -135,6 +135,7 @@ class ResultRemoveMatch(TypedDict):
 class TypebotRequired(TypedDict):
     accessRight: str
     createdAt: str
+    currentUserMode: str
     customDomain: Any
     edges: list
     events: list
@@ -152,7 +153,7 @@ class TypebotRequired(TypedDict):
     settings: dict
     spaceId: Any
     theme: dict
-    typebot: dict
+    typebot: Any
     updatedAt: str
     variables: list
     version: str
@@ -184,6 +185,7 @@ class TypebotListMatch(TypebotListMatchRequired, total=False):
 class TypebotCreateDataRequired(TypedDict):
     accessRight: str
     createdAt: str
+    currentUserMode: str
     customDomain: Any
     edges: list
     events: list
@@ -201,7 +203,7 @@ class TypebotCreateDataRequired(TypedDict):
     settings: dict
     spaceId: Any
     theme: dict
-    typebot: dict
+    typebot: Any
     updatedAt: str
     variables: list
     version: str
@@ -221,6 +223,7 @@ class TypebotUpdateDataRequired(TypedDict):
 class TypebotUpdateData(TypebotUpdateDataRequired, total=False):
     accessRight: str
     createdAt: str
+    currentUserMode: str
     customDomain: Any
     edges: list
     events: list
@@ -239,7 +242,7 @@ class TypebotUpdateData(TypebotUpdateDataRequired, total=False):
     settings: dict
     spaceId: Any
     theme: dict
-    typebot: dict
+    typebot: Any
     updatedAt: str
     variables: list
     version: str
@@ -254,8 +257,7 @@ class TypebotRemoveMatch(TypedDict):
 class Workspace(TypedDict):
     chatsHardLimit: Any
     createdAt: str
-    customChatsLimit: Any
-    customSeatsLimit: Any
+    currentUserMode: str
     icon: Any
     id: str
     inactiveFirstEmailSentAt: Any
@@ -269,6 +271,7 @@ class Workspace(TypedDict):
     settings: Any
     stripeId: Any
     updatedAt: str
+    workspace: dict
 
 
 class WorkspaceLoadMatch(TypedDict):
@@ -278,8 +281,7 @@ class WorkspaceLoadMatch(TypedDict):
 class WorkspaceListMatch(TypedDict, total=False):
     chatsHardLimit: Any
     createdAt: str
-    customChatsLimit: Any
-    customSeatsLimit: Any
+    currentUserMode: str
     icon: Any
     id: str
     inactiveFirstEmailSentAt: Any
@@ -293,13 +295,13 @@ class WorkspaceListMatch(TypedDict, total=False):
     settings: Any
     stripeId: Any
     updatedAt: str
+    workspace: dict
 
 
 class WorkspaceCreateData(TypedDict):
     chatsHardLimit: Any
     createdAt: str
-    customChatsLimit: Any
-    customSeatsLimit: Any
+    currentUserMode: str
     icon: Any
     id: str
     inactiveFirstEmailSentAt: Any
@@ -313,6 +315,7 @@ class WorkspaceCreateData(TypedDict):
     settings: Any
     stripeId: Any
     updatedAt: str
+    workspace: dict
 
 
 class WorkspaceUpdateDataRequired(TypedDict):
@@ -322,8 +325,7 @@ class WorkspaceUpdateDataRequired(TypedDict):
 class WorkspaceUpdateData(WorkspaceUpdateDataRequired, total=False):
     chatsHardLimit: Any
     createdAt: str
-    customChatsLimit: Any
-    customSeatsLimit: Any
+    currentUserMode: str
     icon: Any
     inactiveFirstEmailSentAt: Any
     inactiveSecondEmailSentAt: Any
@@ -336,6 +338,7 @@ class WorkspaceUpdateData(WorkspaceUpdateDataRequired, total=False):
     settings: Any
     stripeId: Any
     updatedAt: str
+    workspace: dict
 
 
 class WorkspaceRemoveMatch(TypedDict):

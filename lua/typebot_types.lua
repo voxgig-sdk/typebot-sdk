@@ -90,6 +90,7 @@
 ---@class Typebot
 ---@field accessRight string
 ---@field createdAt string
+---@field currentUserMode string
 ---@field customDomain any
 ---@field edges table
 ---@field events table
@@ -109,7 +110,7 @@
 ---@field settings table
 ---@field spaceId any
 ---@field theme table
----@field typebot table
+---@field typebot any
 ---@field updatedAt string
 ---@field variables table
 ---@field version string
@@ -127,6 +128,7 @@
 ---@class TypebotCreateData
 ---@field accessRight string
 ---@field createdAt string
+---@field currentUserMode string
 ---@field customDomain any
 ---@field edges table
 ---@field events table
@@ -146,7 +148,7 @@
 ---@field settings table
 ---@field spaceId any
 ---@field theme table
----@field typebot table
+---@field typebot any
 ---@field updatedAt string
 ---@field variables table
 ---@field version string
@@ -157,6 +159,7 @@
 ---@field id string
 ---@field accessRight? string
 ---@field createdAt? string
+---@field currentUserMode? string
 ---@field customDomain? any
 ---@field edges? table
 ---@field events? table
@@ -175,7 +178,7 @@
 ---@field settings? table
 ---@field spaceId? any
 ---@field theme? table
----@field typebot? table
+---@field typebot? any
 ---@field updatedAt? string
 ---@field variables? table
 ---@field version? string
@@ -188,8 +191,7 @@
 ---@class Workspace
 ---@field chatsHardLimit any
 ---@field createdAt string
----@field customChatsLimit any
----@field customSeatsLimit any
+---@field currentUserMode string
 ---@field icon any
 ---@field id string
 ---@field inactiveFirstEmailSentAt any
@@ -203,6 +205,7 @@
 ---@field settings any
 ---@field stripeId any
 ---@field updatedAt string
+---@field workspace table
 
 ---@class WorkspaceLoadMatch
 ---@field id string
@@ -210,8 +213,7 @@
 ---@class WorkspaceListMatch
 ---@field chatsHardLimit? any
 ---@field createdAt? string
----@field customChatsLimit? any
----@field customSeatsLimit? any
+---@field currentUserMode? string
 ---@field icon? any
 ---@field id? string
 ---@field inactiveFirstEmailSentAt? any
@@ -225,12 +227,12 @@
 ---@field settings? any
 ---@field stripeId? any
 ---@field updatedAt? string
+---@field workspace? table
 
 ---@class WorkspaceCreateData
 ---@field chatsHardLimit any
 ---@field createdAt string
----@field customChatsLimit any
----@field customSeatsLimit any
+---@field currentUserMode string
 ---@field icon any
 ---@field id string
 ---@field inactiveFirstEmailSentAt any
@@ -244,13 +246,13 @@
 ---@field settings any
 ---@field stripeId any
 ---@field updatedAt string
+---@field workspace table
 
 ---@class WorkspaceUpdateData
 ---@field id string
 ---@field chatsHardLimit? any
 ---@field createdAt? string
----@field customChatsLimit? any
----@field customSeatsLimit? any
+---@field currentUserMode? string
 ---@field icon? any
 ---@field inactiveFirstEmailSentAt? any
 ---@field inactiveSecondEmailSentAt? any
@@ -263,6 +265,7 @@
 ---@field settings? any
 ---@field stripeId? any
 ---@field updatedAt? string
+---@field workspace? table
 
 ---@class WorkspaceRemoveMatch
 ---@field id string

@@ -12,6 +12,10 @@ const {
   envOverride,
   liveClientOptions,
   liveDelay,
+  skipIfMissingIds,
+  liveMiss,
+  liveEmpty,
+  describeLive,
 } = require('../../utility')
 
 
@@ -37,23 +41,32 @@ describe('ResultDirect', async () => {
   test('direct-load-result', async (t) => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup({ id: 'direct01' })
+    if (skipIfMissingIds(t, setup, ["result01","typebot01"], LIVE_STRICT)) return
     const { client, calls } = setup
 
     const params = {}
     if (setup.live) {
       const listResult = await client.direct({
-        path: 'v1/typebots/{typebot_id}/results',
+        path: 'v1/typebots/{typebot_id}/results/{id}/logs',
         method: 'GET',
         params: {
+        id: setup.idmap['result01'],
         typebot_id: setup.idmap['typebot01'],
         },
       })
-      assert(listResult.ok === true)
-      const listData = listResult.data
-      if (!Array.isArray(listData) || listData.length === 0) {
-        throw new Error('Live load blocked: discovery returned no usable entities')
+      if (!listResult.ok || listResult.status < 200 || listResult.status >= 300) {
+        return void liveMiss(t, LIVE_STRICT, 'Live list discovery failed: ' + describeLive(listResult))
       }
-      params.id = listData[0].id
+      if (!Array.isArray(listResult.data)) {
+        return void liveMiss(t, LIVE_STRICT, 'Live list discovery returned no list: ' + describeLive(listResult))
+      }
+      if (0 === listResult.data.length) {
+        return void liveEmpty(t, 'The account has no result record to load')
+      }
+      if (null == listResult.data[0]?.id) {
+        return void liveMiss(t, LIVE_STRICT, 'Live load blocked: discovery returned no usable identity')
+      }
+      params.id = listResult.data[0].id
       params.typebot_id = setup.idmap['typebot01']
     } else {
       params.id = 'direct01'
@@ -66,11 +79,17 @@ describe('ResultDirect', async () => {
       params,
     })
 
-    assert(result.ok === true)
-    assert(setup.live ? result.status >= 200 && result.status < 300 : result.status === 200)
-    assert(null != result.data)
-
-    if (!setup.live) {
+    if (setup.live) {
+      if (!result.ok || result.status < 200 || result.status >= 300) {
+        return void liveMiss(t, LIVE_STRICT, 'Live load failed: ' + describeLive(result))
+      }
+      if (!(null != result.data)) {
+        return void liveMiss(t, LIVE_STRICT, 'Live load returned no data: ' + describeLive(result))
+      }
+    } else {
+      assert(result.ok === true)
+      assert(result.status === 200)
+      assert(null != result.data)
       assert(result.data.id === 'direct01')
       assert(calls.length === 1)
       assert(calls[0].init.method === 'GET')
@@ -82,36 +101,52 @@ describe('ResultDirect', async () => {
   test('direct-list-result', async (t) => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
+    if (skipIfMissingIds(t, setup, ["result01","typebot01"], LIVE_STRICT)) return
     const { client, calls } = setup
 
     const params = {}
     if (setup.live) {
+      params.id = setup.idmap['result01']
       params.typebot_id = setup.idmap['typebot01']
     } else {
-      params.typebot_id = 'direct01'
+      params.id = 'direct01'
+      params.typebot_id = 'direct02'
     }
 
     const result = await client.direct({
-      path: 'v1/typebots/{typebot_id}/results',
+      path: 'v1/typebots/{typebot_id}/results/{id}/logs',
       method: 'GET',
       params,
     })
 
-    assert(result.ok === true)
-    assert(setup.live ? result.status >= 200 && result.status < 300 : result.status === 200)
-    assert(Array.isArray(result.data))
-
-    if (!setup.live) {
+    if (setup.live) {
+      if (!result.ok || result.status < 200 || result.status >= 300) {
+        return void liveMiss(t, LIVE_STRICT, 'Live list failed: ' + describeLive(result))
+      }
+      if (!(Array.isArray(result.data))) {
+        return void liveMiss(t, LIVE_STRICT, 'Live list returned no list: ' + describeLive(result))
+      }
+    } else {
+      assert(result.ok === true)
+      assert(result.status === 200)
+      assert(Array.isArray(result.data))
       assert(result.data.length === 2)
       assert(calls.length === 1)
       assert(calls[0].init.method === 'GET')
       assert(calls[0].url.includes('direct01'))
+      assert(calls[0].url.includes('direct02'))
     }
   })
 
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function liveScenariosActive() { return false && process.env.TYPEBOT_TEST_LIVE === 'TRUE' }
 function directSetup(mockres) {

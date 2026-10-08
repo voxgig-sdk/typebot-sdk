@@ -18,6 +18,12 @@ main: kit: entity: typebot: {
       r: true
       t: "`$STRING`"
     }
+    currentUserMode: {
+      h: "Current User Mode"
+      n: "currentUserMode"
+      r: true
+      t: "`$STRING`"
+    }
     customDomain: {
       h: "Custom Domain"
       n: "customDomain"
@@ -157,11 +163,11 @@ main: kit: entity: typebot: {
       h: "Typebot"
       n: "typebot"
       r: true
-      t: "`$OBJECT`"
+      t: "`$ANY`"
       union: {
         branches: 19
-        count: 88
-        depth: 24
+        count: 49
+        depth: 18
       }
     }
     updatedAt: {
@@ -213,6 +219,7 @@ main: kit: entity: typebot: {
       name: "create"
       points: [
         {
+          bf: false
           co: {
             id: "POST /v1/typebots/{typebotId}/publish"
             source: "openapi3"
@@ -223,7 +230,7 @@ main: kit: entity: typebot: {
               {
                 k: "param"
                 n: "id"
-                or: "typebot_id"
+                or: "typebotId"
                 r: true
                 t: "`$STRING`"
               }
@@ -241,6 +248,10 @@ main: kit: entity: typebot: {
             param: {
               typebotId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -262,6 +273,7 @@ main: kit: entity: typebot: {
           }
         }
         {
+          bf: false
           co: {
             id: "POST /v1/typebots/{typebotId}/unpublish"
             source: "openapi3"
@@ -272,7 +284,7 @@ main: kit: entity: typebot: {
               {
                 k: "param"
                 n: "id"
-                or: "typebot_id"
+                or: "typebotId"
                 r: true
                 t: "`$STRING`"
               }
@@ -290,6 +302,10 @@ main: kit: entity: typebot: {
             param: {
               typebotId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -311,6 +327,10 @@ main: kit: entity: typebot: {
           }
         }
         {
+          bf: [
+            "typebot"
+            "workspaceId"
+          ]
           co: {
             id: "POST /v1/typebots"
             source: "openapi3"
@@ -318,6 +338,10 @@ main: kit: entity: typebot: {
           }
           m: "POST"
           o: "/v1/typebots"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "v1"
@@ -327,13 +351,17 @@ main: kit: entity: typebot: {
             }
           ]
           t: {
-            req: {
-              typebot: "`reqdata`"
-            }
+            req: "`reqdata`"
             res: "`body.typebot`"
           }
         }
         {
+          bf: [
+            "enableSafetyFlags"
+            "fromTemplate"
+            "typebot"
+            "workspaceId"
+          ]
           co: {
             id: "POST /v1/typebots/import"
             source: "openapi3"
@@ -343,6 +371,10 @@ main: kit: entity: typebot: {
           o: "/v1/typebots/import"
           q: {
             "$action": "import"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -356,9 +388,7 @@ main: kit: entity: typebot: {
             }
           ]
           t: {
-            req: {
-              typebot: "`reqdata`"
-            }
+            req: "`reqdata`"
             res: "`body.typebot`"
           }
         }
@@ -378,14 +408,14 @@ main: kit: entity: typebot: {
               {
                 k: "query"
                 n: "folder_id"
-                or: "folder_id"
+                or: "folderId"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "workspace_id"
-                or: "workspace_id"
+                or: "workspaceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -395,9 +425,12 @@ main: kit: entity: typebot: {
           o: "/v1/typebots"
           q: {
             exist: [
-              "folder_id"
               "workspace_id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -428,7 +461,7 @@ main: kit: entity: typebot: {
               {
                 k: "param"
                 n: "id"
-                or: "typebot_id"
+                or: "typebotId"
                 r: true
                 t: "`$STRING`"
               }
@@ -438,7 +471,7 @@ main: kit: entity: typebot: {
                 ex: false
                 k: "query"
                 n: "migrate_to_latest_version"
-                or: "migrate_to_latest_version"
+                or: "migrateToLatestVersion"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -449,13 +482,16 @@ main: kit: entity: typebot: {
           q: {
             exist: [
               "id"
-              "migrate_to_latest_version"
             ]
           }
           r: {
             param: {
               typebotId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -484,7 +520,7 @@ main: kit: entity: typebot: {
               {
                 k: "param"
                 n: "id"
-                or: "typebot_id"
+                or: "typebotId"
                 r: true
                 t: "`$STRING`"
               }
@@ -494,7 +530,7 @@ main: kit: entity: typebot: {
                 ex: false
                 k: "query"
                 n: "migrate_to_latest_version"
-                or: "migrate_to_latest_version"
+                or: "migrateToLatestVersion"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -506,13 +542,16 @@ main: kit: entity: typebot: {
             "$action": "published_typebot"
             exist: [
               "id"
-              "migrate_to_latest_version"
             ]
           }
           r: {
             param: {
               typebotId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -530,7 +569,7 @@ main: kit: entity: typebot: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.publishedTypebot`"
           }
         }
       ]
@@ -539,6 +578,7 @@ main: kit: entity: typebot: {
       name: "remove"
       points: [
         {
+          bf: false
           co: {
             id: "DELETE /v1/typebots/{typebotId}"
             source: "openapi3"
@@ -549,7 +589,7 @@ main: kit: entity: typebot: {
               {
                 k: "param"
                 n: "id"
-                or: "typebot_id"
+                or: "typebotId"
                 r: true
                 t: "`$STRING`"
               }
@@ -566,6 +606,10 @@ main: kit: entity: typebot: {
             param: {
               typebotId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -589,6 +633,10 @@ main: kit: entity: typebot: {
       name: "update"
       points: [
         {
+          bf: [
+            "overwrite"
+            "typebot"
+          ]
           co: {
             id: "PATCH /v1/typebots/{typebotId}"
             source: "openapi3"
@@ -599,7 +647,7 @@ main: kit: entity: typebot: {
               {
                 k: "param"
                 n: "id"
-                or: "typebot_id"
+                or: "typebotId"
                 r: true
                 t: "`$STRING`"
               }
@@ -617,6 +665,10 @@ main: kit: entity: typebot: {
               typebotId: "id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "v1"
@@ -629,9 +681,7 @@ main: kit: entity: typebot: {
             }
           ]
           t: {
-            req: {
-              typebot: "`reqdata`"
-            }
+            req: "`reqdata`"
             res: "`body.typebot`"
           }
         }

@@ -12,6 +12,19 @@ import { TypebotEntityBase } from './TypebotEntityBase';
 import { Utility } from './utility/Utility';
 import { BaseFeature } from './feature/base/BaseFeature';
 declare const stdutil: Utility;
+type DirectResult = {
+    ok: false;
+    err: any;
+    status?: undefined;
+    headers?: undefined;
+    data?: undefined;
+} | {
+    ok: boolean;
+    status: number;
+    headers: any;
+    data: any;
+    err?: any;
+};
 declare class TypebotSDK {
     _mode: string;
     _options: any;
@@ -22,32 +35,8 @@ declare class TypebotSDK {
     options(): any;
     utility(): any;
     prepare(fetchargs?: any): Promise<any>;
-    direct(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    } | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    }>;
-    _rawRequest(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    } | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    }>;
+    direct(fetchargs?: any): Promise<DirectResult>;
+    _rawRequest(fetchargs?: any): Promise<DirectResult>;
     graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     Analytics(entopts?: Record<string, any>): AnalyticsEntity;
     Billing(entopts?: Record<string, any>): BillingEntity;
@@ -65,3 +54,4 @@ declare class TypebotSDK {
 }
 declare const SDK: typeof TypebotSDK;
 export { stdutil, config, BaseFeature, TypebotEntityBase, TypebotSDK, SDK, };
+export type { DirectResult };

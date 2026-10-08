@@ -20,7 +20,7 @@ main: kit: entity: billing: {
               {
                 k: "query"
                 n: "workspace_id"
-                or: "workspace_id"
+                or: "workspaceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -33,6 +33,10 @@ main: kit: entity: billing: {
             exist: [
               "workspace_id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -66,7 +70,7 @@ main: kit: entity: billing: {
               {
                 k: "query"
                 n: "workspace_id"
-                or: "workspace_id"
+                or: "workspaceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -79,6 +83,10 @@ main: kit: entity: billing: {
             exist: [
               "workspace_id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

@@ -113,7 +113,7 @@ $analytics = $client->Analytics();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Analytics()->load(["typebot_id" => "typebot_id"]);
@@ -159,15 +159,15 @@ $billing = $client->Billing();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Billing()->list();
+$results = $client->Billing()->list(["workspace_id" => "example"]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Billing()->load(["workspace_id" => "workspace_id"]);
@@ -239,7 +239,7 @@ $folder = $client->Folder();
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->Folder()->create([
@@ -255,15 +255,15 @@ $result = $client->Folder()->create([
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Folder()->list();
+$results = $client->Folder()->list(["workspace_id" => "example"]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Folder()->load(["id" => "folder_id", "workspace_id" => "workspace_id"]);
@@ -271,7 +271,7 @@ $result = $client->Folder()->load(["id" => "folder_id", "workspace_id" => "works
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
-Remove the entity matching the given criteria. Throws on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and throws on error.
 
 ```php
 $result = $client->Folder()->remove(["id" => "folder_id"]);
@@ -279,7 +279,7 @@ $result = $client->Folder()->remove(["id" => "folder_id"]);
 
 #### `update(array $reqdata, ?array $ctrl = null): mixed`
 
-Update an existing entity. The data must include the entity `id`. Throws on error.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and throws on error.
 
 ```php
 $result = $client->Folder()->update([
@@ -342,15 +342,15 @@ $result = $client->Result();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Result()->list();
+$results = $client->Result()->list(["typebot_id" => "example"]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Result()->load(["id" => "result_id", "typebot_id" => "typebot_id"]);
@@ -358,7 +358,7 @@ $result = $client->Result()->load(["id" => "result_id", "typebot_id" => "typebot
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
-Remove the entity matching the given criteria. Throws on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and throws on error.
 
 ```php
 $result = $client->Result()->remove(["typebot_id" => "typebot_id"]);
@@ -406,6 +406,7 @@ $typebot = $client->Typebot();
 | --- | --- | --- | --- |
 | `accessRight` | `string` | Yes |  |
 | `createdAt` | `string` | Yes |  |
+| `currentUserMode` | `string` | Yes |  |
 | `customDomain` | `mixed` | Yes |  |
 | `edges` | `array` | Yes |  |
 | `events` | `array` | Yes |  |
@@ -425,7 +426,7 @@ $typebot = $client->Typebot();
 | `settings` | `array` | Yes |  |
 | `spaceId` | `mixed` | Yes |  |
 | `theme` | `array` | Yes |  |
-| `typebot` | `array` | Yes |  |
+| `typebot` | `mixed` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
 | `variables` | `array` | Yes |  |
 | `version` | `string` | Yes |  |
@@ -436,12 +437,13 @@ $typebot = $client->Typebot();
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->Typebot()->create([
   "accessRight" => null, // string
   "createdAt" => null, // string
+  "currentUserMode" => null, // string
   "customDomain" => null, // mixed
   "edges" => null, // array
   "events" => null, // array
@@ -459,7 +461,7 @@ $result = $client->Typebot()->create([
   "settings" => null, // array
   "spaceId" => null, // mixed
   "theme" => null, // array
-  "typebot" => null, // array
+  "typebot" => null, // mixed
   "updatedAt" => null, // string
   "variables" => null, // array
   "version" => null, // string
@@ -470,15 +472,15 @@ $result = $client->Typebot()->create([
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Typebot()->list();
+$results = $client->Typebot()->list(["workspace_id" => "example"]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Typebot()->load(["id" => "typebot_id"]);
@@ -486,7 +488,7 @@ $result = $client->Typebot()->load(["id" => "typebot_id"]);
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
-Remove the entity matching the given criteria. Throws on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and throws on error.
 
 ```php
 $result = $client->Typebot()->remove(["id" => "typebot_id"]);
@@ -494,7 +496,7 @@ $result = $client->Typebot()->remove(["id" => "typebot_id"]);
 
 #### `update(array $reqdata, ?array $ctrl = null): mixed`
 
-Update an existing entity. The data must include the entity `id`. Throws on error.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and throws on error.
 
 ```php
 $result = $client->Typebot()->update([
@@ -545,8 +547,7 @@ $workspace = $client->Workspace();
 | --- | --- | --- | --- |
 | `chatsHardLimit` | `mixed` | Yes |  |
 | `createdAt` | `string` | Yes |  |
-| `customChatsLimit` | `mixed` | Yes |  |
-| `customSeatsLimit` | `mixed` | Yes |  |
+| `currentUserMode` | `string` | Yes |  |
 | `icon` | `mixed` | Yes |  |
 | `id` | `string` | Yes |  |
 | `inactiveFirstEmailSentAt` | `mixed` | Yes |  |
@@ -560,6 +561,7 @@ $workspace = $client->Workspace();
 | `settings` | `mixed` | Yes |  |
 | `stripeId` | `mixed` | Yes |  |
 | `updatedAt` | `string` | Yes |  |
+| `workspace` | `array` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -567,8 +569,7 @@ $workspace = $client->Workspace();
 | --- | --- | --- | --- | --- | --- |
 | `chatsHardLimit` | - | - | - | - | - |
 | `createdAt` | - | - | - | - | - |
-| `customChatsLimit` | - | - | - | - | - |
-| `customSeatsLimit` | - | - | - | - | - |
+| `currentUserMode` | - | - | - | - | - |
 | `icon` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
 | `inactiveFirstEmailSentAt` | - | - | - | - | - |
@@ -582,19 +583,19 @@ $workspace = $client->Workspace();
 | `settings` | - | - | - | - | - |
 | `stripeId` | - | - | - | - | - |
 | `updatedAt` | - | - | - | - | - |
+| `workspace` | - | - | - | - | - |
 
 ### Operations
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->Workspace()->create([
   "chatsHardLimit" => null, // mixed
   "createdAt" => null, // string
-  "customChatsLimit" => null, // mixed
-  "customSeatsLimit" => null, // mixed
+  "currentUserMode" => null, // string
   "icon" => null, // mixed
   "id" => null, // string
   "inactiveFirstEmailSentAt" => null, // mixed
@@ -608,12 +609,13 @@ $result = $client->Workspace()->create([
   "settings" => null, // mixed
   "stripeId" => null, // mixed
   "updatedAt" => null, // string
+  "workspace" => null, // array
 ]);
 ```
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
 $results = $client->Workspace()->list();
@@ -621,7 +623,7 @@ $results = $client->Workspace()->list();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Workspace()->load(["id" => "workspace_id"]);
@@ -629,7 +631,7 @@ $result = $client->Workspace()->load(["id" => "workspace_id"]);
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
-Remove the entity matching the given criteria. Throws on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and throws on error.
 
 ```php
 $result = $client->Workspace()->remove(["id" => "workspace_id"]);
@@ -637,7 +639,7 @@ $result = $client->Workspace()->remove(["id" => "workspace_id"]);
 
 #### `update(array $reqdata, ?array $ctrl = null): mixed`
 
-Update an existing entity. The data must include the entity `id`. Throws on error.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and throws on error.
 
 ```php
 $result = $client->Workspace()->update([
@@ -966,6 +968,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

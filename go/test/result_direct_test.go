@@ -10,6 +10,12 @@ import (
 	"github.com/voxgig-sdk/typebot-sdk/go/core"
 )
 
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const resultDirectLiveStrict = true
+
 func TestResultDirect(t *testing.T) {
 	t.Run("direct-list-result", func(t *testing.T) {
 		setup := resultDirectSetup([]any{
@@ -28,9 +34,9 @@ func TestResultDirect(t *testing.T) {
 			return
 		}
 		if setup.live {
-			for _, _liveKey := range []string{"typebot01"} {
+			for _, _liveKey := range []string{"result01", "typebot01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
-					t.Skipf("live test needs %s via *_ENTID env var (synthetic IDs only)", _liveKey)
+					liveMiss(t, resultDirectLiveStrict, "Live test blocked: needs %s via TYPEBOT_TEST_RESULT_ENTID", _liveKey)
 					return
 				}
 			}
@@ -39,30 +45,30 @@ func TestResultDirect(t *testing.T) {
 
 		params := map[string]any{}
 		if setup.live {
+			params["id"] = setup.idmap["result01"]
+		} else {
+			params["id"] = "direct01"
+		}
+		if setup.live {
 			params["typebot_id"] = setup.idmap["typebot01"]
 		} else {
-			params["typebot_id"] = "direct01"
+			params["typebot_id"] = "direct02"
 		}
 
 		result, err := client.Direct(map[string]any{
-			"path":   "v1/typebots/{typebot_id}/results",
+			"path":   "v1/typebots/{typebot_id}/results/{id}/logs",
 			"method": "GET",
 			"params": params,
 		})
 		if setup.live {
-			// Live-mode leniency is a model decision
-			// (main.kit.test.live.strict): synthetic IDs 4xx constantly
-			// against an arbitrary public API, so the default SKIPS here.
-			// A project that owns its test server sets strict and FAILS.
 			if err != nil {
-				t.Fatalf("list call failed (likely synthetic IDs against live API): %v", err)
+				liveMiss(t, resultDirectLiveStrict, "Live list failed: %v", err)
 			}
-			if result["ok"] != true {
-				t.Fatalf("list call not ok (likely synthetic IDs against live API): %v", result)
+			if status := core.ToInt(result["status"]); result["ok"] != true || status < 200 || status >= 300 {
+				liveMiss(t, resultDirectLiveStrict, "Live list failed: %s", liveDescribe(result))
 			}
-			status := core.ToInt(result["status"])
-			if status < 200 || status >= 300 {
-				t.Fatalf("expected 2xx status, got %v", result["status"])
+			if _, ok := liveList(result["data"]); !ok {
+				liveMiss(t, resultDirectLiveStrict, "Live list returned no list: %s", liveDescribe(result))
 			}
 		} else {
 			if err != nil {
@@ -98,6 +104,9 @@ func TestResultDirect(t *testing.T) {
 				if !strings.Contains(url, "direct01") {
 					t.Fatalf("expected url to contain direct01, got %v", url)
 				}
+				if !strings.Contains(url, "direct02") {
+					t.Fatalf("expected url to contain direct02, got %v", url)
+				}
 			}
 		}
 	})
@@ -116,9 +125,9 @@ func TestResultDirect(t *testing.T) {
 			return
 		}
 		if setup.live {
-			for _, _liveKey := range []string{"typebot01"} {
+			for _, _liveKey := range []string{"result01", "typebot01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
-					t.Skipf("live test needs %s via *_ENTID env var (synthetic IDs only)", _liveKey)
+					liveMiss(t, resultDirectLiveStrict, "Live test blocked: needs %s via TYPEBOT_TEST_RESULT_ENTID", _liveKey)
 					return
 				}
 			}
@@ -129,25 +138,30 @@ func TestResultDirect(t *testing.T) {
 		query := map[string]any{}
 		if setup.live {
 			listParams := map[string]any{}
+			listParams["id"] = setup.idmap["result01"]
 			listParams["typebot_id"] = setup.idmap["typebot01"]
 			listResult, listErr := client.Direct(map[string]any{
-				"path":   "v1/typebots/{typebot_id}/results",
+				"path":   "v1/typebots/{typebot_id}/results/{id}/logs",
 				"method": "GET",
 				"params": listParams,
 			})
 			if listErr != nil {
-				t.Fatalf("list call failed (likely synthetic IDs against live API): %v", listErr)
+				liveMiss(t, resultDirectLiveStrict, "Live list discovery failed: %v", listErr)
 			}
 			if listResult["ok"] != true {
-				t.Fatalf("list call not ok (likely synthetic IDs against live API): %v", listResult)
+				liveMiss(t, resultDirectLiveStrict, "Live list discovery failed: %s", liveDescribe(listResult))
 			}
-
-			// Get first entity ID from list
-			listData, _ := listResult["data"].([]any)
+			listData, listOk := liveList(listResult["data"])
+			if !listOk {
+				liveMiss(t, resultDirectLiveStrict, "Live list discovery returned no list: %s", liveDescribe(listResult))
+			}
 			if len(listData) == 0 {
-				t.Skip("no entities to load in live mode")
+				liveEmpty(t, "The account has no result record to load")
 			}
 			firstEnt := core.ToMapAny(listData[0])
+			if firstEnt["id"] == nil {
+				liveMiss(t, resultDirectLiveStrict, "Live load blocked: discovery returned no usable identity")
+			}
 			params["id"] = firstEnt["id"]
 			params["typebot_id"] = setup.idmap["typebot01"]
 		} else {
@@ -162,19 +176,14 @@ func TestResultDirect(t *testing.T) {
 			"query":  query,
 		})
 		if setup.live {
-			// Live mode is lenient: synthetic IDs frequently 4xx. Skip
-			// rather than fail when the load endpoint isn't reachable with
-			// the IDs we can construct from setup.idmap — unless the model
-			// sets main.kit.test.live.strict.
 			if err != nil {
-				t.Fatalf("load call failed (likely synthetic IDs against live API): %v", err)
+				liveMiss(t, resultDirectLiveStrict, "Live load failed: %v", err)
 			}
-			if result["ok"] != true {
-				t.Fatalf("load call not ok (likely synthetic IDs against live API): %v", result)
+			if status := core.ToInt(result["status"]); result["ok"] != true || status < 200 || status >= 300 {
+				liveMiss(t, resultDirectLiveStrict, "Live load failed: %s", liveDescribe(result))
 			}
-			status := core.ToInt(result["status"])
-			if status < 200 || status >= 300 {
-				t.Fatalf("expected 2xx status, got %v", result["status"])
+			if result["data"] == nil {
+				liveMiss(t, resultDirectLiveStrict, "Live load returned no data: %s", liveDescribe(result))
 			}
 		} else {
 			if err != nil {

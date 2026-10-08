@@ -126,6 +126,7 @@ type TypebotListMatch struct {
 type TypebotCreateData struct {
 	AccessRight string `json:"accessRight"`
 	CreatedAt string `json:"createdAt"`
+	CurrentUserMode string `json:"currentUserMode"`
 	CustomDomain any `json:"customDomain"`
 	Edges []any `json:"edges"`
 	Events []any `json:"events"`
@@ -145,7 +146,7 @@ type TypebotCreateData struct {
 	Settings map[string]any `json:"settings"`
 	SpaceId any `json:"spaceId"`
 	Theme map[string]any `json:"theme"`
-	Typebot map[string]any `json:"typebot"`
+	Typebot any `json:"typebot"`
 	UpdatedAt string `json:"updatedAt"`
 	Variables []any `json:"variables"`
 	Version string `json:"version"`
@@ -158,6 +159,7 @@ type TypebotUpdateData struct {
 	Id string `json:"id"`
 	AccessRight *string `json:"accessRight,omitempty"`
 	CreatedAt *string `json:"createdAt,omitempty"`
+	CurrentUserMode *string `json:"currentUserMode,omitempty"`
 	CustomDomain *any `json:"customDomain,omitempty"`
 	Edges *[]any `json:"edges,omitempty"`
 	Events *[]any `json:"events,omitempty"`
@@ -176,7 +178,7 @@ type TypebotUpdateData struct {
 	Settings *map[string]any `json:"settings,omitempty"`
 	SpaceId *any `json:"spaceId,omitempty"`
 	Theme *map[string]any `json:"theme,omitempty"`
-	Typebot *map[string]any `json:"typebot,omitempty"`
+	Typebot *any `json:"typebot,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	Variables *[]any `json:"variables,omitempty"`
 	Version *string `json:"version,omitempty"`
@@ -202,8 +204,7 @@ type WorkspaceLoadMatch struct {
 type WorkspaceListMatch struct {
 	ChatsHardLimit *any `json:"chatsHardLimit,omitempty"`
 	CreatedAt *string `json:"createdAt,omitempty"`
-	CustomChatsLimit *any `json:"customChatsLimit,omitempty"`
-	CustomSeatsLimit *any `json:"customSeatsLimit,omitempty"`
+	CurrentUserMode *string `json:"currentUserMode,omitempty"`
 	Icon *any `json:"icon,omitempty"`
 	Id *string `json:"id,omitempty"`
 	InactiveFirstEmailSentAt *any `json:"inactiveFirstEmailSentAt,omitempty"`
@@ -217,14 +218,14 @@ type WorkspaceListMatch struct {
 	Settings *any `json:"settings,omitempty"`
 	StripeId *any `json:"stripeId,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
+	Workspace *map[string]any `json:"workspace,omitempty"`
 }
 
 // WorkspaceCreateData is the typed request payload for Workspace.CreateTyped.
 type WorkspaceCreateData struct {
 	ChatsHardLimit any `json:"chatsHardLimit"`
 	CreatedAt string `json:"createdAt"`
-	CustomChatsLimit any `json:"customChatsLimit"`
-	CustomSeatsLimit any `json:"customSeatsLimit"`
+	CurrentUserMode string `json:"currentUserMode"`
 	Icon any `json:"icon"`
 	Id string `json:"id"`
 	InactiveFirstEmailSentAt any `json:"inactiveFirstEmailSentAt"`
@@ -238,6 +239,7 @@ type WorkspaceCreateData struct {
 	Settings any `json:"settings"`
 	StripeId any `json:"stripeId"`
 	UpdatedAt string `json:"updatedAt"`
+	Workspace map[string]any `json:"workspace"`
 }
 
 // WorkspaceUpdateData is the typed request payload for Workspace.UpdateTyped.
@@ -245,8 +247,7 @@ type WorkspaceUpdateData struct {
 	Id string `json:"id"`
 	ChatsHardLimit *any `json:"chatsHardLimit,omitempty"`
 	CreatedAt *string `json:"createdAt,omitempty"`
-	CustomChatsLimit *any `json:"customChatsLimit,omitempty"`
-	CustomSeatsLimit *any `json:"customSeatsLimit,omitempty"`
+	CurrentUserMode *string `json:"currentUserMode,omitempty"`
 	Icon *any `json:"icon,omitempty"`
 	InactiveFirstEmailSentAt *any `json:"inactiveFirstEmailSentAt,omitempty"`
 	InactiveSecondEmailSentAt *any `json:"inactiveSecondEmailSentAt,omitempty"`
@@ -259,6 +260,7 @@ type WorkspaceUpdateData struct {
 	Settings *any `json:"settings,omitempty"`
 	StripeId *any `json:"stripeId,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
+	Workspace *map[string]any `json:"workspace,omitempty"`
 }
 
 // WorkspaceRemoveMatch is the typed request payload for Workspace.RemoveTyped.

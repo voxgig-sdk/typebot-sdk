@@ -16,7 +16,7 @@ go get github.com/voxgig-sdk/typebot-sdk/go@latest
 ```
 
 The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
-release tag — see [Releases](https://github.com/voxgig-sdk/typebot-sdk/releases) for the available versions.
+release tag — see [Tags](https://github.com/voxgig-sdk/typebot-sdk/tags) for the available versions.
 
 To vendor from a local checkout instead, clone this repo alongside your
 project and add a `replace` directive pointing at the checked-out
@@ -35,9 +35,10 @@ loading a specific record.
 ### Quickstart
 
 A complete program: create a client, then call the entity operations.
-Each operation returns `(value, error)` — the value is the data itself
-(there is no `{ok, data}` wrapper), so check `err` and use the value
-directly.
+Each operation returns `(value, error)` — the value is the entity, and for
+`List` a `[]any` of entities, one per record (there is no `{ok, data}`
+wrapper), so check `err` and read a record through the entity's
+`Data()`.
 
 ```go
 package main
@@ -53,12 +54,12 @@ func main() {
         "apikey": os.Getenv("TYPEBOT_APIKEY"),
     })
 
-    // Load a single analytics — the value is the loaded record.
+    // Load a single analytics — the value is the entity; Data() reads its record.
     analytics, err := client.Analytics(nil).Load(map[string]any{"typebot_id": "example_typebot_id"}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(analytics)
+    fmt.Println(analytics.(sdk.Entity).Data())
 }
 ```
 
@@ -69,7 +70,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-folders, err := client.Folder(nil).List(nil, nil)
+folders, err := client.Folder(nil).List(map[string]any{"workspace_id": "example"}, nil)
 if err != nil {
     // handle err
     return
@@ -138,13 +139,16 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-folder, err := client.Folder(nil).List(
-    nil, nil,
+folders, err := client.Folder(nil).List(
+    map[string]any{"workspace_id": "example"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(folder) // the returned mock data
+// A []any of entities, one per mock record.
+for _, item := range folders.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Use a custom fetch function
@@ -236,11 +240,11 @@ All entities implement the `TypebotEntity` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
-| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity. |
-| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
+| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
+| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria, one per record. |
+| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity, and return it. |
+| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity, and return it. |
+| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity, and return it marked as deleted. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -248,13 +252,13 @@ All entities implement the `TypebotEntity` interface.
 
 ### Result shape
 
-Entity operations return `(value, error)`. The `value` is the
-operation's data **directly** — there is no wrapper:
+Entity operations return `(value, error)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` / `Create` / `Update` / `Remove` | the entity, whose `Data()` reads its record (`map[string]any`) |
+| `List` | a `[]any` of entities, one per record |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
@@ -262,7 +266,7 @@ slice):
 
     analytics, err := client.Analytics(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // analytics is the returned record
+    // analytics is the entity; analytics.(sdk.Entity).Data() reads its record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -320,7 +324,7 @@ API path: `/v1/folders`
 
 Operations: List, Load, Remove.
 
-API path: `/v1/typebots/{typebotId}/results`
+API path: `/v1/typebots/{typebotId}/results/{resultId}/logs`
 
 #### Typebot
 
@@ -328,6 +332,7 @@ API path: `/v1/typebots/{typebotId}/results`
 | --- | --- |
 | `"accessRight"` |  |
 | `"createdAt"` |  |
+| `"currentUserMode"` |  |
 | `"customDomain"` |  |
 | `"edges"` |  |
 | `"events"` |  |
@@ -364,8 +369,7 @@ API path: `/v1/typebots/{typebotId}/publish`
 | --- | --- |
 | `"chatsHardLimit"` |  |
 | `"createdAt"` |  |
-| `"customChatsLimit"` |  |
-| `"customSeatsLimit"` |  |
+| `"currentUserMode"` |  |
 | `"icon"` |  |
 | `"id"` |  |
 | `"inactiveFirstEmailSentAt"` |  |
@@ -379,6 +383,7 @@ API path: `/v1/typebots/{typebotId}/publish`
 | `"settings"` |  |
 | `"stripeId"` |  |
 | `"updatedAt"` |  |
+| `"workspace"` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -406,7 +411,7 @@ analytics, err := client.Analytics(nil).Load(map[string]any{"typebot_id": "typeb
 if err != nil {
     panic(err)
 }
-fmt.Println(analytics) // the loaded record
+fmt.Println(analytics.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -428,17 +433,20 @@ billing, err := client.Billing(nil).Load(map[string]any{"workspace_id": "workspa
 if err != nil {
     panic(err)
 }
-fmt.Println(billing) // the loaded record
+fmt.Println(billing.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
 
 ```go
-billings, err := client.Billing(nil).List(nil, nil)
+billings, err := client.Billing(nil).List(map[string]any{"workspace_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(billings) // the array of records
+// A []any of entities, one per record.
+for _, item := range billings.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -476,17 +484,20 @@ folder, err := client.Folder(nil).Load(map[string]any{"id": "folder_id", "worksp
 if err != nil {
     panic(err)
 }
-fmt.Println(folder) // the loaded record
+fmt.Println(folder.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
 
 ```go
-folders, err := client.Folder(nil).List(nil, nil)
+folders, err := client.Folder(nil).List(map[string]any{"workspace_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(folders) // the array of records
+// A []any of entities, one per record.
+for _, item := range folders.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 #### Example: Create
@@ -504,7 +515,7 @@ result, err := client.Folder(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -541,17 +552,20 @@ result, err := client.Result(nil).Load(map[string]any{"id": "result_id", "typebo
 if err != nil {
     panic(err)
 }
-fmt.Println(result) // the loaded record
+fmt.Println(result.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Result(nil).List(nil, nil)
+results, err := client.Result(nil).List(map[string]any{"typebot_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(results) // the array of records
+// A []any of entities, one per record.
+for _, item := range results.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -575,6 +589,7 @@ Create an instance: `typebot := client.Typebot(nil)`
 | --- | --- | --- |
 | `accessRight` | `string` |  |
 | `createdAt` | `string` |  |
+| `currentUserMode` | `string` |  |
 | `customDomain` | `any` |  |
 | `edges` | `[]any` |  |
 | `events` | `[]any` |  |
@@ -594,7 +609,7 @@ Create an instance: `typebot := client.Typebot(nil)`
 | `settings` | `map[string]any` |  |
 | `spaceId` | `any` |  |
 | `theme` | `map[string]any` |  |
-| `typebot` | `map[string]any` |  |
+| `typebot` | `any` |  |
 | `updatedAt` | `string` |  |
 | `variables` | `[]any` |  |
 | `version` | `string` |  |
@@ -608,17 +623,20 @@ typebot, err := client.Typebot(nil).Load(map[string]any{"id": "typebot_id"}, nil
 if err != nil {
     panic(err)
 }
-fmt.Println(typebot) // the loaded record
+fmt.Println(typebot.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
 
 ```go
-typebots, err := client.Typebot(nil).List(nil, nil)
+typebots, err := client.Typebot(nil).List(map[string]any{"workspace_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(typebots) // the array of records
+// A []any of entities, one per record.
+for _, item := range typebots.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 #### Example: Create
@@ -627,6 +645,7 @@ fmt.Println(typebots) // the array of records
 result, err := client.Typebot(nil).Create(map[string]any{
     "accessRight": "example_accessRight",
     "createdAt": "example_createdAt",
+    "currentUserMode": "example_currentUserMode",
     "customDomain": "example_customDomain",
     "edges": []any{},
     "events": []any{},
@@ -644,7 +663,7 @@ result, err := client.Typebot(nil).Create(map[string]any{
     "settings": map[string]any{},
     "spaceId": "example_spaceId",
     "theme": map[string]any{},
-    "typebot": map[string]any{},
+    "typebot": "example_typebot",
     "updatedAt": "example_updatedAt",
     "variables": []any{},
     "version": "example_version",
@@ -654,7 +673,7 @@ result, err := client.Typebot(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -678,8 +697,7 @@ Create an instance: `workspace := client.Workspace(nil)`
 | --- | --- | --- |
 | `chatsHardLimit` | `any` |  |
 | `createdAt` | `string` |  |
-| `customChatsLimit` | `any` |  |
-| `customSeatsLimit` | `any` |  |
+| `currentUserMode` | `string` |  |
 | `icon` | `any` |  |
 | `id` | `string` |  |
 | `inactiveFirstEmailSentAt` | `any` |  |
@@ -693,6 +711,7 @@ Create an instance: `workspace := client.Workspace(nil)`
 | `settings` | `any` |  |
 | `stripeId` | `any` |  |
 | `updatedAt` | `string` |  |
+| `workspace` | `map[string]any` |  |
 
 #### Example: Load
 
@@ -701,7 +720,7 @@ workspace, err := client.Workspace(nil).Load(map[string]any{"id": "workspace_id"
 if err != nil {
     panic(err)
 }
-fmt.Println(workspace) // the loaded record
+fmt.Println(workspace.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -711,7 +730,10 @@ workspaces, err := client.Workspace(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(workspaces) // the array of records
+// A []any of entities, one per record.
+for _, item := range workspaces.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 #### Example: Create
@@ -720,8 +742,7 @@ fmt.Println(workspaces) // the array of records
 result, err := client.Workspace(nil).Create(map[string]any{
     "chatsHardLimit": "example_chatsHardLimit",
     "createdAt": "example_createdAt",
-    "customChatsLimit": "example_customChatsLimit",
-    "customSeatsLimit": "example_customSeatsLimit",
+    "currentUserMode": "example_currentUserMode",
     "icon": "example_icon",
     "id": "example_id",
     "inactiveFirstEmailSentAt": "example_inactiveFirstEmailSentAt",
@@ -735,11 +756,12 @@ result, err := client.Workspace(nil).Create(map[string]any{
     "settings": "example_settings",
     "stripeId": "example_stripeId",
     "updatedAt": "example_updatedAt",
+    "workspace": map[string]any{},
 }, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 ## Features
@@ -892,7 +914,7 @@ guarantee.
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
 | `typebot` | `groups` | 19 | 14 levels |
-| `typebot` | `typebot` | 19 | 24 levels |
+| `typebot` | `typebot` | 19 | 18 levels |
 | `typebot` | `events` | 3 | 1 level |
 
 These values round-trip unchanged — read them, modify them, send them back. If
@@ -955,7 +977,9 @@ The Go SDK uses `map[string]any` throughout rather than typed structs.
 This mirrors the dynamic nature of the API and keeps the SDK
 flexible — no code generation is needed when the API schema changes.
 
-Use `core.ToMapAny()` to safely cast results and nested data.
+An operation returns the entity, and its `Data()` returns the record. Use
+`core.ToMapAny()` to safely cast that record, or data nested in it, to
+`map[string]any`: it returns `nil` for anything else, an entity included.
 
 ### Package structure
 
@@ -980,7 +1004,7 @@ stores the returned data and match criteria internally.
 
 ```go
 folder := client.Folder(nil)
-folder.List(nil, nil)
+folder.List(map[string]any{"workspace_id": "example"}, nil)
 
 // folder.Data() now returns the folder data from the last list
 // folder.Match() returns the last match criteria

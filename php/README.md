@@ -12,9 +12,14 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`):
+GitHub release tag (`php/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/typebot-sdk/tags)), or
+from a clone as a Composer path repository:
 
-- Releases: [https://github.com/voxgig-sdk/typebot-sdk/releases](https://github.com/voxgig-sdk/typebot-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/typebot-sdk
+composer config repositories.typebot-sdk path ./typebot-sdk/php
+composer require voxgig-sdk/typebot-sdk:@dev
+```
 
 
 ## Tutorial: your first API call
@@ -55,7 +60,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $folders = $client->Folder()->list();
+    $folders = $client->Folder()->list(["workspace_id" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -127,13 +132,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = TypebotSDK::test([
-    "entity" => ["result" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["workspace" => ["test01" => ["id" => "test01"]]],
 ]);
 
 // list() returns entity instances (throws on error);
 // call data_get() for the mock record.
-$result = $client->Result()->list();
-print_r(array_map(fn($item) => $item->data_get(), $result));
+$workspace = $client->Workspace()->list();
+print_r(array_map(fn($item) => $item->data_get(), $workspace));
 ```
 
 ### Use a custom fetch function
@@ -227,11 +232,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
+| `load` | `($reqmatch, $ctrl): mixed` | Load a single entity by match criteria, and return it. |
+| `list` | `(?array $reqmatch = null, $ctrl): mixed` | List entities matching the criteria (call with no argument to list all), one per record. |
+| `create` | `($reqdata, $ctrl): mixed` | Create a new entity, and return it. |
+| `update` | `($reqdata, $ctrl): mixed` | Update an existing entity, and return it. |
+| `remove` | `($reqmatch, $ctrl): mixed` | Remove an entity, and return it marked as deleted. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -241,9 +246,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
-ops, a `list` for `list`) and throw on error. Wrap calls in
-`try`/`catch` to handle failures.
+Entity operations return the entity, and `list` an `array` of entities, one
+per record; an entity's `data_get()` reads its record (an `array`). They
+throw on error, so wrap calls in `try`/`catch` to handle failures.
 
 The `direct()` escape hatch never throws — it returns a result `array`
 you branch on via `$result["ok"]`:
@@ -310,7 +315,7 @@ API path: `/v1/folders`
 
 Operations: List, Load, Remove.
 
-API path: `/v1/typebots/{typebotId}/results`
+API path: `/v1/typebots/{typebotId}/results/{resultId}/logs`
 
 #### Typebot
 
@@ -318,6 +323,7 @@ API path: `/v1/typebots/{typebotId}/results`
 | --- | --- |
 | `accessRight` |  |
 | `createdAt` |  |
+| `currentUserMode` |  |
 | `customDomain` |  |
 | `edges` |  |
 | `events` |  |
@@ -354,8 +360,7 @@ API path: `/v1/typebots/{typebotId}/publish`
 | --- | --- |
 | `chatsHardLimit` |  |
 | `createdAt` |  |
-| `customChatsLimit` |  |
-| `customSeatsLimit` |  |
+| `currentUserMode` |  |
 | `icon` |  |
 | `id` |  |
 | `inactiveFirstEmailSentAt` |  |
@@ -369,6 +374,7 @@ API path: `/v1/typebots/{typebotId}/publish`
 | `settings` |  |
 | `stripeId` |  |
 | `updatedAt` |  |
+| `workspace` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -418,8 +424,8 @@ $billing = $client->Billing()->load(["workspace_id" => "workspace_id"]);
 #### Example: List
 
 ```php
-// list() returns an array of Billing records (throws on error).
-$billings = $client->Billing()->list();
+// list() returns an array of Billing entities, one per record (throws on error).
+$billings = $client->Billing()->list(["workspace_id" => "example"]);
 ```
 
 
@@ -460,8 +466,8 @@ $folder = $client->Folder()->load(["id" => "folder_id", "workspace_id" => "works
 #### Example: List
 
 ```php
-// list() returns an array of Folder records (throws on error).
-$folders = $client->Folder()->list();
+// list() returns an array of Folder entities, one per record (throws on error).
+$folders = $client->Folder()->list(["workspace_id" => "example"]);
 ```
 
 #### Example: Create
@@ -515,8 +521,8 @@ $result = $client->Result()->load(["id" => "result_id", "typebot_id" => "typebot
 #### Example: List
 
 ```php
-// list() returns an array of Result records (throws on error).
-$results = $client->Result()->list();
+// list() returns an array of Result entities, one per record (throws on error).
+$results = $client->Result()->list(["typebot_id" => "example"]);
 ```
 
 
@@ -540,6 +546,7 @@ Create an instance: `$typebot = $client->Typebot();`
 | --- | --- | --- |
 | `accessRight` | `string` |  |
 | `createdAt` | `string` |  |
+| `currentUserMode` | `string` |  |
 | `customDomain` | `mixed` |  |
 | `edges` | `array` |  |
 | `events` | `array` |  |
@@ -559,7 +566,7 @@ Create an instance: `$typebot = $client->Typebot();`
 | `settings` | `array` |  |
 | `spaceId` | `mixed` |  |
 | `theme` | `array` |  |
-| `typebot` | `array` |  |
+| `typebot` | `mixed` |  |
 | `updatedAt` | `string` |  |
 | `variables` | `array` |  |
 | `version` | `string` |  |
@@ -576,8 +583,8 @@ $typebot = $client->Typebot()->load(["id" => "typebot_id"]);
 #### Example: List
 
 ```php
-// list() returns an array of Typebot records (throws on error).
-$typebots = $client->Typebot()->list();
+// list() returns an array of Typebot entities, one per record (throws on error).
+$typebots = $client->Typebot()->list(["workspace_id" => "example"]);
 ```
 
 #### Example: Create
@@ -586,6 +593,7 @@ $typebots = $client->Typebot()->list();
 $typebot = $client->Typebot()->create([
     "accessRight" => null, // string
     "createdAt" => null, // string
+    "currentUserMode" => null, // string
     "customDomain" => null, // mixed
     "edges" => null, // array
     "events" => null, // array
@@ -603,7 +611,7 @@ $typebot = $client->Typebot()->create([
     "settings" => null, // array
     "spaceId" => null, // mixed
     "theme" => null, // array
-    "typebot" => null, // array
+    "typebot" => null, // mixed
     "updatedAt" => null, // string
     "variables" => null, // array
     "version" => null, // string
@@ -633,8 +641,7 @@ Create an instance: `$workspace = $client->Workspace();`
 | --- | --- | --- |
 | `chatsHardLimit` | `mixed` |  |
 | `createdAt` | `string` |  |
-| `customChatsLimit` | `mixed` |  |
-| `customSeatsLimit` | `mixed` |  |
+| `currentUserMode` | `string` |  |
 | `icon` | `mixed` |  |
 | `id` | `string` |  |
 | `inactiveFirstEmailSentAt` | `mixed` |  |
@@ -648,6 +655,7 @@ Create an instance: `$workspace = $client->Workspace();`
 | `settings` | `mixed` |  |
 | `stripeId` | `mixed` |  |
 | `updatedAt` | `string` |  |
+| `workspace` | `array` |  |
 
 #### Example: Load
 
@@ -659,7 +667,7 @@ $workspace = $client->Workspace()->load(["id" => "workspace_id"]);
 #### Example: List
 
 ```php
-// list() returns an array of Workspace records (throws on error).
+// list() returns an array of Workspace entities, one per record (throws on error).
 $workspaces = $client->Workspace()->list();
 ```
 
@@ -669,8 +677,7 @@ $workspaces = $client->Workspace()->list();
 $workspace = $client->Workspace()->create([
     "chatsHardLimit" => null, // mixed
     "createdAt" => null, // string
-    "customChatsLimit" => null, // mixed
-    "customSeatsLimit" => null, // mixed
+    "currentUserMode" => null, // string
     "icon" => null, // mixed
     "id" => null, // string
     "inactiveFirstEmailSentAt" => null, // mixed
@@ -684,6 +691,7 @@ $workspace = $client->Workspace()->create([
     "settings" => null, // mixed
     "stripeId" => null, // mixed
     "updatedAt" => null, // string
+    "workspace" => null, // array
 ]);
 ```
 
@@ -837,7 +845,7 @@ guarantee.
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
 | `typebot` | `groups` | 19 | 14 levels |
-| `typebot` | `typebot` | 19 | 24 levels |
+| `typebot` | `typebot` | 19 | 18 levels |
 | `typebot` | `events` | 3 | 1 level |
 
 These values round-trip unchanged — read them, modify them, send them back. If
@@ -929,7 +937,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $folder = $client->Folder();
-$folder->list();
+$folder->list(["workspace_id" => "example"]);
 
 // $folder->data_get() now returns the folder data from the last list
 // $folder->match_get() returns the last match criteria

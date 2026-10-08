@@ -18,17 +18,11 @@ main: kit: entity: workspace: {
       r: true
       t: "`$STRING`"
     }
-    customChatsLimit: {
-      h: "Custom Chats Limit"
-      n: "customChatsLimit"
+    currentUserMode: {
+      h: "Current User Mode"
+      n: "currentUserMode"
       r: true
-      t: "`$ANY`"
-    }
-    customSeatsLimit: {
-      h: "Custom Seats Limit"
-      n: "customSeatsLimit"
-      r: true
-      t: "`$ANY`"
+      t: "`$STRING`"
     }
     icon: {
       h: "Icon"
@@ -125,6 +119,12 @@ main: kit: entity: workspace: {
       r: true
       t: "`$STRING`"
     }
+    workspace: {
+      h: "Workspace"
+      n: "workspace"
+      r: true
+      t: "`$OBJECT`"
+    }
   }
 
   id: {
@@ -138,6 +138,10 @@ main: kit: entity: workspace: {
       name: "create"
       points: [
         {
+          bf: [
+            "icon"
+            "name"
+          ]
           co: {
             id: "POST /v1/workspaces"
             source: "openapi3"
@@ -145,6 +149,10 @@ main: kit: entity: workspace: {
           }
           m: "POST"
           o: "/v1/workspaces"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "v1"
@@ -174,7 +182,7 @@ main: kit: entity: workspace: {
               {
                 k: "param"
                 n: "id"
-                or: "workspace_id"
+                or: "workspaceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -192,6 +200,10 @@ main: kit: entity: workspace: {
             param: {
               workspaceId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -220,6 +232,10 @@ main: kit: entity: workspace: {
           }
           m: "GET"
           o: "/v1/workspaces"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "v1"
@@ -249,7 +265,7 @@ main: kit: entity: workspace: {
               {
                 k: "param"
                 n: "id"
-                or: "workspace_id"
+                or: "workspaceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -266,6 +282,10 @@ main: kit: entity: workspace: {
             param: {
               workspaceId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -289,6 +309,7 @@ main: kit: entity: workspace: {
       name: "remove"
       points: [
         {
+          bf: false
           co: {
             id: "DELETE /v1/workspaces/{workspaceId}"
             source: "openapi3"
@@ -299,7 +320,7 @@ main: kit: entity: workspace: {
               {
                 k: "param"
                 n: "id"
-                or: "workspace_id"
+                or: "workspaceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -316,6 +337,10 @@ main: kit: entity: workspace: {
             param: {
               workspaceId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -339,6 +364,10 @@ main: kit: entity: workspace: {
       name: "update"
       points: [
         {
+          bf: [
+            "icon"
+            "name"
+          ]
           co: {
             id: "PATCH /v1/workspaces/{workspaceId}"
             source: "openapi3"
@@ -349,7 +378,7 @@ main: kit: entity: workspace: {
               {
                 k: "param"
                 n: "id"
-                or: "workspace_id"
+                or: "workspaceId"
                 r: true
                 t: "`$STRING`"
               }
@@ -366,6 +395,10 @@ main: kit: entity: workspace: {
             param: {
               workspaceId: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

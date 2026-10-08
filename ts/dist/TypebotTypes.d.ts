@@ -90,6 +90,7 @@ export interface ResultRemoveMatch {
 export interface Typebot {
     accessRight: string;
     createdAt: string;
+    currentUserMode: string;
     customDomain: any;
     edges: any[];
     events: any[];
@@ -109,7 +110,7 @@ export interface Typebot {
     settings: Record<string, any>;
     spaceId: any;
     theme: Record<string, any>;
-    typebot: Record<string, any>;
+    typebot: any;
     updatedAt: string;
     variables: any[];
     version: string;
@@ -129,6 +130,7 @@ export interface TypebotListMatch {
 export interface TypebotCreateData {
     accessRight: string;
     createdAt: string;
+    currentUserMode: string;
     customDomain: any;
     edges: any[];
     events: any[];
@@ -148,7 +150,7 @@ export interface TypebotCreateData {
     settings: Record<string, any>;
     spaceId: any;
     theme: Record<string, any>;
-    typebot: Record<string, any>;
+    typebot: any;
     updatedAt: string;
     variables: any[];
     version: string;
@@ -161,6 +163,7 @@ export interface TypebotUpdateData {
     id: string;
     accessRight?: string;
     createdAt?: string;
+    currentUserMode?: string;
     customDomain?: any;
     edges?: any[];
     events?: any[];
@@ -179,7 +182,7 @@ export interface TypebotUpdateData {
     settings?: Record<string, any>;
     spaceId?: any;
     theme?: Record<string, any>;
-    typebot?: Record<string, any>;
+    typebot?: any;
     updatedAt?: string;
     variables?: any[];
     version?: string;
@@ -192,8 +195,7 @@ export interface TypebotRemoveMatch {
 export interface Workspace {
     chatsHardLimit: any;
     createdAt: string;
-    customChatsLimit: any;
-    customSeatsLimit: any;
+    currentUserMode: string;
     icon: any;
     id: string;
     inactiveFirstEmailSentAt: any;
@@ -207,6 +209,7 @@ export interface Workspace {
     settings: any;
     stripeId: any;
     updatedAt: string;
+    workspace: Record<string, any>;
 }
 export interface WorkspaceLoadMatch {
     id: string;
@@ -214,8 +217,7 @@ export interface WorkspaceLoadMatch {
 export interface WorkspaceListMatch {
     chatsHardLimit?: any;
     createdAt?: string;
-    customChatsLimit?: any;
-    customSeatsLimit?: any;
+    currentUserMode?: string;
     icon?: any;
     id?: string;
     inactiveFirstEmailSentAt?: any;
@@ -229,14 +231,14 @@ export interface WorkspaceListMatch {
     settings?: any;
     stripeId?: any;
     updatedAt?: string;
+    workspace?: Record<string, any>;
     $action?: string;
     [action: string]: any;
 }
 export interface WorkspaceCreateData {
     chatsHardLimit: any;
     createdAt: string;
-    customChatsLimit: any;
-    customSeatsLimit: any;
+    currentUserMode: string;
     icon: any;
     id: string;
     inactiveFirstEmailSentAt: any;
@@ -250,13 +252,13 @@ export interface WorkspaceCreateData {
     settings: any;
     stripeId: any;
     updatedAt: string;
+    workspace: Record<string, any>;
 }
 export interface WorkspaceUpdateData {
     id: string;
     chatsHardLimit?: any;
     createdAt?: string;
-    customChatsLimit?: any;
-    customSeatsLimit?: any;
+    currentUserMode?: string;
     icon?: any;
     inactiveFirstEmailSentAt?: any;
     inactiveSecondEmailSentAt?: any;
@@ -269,6 +271,7 @@ export interface WorkspaceUpdateData {
     settings?: any;
     stripeId?: any;
     updatedAt?: string;
+    workspace?: Record<string, any>;
 }
 export interface WorkspaceRemoveMatch {
     id: string;

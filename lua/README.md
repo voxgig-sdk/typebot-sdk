@@ -12,7 +12,7 @@ It exposes the API as capitalised, semantic **Entities** — e.g. `client:Analyt
 
 ## Install
 This package is not yet published to LuaRocks. Install it from the
-GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/typebot-sdk/releases)),
+GitHub release tag (`lua/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/typebot-sdk/tags)),
 or add the source directory to your `LUA_PATH`:
 
 ```bash
@@ -39,10 +39,12 @@ local client = sdk.new({
 
 Analytics is nested under typebot, so provide the `typebot_id`.
 
+`load` returns the entity; `data_get()` reads its record.
+
 ```lua
 local analytics, err = client:Analytics():load({ typebot_id = "example_typebot_id" })
 if err then error(err) end
-print(analytics)
+for k, val in pairs(analytics:data_get()) do print(k, val) end
 ```
 
 
@@ -52,7 +54,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local folders, err = client:Folder():list()
+local folders, err = client:Folder():list({ workspace_id = "example" })
 if err then error(err) end
 ```
 
@@ -110,8 +112,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Folder():list()
--- result is the returned data; err is set on failure
+local result, err = client:Folder():list({ workspace_id = "example" })
+-- result is an array of entities, one per mock record; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -204,11 +206,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> any, err` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> any, err` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> any, err` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria, and return it. |
+| `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria, one per record. |
+| `create` | `(reqdata, ctrl) -> any, err` | Create a new entity, and return it. |
+| `update` | `(reqdata, ctrl) -> any, err` | Update an existing entity, and return it. |
+| `remove` | `(reqmatch, ctrl) -> any, err` | Remove an entity, and return it marked as deleted. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -218,19 +220,19 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(value, err)`. The `value` is the operation's
-data **directly** — there is no wrapper:
+Entity operations return `(value, err)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
-| `list` | an array (`table`) of entity records |
+| `load` / `create` / `update` / `remove` | the entity, whose `data_get()` reads its record (a `table`) |
+| `list` | an array (`table`) of entities, one per record |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
     local analytics, err = client:Analytics():load()
     if err then error(err) end
-    -- analytics is the loaded record
+    -- analytics is the loaded entity
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -288,7 +290,7 @@ API path: `/v1/folders`
 
 Operations: List, Load, Remove.
 
-API path: `/v1/typebots/{typebotId}/results`
+API path: `/v1/typebots/{typebotId}/results/{resultId}/logs`
 
 #### Typebot
 
@@ -296,6 +298,7 @@ API path: `/v1/typebots/{typebotId}/results`
 | --- | --- |
 | `accessRight` |  |
 | `createdAt` |  |
+| `currentUserMode` |  |
 | `customDomain` |  |
 | `edges` |  |
 | `events` |  |
@@ -332,8 +335,7 @@ API path: `/v1/typebots/{typebotId}/publish`
 | --- | --- |
 | `chatsHardLimit` |  |
 | `createdAt` |  |
-| `customChatsLimit` |  |
-| `customSeatsLimit` |  |
+| `currentUserMode` |  |
 | `icon` |  |
 | `id` |  |
 | `inactiveFirstEmailSentAt` |  |
@@ -347,6 +349,7 @@ API path: `/v1/typebots/{typebotId}/publish`
 | `settings` |  |
 | `stripeId` |  |
 | `updatedAt` |  |
+| `workspace` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -394,7 +397,7 @@ local billing, err = client:Billing():load({ workspace_id = "workspace_id" })
 #### Example: List
 
 ```lua
-local billings, err = client:Billing():list()
+local billings, err = client:Billing():list({ workspace_id = "example" })
 ```
 
 
@@ -434,7 +437,7 @@ local folder, err = client:Folder():load({ id = "folder_id", workspace_id = "wor
 #### Example: List
 
 ```lua
-local folders, err = client:Folder():list()
+local folders, err = client:Folder():list({ workspace_id = "example" })
 ```
 
 #### Example: Create
@@ -487,7 +490,7 @@ local result, err = client:Result():load({ id = "result_id", typebot_id = "typeb
 #### Example: List
 
 ```lua
-local results, err = client:Result():list()
+local results, err = client:Result():list({ typebot_id = "example" })
 ```
 
 
@@ -511,6 +514,7 @@ Create an instance: `local typebot = client:Typebot(nil)`
 | --- | --- | --- |
 | `accessRight` | `string` |  |
 | `createdAt` | `string` |  |
+| `currentUserMode` | `string` |  |
 | `customDomain` | `any` |  |
 | `edges` | `table` |  |
 | `events` | `table` |  |
@@ -530,7 +534,7 @@ Create an instance: `local typebot = client:Typebot(nil)`
 | `settings` | `table` |  |
 | `spaceId` | `any` |  |
 | `theme` | `table` |  |
-| `typebot` | `table` |  |
+| `typebot` | `any` |  |
 | `updatedAt` | `string` |  |
 | `variables` | `table` |  |
 | `version` | `string` |  |
@@ -546,7 +550,7 @@ local typebot, err = client:Typebot():load({ id = "typebot_id" })
 #### Example: List
 
 ```lua
-local typebots, err = client:Typebot():list()
+local typebots, err = client:Typebot():list({ workspace_id = "example" })
 ```
 
 #### Example: Create
@@ -555,6 +559,7 @@ local typebots, err = client:Typebot():list()
 local typebot, err = client:Typebot():create({
   accessRight = "example_accessRight", -- string
   createdAt = "example_createdAt", -- string
+  currentUserMode = "example_currentUserMode", -- string
   customDomain = "example_customDomain", -- any
   edges = {}, -- table
   events = {}, -- table
@@ -572,7 +577,7 @@ local typebot, err = client:Typebot():create({
   settings = {}, -- table
   spaceId = "example_spaceId", -- any
   theme = {}, -- table
-  typebot = {}, -- table
+  typebot = "example_typebot", -- any
   updatedAt = "example_updatedAt", -- string
   variables = {}, -- table
   version = "example_version", -- string
@@ -602,8 +607,7 @@ Create an instance: `local workspace = client:Workspace(nil)`
 | --- | --- | --- |
 | `chatsHardLimit` | `any` |  |
 | `createdAt` | `string` |  |
-| `customChatsLimit` | `any` |  |
-| `customSeatsLimit` | `any` |  |
+| `currentUserMode` | `string` |  |
 | `icon` | `any` |  |
 | `id` | `string` |  |
 | `inactiveFirstEmailSentAt` | `any` |  |
@@ -617,6 +621,7 @@ Create an instance: `local workspace = client:Workspace(nil)`
 | `settings` | `any` |  |
 | `stripeId` | `any` |  |
 | `updatedAt` | `string` |  |
+| `workspace` | `table` |  |
 
 #### Example: Load
 
@@ -636,8 +641,7 @@ local workspaces, err = client:Workspace():list()
 local workspace, err = client:Workspace():create({
   chatsHardLimit = "example_chatsHardLimit", -- any
   createdAt = "example_createdAt", -- string
-  customChatsLimit = "example_customChatsLimit", -- any
-  customSeatsLimit = "example_customSeatsLimit", -- any
+  currentUserMode = "example_currentUserMode", -- string
   icon = "example_icon", -- any
   id = "example_id", -- string
   inactiveFirstEmailSentAt = "example_inactiveFirstEmailSentAt", -- any
@@ -651,6 +655,7 @@ local workspace, err = client:Workspace():create({
   settings = "example_settings", -- any
   stripeId = "example_stripeId", -- any
   updatedAt = "example_updatedAt", -- string
+  workspace = {}, -- table
 })
 ```
 
@@ -804,7 +809,7 @@ guarantee.
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
 | `typebot` | `groups` | 19 | 14 levels |
-| `typebot` | `typebot` | 19 | 24 levels |
+| `typebot` | `typebot` | 19 | 18 levels |
 | `typebot` | `events` | 3 | 1 level |
 
 These values round-trip unchanged — read them, modify them, send them back. If
@@ -896,7 +901,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local folder = client:Folder()
-folder:list()
+folder:list({ workspace_id = "example" })
 
 -- folder:data_get() now returns the folder data from the last list
 -- folder:match_get() returns the last match criteria

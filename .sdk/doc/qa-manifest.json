@@ -1,35 +1,15 @@
 {
   "files": [
-    "SUMMARY.md",
-    "docs/api/analytics.html",
-    "docs/api/billing.html",
-    "docs/api/folder.html",
-    "docs/api/index.html",
-    "docs/api/result.html",
-    "docs/api/typebot.html",
-    "docs/api/workspace.html",
-    "docs/features/debug.html",
-    "docs/features/idempotency.html",
-    "docs/features/metrics.html",
-    "docs/features/paging.html",
-    "docs/features/ratelimit.html",
-    "docs/features/retry.html",
-    "docs/features/test.html",
-    "docs/features/timeout.html",
-    "docs/guides/authentication.html",
-    "docs/guides/concepts.html",
-    "docs/guides/errors.html",
-    "docs/guides/first-call.html",
-    "docs/index.html",
-    "docs/sdks/go.html",
-    "docs/sdks/js.html",
-    "docs/sdks/lua.html",
-    "docs/sdks/php.html",
-    "docs/sdks/py.html",
-    "docs/sdks/ts.html",
-    "docs/tools/go-cli.html",
-    "docs/tools/go-mcp.html"
+    "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "If true, even if we detect a conflict, we will overwrite push the updates to the typebot",
+      "OK",
+      "Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`.",
+      "The Builder API."
+    ]
+  }
 }

@@ -24,7 +24,7 @@ class AnalyticsEntity extends TypebotEntityBase {
   /**
    * @param {AnalyticsLoadMatch} [reqmatch]
    * @param {Object} [ctrl]
-   * @returns {Promise<Analytics>}
+   * @returns {Promise<AnalyticsEntity>}
    */
   async load(reqmatch, ctrl) {
 
@@ -129,9 +129,15 @@ class AnalyticsEntity extends TypebotEntityBase {
       return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 
@@ -143,6 +149,7 @@ class AnalyticsEntity extends TypebotEntityBase {
       }
     }
   }
+
 
 
 
